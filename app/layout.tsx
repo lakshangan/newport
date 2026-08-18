@@ -71,7 +71,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${bebas.variable} ${inter.variable} ${jetbrains.variable}`}>
-      <body className="bg-[#080808] text-[#E8E5DF] antialiased selection:bg-[#C75B32] selection:text-white">
+      <body className="bg-[#08080a] text-[#f5f5f7] antialiased selection:bg-[#C75B32] selection:text-white font-sans">
         {/* Subtle Film Grain Noise Overlay */}
         <div className="grain-overlay" />
         {children}
