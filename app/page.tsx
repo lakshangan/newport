@@ -7,6 +7,7 @@ import { DeveloperDecorations } from '@/components/ui/DeveloperDecorations';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
+import { ScrollWordRevealSection } from '@/components/ui/ScrollWordRevealSection';
 import { AboutSection } from '@/components/about/AboutSection';
 import { ProjectGallery } from '@/components/projects/ProjectGallery';
 import { PhotoGallerySection } from '@/components/gallery/PhotoGallerySection';
@@ -54,6 +55,9 @@ export default function Home() {
 
       {/* Full-Screen Hero Section */}
       <HeroSection />
+
+      {/* Scroll-Driven Action Word Reveal */}
+      <ScrollWordRevealSection />
 
       {/* About & Core Disciplines */}
       <AboutSection />
