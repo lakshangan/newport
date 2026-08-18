@@ -10,6 +10,41 @@
   --text-muted: #86868b;
   --accent-color: #C75B32;
   --accent-glow: rgba(199, 91, 50, 0.4);
+  --start: 0;
+  --end: 360;
+  --lightness: 65%;
+  --base-chroma: 0.3;
+}
+
+@keyframes change {
+  to {
+    --hue: var(--end);
+  }
+}
+
+@keyframes chroma-on {
+  to {
+    --chroma: 0.3;
+  }
+}
+
+@keyframes chroma-off {
+  to {
+    --chroma: 0;
+  }
+}
+
+@keyframes brighten {
+  0% {
+    opacity: var(--start-opacity, 0.2);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(var(--brightness, 1.2));
+  }
+  100% {
+    opacity: var(--end-opacity, 0.2);
+  }
 }
 
 html {

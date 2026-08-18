@@ -7,7 +7,7 @@ import { DeveloperDecorations } from '@/components/ui/DeveloperDecorations';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
-import { ScrollWordRevealSection } from '@/components/ui/ScrollWordRevealSection';
+import ScrollAnimation from '@/components/ui/you-can-scroll';
 import { AboutSection } from '@/components/about/AboutSection';
 import { ProjectGallery } from '@/components/projects/ProjectGallery';
 import { SectionDissolveTransition } from '@/components/sections/SectionDissolveTransition';
@@ -57,8 +57,8 @@ export default function Home() {
       {/* Full-Screen Hero Section */}
       <HeroSection />
 
-      {/* Scroll-Driven Action Word Reveal */}
-      <ScrollWordRevealSection />
+      {/* GSAP ScrollTrigger Word Dimmer Timeline */}
+      <ScrollAnimation />
 
       {/* About & Core Disciplines */}
       <AboutSection />
