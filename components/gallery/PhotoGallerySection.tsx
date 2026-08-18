@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { ZoomParallax, ParallaxImage } from '@/components/ui/zoom-parallax';
 
 interface GalleryItem {
   id: string;
@@ -95,34 +96,76 @@ const GALLERY_ITEMS: GalleryItem[] = [
 export const PhotoGallerySection: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [isVibrantBg, setIsVibrantBg] = useState(true);
+  const [viewMode, setViewMode] = useState<'parallax' | 'grid'>('parallax');
+
+  const parallaxImages: ParallaxImage[] = GALLERY_ITEMS.slice(0, 7).map((item) => ({
+    src: item.src,
+    alt: item.title,
+    title: item.title,
+    subtitle: item.event,
+    tag: item.tag,
+    location: item.location,
+  }));
+
+  const handleParallaxClick = (img: ParallaxImage) => {
+    const item = GALLERY_ITEMS.find((g) => g.src === img.src);
+    if (item) {
+      setSelectedItem(item);
+    }
+  };
 
   return (
     <section
       id="gallery"
-      className={`py-24 px-4 sm:px-6 transition-colors duration-500 relative border-t border-white/10 ${
+      className={`transition-colors duration-500 relative border-t border-white/10 ${
         isVibrantBg
           ? 'bg-gradient-to-b from-[#f45fa2] via-[#f74895] to-[#f45fa2] text-white'
           : 'bg-[#080808] text-[#E8E5DF]'
       }`}
     >
-      <div className="max-w-7xl mx-auto space-y-12">
-        {/* Gallery Header */}
+      {/* Sticky Gallery Header Container */}
+      <div className="py-12 px-4 sm:px-6 max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/20 pb-8">
           <div className="space-y-4">
-            {/* Boxed Title Badge as in Screenshot */}
+            {/* Boxed Title Badge */}
             <div className="inline-block bg-[#0f1115] text-white border-2 border-white/90 px-6 py-2.5 rounded-lg shadow-2xl">
               <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight">
                 The Gallery
               </h2>
             </div>
-            
+
             <p className={`text-base sm:text-lg font-medium tracking-wide ${isVibrantBg ? 'text-white/90' : 'text-[#8E8B85]'}`}>
               Proof of Work: Community, Code &amp; Chaos.
             </p>
           </div>
 
-          {/* Background Theme Switcher */}
-          <div className="flex items-center space-x-3">
+          {/* Controls: View Switcher & Theme Toggle */}
+          <div className="flex items-center flex-wrap gap-3">
+            {/* View Mode Toggle */}
+            <div className="bg-black/40 p-1 rounded-full border border-white/20 flex items-center shadow-lg">
+              <button
+                onClick={() => setViewMode('parallax')}
+                className={`px-4 py-1.5 text-xs font-mono rounded-full transition-all ${
+                  viewMode === 'parallax'
+                    ? 'bg-[#C75B32] text-white font-bold shadow'
+                    : 'text-white/70 hover:text-white'
+                }`}
+              >
+                🔍 Zoom Parallax
+              </button>
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`px-4 py-1.5 text-xs font-mono rounded-full transition-all ${
+                  viewMode === 'grid'
+                    ? 'bg-[#C75B32] text-white font-bold shadow'
+                    : 'text-white/70 hover:text-white'
+                }`}
+              >
+                📷 Polaroid Grid
+              </button>
+            </div>
+
+            {/* Background Theme Switcher */}
             <button
               onClick={() => setIsVibrantBg(!isVibrantBg)}
               className={`px-4 py-2 text-xs font-mono rounded-full border transition-all flex items-center space-x-2 shadow-lg ${
@@ -136,212 +179,216 @@ export const PhotoGallerySection: React.FC = () => {
             </button>
           </div>
         </div>
-
-        {/* Collage Grid Layout (3 Columns matching screenshot) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
-          
-          {/* Column 1 */}
-          <div className="space-y-6">
-            {/* Item 1: Hackathon Marathon */}
-            <div
-              onClick={() => setSelectedItem(GALLERY_ITEMS[0])}
-              className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[0].rotation}`}
-            >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
-                <Image
-                  src={GALLERY_ITEMS[0].src}
-                  alt={GALLERY_ITEMS[0].title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
-                <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[0].title}</span>
-                <span className="px-2 py-0.5 bg-black text-white text-[10px] rounded-xs font-semibold">
-                  {GALLERY_ITEMS[0].tag}
-                </span>
-              </div>
-            </div>
-
-            {/* Item 4: Community Squad */}
-            <div
-              onClick={() => setSelectedItem(GALLERY_ITEMS[3])}
-              className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[3].rotation}`}
-            >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
-                <Image
-                  src={GALLERY_ITEMS[3].src}
-                  alt={GALLERY_ITEMS[3].title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
-                <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[3].title}</span>
-                <span className="px-2 py-0.5 bg-[#C75B32] text-white text-[10px] rounded-xs font-semibold">
-                  {GALLERY_ITEMS[3].tag}
-                </span>
-              </div>
-            </div>
-
-            {/* Item 7: Uniswap Hook Incubator Card / Image */}
-            <div
-              onClick={() => setSelectedItem(GALLERY_ITEMS[6])}
-              className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[6].rotation}`}
-            >
-              <div className="relative aspect-square w-full overflow-hidden bg-black flex flex-col justify-between p-4 text-white">
-                <Image
-                  src={GALLERY_ITEMS[6].src}
-                  alt={GALLERY_ITEMS[6].title}
-                  fill
-                  className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="relative z-10 space-y-1">
-                  <div className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-white drop-shadow-md">
-                    CONGRATULATIONS!
-                  </div>
-                  <div className="inline-block bg-[#e84393] text-white px-2 py-0.5 text-xs font-bold rounded">
-                    Lakshan
-                  </div>
-                </div>
-                <div className="relative z-10 pt-12 text-[10px] font-mono text-white/90 drop-shadow">
-                  ACCEPTED TO UNISWAP HOOK INCUBATOR 🦄
-                </div>
-              </div>
-              <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
-                <span className="font-bold text-gray-900">UNISWAP INCUBATOR</span>
-                <span className="px-2 py-0.5 bg-[#e84393] text-white text-[10px] rounded-xs font-semibold">
-                  DEFI
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Column 2 */}
-          <div className="space-y-6">
-            {/* Item 2: Beyond Abstraction Demo Day */}
-            <div
-              onClick={() => setSelectedItem(GALLERY_ITEMS[1])}
-              className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[1].rotation}`}
-            >
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
-                <Image
-                  src={GALLERY_ITEMS[1].src}
-                  alt={GALLERY_ITEMS[1].title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
-                <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[1].title}</span>
-                <span className="px-2 py-0.5 bg-[#6c5ce7] text-white text-[10px] rounded-xs font-semibold">
-                  {GALLERY_ITEMS[1].tag}
-                </span>
-              </div>
-            </div>
-
-            {/* Item 5: Keynote Presentation at Screen */}
-            <div
-              onClick={() => setSelectedItem(GALLERY_ITEMS[4])}
-              className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[4].rotation}`}
-            >
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100">
-                <Image
-                  src={GALLERY_ITEMS[4].src}
-                  alt={GALLERY_ITEMS[4].title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
-                <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[4].title}</span>
-                <span className="px-2 py-0.5 bg-black text-white text-[10px] rounded-xs font-semibold">
-                  {GALLERY_ITEMS[4].tag}
-                </span>
-              </div>
-            </div>
-
-            {/* Item 8: Code & Chaos */}
-            <div
-              onClick={() => setSelectedItem(GALLERY_ITEMS[7])}
-              className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[7].rotation}`}
-            >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
-                <Image
-                  src={GALLERY_ITEMS[7].src}
-                  alt={GALLERY_ITEMS[7].title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
-                <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[7].title}</span>
-                <span className="px-2 py-0.5 bg-gray-800 text-white text-[10px] rounded-xs font-semibold">
-                  {GALLERY_ITEMS[7].tag}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Column 3 */}
-          <div className="space-y-6 md:col-span-2 lg:col-span-1">
-            {/* Item 3: Tall Classroom Talk (Tech Hub) */}
-            <div
-              onClick={() => setSelectedItem(GALLERY_ITEMS[2])}
-              className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[2].rotation}`}
-            >
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100">
-                <Image
-                  src={GALLERY_ITEMS[2].src}
-                  alt={GALLERY_ITEMS[2].title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 right-3 bg-[#e84393] text-white px-2.5 py-1 text-[10px] font-mono font-bold rounded shadow-md">
-                  TECH HUB
-                </div>
-              </div>
-              <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
-                <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[2].title}</span>
-                <span className="px-2 py-0.5 bg-[#e84393] text-white text-[10px] rounded-xs font-semibold">
-                  {GALLERY_ITEMS[2].tag}
-                </span>
-              </div>
-            </div>
-
-            {/* Item 6: NIT Calicut Web3 Hackathon */}
-            <div
-              onClick={() => setSelectedItem(GALLERY_ITEMS[5])}
-              className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[5].rotation}`}
-            >
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
-                <Image
-                  src={GALLERY_ITEMS[5].src}
-                  alt={GALLERY_ITEMS[5].title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                {/* Banner Overlay matching screenshot */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 text-white">
-                  <div className="text-sm font-extrabold uppercase font-display tracking-tight text-white drop-shadow">
-                    KERALA&apos;S LARGEST WEB3 HACKATHON
-                  </div>
-                  <div className="text-[10px] font-mono text-yellow-400 font-semibold pt-0.5">
-                    NIT Calicut // 1st Place Track Winner
-                  </div>
-                </div>
-              </div>
-              <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
-                <span className="font-bold text-gray-900 truncate">NIT Calicut Hackathon</span>
-                <span className="px-2 py-0.5 bg-yellow-500 text-black text-[10px] rounded-xs font-bold">
-                  🏆 WINNER
-                </span>
-              </div>
-            </div>
-          </div>
-
-        </div>
       </div>
+
+      {/* View Mode 1: Zoom Parallax Experience */}
+      {viewMode === 'parallax' ? (
+        <div className="relative w-full overflow-hidden pb-12">
+          <div className="text-center py-4 text-xs font-mono tracking-widest text-white/80 animate-bounce">
+            ↓ SCROLL DOWN TO EXPLORE ZOOM PARALLAX WITH TEXT OVERLAYS ↓
+          </div>
+
+          <ZoomParallax images={parallaxImages} onImageClick={handleParallaxClick} />
+        </div>
+      ) : (
+        /* View Mode 2: Polaroid Grid Layout */
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
+            
+            {/* Column 1 */}
+            <div className="space-y-6">
+              <div
+                onClick={() => setSelectedItem(GALLERY_ITEMS[0])}
+                className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[0].rotation}`}
+              >
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src={GALLERY_ITEMS[0].src}
+                    alt={GALLERY_ITEMS[0].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
+                  <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[0].title}</span>
+                  <span className="px-2 py-0.5 bg-black text-white text-[10px] rounded-xs font-semibold">
+                    {GALLERY_ITEMS[0].tag}
+                  </span>
+                </div>
+              </div>
+
+              <div
+                onClick={() => setSelectedItem(GALLERY_ITEMS[3])}
+                className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[3].rotation}`}
+              >
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src={GALLERY_ITEMS[3].src}
+                    alt={GALLERY_ITEMS[3].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
+                  <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[3].title}</span>
+                  <span className="px-2 py-0.5 bg-[#C75B32] text-white text-[10px] rounded-xs font-semibold">
+                    {GALLERY_ITEMS[3].tag}
+                  </span>
+                </div>
+              </div>
+
+              <div
+                onClick={() => setSelectedItem(GALLERY_ITEMS[6])}
+                className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[6].rotation}`}
+              >
+                <div className="relative aspect-square w-full overflow-hidden bg-black flex flex-col justify-between p-4 text-white">
+                  <Image
+                    src={GALLERY_ITEMS[6].src}
+                    alt={GALLERY_ITEMS[6].title}
+                    fill
+                    className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="relative z-10 space-y-1">
+                    <div className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-white drop-shadow-md">
+                      CONGRATULATIONS!
+                    </div>
+                    <div className="inline-block bg-[#e84393] text-white px-2 py-0.5 text-xs font-bold rounded">
+                      Lakshan
+                    </div>
+                  </div>
+                  <div className="relative z-10 pt-12 text-[10px] font-mono text-white/90 drop-shadow">
+                    ACCEPTED TO UNISWAP HOOK INCUBATOR 🦄
+                  </div>
+                </div>
+                <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
+                  <span className="font-bold text-gray-900">UNISWAP INCUBATOR</span>
+                  <span className="px-2 py-0.5 bg-[#e84393] text-white text-[10px] rounded-xs font-semibold">
+                    DEFI
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Column 2 */}
+            <div className="space-y-6">
+              <div
+                onClick={() => setSelectedItem(GALLERY_ITEMS[1])}
+                className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[1].rotation}`}
+              >
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src={GALLERY_ITEMS[1].src}
+                    alt={GALLERY_ITEMS[1].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
+                  <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[1].title}</span>
+                  <span className="px-2 py-0.5 bg-[#6c5ce7] text-white text-[10px] rounded-xs font-semibold">
+                    {GALLERY_ITEMS[1].tag}
+                  </span>
+                </div>
+              </div>
+
+              <div
+                onClick={() => setSelectedItem(GALLERY_ITEMS[4])}
+                className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[4].rotation}`}
+              >
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src={GALLERY_ITEMS[4].src}
+                    alt={GALLERY_ITEMS[4].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
+                  <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[4].title}</span>
+                  <span className="px-2 py-0.5 bg-black text-white text-[10px] rounded-xs font-semibold">
+                    {GALLERY_ITEMS[4].tag}
+                  </span>
+                </div>
+              </div>
+
+              <div
+                onClick={() => setSelectedItem(GALLERY_ITEMS[7])}
+                className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[7].rotation}`}
+              >
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src={GALLERY_ITEMS[7].src}
+                    alt={GALLERY_ITEMS[7].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
+                  <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[7].title}</span>
+                  <span className="px-2 py-0.5 bg-gray-800 text-white text-[10px] rounded-xs font-semibold">
+                    {GALLERY_ITEMS[7].tag}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Column 3 */}
+            <div className="space-y-6 md:col-span-2 lg:col-span-1">
+              <div
+                onClick={() => setSelectedItem(GALLERY_ITEMS[2])}
+                className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[2].rotation}`}
+              >
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src={GALLERY_ITEMS[2].src}
+                    alt={GALLERY_ITEMS[2].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 right-3 bg-[#e84393] text-white px-2.5 py-1 text-[10px] font-mono font-bold rounded shadow-md">
+                    TECH HUB
+                  </div>
+                </div>
+                <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
+                  <span className="font-bold text-gray-900 truncate">{GALLERY_ITEMS[2].title}</span>
+                  <span className="px-2 py-0.5 bg-[#e84393] text-white text-[10px] rounded-xs font-semibold">
+                    {GALLERY_ITEMS[2].tag}
+                  </span>
+                </div>
+              </div>
+
+              <div
+                onClick={() => setSelectedItem(GALLERY_ITEMS[5])}
+                className={`group cursor-pointer p-3 bg-white text-black shadow-2xl rounded-sm transition-all duration-300 hover:scale-[1.02] hover:z-20 ${GALLERY_ITEMS[5].rotation}`}
+              >
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src={GALLERY_ITEMS[5].src}
+                    alt={GALLERY_ITEMS[5].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 text-white">
+                    <div className="text-sm font-extrabold uppercase font-display tracking-tight text-white drop-shadow">
+                      KERALA&apos;S LARGEST WEB3 HACKATHON
+                    </div>
+                    <div className="text-[10px] font-mono text-yellow-400 font-semibold pt-0.5">
+                      NIT Calicut // 1st Place Track Winner
+                    </div>
+                  </div>
+                </div>
+                <div className="pt-3 pb-1 flex justify-between items-center text-xs font-mono">
+                  <span className="font-bold text-gray-900 truncate">NIT Calicut Hackathon</span>
+                  <span className="px-2 py-0.5 bg-yellow-500 text-black text-[10px] rounded-xs font-bold">
+                    🏆 WINNER
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
 
       {/* Fullscreen Lightbox Modal */}
       {selectedItem && (
