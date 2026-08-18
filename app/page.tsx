@@ -9,6 +9,7 @@ import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
 import { AboutSection } from '@/components/about/AboutSection';
 import { ProjectGallery } from '@/components/projects/ProjectGallery';
+import { PhotoGallerySection } from '@/components/gallery/PhotoGallerySection';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
 import { AchievementsSection } from '@/components/achievements/AchievementsSection';
 import { PlaygroundSection } from '@/components/playground/PlaygroundSection';
@@ -48,7 +49,7 @@ export default function Home() {
       {/* Custom Subtle Dot Cursor */}
       <CustomCursor />
 
-      {/* Editorial Top Navigation */}
+      {/* Modern Cylinder Floating Navigation */}
       <Navbar />
 
       {/* Full-Screen Hero Section */}
@@ -59,6 +60,9 @@ export default function Home() {
 
       {/* Selected Work & Case Studies with R3F Scenes */}
       <ProjectGallery />
+
+      {/* Proof of Work: Polaroid Photo Gallery & Community Memories */}
+      <PhotoGallerySection />
 
       {/* Professional Experience Timeline */}
       <ExperienceSection />

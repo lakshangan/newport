@@ -1,79 +1,125 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('about');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 40) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+
+      // Simple active section indicator
+      const sections = ['about', 'work', 'gallery', 'experience', 'playground', 'contact'];
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200 && rect.bottom >= 200) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 px-6 py-6 transition-all duration-300">
-      <nav className="max-w-7xl mx-auto flex items-center justify-between">
+    <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 flex justify-center pointer-events-none">
+      {/* Floating Cylinder Nav Container */}
+      <nav
+        className={`pointer-events-auto w-full max-w-4xl rounded-full border transition-all duration-300 flex items-center justify-between px-4 sm:px-6 py-2 sm:py-2.5 shadow-2xl backdrop-blur-xl ${
+          scrolled
+            ? 'bg-[#080808]/90 border-white/20 shadow-black/80'
+            : 'bg-[#0c0c0c]/80 border-white/15 shadow-black/50'
+        }`}
+      >
         {/* Left: Brand Identity */}
         <a
           href="#"
-          className="text-xl md:text-2xl font-display font-bold tracking-wider text-[#E8E5DF] hover:text-[#C75B32] transition-colors"
+          className="flex items-center space-x-1 font-display font-extrabold text-lg sm:text-xl tracking-wider text-[#E8E5DF] hover:text-[#C75B32] transition-colors pr-2"
           data-cursor="HOME"
         >
-          {PORTFOLIO_DATA.personal.shortName}
+          <span>{PORTFOLIO_DATA.personal.shortName}</span>
+          <span className="text-[#C75B32]">.</span>
         </a>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-10 text-xs font-mono tracking-widest text-[#8E8B85]">
+        {/* Desktop Navigation Links */}
+        <div className="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs font-mono tracking-widest text-[#A09D96]">
           <a
             href="#about"
-            className="hover:text-[#E8E5DF] transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C75B32] hover:after:w-full after:transition-all"
+            className={`transition-colors hover:text-[#E8E5DF] ${
+              activeSection === 'about' ? 'text-[#C75B32] font-semibold' : ''
+            }`}
           >
-            ABOUT
+            About
           </a>
           <a
             href="#work"
-            className="hover:text-[#E8E5DF] transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C75B32] hover:after:w-full after:transition-all"
+            className={`transition-colors hover:text-[#E8E5DF] ${
+              activeSection === 'work' ? 'text-[#C75B32] font-semibold' : ''
+            }`}
           >
-            WORK
+            Projects
+          </a>
+          <a
+            href="#gallery"
+            className={`transition-colors hover:text-[#E8E5DF] ${
+              activeSection === 'gallery' ? 'text-[#C75B32] font-semibold' : ''
+            }`}
+          >
+            Gallery
           </a>
           <a
             href="#experience"
-            className="hover:text-[#E8E5DF] transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C75B32] hover:after:w-full after:transition-all"
+            className={`transition-colors hover:text-[#E8E5DF] ${
+              activeSection === 'experience' ? 'text-[#C75B32] font-semibold' : ''
+            }`}
           >
-            EXPERIENCE
+            Experience
           </a>
           <a
             href="#playground"
-            className="hover:text-[#E8E5DF] transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C75B32] hover:after:w-full after:transition-all"
+            className={`transition-colors hover:text-[#E8E5DF] ${
+              activeSection === 'playground' ? 'text-[#C75B32] font-semibold' : ''
+            }`}
           >
-            EXPERIMENTS
-          </a>
-          <a
-            href="#contact"
-            className="hover:text-[#E8E5DF] transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C75B32] hover:after:w-full after:transition-all"
-          >
-            CONTACT
+            Experiments
           </a>
         </div>
 
-        {/* Right: Editorial CTA */}
-        <div className="hidden md:block">
+        {/* Right: Actions & Contact CTA */}
+        <div className="hidden md:flex items-center space-x-3">
           <a
             href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-            className="inline-flex items-center space-x-2 px-5 py-2 text-xs font-mono tracking-widest border border-[#242424] text-[#E8E5DF] hover:border-[#C75B32] hover:bg-[#C75B32] hover:text-white transition-all duration-300"
+            className="inline-flex items-center space-x-1.5 px-4 py-1.5 text-xs font-mono tracking-wider rounded-full bg-white/10 hover:bg-[#C75B32] border border-white/15 text-[#E8E5DF] hover:text-white transition-all duration-300 shadow-sm"
             data-cursor="EMAIL"
           >
             <span>LET&apos;S TALK</span>
-            <span className="text-[#C75B32] group-hover:text-white">↗</span>
+            <span className="text-[10px]">↗</span>
           </a>
         </div>
 
-        {/* Mobile Hamburger Button */}
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="md:hidden p-2 text-[#E8E5DF] focus:outline-none"
           aria-label="Toggle menu"
         >
-          <div className="w-6 h-5 flex flex-col justify-between">
+          <div className="w-5 h-4 flex flex-col justify-between">
             <span
               className={`w-full h-0.5 bg-[#E8E5DF] transition-transform duration-300 ${
-                mobileMenuOpen ? 'rotate-45 translate-y-2.5 bg-[#C75B32]' : ''
+                mobileMenuOpen ? 'rotate-45 translate-y-1.5 bg-[#C75B32]' : ''
               }`}
             />
             <span
@@ -83,7 +129,7 @@ export const Navbar: React.FC = () => {
             />
             <span
               className={`w-full h-0.5 bg-[#E8E5DF] transition-transform duration-300 ${
-                mobileMenuOpen ? '-rotate-45 -translate-y-2 bg-[#C75B32]' : ''
+                mobileMenuOpen ? '-rotate-45 -translate-y-1.5 bg-[#C75B32]' : ''
               }`}
             />
           </div>
@@ -92,29 +138,29 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 top-[72px] bg-[#080808]/95 z-40 p-8 flex flex-col justify-between border-t border-[#242424]">
-          <div className="flex flex-col space-y-8 font-display text-4xl tracking-wider text-[#E8E5DF]">
-            <a href="#about" onClick={() => setMobileMenuOpen(false)}>
+        <div className="md:hidden fixed inset-x-4 top-20 bg-[#0c0c0c]/95 border border-white/15 rounded-2xl backdrop-blur-2xl z-40 p-6 shadow-2xl flex flex-col space-y-5 text-center pointer-events-auto">
+          <div className="flex flex-col space-y-4 font-display text-lg tracking-wider text-[#E8E5DF]">
+            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
               ABOUT
             </a>
-            <a href="#work" onClick={() => setMobileMenuOpen(false)}>
-              WORK
+            <a href="#work" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
+              PROJECTS
             </a>
-            <a href="#experience" onClick={() => setMobileMenuOpen(false)}>
+            <a href="#gallery" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
+              GALLERY
+            </a>
+            <a href="#experience" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
               EXPERIENCE
             </a>
-            <a href="#playground" onClick={() => setMobileMenuOpen(false)}>
+            <a href="#playground" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
               EXPERIMENTS
-            </a>
-            <a href="#contact" onClick={() => setMobileMenuOpen(false)}>
-              CONTACT
             </a>
           </div>
 
-          <div className="pt-8 border-t border-[#242424]">
+          <div className="pt-4 border-t border-white/10 flex justify-center">
             <a
               href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-              className="block w-full py-4 text-center text-sm font-mono tracking-widest bg-[#C75B32] text-white"
+              className="inline-block px-6 py-2.5 rounded-full text-xs font-mono tracking-widest bg-[#C75B32] text-white shadow-lg"
             >
               LET&apos;S TALK ↗
             </a>
