@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import imagesLoaded from 'imagesloaded';
 import { cn } from '@/lib/utils';
 import { FaGithub, FaSlack, FaTwitter } from 'react-icons/fa';
 
@@ -35,20 +34,17 @@ export interface StaggeredGridProps {
 export function StaggeredGrid({
   images,
   bentoItems,
-  centerText = "Tech Stack",
+  centerText = "TECH ARSENAL",
   credits = {
-    madeBy: { text: "@lakshangan", href: "https://github.com/lakshangan" },
-    moreDemos: { text: "View Portfolio", href: "#work" },
+    madeBy: { text: "LAKSHAN GANESAN // 2026", href: "https://github.com/lakshangan" },
+    moreDemos: { text: "FEATURED PROJECTS ↗", href: "#work" },
   },
   className,
   showFooter = true,
   scroller,
 }: StaggeredGridProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
   const gridFullRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-
-  // Bento Grid State
   const [activeBento, setActiveBento] = useState<number>(0);
 
   const splitText = (text: string) => {
@@ -60,125 +56,96 @@ export function StaggeredGrid({
   };
 
   useEffect(() => {
-    const handleLoad = () => {
-      document.body.classList.remove('loading');
-      setIsLoaded(true);
-    };
-
-    const imgLoad = imagesLoaded(
-      document.querySelectorAll('.grid__item-img'),
-      { background: true },
-      handleLoad
-    );
-
-    return () => {
-      imgLoad.off('always', handleLoad);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isLoaded) return;
-
-    // Animate Text Element
-    if (textRef.current) {
-      const chars = textRef.current.querySelectorAll('.char');
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: textRef.current,
-            scroller: scroller || undefined,
-            start: 'top bottom',
-            end: 'center center-=25%',
-            scrub: 1,
-          },
-        })
-        .from(chars, {
-          ease: 'sine.out',
-          yPercent: 300,
-          autoAlpha: 0,
-          stagger: {
-            each: 0.05,
-            from: 'center',
-          },
-        });
-    }
-
-    // Animate Full Grid
-    if (gridFullRef.current) {
-      const gridFullItems = gridFullRef.current.querySelectorAll('.grid__item');
-      const numColumns = getComputedStyle(gridFullRef.current)
-        .getPropertyValue('grid-template-columns')
-        .split(' ').length;
-      const middleColumnIndex = Math.floor(numColumns / 2);
-
-      const columns: Element[][] = Array.from({ length: numColumns }, () => []);
-      gridFullItems.forEach((item: any) => {
-        const colAttr = item.getAttribute('data-col');
-        const columnIndex = colAttr !== null ? parseInt(colAttr, 10) : 0;
-        if (columns[columnIndex]) {
-          columns[columnIndex].push(item);
-        }
-      });
-
-      columns.forEach((columnItems, columnIndex) => {
-        const delayFactor = Math.abs(columnIndex - middleColumnIndex) * 0.2;
-
+    const ctx = gsap.context(() => {
+      // Animate Text Element
+      if (textRef.current) {
+        const chars = textRef.current.querySelectorAll('.char');
         gsap
           .timeline({
             scrollTrigger: {
-              trigger: gridFullRef.current,
-              scroller: scroller || undefined,
-              start: 'top bottom',
-              end: 'center center',
-              scrub: 1.5,
+              trigger: textRef.current,
+              start: 'top 85%',
+              end: 'bottom center',
+              scrub: 1,
             },
           })
-          .from(columnItems, {
-            yPercent: 450,
-            autoAlpha: 0,
-            delay: delayFactor,
+          .from(chars, {
             ease: 'sine.out',
-          })
-          .from(
-            columnItems.map((item) => item.querySelector('.grid__item-img')),
-            {
-              transformOrigin: '50% 0%',
-              ease: 'sine.out',
+            yPercent: 200,
+            autoAlpha: 0,
+            stagger: {
+              each: 0.05,
+              from: 'center',
             },
-            0
-          );
-      });
+          });
+      }
 
-      // Specific animation for Bento Container
-      const bentoContainer = gridFullRef.current.querySelector('.bento-container');
+      // Animate Full Grid Columns
+      if (gridFullRef.current) {
+        const gridFullItems = gridFullRef.current.querySelectorAll('.grid__item');
+        const numColumns = 7;
+        const middleColumnIndex = Math.floor(numColumns / 2);
 
-      if (bentoContainer) {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: gridFullRef.current,
-            scroller: scroller || undefined,
-            start: 'top top+=15%',
-            end: 'bottom center',
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
+        const columns: Element[][] = Array.from({ length: numColumns }, () => []);
+        gridFullItems.forEach((item: any) => {
+          const colAttr = item.getAttribute('data-col');
+          const columnIndex = colAttr !== null ? parseInt(colAttr, 10) : 0;
+          if (columns[columnIndex]) {
+            columns[columnIndex].push(item);
+          }
         });
 
-        tl.to(
-          bentoContainer,
-          {
-            y: window.innerHeight * 0.1,
-            scale: 1.25,
-            zIndex: 1000,
+        columns.forEach((columnItems, columnIndex) => {
+          const delayFactor = Math.abs(columnIndex - middleColumnIndex) * 0.2;
+
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: gridFullRef.current,
+                start: 'top 85%',
+                end: 'center center',
+                scrub: 1.5,
+              },
+            })
+            .from(columnItems, {
+              yPercent: 350,
+              autoAlpha: 0,
+              delay: delayFactor,
+              ease: 'sine.out',
+            });
+        });
+
+        // Specific animation for Bento Container
+        const bentoContainer = gridFullRef.current.querySelector('.bento-container');
+        if (bentoContainer) {
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: gridFullRef.current,
+              start: 'top top+=20%',
+              end: 'bottom center',
+              scrub: 1,
+              invalidateOnRefresh: true,
+            },
+          }).to(bentoContainer, {
+            y: window.innerHeight * 0.08,
+            scale: 1.15,
+            zIndex: 100,
             ease: 'power2.out',
             duration: 1,
-            force3D: true,
-          },
-          0
-        );
+          });
+        }
       }
-    }
-  }, [isLoaded, scroller]);
+    });
+
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
+    return () => {
+      clearTimeout(timer);
+      ctx.revert();
+    };
+  }, []);
 
   const mixedGridItems: (string | 'BENTO_GROUP')[] = Array.from(
     { length: 21 },
@@ -188,28 +155,31 @@ export function StaggeredGrid({
 
   return (
     <div
-      className={cn('shadow relative overflow-hidden w-full', className)}
+      className={cn('shadow relative overflow-hidden w-full bg-[#080808]', className)}
       style={
         {
           '--grid-item-translate': '0px',
         } as React.CSSProperties
       }
     >
+      {/* Centered Split Text Section */}
       <section className="grid place-items-center w-full relative mt-[6vh]">
         <div
           ref={textRef}
-          className="text font-display uppercase flex content-center text-[clamp(2.5rem,10vw,8rem)] leading-[0.8] text-neutral-900 dark:text-white font-extrabold tracking-tight"
+          className="text font-display uppercase flex content-center text-[clamp(2.5rem,9vw,7.5rem)] leading-[0.85] text-white font-black tracking-tight drop-shadow-2xl"
         >
           {splitText(centerText)}
         </div>
       </section>
 
+      {/* Column Staggered Grid Section */}
       <section className="grid place-items-center w-full relative">
         <div
           ref={gridFullRef}
           className="grid--full relative w-full my-[6vh] h-auto aspect-[1.1] max-w-none p-4 grid gap-3 sm:gap-4 grid-cols-7 grid-rows-5"
         >
-          <div className="grid-overlay absolute inset-0 z-[15] pointer-events-none opacity-0 bg-white/80 dark:bg-black/80 rounded-lg transition-opacity duration-500" />
+          <div className="grid-overlay absolute inset-0 z-[15] pointer-events-none opacity-0 bg-black/80 rounded-lg transition-opacity duration-500" />
+          
           {mixedGridItems.map((item, i) => {
             if (item === 'BENTO_GROUP') {
               if (!bentoItems || bentoItems.length === 0) return null;
@@ -228,7 +198,7 @@ export function StaggeredGrid({
                         className={cn(
                           'relative cursor-pointer overflow-hidden rounded-2xl h-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
                           isActive
-                            ? 'bg-zinc-900/40 shadow-2xl border border-[#C75B32]/60'
+                            ? 'bg-zinc-900/60 shadow-2xl border border-[#C75B32]/70'
                             : 'bg-zinc-950 border border-white/10 hover:border-white/30'
                         )}
                         style={{ width: isActive ? '60%' : '20%' }}
@@ -259,7 +229,7 @@ export function StaggeredGrid({
                                     alt={bentoItem.title}
                                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 opacity-85 group-hover/img:opacity-100"
                                   />
-                                  <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none" />
+                                  <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none" />
                                 </>
                               )}
                             </div>
