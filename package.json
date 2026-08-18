@@ -13,6 +13,7 @@
     "@react-three/drei": "^9.121.5",
     "@react-three/fiber": "^8.17.14",
     "clsx": "^2.1.1",
+    "framer-motion": "^13.1.0",
     "gsap": "^3.12.7",
     "imagesloaded": "^5.0.0",
     "lenis": "^1.1.18",
