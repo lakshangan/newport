@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
 import { PORTFOLIO_DATA, Project } from '@/lib/portfolioData';
-import { ProjectModal } from './ProjectModal';
+import ExpandableBentoGrid, { BentoItem } from '@/components/ui/ExpandableBentoGrid';
+import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 
 // Dynamic imports with SSR false for R3F scenes
 const LandVaultScene = dynamic(
@@ -24,8 +25,6 @@ const SteganographyScene = dynamic(
 );
 
 export const ProjectGallery: React.FC = () => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
   const renderSceneComponent = (sceneType: Project['sceneType']) => {
     switch (sceneType) {
       case 'landvault':
@@ -45,98 +44,102 @@ export const ProjectGallery: React.FC = () => {
     }
   };
 
-  return (
-    <section id="work" className="py-24 px-6 bg-[#080808] border-t border-[#242424]">
-      <div className="max-w-7xl mx-auto space-y-24">
-        
-        {/* Section Header */}
-        <div className="space-y-3 border-b border-[#242424] pb-8">
-          <div className="text-xs font-mono tracking-widest text-[#C75B32]">
-            // 02 SELECTED CASE STUDIES
-          </div>
-          <h2 className="font-display text-5xl sm:text-7xl font-extrabold uppercase tracking-tight text-[#E8E5DF]">
-            FEATURED PROJECTS
-          </h2>
-          <p className="text-base font-light text-[#8E8B85] max-w-xl">
-            Smart contract systems, transaction intelligence tools, AI provenance layers, and security tooling.
+  const bentoItems: BentoItem[] = PORTFOLIO_DATA.projects.map((project) => ({
+    id: project.id,
+    title: project.title,
+    number: project.number,
+    category: project.category,
+    subtitle: project.tagline,
+    description: project.description,
+    demoUrl: project.demoUrl,
+    githubUrl: project.githubUrl,
+    icon: (
+      <div className="w-full h-full relative overflow-hidden bg-[#09090b]">
+        {renderSceneComponent(project.sceneType)}
+      </div>
+    ),
+    content: (
+      <div className="space-y-5 text-left">
+        <div className="space-y-1.5">
+          <h4 className="font-mono text-xs text-[#C75B32] uppercase font-bold tracking-wider">
+            01 / THE PROBLEM
+          </h4>
+          <p className="text-white/80 font-light text-xs sm:text-sm leading-relaxed">
+            {project.problem}
           </p>
         </div>
 
-        {/* Clean Project Showcase List */}
-        <div className="space-y-20">
-          {PORTFOLIO_DATA.projects.map((project) => (
-            <div
-              key={project.id}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center border-b border-[#242424] pb-16 group"
-            >
-              {/* Left Column: Details */}
-              <div className="lg:col-span-5 space-y-5">
-                
-                <div className="flex justify-between items-center text-xs font-mono text-[#8E8B85]">
-                  <span className="text-3xl font-display font-bold text-[#C75B32]">
-                    {project.number}
-                  </span>
-                  <span className="px-2.5 py-1 bg-[#111111] border border-[#242424] text-[#E8E5DF] text-[10px]">
-                    {project.category}
-                  </span>
-                </div>
-
-                <h3 className="font-display text-3xl sm:text-5xl font-extrabold uppercase text-[#E8E5DF] group-hover:text-[#C75B32] transition-colors">
-                  {project.title}
-                </h3>
-
-                <p className="text-base text-[#E8E5DF] font-light">
-                  {project.tagline}
-                </p>
-                
-                <p className="text-sm text-[#8E8B85] font-light leading-relaxed">
-                  {project.description}
-                </p>
-
-                {/* Tech Pills */}
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {project.technologies.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="px-2.5 py-1 font-mono text-[11px] border border-[#242424] bg-[#111111] text-[#8E8B85]"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Case Study Trigger */}
-                <div className="pt-2">
-                  <button
-                    onClick={() => setSelectedProject(project)}
-                    className="inline-flex items-center space-x-2 px-5 py-2.5 border border-[#242424] text-[#E8E5DF] font-mono text-xs tracking-widest hover:border-[#C75B32] hover:bg-[#C75B32] hover:text-white transition-colors"
-                    data-cursor="CASE STUDY"
-                  >
-                    <span>CASE STUDY</span>
-                    <span>↗</span>
-                  </button>
-                </div>
-
-              </div>
-
-              {/* Right Column: 3D Scene */}
-              <div className="lg:col-span-7">
-                <div className="w-full aspect-[16/10] bg-[#111111] border border-[#242424] relative overflow-hidden group-hover:border-[#C75B32]/50 transition-colors shadow-xl">
-                  {renderSceneComponent(project.sceneType)}
-                  <div className="absolute bottom-3 right-3 text-[10px] font-mono text-[#8E8B85] bg-[#080808]/90 px-2 py-1 border border-[#242424]">
-                    3D SCENE // {project.number}
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          ))}
+        <div className="space-y-1.5">
+          <h4 className="font-mono text-xs text-[#C75B32] uppercase font-bold tracking-wider">
+            02 / ARCHITECTURAL CONCEPT
+          </h4>
+          <p className="text-white/80 font-light text-xs sm:text-sm leading-relaxed">
+            {project.concept}
+          </p>
         </div>
 
-      </div>
+        <div className="space-y-1.5">
+          <h4 className="font-mono text-xs text-[#C75B32] uppercase font-bold tracking-wider">
+            03 / IMPLEMENTED SOLUTION
+          </h4>
+          <p className="text-white/80 font-light text-xs sm:text-sm leading-relaxed">
+            {project.solution}
+          </p>
+        </div>
 
-      {/* Case Study Modal */}
-      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+        <div className="space-y-1.5">
+          <h4 className="font-mono text-xs text-[#C75B32] uppercase font-bold tracking-wider">
+            04 / MY DISCIPLINE &amp; ROLE
+          </h4>
+          <p className="text-white/80 font-light text-xs sm:text-sm leading-relaxed">
+            {project.myRole}
+          </p>
+        </div>
+
+        <div className="space-y-2 pt-2 border-t border-white/10">
+          <h4 className="font-mono text-[11px] text-white/50 uppercase tracking-widest">
+            TECHNOLOGY STACK
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech, i) => (
+              <span
+                key={i}
+                className="px-2.5 py-1 font-mono text-[11px] border border-white/15 bg-white/5 text-white/80 rounded"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    ),
+  }));
+
+  return (
+    <section id="work" className="py-20 sm:py-28 px-4 sm:px-6 bg-[#080808] border-t border-[#242424]">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
+        
+        {/* Section Header */}
+        <div className="space-y-3 border-b border-[#242424] pb-8 text-left">
+          <div className="text-xs font-mono tracking-widest text-[#C75B32]">
+            // 02 SELECTED CASE STUDIES
+          </div>
+          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-[#E8E5DF]">
+            <AsciiGlitchRipple as="span" dur={900}>
+              FEATURED PROJECTS
+            </AsciiGlitchRipple>
+          </h2>
+          <p className="text-base font-light text-[#8E8B85] max-w-xl">
+            Smart contract systems, transaction intelligence tools, AI provenance layers, and security tooling. Click any project card to expand case study details.
+          </p>
+        </div>
+
+        {/* Expandable Bento Grid */}
+        <ExpandableBentoGrid items={bentoItems} />
+
+      </div>
     </section>
   );
 };
+
+export default ProjectGallery;
