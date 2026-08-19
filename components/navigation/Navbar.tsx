@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
+import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -50,7 +51,9 @@ export const Navbar: React.FC = () => {
           className="flex items-center space-x-1 font-display font-extrabold text-lg sm:text-xl tracking-wider text-[#E8E5DF] hover:text-[#C75B32] transition-colors pr-2"
           data-cursor="HOME"
         >
-          <span>{PORTFOLIO_DATA.personal.shortName}</span>
+          <AsciiGlitchRipple as="span" dur={900}>
+            {PORTFOLIO_DATA.personal.shortName}
+          </AsciiGlitchRipple>
           <span className="text-[#C75B32]">.</span>
         </a>
 

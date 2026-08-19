@@ -43,6 +43,11 @@ export interface AsciiGlitchRippleProps extends React.AnchorHTMLAttributes<HTMLA
    * @default 1.0
    */
   spread?: number;
+  /**
+   * Whether to automatically trigger an ASCII ripple wave when text changes.
+   * @default false
+   */
+  triggerOnChange?: boolean;
   [key: string]: any;
 }
 
@@ -54,6 +59,7 @@ export function AsciiGlitchRipple({
   chars = '.,·-─~+:;=*π""┐┌┘┴┬╗╔╝╚╬╠╣╩╦║░▒▓█▄▀▌▐■!?&#$@0123456789*',
   preserveSpaces = true,
   spread = 1.0,
+  triggerOnChange = false,
   ...props
 }: AsciiGlitchRippleProps) {
   const Component = as;
@@ -77,6 +83,7 @@ export function AsciiGlitchRipple({
 
   // Keep internal mutable state updated when props change
   useEffect(() => {
+    const textChanged = stateRef.current.origTxt !== children;
     stateRef.current.origTxt = children;
     stateRef.current.origChars = children.split("");
     stateRef.current.dur = dur;
@@ -93,7 +100,16 @@ export function AsciiGlitchRipple({
     if (!stateRef.current.isAnim && elRef.current) {
       elRef.current.textContent = children;
     }
-  }, [children, dur, chars, preserveSpaces, spread]);
+
+    if (textChanged && triggerOnChange) {
+      stateRef.current.cursorPos = Math.floor(children.length / 2);
+      stateRef.current.waves.push({
+        startPos: stateRef.current.cursorPos,
+        startTime: Date.now(),
+        id: Math.random(),
+      });
+    }
+  }, [children, dur, chars, preserveSpaces, spread, triggerOnChange]);
 
   useEffect(() => {
     const el = elRef.current;
