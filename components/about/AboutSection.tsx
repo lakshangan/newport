@@ -14,13 +14,13 @@ export const AboutSection: React.FC = () => {
         </div>
 
         {/* Clean Headline */}
-        <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-[#E8E5DF]">
-          BUILDING DECENTRALIZED PROTOCOLS <br />
+        <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-[#E8E5DF]">
+          BUILDING DECENTRALIZED PROTOCOLS <br className="hidden sm:inline" />
           <span className="text-[#C75B32]">&amp; INTELLIGENT SYSTEMS.</span>
         </h2>
 
         {/* 2-Column Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 pt-4">
           {/* Left: Clean Narrative */}
           <div className="lg:col-span-7 space-y-6 text-base sm:text-lg font-light text-[#8E8B85] leading-relaxed">
             <p>
@@ -32,14 +32,14 @@ export const AboutSection: React.FC = () => {
           </div>
 
           {/* Right: Technical Capabilities Box */}
-          <div className="lg:col-span-5 bg-[#111111] border border-[#242424] p-8 space-y-4">
+          <div className="lg:col-span-5 bg-[#111111] border border-[#242424] p-5 sm:p-8 space-y-4">
             <div className="text-xs font-mono text-[#E8E5DF] tracking-widest uppercase border-b border-[#242424] pb-3">
               TECHNICAL FOCUS
             </div>
             <ul className="space-y-3 font-mono text-xs text-[#8E8B85]">
               <li className="flex items-center space-x-3">
                 <span className="w-1.5 h-1.5 bg-[#C75B32]" />
-                <span>SOLICITY &amp; EVM SMART CONTRACTS</span>
+                <span>SOLIDITY &amp; EVM SMART CONTRACTS</span>
               </li>
               <li className="flex items-center space-x-3">
                 <span className="w-1.5 h-1.5 bg-[#C75B32]" />

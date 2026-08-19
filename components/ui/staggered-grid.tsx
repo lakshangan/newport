@@ -176,7 +176,7 @@ export function StaggeredGrid({
       <section className="grid place-items-center w-full relative">
         <div
           ref={gridFullRef}
-          className="grid--full relative w-full my-[6vh] h-auto aspect-[1.1] max-w-none p-4 grid gap-3 sm:gap-4 grid-cols-7 grid-rows-5"
+          className="grid--full relative w-full my-[4vh] sm:my-[6vh] h-auto aspect-[1.1] max-w-none p-2 sm:p-4 grid gap-1.5 sm:gap-4 grid-cols-7 grid-rows-5"
         >
           <div className="grid-overlay absolute inset-0 z-[15] pointer-events-none opacity-0 bg-black/80 rounded-lg transition-opacity duration-500" />
           
@@ -188,7 +188,7 @@ export function StaggeredGrid({
                 <div
                   key="bento-group"
                   data-col={2}
-                  className="grid__item bento-container col-span-3 row-span-1 relative z-20 flex items-center justify-center gap-2 h-full w-full will-change-transform"
+                  className="grid__item bento-container col-span-3 row-span-1 relative z-20 flex items-center justify-center gap-1 sm:gap-2 h-full w-full will-change-transform"
                 >
                   {bentoItems.map((bentoItem, index) => {
                     const isActive = activeBento === index;
@@ -196,7 +196,7 @@ export function StaggeredGrid({
                       <div
                         key={bentoItem.id}
                         className={cn(
-                          'relative cursor-pointer overflow-hidden rounded-2xl h-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
+                          'relative cursor-pointer overflow-hidden rounded-xl sm:rounded-2xl h-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
                           isActive
                             ? 'bg-zinc-900/60 shadow-2xl border border-[#C75B32]/70'
                             : 'bg-zinc-950 border border-white/10 hover:border-white/30'
@@ -207,7 +207,7 @@ export function StaggeredGrid({
                       >
                         <div
                           className={cn(
-                            'absolute inset-0 rounded-2xl border z-50 pointer-events-none transition-colors duration-700',
+                            'absolute inset-0 rounded-xl sm:rounded-2xl border z-50 pointer-events-none transition-colors duration-700',
                             isActive ? 'border-[#C75B32]/50' : 'border-zinc-800/50'
                           )}
                         />
@@ -234,16 +234,16 @@ export function StaggeredGrid({
                               )}
                             </div>
 
-                            <div className="absolute bottom-0 left-0 w-full h-20 flex items-center justify-between px-5 z-20">
-                              <div className="flex flex-col relative z-10 space-y-0.5">
-                                <h3 className="text-sm font-bold text-white drop-shadow-md leading-none tracking-tight">
+                            <div className="absolute bottom-0 left-0 w-full h-16 sm:h-20 flex items-center justify-between px-2 sm:px-5 z-20">
+                              <div className="flex flex-col relative z-10 space-y-0.5 max-w-[80%]">
+                                <h3 className="text-xs sm:text-sm font-bold text-white drop-shadow-md leading-none tracking-tight truncate">
                                   {bentoItem.title}
                                 </h3>
-                                <p className="text-[10px] font-mono text-[#C75B32]">
+                                <p className="text-[9px] sm:text-[10px] font-mono text-[#C75B32] truncate">
                                   {bentoItem.subtitle}
                                 </p>
                               </div>
-                              <div className="text-[#C75B32] transition-colors hover:text-white drop-shadow-md relative z-10 text-xl">
+                              <div className="text-[#C75B32] transition-colors hover:text-white drop-shadow-md relative z-10 text-base sm:text-xl">
                                 {bentoItem.icon}
                               </div>
                             </div>
@@ -252,14 +252,14 @@ export function StaggeredGrid({
 
                         <div
                           className={cn(
-                            'absolute inset-0 flex flex-col items-center justify-center gap-2 transition-all duration-500',
+                            'absolute inset-0 flex flex-col items-center justify-center gap-1 sm:gap-2 transition-all duration-500 p-0.5',
                             isActive ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'
                           )}
                         >
-                          <div className="text-[#C75B32] group-hover:text-white transition-colors text-lg">
+                          <div className="text-[#C75B32] group-hover:text-white transition-colors text-sm sm:text-lg">
                             {bentoItem.icon}
                           </div>
-                          <span className="text-[9px] font-mono font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors uppercase tracking-wider text-center px-1">
+                          <span className="text-[8px] sm:text-[9px] font-mono font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors uppercase tracking-wider text-center px-0.5 truncate max-w-full">
                             {bentoItem.title}
                           </span>
                         </div>

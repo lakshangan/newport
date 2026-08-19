@@ -33,15 +33,15 @@ export const HeroSection: React.FC = () => {
       <div className="relative z-10 w-full max-w-7xl mx-auto my-auto flex flex-col lg:flex-row items-center justify-center py-6">
         
         {/* Left Side Typography */}
-        <div className="z-20 text-center lg:text-left space-y-0 -mb-4 lg:mb-0 lg:-mr-12">
-          <h1 className="font-display font-black text-6xl sm:text-8xl md:text-[7.5rem] lg:text-[9.5rem] leading-[0.85] tracking-tight uppercase">
+        <div className="z-20 text-center lg:text-left space-y-0 -mb-2 sm:-mb-4 lg:mb-0 lg:-mr-12">
+          <h1 className="font-display font-black text-5xl xs:text-6xl sm:text-8xl md:text-[7.5rem] lg:text-[9.5rem] leading-[0.85] tracking-tight uppercase">
             <span className="block text-outline">HELLO</span>
             <span className="block text-white">I&apos;M</span>
           </h1>
         </div>
 
         {/* Center Studio Portrait */}
-        <div className="relative w-[270px] sm:w-[360px] lg:w-[420px] aspect-[3/4] z-10 rounded-2xl overflow-hidden shadow-2xl border border-white/10 my-4 lg:my-0 group">
+        <div className="relative w-[230px] xs:w-[270px] sm:w-[360px] lg:w-[420px] max-w-full aspect-[3/4] z-10 rounded-2xl overflow-hidden shadow-2xl border border-white/10 my-4 lg:my-0 group">
           <Image
             src="/images/hero_portrait.jpg"
             alt="Lakshan Ganesan Studio Portrait"
@@ -54,8 +54,8 @@ export const HeroSection: React.FC = () => {
         </div>
 
         {/* Right Side Typography */}
-        <div className="z-20 text-center lg:text-left space-y-0 -mt-4 lg:mt-0 lg:-ml-12">
-          <h1 className="font-display font-black text-6xl sm:text-8xl md:text-[7.5rem] lg:text-[9.5rem] leading-[0.85] tracking-tight uppercase">
+        <div className="z-20 text-center lg:text-left space-y-0 -mt-2 sm:-mt-4 lg:mt-0 lg:-ml-12">
+          <h1 className="font-display font-black text-5xl xs:text-6xl sm:text-8xl md:text-[7.5rem] lg:text-[9.5rem] leading-[0.85] tracking-tight uppercase">
             <span className="block text-white">LAKSHAN</span>
             <span className="block text-outline">GANESAN</span>
           </h1>
@@ -64,10 +64,10 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* Bottom Floating Pill Action Controls */}
-      <div className="relative z-30 max-w-7xl mx-auto w-full flex items-center justify-center space-x-4 pt-4 pb-4">
+      <div className="relative z-30 max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-4 pb-4">
         <a
-          href="#projects"
-          className="px-7 py-3.5 bg-white text-black font-mono font-bold text-xs tracking-wider rounded-full hover:scale-105 transition-all shadow-2xl flex items-center space-x-2"
+          href="#work"
+          className="w-full sm:w-auto px-7 py-3.5 bg-white text-black font-mono font-bold text-xs tracking-wider rounded-full hover:scale-105 transition-all shadow-2xl flex items-center justify-center space-x-2 text-center"
           data-cursor="PORTFOLIO"
         >
           <span>▶ VIEW PORTFOLIO</span>
@@ -75,7 +75,7 @@ export const HeroSection: React.FC = () => {
 
         <a
           href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-          className="px-7 py-3.5 bg-white/5 border border-white/20 text-white font-mono text-xs tracking-wider rounded-full hover:bg-white/15 transition-all backdrop-blur-md"
+          className="w-full sm:w-auto px-7 py-3.5 bg-white/5 border border-white/20 text-white font-mono text-xs tracking-wider rounded-full hover:bg-white/15 transition-all backdrop-blur-md text-center justify-center flex items-center"
           data-cursor="RESUME"
         >
           <span>VIEW RESUME</span>

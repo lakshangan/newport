@@ -21,7 +21,7 @@ export const ContactSection: React.FC = () => {
           <div className="text-xs font-mono tracking-widest text-[#C75B32]">
             // 06 CONTACT & COLLABORATION
           </div>
-          <h2 className="font-display text-5xl sm:text-7xl font-extrabold uppercase tracking-tight text-[#E8E5DF]">
+          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-[#E8E5DF]">
             LET&apos;S BUILD <span className="text-[#C75B32]">TOGETHER.</span>
           </h2>
           <p className="text-base font-light text-[#8E8B85] max-w-xl">
@@ -30,10 +30,10 @@ export const ContactSection: React.FC = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
           <a
             href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-            className="px-7 py-3.5 bg-[#C75B32] text-white font-mono text-xs tracking-widest hover:bg-[#E06D43] transition-colors"
+            className="px-7 py-3.5 bg-[#C75B32] text-white font-mono text-xs tracking-widest hover:bg-[#E06D43] transition-colors text-center"
             data-cursor="EMAIL"
           >
             GET IN TOUCH ↗
@@ -41,7 +41,7 @@ export const ContactSection: React.FC = () => {
 
           <button
             onClick={handleCopyEmail}
-            className="px-7 py-3.5 border border-[#242424] text-[#E8E5DF] font-mono text-xs tracking-widest hover:border-[#E8E5DF] transition-colors"
+            className="px-7 py-3.5 border border-[#242424] text-[#E8E5DF] font-mono text-xs tracking-widest hover:border-[#E8E5DF] transition-colors text-center"
             data-cursor="COPY"
           >
             {copied ? '✓ EMAIL COPIED' : 'COPY EMAIL ADDRESS'}

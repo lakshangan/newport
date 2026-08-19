@@ -140,10 +140,10 @@ export const PhotoGallerySection: React.FC = () => {
 
           {/* View Mode Switcher Pill */}
           <div className="flex items-center gap-3">
-            <div className="bg-[#111115] p-1.5 rounded-full border border-white/15 flex items-center shadow-xl backdrop-blur-md">
+            <div className="bg-[#111115] p-1 sm:p-1.5 rounded-full border border-white/15 flex items-center shadow-xl backdrop-blur-md max-w-full overflow-x-auto">
               <button
                 onClick={() => setViewMode('parallax')}
-                className={`px-5 py-2 text-xs font-mono rounded-full transition-all ${
+                className={`px-3.5 sm:px-5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-mono rounded-full transition-all whitespace-nowrap ${
                   viewMode === 'parallax'
                     ? 'bg-[#C75B32] text-white font-bold shadow-md'
                     : 'text-white/70 hover:text-white'
@@ -153,7 +153,7 @@ export const PhotoGallerySection: React.FC = () => {
               </button>
               <button
                 onClick={() => setViewMode('grid')}
-                className={`px-5 py-2 text-xs font-mono rounded-full transition-all ${
+                className={`px-3.5 sm:px-5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-mono rounded-full transition-all whitespace-nowrap ${
                   viewMode === 'grid'
                     ? 'bg-[#C75B32] text-white font-bold shadow-md'
                     : 'text-white/70 hover:text-white'
