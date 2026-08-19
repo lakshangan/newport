@@ -16,6 +16,7 @@ import { ExperienceSection } from '@/components/experience/ExperienceSection';
 import { AchievementsSection } from '@/components/achievements/AchievementsSection';
 import { PlaygroundSection } from '@/components/playground/PlaygroundSection';
 import { TechTicker } from '@/components/tech/TechTicker';
+import { DevLabBentoSection } from '@/components/sections/DevLabBentoSection';
 import { ContactSection } from '@/components/contact/ContactSection';
 import { Footer } from '@/components/footer/Footer';
 
@@ -83,6 +84,9 @@ export default function Home() {
 
       {/* Moving Tech Arsenal Ticker */}
       <TechTicker />
+
+      {/* Dev Lab & Interactive Deployment Stack Bento Grid */}
+      <DevLabBentoSection />
 
       {/* Dramatic Contact CTA */}
       <ContactSection />
