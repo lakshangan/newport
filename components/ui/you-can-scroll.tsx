@@ -1,94 +1,103 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { AsciiGlitchRipple } from "@/components/ui/AsciiGlitchRipple";
+
+const FOUR_WORDS = [
+  "BUILD.",
+  "DESIGN.",
+  "LEARN.",
+  "INNOVATE.",
+];
 
 export default function ScrollAnimation() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const items: Element[] = gsap.utils.toArray("#you-can-scroll-list li");
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const items = gsap.utils.toArray<HTMLElement>(".scroll-word-item");
     if (!items || items.length === 0) return;
 
-    // Set initial state: first item bright, others dimmed
-    gsap.set(items, { opacity: (i) => (i !== 0 ? 0.2 : 1) });
+    // Initial state: first item active/bright, others dimmed
+    gsap.set(items, { opacity: 0.2, scale: 0.96 });
+    if (items[0]) {
+      gsap.set(items[0], { opacity: 1, scale: 1.05, color: "#C75B32" });
+    }
 
-    const dimmer = gsap.timeline()
-      .to(items.slice(1), { opacity: 1, stagger: 0.5 })
-      .to(items.slice(0, items.length - 1), { opacity: 0.2, stagger: 0.5 }, 0);
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.6,
+      },
+    });
 
-    const dimmerScrub = ScrollTrigger.create({
-      trigger: items[0],
-      endTrigger: items[items.length - 1],
-      start: "center center",
-      end: "center center",
-      animation: dimmer,
-      scrub: 0.2,
+    const numSteps = items.length;
+    items.forEach((item, index) => {
+      const stepStart = index / numSteps;
+
+      if (index > 0) {
+        // Dim previous item
+        tl.to(
+          items[index - 1],
+          { opacity: 0.25, scale: 0.96, color: "#FFFFFF", duration: 0.4 },
+          stepStart
+        );
+        // Highlight current item
+        tl.to(
+          item,
+          { opacity: 1, scale: 1.05, color: "#C75B32", duration: 0.4 },
+          stepStart
+        );
+      }
     });
 
     return () => {
-      dimmerScrub?.kill();
+      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
 
-  const ACTIONS = [
-    "design.",
-    "prototype.",
-    "solve.",
-    "build.",
-    "develop.",
-    "debug.",
-    "learn.",
-    "cook.",
-    "ship.",
-    "prompt.",
-    "collaborate.",
-    "create.",
-    "inspire.",
-    "follow.",
-    "innovate.",
-    "test.",
-    "optimize.",
-    "teach.",
-    "visualize.",
-    "transform.",
-    "scale.",
-    "do it."
-  ];
-
   return (
-    <section className="relative w-full py-16 sm:py-32 px-4 sm:px-12 bg-[#080808] border-t border-white/10 overflow-hidden">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between gap-8 sm:gap-16">
+    <section ref={sectionRef} className="relative w-full h-[220vh] bg-[#080808] border-t border-white/10">
+      {/* Sticky Fullscreen Container */}
+      <div className="sticky top-0 h-screen w-full flex flex-col md:flex-row items-center justify-between px-6 sm:px-12 max-w-7xl mx-auto overflow-hidden">
         
-        {/* Pinned Left Title */}
-        <div className="sticky top-16 md:top-[38vh] z-20 bg-[#080808]/90 md:bg-transparent py-3 md:py-0 backdrop-blur-md md:backdrop-blur-none w-full md:w-5/12 space-y-3">
+        {/* Left Pinned Static Title */}
+        <div className="w-full md:w-5/12 space-y-4 text-left pt-12 md:pt-0">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1 bg-white/5 border border-white/10 text-[#C75B32] text-xs font-mono rounded-full">
             <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
             <span>DISCIPLINE &amp; EXECUTION</span>
           </div>
 
-          <h2 className="font-display text-4xl sm:text-7xl lg:text-8xl font-black uppercase text-white tracking-tight leading-none drop-shadow-2xl">
-            YOU CAN<br className="hidden md:inline" />{" "}
-            <span className="text-[#C75B32]">SCROLL.</span>
+          <h2 className="font-display text-5xl sm:text-7xl lg:text-8xl font-black uppercase text-white tracking-tight leading-none drop-shadow-2xl">
+            I LOVE<br />
+            <span className="text-[#C75B32]">TO.</span>
           </h2>
+
+          <p className="text-xs sm:text-sm font-mono text-white/50 max-w-sm pt-1">
+            Scroll to cycle through core operational pillars across Web3 protocols, AI, and graphics.
+          </p>
         </div>
 
-        {/* Right Vertical List */}
-        <div className="md:w-6/12 w-full pt-2 md:pt-0">
-          <ul
-            id="you-can-scroll-list"
-            className="space-y-4 sm:space-y-8 font-display text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-white"
-          >
-            {ACTIONS.map((text, i) => (
-              <li
-                key={i}
-                className="transition-colors duration-300 hover:text-[#C75B32] select-none cursor-pointer"
-              >
-                {text}
-              </li>
-            ))}
-          </ul>
+        {/* Right 4 Stacked Words */}
+        <div className="w-full md:w-6/12 flex flex-col justify-center space-y-6 sm:space-y-8 py-8">
+          {FOUR_WORDS.map((word, i) => (
+            <div
+              key={i}
+              className="scroll-word-item font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-white transition-all duration-300 select-none cursor-pointer"
+            >
+              <AsciiGlitchRipple as="span" dur={900}>
+                {word}
+              </AsciiGlitchRipple>
+            </div>
+          ))}
         </div>
 
       </div>
