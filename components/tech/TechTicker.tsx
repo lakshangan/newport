@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { StaggeredGrid, BentoItem } from '@/components/ui/staggered-grid';
-import { SiSolidity, SiPython, SiReact, SiNextdotjs, SiEthereum, SiTypescript } from 'react-icons/si';
+import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 
 const TECH_BENTO_ITEMS: BentoItem[] = [
   {
@@ -10,7 +10,7 @@ const TECH_BENTO_ITEMS: BentoItem[] = [
     title: 'EVM Smart Contracts',
     subtitle: 'Solidity / Hardhat / Uniswap v4',
     description: 'Architecting fractionalized real estate vaults, custom liquidity hooks, and EVM security protocols.',
-    icon: <SiSolidity className="w-6 h-6" />,
+    icon: <span className="font-mono text-xs font-bold text-[#C75B32] px-1.5 py-0.5 border border-[#C75B32]/40 rounded bg-[#C75B32]/10">[EVM]</span>,
     image: '/images/IMG_0400.jpeg',
   },
   {
@@ -18,7 +18,7 @@ const TECH_BENTO_ITEMS: BentoItem[] = [
     title: 'AI & Neural Systems',
     subtitle: 'Python / LLM Agents / C2PA',
     description: 'Building C2PA synthetic media provenance engines and context-aware medical LLM triage tools.',
-    icon: <SiPython className="w-6 h-6" />,
+    icon: <span className="font-mono text-xs font-bold text-[#C75B32] px-1.5 py-0.5 border border-[#C75B32]/40 rounded bg-[#C75B32]/10">[AI]</span>,
     image: '/images/IMG_0399.jpeg',
   },
   {
@@ -26,7 +26,7 @@ const TECH_BENTO_ITEMS: BentoItem[] = [
     title: 'Protocol Research',
     subtitle: 'Ethereum / OpenLedger / DeFi',
     description: 'Technical research lead mapping on-chain transaction trails and Web3 market infrastructure.',
-    icon: <SiEthereum className="w-6 h-6" />,
+    icon: <span className="font-mono text-xs font-bold text-[#C75B32] px-1.5 py-0.5 border border-[#C75B32]/40 rounded bg-[#C75B32]/10">[WEB3]</span>,
     image: '/images/IMG_8920.JPG',
   },
   {
@@ -34,7 +34,7 @@ const TECH_BENTO_ITEMS: BentoItem[] = [
     title: 'Frontend & 3D WebGL',
     subtitle: 'Next.js / React / Three.js',
     description: 'Constructing high-performance interactive 3D web experiences, custom shaders, and responsive UIs.',
-    icon: <SiNextdotjs className="w-6 h-6" />,
+    icon: <span className="font-mono text-xs font-bold text-[#C75B32] px-1.5 py-0.5 border border-[#C75B32]/40 rounded bg-[#C75B32]/10">[3D]</span>,
     image: '/images/IMG_8355.jpeg',
   },
 ];

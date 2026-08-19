@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
-import { FaGithub, FaSlack, FaTwitter } from 'react-icons/fa';
+import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -273,9 +273,6 @@ export function StaggeredGrid({
             if (i === 17 || i === 18) return null;
 
             if (typeof item === 'string') {
-              const Icon = i % 3 === 0 ? FaGithub : i % 3 === 1 ? FaSlack : FaTwitter;
-              const label = i % 3 === 0 ? 'Github' : i % 3 === 1 ? 'Slack' : 'Twitter';
-
               return (
                 <figure
                   key={`img-${i}`}
@@ -283,17 +280,19 @@ export function StaggeredGrid({
                   className="grid__item m-0 relative z-10 [perspective:800px] will-change-[transform,opacity] group cursor-pointer"
                 >
                   <div className="grid__item-img w-full h-full [backface-visibility:hidden] will-change-transform rounded-xl overflow-hidden shadow-sm border border-zinc-800 bg-zinc-950 flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-105 group-hover:shadow-xl group-hover:border-[#C75B32]/60">
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/80 to-black backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
-
-                    <div className="relative z-10 flex flex-col items-center justify-center gap-2.5 p-2">
-                      <Icon className="w-6 h-6 text-zinc-400 transition-all duration-300 group-hover:text-[#C75B32] group-hover:scale-110" />
-
-                      <div className="text-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 delay-75">
-                        <span className="block text-[9px] font-mono text-white/70 uppercase tracking-wider mb-0.5">
-                          Stack
-                        </span>
-                        <span className="block text-xs font-bold text-white tracking-tight">{label}</span>
-                      </div>
+                    <img
+                      src={item}
+                      alt={`Gallery shot ${i}`}
+                      className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-end p-2">
+                      <AsciiGlitchRipple
+                        as="span"
+                        className="text-[9px] font-mono text-white font-bold tracking-wider uppercase drop-shadow"
+                        dur={800}
+                      >
+                        PROOF_OF_WORK
+                      </AsciiGlitchRipple>
                     </div>
                   </div>
                 </figure>

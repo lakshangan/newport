@@ -2,6 +2,7 @@
 
 import { useScroll, useTransform, motion } from 'framer-motion';
 import { useRef } from 'react';
+import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 
 export interface ParallaxImage {
   src: string;
@@ -75,7 +76,7 @@ export function ZoomParallax({ images, className, onImageClick }: ZoomParallaxPr
                 className="relative h-[25vh] w-[25vw] group overflow-hidden rounded-xl border border-white/20 shadow-2xl bg-black cursor-pointer transition-all duration-300 hover:border-[#C75B32]"
               >
                 <img
-                  src={item.src || '/placeholder.svg'}
+                  src={item.src}
                   alt={item.alt || item.title || `Parallax image ${index + 1}`}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                 />
@@ -90,7 +91,9 @@ export function ZoomParallax({ images, className, onImageClick }: ZoomParallaxPr
                     )}
                     {item.title && (
                       <h4 className="text-xs sm:text-sm font-display font-bold text-white tracking-tight drop-shadow-md leading-tight group-hover:text-[#E88053] transition-colors">
-                        {item.title}
+                        <AsciiGlitchRipple as="span" dur={900}>
+                          {item.title}
+                        </AsciiGlitchRipple>
                       </h4>
                     )}
                     {item.subtitle && (
