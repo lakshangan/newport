@@ -48,6 +48,10 @@ export interface AsciiGlitchRippleProps extends React.AnchorHTMLAttributes<HTMLA
    * @default false
    */
   triggerOnChange?: boolean;
+  /**
+   * Optional interval in milliseconds to automatically trigger periodic glitch ripple waves.
+   */
+  autoRippleInterval?: number;
   [key: string]: any;
 }
 
@@ -60,6 +64,7 @@ export function AsciiGlitchRipple({
   preserveSpaces = true,
   spread = 1.0,
   triggerOnChange = false,
+  autoRippleInterval,
   ...props
 }: AsciiGlitchRippleProps) {
   const Component = as;
@@ -175,9 +180,9 @@ export function AsciiGlitchRipple({
       stateRef.current.animId = requestAnimationFrame(animate);
     };
 
-    const startWave = () => {
+    const startWave = (overridePos?: number) => {
       stateRef.current.waves.push({
-        startPos: stateRef.current.cursorPos,
+        startPos: overridePos ?? stateRef.current.cursorPos,
         startTime: Date.now(),
         id: Math.random(),
       });
@@ -238,11 +243,22 @@ export function AsciiGlitchRipple({
       stateRef.current.isHover = false;
     };
 
+    let intervalId: NodeJS.Timeout | null = null;
+    if (autoRippleInterval && autoRippleInterval > 0) {
+      intervalId = setInterval(() => {
+        if (!stateRef.current.isHover) {
+          const randPos = Math.floor(Math.random() * Math.max(1, stateRef.current.origChars.length));
+          startWave(randPos);
+        }
+      }, autoRippleInterval);
+    }
+
     el.addEventListener("mouseenter", handleEnter);
     el.addEventListener("mousemove", handleMove);
     el.addEventListener("mouseleave", handleLeave);
 
     return () => {
+      if (intervalId) clearInterval(intervalId);
       el.removeEventListener("mouseenter", handleEnter);
       el.removeEventListener("mousemove", handleMove);
       el.removeEventListener("mouseleave", handleLeave);

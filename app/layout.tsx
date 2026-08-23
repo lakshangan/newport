@@ -22,9 +22,15 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://lakshan-dev.vercel.app'),
   title: 'Lakshan Ganesan — Creative Developer, Web3 & AI',
   description:
     'Cinematic Personal Portfolio of Lakshan Ganesan. Creative Developer & Web3 Research Analyst engineering decentralized intelligence, smart contracts, and high-end interactive digital experiences.',
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/icon.svg',
+  },
   keywords: [
     'Lakshan Ganesan',
     'Creative Developer',

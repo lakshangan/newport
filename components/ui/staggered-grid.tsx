@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
+import { FaGithub, FaSlack, FaTwitter } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
 
