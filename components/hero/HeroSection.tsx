@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
+import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 
 export const HeroSection: React.FC = () => {
   return (
@@ -20,48 +21,57 @@ export const HeroSection: React.FC = () => {
         />
       </div>
 
-      {/* Top HUD Telemetry Metadata Bar */}
-      <div className="relative z-20 max-w-7xl mx-auto w-full flex justify-between items-start text-[11px] font-mono text-white/70 tracking-wider">
-        <div className="space-y-0.5">
-          <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
-            <span className="text-white font-semibold">DEV_ENV // ACTIVE</span>
-          </div>
-          <div>TCR 01:04:32:15 // REC 23.976 FPS</div>
+      {/* Dark Vignette & Gradient Overlays for High-Contrast Readable Text */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/85 via-black/55 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#080808] via-transparent to-black/40 pointer-events-none" />
+
+      {/* Clean Top Metadata Bar */}
+      <div className="relative z-20 max-w-7xl mx-auto w-full flex justify-between items-center text-[11px] font-mono tracking-wider">
+        <div className="flex items-center space-x-2 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 shadow-md">
+          <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
+          <span className="text-white font-semibold">DEV_ENV // ACTIVE</span>
         </div>
 
-        <div className="space-y-0.5 text-right font-mono">
-          <div className="text-[#5CE1E6] font-semibold">WEB3 &amp; AI ARCHITECT</div>
-          <div>COIMBATORE, IN</div>
+        <div className="hidden sm:flex items-center space-x-2 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 font-mono shadow-md">
+          <span className="text-[#5CE1E6] font-semibold">WEB3 &amp; AI ARCHITECT</span>
+          <span className="text-white/50">|</span>
+          <span className="text-white/80">COIMBATORE, IN</span>
         </div>
       </div>
 
-      {/* Main Left-Aligned Typography Content Over Widescreen Background */}
+      {/* Main Left-Aligned Typography Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto my-auto flex flex-col items-start justify-center py-6">
-        <div className="max-w-3xl space-y-4 text-left">
+        <div className="max-w-3xl space-y-5 text-left">
           
           {/* Subtitle Badge */}
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase">
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-[#5CE1E6]/30 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase shadow-xl">
             <span>CREATIVE DEVELOPER &amp; ANALYST</span>
           </div>
 
-          {/* Main Display Headline */}
-          <h1 className="font-display font-black text-5xl xs:text-6xl sm:text-7xl md:text-[6rem] lg:text-[7.5rem] xl:text-[8.5rem] leading-[0.88] tracking-tight uppercase">
-            <span className="block text-outline">HELLO I&apos;M</span>
-            <span className="block text-white">LAKSHAN</span>
-            <span className="block text-accent-gradient">GANESAN</span>
+          {/* Main Display Headline with ASCII Scramble Hover Effect */}
+          <h1 className="font-display font-black text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] leading-[0.95] tracking-tight uppercase">
+            <span className="block text-white/80 font-light text-2xl xs:text-3xl sm:text-4xl md:text-5xl tracking-widest mb-1 sm:mb-2">
+              <AsciiGlitchRipple dur={1000} className="hover:text-[#5CE1E6] transition-colors">
+                HELLO, I&apos;M
+              </AsciiGlitchRipple>
+            </span>
+            <span className="block text-white tracking-tight drop-shadow-2xl">
+              <AsciiGlitchRipple dur={1200} className="hover:text-[#C75B32] transition-colors">
+                LAKSHAN GANESAN
+              </AsciiGlitchRipple>
+            </span>
           </h1>
 
-          {/* Bio Description */}
-          <p className="text-xs sm:text-sm font-mono tracking-wider text-white/90 max-w-xl pt-2 leading-relaxed bg-black/30 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+          {/* Clean Bio Description */}
+          <p className="text-xs sm:text-sm font-mono tracking-wider text-white/90 max-w-xl pt-2 leading-relaxed bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/15 shadow-2xl">
             Architecting decentralized systems, smart contracts, and high-performance AI interfaces at the edge of code and intelligence.
           </p>
 
           {/* Floating Action CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 pt-3">
             <a
               href="#work"
-              className="w-full sm:w-auto px-7 py-3.5 bg-white text-black font-mono font-bold text-xs tracking-wider rounded-full hover:scale-105 transition-all shadow-2xl flex items-center justify-center space-x-2 text-center"
+              className="w-full sm:w-auto px-7 py-3.5 bg-white text-black font-mono font-bold text-xs tracking-wider rounded-full hover:bg-[#5CE1E6] hover:scale-105 transition-all shadow-2xl flex items-center justify-center space-x-2 text-center"
               data-cursor="PORTFOLIO"
             >
               <span>▶ VIEW PORTFOLIO</span>
@@ -69,7 +79,7 @@ export const HeroSection: React.FC = () => {
 
             <a
               href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-              className="w-full sm:w-auto px-7 py-3.5 bg-black/50 border border-white/25 text-white font-mono text-xs tracking-wider rounded-full hover:bg-black/70 transition-all backdrop-blur-md text-center justify-center flex items-center"
+              className="w-full sm:w-auto px-7 py-3.5 bg-black/60 border border-white/25 text-white font-mono text-xs tracking-wider rounded-full hover:bg-black/80 hover:border-white/40 transition-all backdrop-blur-md text-center justify-center flex items-center shadow-lg"
               data-cursor="RESUME"
             >
               <span>GET IN TOUCH</span>
@@ -86,6 +96,8 @@ export const HeroSection: React.FC = () => {
     </section>
   );
 };
+
+export default HeroSection;
 
 
 
