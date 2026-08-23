@@ -150,12 +150,6 @@ export function AsciiGlitchRipple({
     const start = () => {
       if (stateRef.current.isAnim) return;
 
-      // Lock current width to prevent layout shifts during ASCII scrambling
-      if (stateRef.current.origW === null) {
-        stateRef.current.origW = el.getBoundingClientRect().width;
-        el.style.width = `${stateRef.current.origW}px`;
-      }
-
       stateRef.current.isAnim = true;
       el.classList.add("as");
 
