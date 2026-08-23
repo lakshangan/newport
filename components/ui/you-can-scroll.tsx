@@ -8,12 +8,12 @@ import { AsciiGlitchRipple } from "@/components/ui/AsciiGlitchRipple";
 const WORD_ITEMS = [
   { text: "code.", color: "text-[#5CE1E6]", desc: "EVM Smart Contracts & Protocol Logic" },
   { text: "build.", color: "text-[#38BDF8]", desc: "High-Performance AI & 3D WebGL Interfaces" },
-  { text: "learn.", color: "text-[#A855F7]", desc: "Web3 Cryptography & Distributed Systems" },
-  { text: "ship.", color: "text-[#C75B32]", desc: "Full-Stack Production Applications" },
-  { text: "innovate.", color: "text-[#F59E0B]", desc: "C2PA Provenance & Autonomous Agents" },
-  { text: "optimize.", color: "text-[#10B981]", desc: "Low-Latency Edge Execution & Performance" },
-  { text: "like.", color: "text-[#EC4899]", desc: "Crafting Pixel-Perfect Modern Aesthetics" },
-  { text: "do it.", color: "text-[#F43F5E]", desc: "Shipping End-to-End Scalable Systems" },
+  { text: "learn.", color: "text-[#C084FC]", desc: "Web3 Cryptography & Distributed Systems" },
+  { text: "ship.", color: "text-[#FF6B35]", desc: "Full-Stack Production Applications" },
+  { text: "innovate.", color: "text-[#FACC15]", desc: "C2PA Provenance & Autonomous Agents" },
+  { text: "optimize.", color: "text-[#34D399]", desc: "Low-Latency Edge Execution & Performance" },
+  { text: "like.", color: "text-[#F472B6]", desc: "Crafting Pixel-Perfect Modern Aesthetics" },
+  { text: "do it.", color: "text-[#FB7185]", desc: "Shipping End-to-End Scalable Systems" },
 ];
 
 export default function ScrollAnimation() {
@@ -32,7 +32,7 @@ export default function ScrollAnimation() {
 
     // Create GSAP ScrollTrigger timeline to translate words vertically next to 'i love'
     const anim = gsap.to(wordsList, {
-      y: () => -(wordsList.scrollHeight - 160),
+      y: () => -(wordsList.scrollHeight - 140),
       ease: "none",
       scrollTrigger: {
         trigger: section,
@@ -62,11 +62,11 @@ export default function ScrollAnimation() {
       ref={sectionRef}
       className="relative w-full h-screen flex items-center justify-center bg-[#050505] border-t border-white/10 overflow-hidden select-none"
     >
-      {/* Background Subtle Tech Grid (Matching Screenshot) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1a1a20_1px,transparent_1px),linear-gradient(to_bottom,#1a1a20_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-25 pointer-events-none" />
+      {/* Background Subtle Tech Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f1f26_1px,transparent_1px),linear-gradient(to_bottom,#1f1f26_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30 pointer-events-none" />
 
       {/* Ambient Radial Glow */}
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#C75B32]/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#C75B32]/15 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 flex flex-col md:flex-row items-center justify-center gap-2 sm:gap-6 relative z-10">
         
@@ -91,8 +91,8 @@ export default function ScrollAnimation() {
                   onMouseEnter={() => setActiveIndex(i)}
                   className={`font-display font-black text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] tracking-tight uppercase transition-all duration-300 cursor-pointer whitespace-nowrap leading-none ${
                     isActive
-                      ? `${item.color} opacity-100 scale-105 drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]`
-                      : "text-white/20 hover:text-white/60 opacity-20 scale-95"
+                      ? `${item.color} opacity-100 scale-105 drop-shadow-[0_0_35px_rgba(255,255,255,0.4)]`
+                      : "text-white/40 hover:text-white/80 opacity-40 scale-95"
                   }`}
                 >
                   <AsciiGlitchRipple as="span" dur={900}>
@@ -108,10 +108,10 @@ export default function ScrollAnimation() {
 
       {/* Bottom Focus Detail Marker Pill */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
-        <div className="px-5 py-2 bg-black/60 border border-white/15 rounded-full backdrop-blur-md flex items-center space-x-3 shadow-2xl">
-          <span className="w-2 h-2 rounded-full bg-[#5CE1E6] animate-pulse" />
-          <span className="text-xs font-mono text-white/90 tracking-wider">
-            FOCUS // 0{activeIndex + 1}: <span className="text-[#5CE1E6]">{WORD_ITEMS[activeIndex].desc}</span>
+        <div className="px-5 py-2.5 bg-black/70 border border-white/20 rounded-full backdrop-blur-xl flex items-center space-x-3 shadow-2xl">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#5CE1E6] animate-pulse" />
+          <span className="text-xs sm:text-sm font-mono text-white tracking-wider">
+            FOCUS // 0{activeIndex + 1}: <span className="text-[#5CE1E6] font-semibold">{WORD_ITEMS[activeIndex].desc}</span>
           </span>
         </div>
       </div>
