@@ -9,8 +9,6 @@ import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
 import ScrollAnimation from '@/components/ui/you-can-scroll';
 import { AboutSection } from '@/components/about/AboutSection';
-import { ProjectGallery } from '@/components/projects/ProjectGallery';
-import { SectionDissolveTransition } from '@/components/sections/SectionDissolveTransition';
 import { PhotoGallerySection } from '@/components/gallery/PhotoGallerySection';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
 import { AchievementsSection } from '@/components/achievements/AchievementsSection';
@@ -69,12 +67,6 @@ export default function Home() {
 
       {/* About & Core Disciplines */}
       <AboutSection />
-
-      {/* Selected Work & Case Studies with R3F Scenes */}
-      <ProjectGallery />
-
-      {/* WebGL Shader Section Dissolve Transition */}
-      <SectionDissolveTransition />
 
       {/* Proof of Work: Polaroid Photo Gallery & Community Memories */}
       <PhotoGallerySection />
