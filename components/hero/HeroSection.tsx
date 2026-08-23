@@ -16,14 +16,14 @@ export const HeroSection: React.FC = () => {
           alt="Lakshan Ganesan Workspace"
           fill
           priority
-          className="object-cover object-right md:object-center filter contrast-105 brightness-100"
+          className="object-cover object-right md:object-center filter contrast-105 brightness-105"
           sizes="100vw"
         />
       </div>
 
-      {/* Dark Vignette & Gradient Overlays for High-Contrast Readable Text */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/85 via-black/55 to-transparent pointer-events-none" />
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#080808] via-transparent to-black/40 pointer-events-none" />
+      {/* Light Ambient Overlays - keeps the workspace image bright, warm, and vivid */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/45 via-black/15 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#080808]/50 via-transparent to-black/15 pointer-events-none" />
 
       {/* Clean Top Metadata Bar */}
       <div className="relative z-20 max-w-7xl mx-auto w-full flex justify-between items-center text-[11px] font-mono tracking-wider">
