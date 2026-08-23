@@ -25,6 +25,8 @@ const coverFragmentShader = `
   uniform float uGrayscale;
   uniform float uEdgeIntensity;
   uniform float uEdgeBrightness;
+
+  
   varying vec2 vUv;
 
   mat3 sobelX = mat3(

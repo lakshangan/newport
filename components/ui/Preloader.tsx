@@ -2,10 +2,14 @@
 
 import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useTexture, OrthographicCamera } from '@react-three/drei';
+import { OrthographicCamera } from '@react-three/drei';
 import * as THREE from 'three';
-import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 
+const TARGET_TEXT = 'LAKSHAN';
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
+const SUBTITLE = 'DATA LOADED.';
+
+// WebGL Sobel Edge Dissolve Shader
 const coverVertexShader = `
   varying vec2 vUv;
   void main() {
@@ -15,48 +19,12 @@ const coverVertexShader = `
 `;
 
 const coverFragmentShader = `
-  uniform sampler2D uTexture;
   uniform vec2 uResolution;
-  uniform vec2 uImageResolution;
   uniform float uDissolve;
   uniform vec2 uCenter;
   uniform float uTime;
-  uniform float uGrayscale;
   uniform float uEdgeIntensity;
-  uniform float uEdgeBrightness;
   varying vec2 vUv;
-
-  mat3 sobelX = mat3(
-    -1.0, 0.0, 1.0,
-    -2.0, 0.0, 2.0,
-    -1.0, 0.0, 1.0
-  );
-
-  mat3 sobelY = mat3(
-    -1.0, -2.0, -1.0,
-     0.0,  0.0,  0.0,
-     1.0,  2.0,  1.0
-  );
-
-  float getLuminance(vec3 color) {
-    return dot(color, vec3(0.299, 0.587, 0.114));
-  }
-
-  float sobel(sampler2D tex, vec2 uv, vec2 texelSize) {
-    float gx = 0.0;
-    float gy = 0.0;
-
-    for (int i = -1; i <= 1; i++) {
-      for (int j = -1; j <= 1; j++) {
-        vec2 offset = vec2(float(i), float(j)) * texelSize;
-        float lum = getLuminance(texture2D(tex, uv + offset).rgb);
-        gx += lum * sobelX[i + 1][j + 1];
-        gy += lum * sobelY[i + 1][j + 1];
-      }
-    }
-
-    return sqrt(gx * gx + gy * gy);
-  }
 
   float hash(vec2 p) {
     return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -90,22 +58,6 @@ const coverFragmentShader = `
   }
 
   void main() {
-    vec2 ratio = vec2(
-      min((uResolution.x / uResolution.y) / (uImageResolution.x / uImageResolution.y), 1.0),
-      min((uResolution.y / uResolution.x) / (uImageResolution.y / uImageResolution.x), 1.0)
-    );
-
-    vec2 uv = vec2(
-      vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
-      vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
-    );
-
-    vec4 texColor = texture2D(uTexture, uv);
-    
-    float gray = getLuminance(texColor.rgb);
-    vec3 grayscaleColor = vec3(gray);
-    texColor.rgb = mix(texColor.rgb, grayscaleColor, uGrayscale);
-    
     vec2 centeredUv = vUv - uCenter;
     float aspect = uResolution.x / uResolution.y;
     centeredUv.x *= aspect;
@@ -115,77 +67,63 @@ const coverFragmentShader = `
     
     float noiseScale = 6.0;
     vec2 pixelatedUv = floor(vUv * uResolution / noiseScale) * noiseScale / uResolution;
-    float blockNoise = fbm(pixelatedUv * 100.0) * 0.15;
+    float blockNoise = fbm(pixelatedUv * 10.0 + vec2(uTime * 0.2)) * 0.12;
     
-    float angularNoise = fbm(vec2(angle * 5.0, 0.0)) * 0.15;
+    float angularNoise = fbm(vec2(angle * 4.0, uTime * 0.3)) * 0.10;
     
     float totalNoise = blockNoise + angularNoise;
     float noisyDist = dist + totalNoise;
     
-    float maxDist = length(vec2(aspect * 0.5, 0.5));
+    float maxDist = length(vec2(aspect * 0.5, 0.5)) * 1.25;
     float normalizedDist = noisyDist / maxDist;
     
-    float dissolveThreshold = uDissolve * 1.5; 
+    float dissolveThreshold = uDissolve * 1.4; 
     
-    vec2 texelSize = 1.0 / uResolution;
-    float edge = sobel(uTexture, uv, texelSize);
+    // When uDissolve == 0.0 (Preloader loading phase), dissolveMask = 1.0 (100% solid cover).
+    // As uDissolve expands:
+    //   inside circle (normalizedDist < dissolveThreshold): dissolveMask = 0.0 (transparent / revealed hero)
+    //   outside circle (normalizedDist > dissolveThreshold): dissolveMask = 1.0 (solid dark cover)
+    float dissolveMask = uDissolve <= 0.001 
+      ? 1.0 
+      : smoothstep(dissolveThreshold - 0.05, dissolveThreshold + 0.02, normalizedDist);
     
-    edge = pow(edge, 0.7) * 2.0;
-    edge = clamp(edge, 0.0, 1.0);
+    // Sobel edge glow effect at the dissolve boundary
+    float edgeWidth = 0.08;
+    float edgeZone = smoothstep(dissolveThreshold - edgeWidth, dissolveThreshold, normalizedDist) * 
+                     smoothstep(dissolveThreshold + edgeWidth, dissolveThreshold, normalizedDist);
     
-    float dissolveMask = smoothstep(dissolveThreshold - 0.03, dissolveThreshold, normalizedDist);
+    vec3 edgeColor = vec3(0.36, 0.88, 0.90); // #5CE1E6 Cyan glow accent
+    float sparkle = hash(floor(vUv * uResolution / 4.0) + floor(uTime * 15.0)) * edgeZone;
     
-    vec3 edgeColor = vec3(1.0, 0.36, 0.2);
-    
-    vec3 baseColor = mix(texColor.rgb, vec3(0.03, 0.03, 0.05), uGrayscale * 0.6);
+    vec3 baseColor = vec3(0.02, 0.02, 0.02); // Solid dark #050505
     vec3 finalColor = baseColor;
+    finalColor += edgeColor * edgeZone * uEdgeIntensity * 4.0;
+    finalColor += vec3(sparkle * 5.0 * (1.0 - uDissolve * 0.5));
     
-    float edgeGlowIntensity = uEdgeIntensity * 2.5;
-    float edgeGlow = edge * edgeGlowIntensity * (1.0 + uGrayscale * 2.0);
-    finalColor += edgeColor * edgeGlow * uEdgeBrightness;
-    
-    float edgeZoneWidth = 0.15 * (1.0 - uDissolve) + 0.02;
-    float edgeZone = smoothstep(dissolveThreshold - edgeZoneWidth, dissolveThreshold - edgeZoneWidth + 0.04, normalizedDist) * 
-                     smoothstep(dissolveThreshold + 0.02, dissolveThreshold - 0.02, normalizedDist);
-    float sparkle = hash(floor(vUv * uResolution / 4.0)) * edgeZone;
-    
-    float edgeBrightness = (1.0 - uDissolve) * uEdgeBrightness * (1.0 + uGrayscale * 2.0);
-    finalColor += vec3(sparkle * 3.0 * edgeBrightness);
-    
-    float alpha = (1.0 - dissolveMask) * texColor.a;
+    // Alpha is dissolveMask: 1.0 = dark cover visible, 0.0 = revealed hero section
+    float alpha = dissolveMask;
 
     gl_FragColor = vec4(finalColor, alpha);
   }
 `;
 
-interface PreloaderSceneProps {
-  image: string;
+interface DissolveSceneProps {
   dissolveProgress: number;
 }
 
-const PreloaderScene = ({ image, dissolveProgress }: PreloaderSceneProps) => {
-  const texture = useTexture(image);
+const DissolveScene = ({ dissolveProgress }: DissolveSceneProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
   const { size } = useThree();
 
   const uniforms = useMemo(
     () => ({
-      uTexture: { value: texture },
       uResolution: { value: new THREE.Vector2(size.width, size.height) },
-      uImageResolution: {
-        value: new THREE.Vector2(
-          (texture.image as any)?.width || 1200,
-          (texture.image as any)?.height || 1600
-        ),
-      },
       uDissolve: { value: 0.0 },
       uCenter: { value: new THREE.Vector2(0.5, 0.5) },
       uTime: { value: 0.0 },
-      uGrayscale: { value: 0.4 },
-      uEdgeIntensity: { value: 0.8 },
-      uEdgeBrightness: { value: 1.2 },
+      uEdgeIntensity: { value: 1.0 },
     }),
-    [texture, size]
+    [size]
   );
 
   useFrame((state) => {
@@ -193,7 +131,7 @@ const PreloaderScene = ({ image, dissolveProgress }: PreloaderSceneProps) => {
       materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime();
       materialRef.current.uniforms.uResolution.value.set(size.width, size.height);
       materialRef.current.uniforms.uDissolve.value = dissolveProgress;
-      materialRef.current.uniforms.uEdgeIntensity.value = 0.8 + dissolveProgress * 2.0;
+      materialRef.current.uniforms.uEdgeIntensity.value = 1.0 + dissolveProgress * 2.5;
     }
   });
 
@@ -212,86 +150,120 @@ const PreloaderScene = ({ image, dissolveProgress }: PreloaderSceneProps) => {
 };
 
 export const Preloader: React.FC = () => {
-  const [progress, setProgress] = useState(0);
-  const [currentStep, setCurrentStep] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
-  const [dissolveVal, setDissolveVal] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
-
-  const lakshanSteps = [
-    '01 // LOADING CREATIVE DIRECTION // LAKSHAN GANESAN',
-    '02 // ASSEMBLING SELECTED WORKS // 06 CASE STUDIES',
-    '03 // INITIALIZING 3D WEBGL GRAPHICS PIPELINE',
-    '04 // SYNCHRONIZING RESEARCH & HACKATHON RECORDS',
-    '05 // PREPARING DECENTRALIZED PROTOCOL SUITE',
-    '06 // PORTFOLIO UNLOCKED // WELCOME',
-  ];
+  const [displayText, setDisplayText] = useState('');
+  const [showSubtitle, setShowSubtitle] = useState(false);
+  const [dissolveVal, setDissolveVal] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
 
-    // Progress counter
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          return 100;
+    // Lock scroll position during preloader animation
+    window.scrollTo(0, 0);
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
+    let frameId: number;
+    let exitTimeoutId: NodeJS.Timeout;
+    const targetLength = TARGET_TEXT.length;
+
+    const startTime = Date.now();
+    const scrambleInterval = 40; // ms between character scramble ticks
+    const charDecodeDuration = 160; // ms per character left-to-right decode step
+    const initialScrambleDuration = 250; // ms initial delay before first character locks
+
+    let lastScrambleTime = 0;
+
+    const updateAnimation = () => {
+      const now = Date.now();
+      const elapsed = now - startTime - initialScrambleDuration;
+
+      let currentDecoded = 0;
+      if (elapsed > 0) {
+        currentDecoded = Math.min(
+          targetLength,
+          Math.floor(elapsed / charDecodeDuration) + 1
+        );
+      }
+
+      if (now - lastScrambleTime > scrambleInterval) {
+        lastScrambleTime = now;
+
+        let result = '';
+        for (let i = 0; i < targetLength; i++) {
+          if (i < currentDecoded) {
+            result += TARGET_TEXT[i];
+          } else {
+            result += CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
         }
-        const next = prev + Math.floor(Math.random() * 10) + 5;
-        return next > 100 ? 100 : next;
-      });
-    }, 70);
+        setDisplayText(result);
+      }
 
-    // Step updates
-    const stepInterval = setInterval(() => {
-      setCurrentStep((prev) => (prev < lakshanSteps.length - 1 ? prev + 1 : prev));
-    }, 340);
-
-    return () => {
-      clearInterval(timer);
-      clearInterval(stepInterval);
-    };
-  }, []);
-
-  // WebGL Dissolve Transition on 100% complete
-  useEffect(() => {
-    if (progress < 100) return;
-
-    let animId: number;
-    let startTime: number | null = null;
-    const duration = 1200; // 1.2s dissolve transition
-
-    const animateDissolve = (now: number) => {
-      if (!startTime) startTime = now;
-      const elapsed = now - startTime;
-      const p = Math.min(1.0, elapsed / duration);
-      
-      setDissolveVal(p);
-
-      if (p < 1.0) {
-        animId = requestAnimationFrame(animateDissolve);
+      if (currentDecoded < targetLength) {
+        frameId = requestAnimationFrame(updateAnimation);
       } else {
-        setTimeout(() => setIsComplete(true), 200);
+        // Fully decoded to "LAKSHAN"
+        setDisplayText(TARGET_TEXT);
+
+        // Completion State: reveal subtitle "DATA LOADED."
+        setShowSubtitle(true);
+
+        // Exit Animation: trigger WebGL Sobel Edge Dissolve transition after ~800ms
+        exitTimeoutId = setTimeout(() => {
+          let dissolveAnimId: number;
+          let dissolveStartTime: number | null = null;
+          const dissolveDuration = 1100; // 1.1s WebGL dissolve transition
+
+          const animateDissolve = (timestamp: number) => {
+            if (!dissolveStartTime) dissolveStartTime = timestamp;
+            const progress = Math.min(1.0, (timestamp - dissolveStartTime) / dissolveDuration);
+            setDissolveVal(progress);
+
+            if (progress < 1.0) {
+              dissolveAnimId = requestAnimationFrame(animateDissolve);
+            } else {
+              // Unlock scroll once dissolve transition is complete
+              document.documentElement.style.overflow = '';
+              document.body.style.overflow = '';
+              setIsFinished(true);
+            }
+          };
+
+          dissolveAnimId = requestAnimationFrame(animateDissolve);
+        }, 800);
       }
     };
 
-    animId = requestAnimationFrame(animateDissolve);
+    frameId = requestAnimationFrame(updateAnimation);
 
-    return () => cancelAnimationFrame(animId);
-  }, [progress]);
+    return () => {
+      cancelAnimationFrame(frameId);
+      if (exitTimeoutId) clearTimeout(exitTimeoutId);
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
+  }, []);
 
-  if (isComplete) return null;
+  if (isFinished) return null;
 
   return (
     <div
-      className={`fixed inset-0 z-[99999] bg-[#08080a] text-[#E8E5DF] font-mono flex flex-col justify-between overflow-hidden select-none pointer-events-auto transition-opacity duration-700 ${
-        dissolveVal > 0.8 ? 'opacity-0' : 'opacity-100'
+      className={`fixed inset-0 z-[99999] text-white flex flex-col items-center justify-center overflow-hidden select-none transition-opacity duration-500 ${
+        dissolveVal > 0.95 ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
       }`}
+      style={{
+        backgroundColor: dissolveVal > 0 ? 'transparent' : '#050505'
+      }}
     >
-      {/* Full-Screen WebGL R3F Sobel Edge Dissolve Shader Background */}
+      {/* ScrollDissolveReveal WebGL Sobel Edge Dissolve Shader Canvas */}
       {isMounted && (
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-80">
-          <Canvas>
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Canvas
+            gl={{ alpha: true, antialias: true }}
+            style={{ width: '100%', height: '100%' }}
+          >
             <OrthographicCamera
               makeDefault
               manual
@@ -304,156 +276,48 @@ export const Preloader: React.FC = () => {
               position={[0, 0, 1]}
             />
             <React.Suspense fallback={null}>
-              <PreloaderScene
-                image="/images/hero_portrait.jpg"
-                dissolveProgress={dissolveVal}
-              />
+              <DissolveScene dissolveProgress={dissolveVal} />
             </React.Suspense>
           </Canvas>
         </div>
       )}
 
-      {/* Warm Volumetric Ambient Glow Accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[600px] sm:h-[800px] bg-gradient-to-tr from-[#C75B32]/30 via-amber-800/10 to-transparent rounded-full blur-[160px] pointer-events-none z-0" />
-
-      {/* Cinematic Viewport Framing Corner Brackets */}
-      <div className="absolute top-4 left-4 sm:top-8 sm:left-8 w-4 h-4 border-l border-t border-white/30 pointer-events-none z-20" />
-      <div className="absolute top-4 right-4 sm:top-8 sm:right-8 w-4 h-4 border-r border-t border-white/30 pointer-events-none z-20" />
-      <div className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 w-4 h-4 border-l border-b border-white/30 pointer-events-none z-20" />
-      <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 w-4 h-4 border-r border-b border-white/30 pointer-events-none z-20" />
-
-      {/* Top Cinematic Navigation Header */}
+      {/* Center Stage Minimal Text */}
       <div
-        className={`relative z-20 flex justify-between items-center text-xs text-[#8E8B85] border-b border-white/10 p-6 sm:p-10 pb-4 transition-opacity duration-500 ${
-          dissolveVal > 0.2 ? 'opacity-0' : 'opacity-100'
+        className={`relative z-10 flex flex-col items-center justify-center text-center px-4 transition-all duration-700 ease-out ${
+          dissolveVal > 0.1 ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
         }`}
       >
-        <div className="flex items-center space-x-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#C75B32] animate-ping" />
-          <AsciiGlitchRipple
-            as="span"
-            className="text-[11px] text-white font-bold tracking-widest uppercase"
-            dur={900}
-            autoRippleInterval={2800}
-          >
-            LAKSHAN GANESAN // PORTFOLIO &apos;26
-          </AsciiGlitchRipple>
-        </div>
-
-        <div className="flex items-center space-x-4">
-          <AsciiGlitchRipple
-            as="span"
-            className="text-[11px] text-[#C75B32] font-bold tracking-widest uppercase"
-            dur={900}
-            autoRippleInterval={3200}
-          >
-            WEB3 // AI // 3D GRAPHICS
-          </AsciiGlitchRipple>
-          <span className="hidden sm:inline text-[11px] tracking-widest text-white/40">
-            COIMBATORE, IN
-          </span>
-        </div>
-      </div>
-
-      {/* Center Stage: Cinematic Narrative & ASCII Glitch Ripple Text */}
-      <div
-        className={`relative z-10 max-w-5xl mx-auto w-full my-auto flex flex-col items-center justify-center text-center px-6 transition-all duration-500 ${
-          dissolveVal > 0.2 ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
-        }`}
-      >
-        {/* Subtitle Role Tag */}
-        <AsciiGlitchRipple
-          as="div"
-          className="text-[10px] sm:text-xs font-mono tracking-[0.35em] text-[#C75B32] uppercase font-bold text-center mb-2"
-          dur={800}
-          autoRippleInterval={2500}
-          triggerOnChange={true}
+        {/* Display word LAKSHAN with bold monospace font */}
+        <h1
+          className="font-mono font-bold tracking-widest uppercase text-white select-none"
+          style={{
+            fontSize: 'clamp(3rem, 8vw, 6rem)',
+            lineHeight: 1.1,
+          }}
         >
-          CREATIVE DEVELOPER & WEB3 RESEARCH ANALYST
-        </AsciiGlitchRipple>
+          {displayText || 'LAKSHAN'}
+        </h1>
 
-        {/* Display Title with ASCII Glitch Ripple */}
-        <AsciiGlitchRipple
-          as="h1"
-          className="font-display font-black text-5xl xs:text-7xl sm:text-8xl md:text-[7.5rem] lg:text-[8.5rem] leading-none tracking-tight text-white uppercase text-center my-3 sm:my-5 cursor-pointer"
-          dur={1100}
-          spread={1.6}
-          autoRippleInterval={2000}
-          triggerOnChange={true}
+        {/* Subtitle: DATA LOADED. */}
+        <div
+          className={`mt-4 sm:mt-6 transition-all duration-500 ease-out transform ${
+            showSubtitle
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-4'
+          }`}
         >
-          LAKSHAN GANESAN
-        </AsciiGlitchRipple>
-
-        {/* Tagline / Bio Statement */}
-        <AsciiGlitchRipple
-          as="p"
-          className="text-xs sm:text-sm font-mono tracking-[0.2em] text-[#8E8B85] uppercase text-center max-w-2xl mx-auto mb-8 sm:mb-12"
-          dur={900}
-          autoRippleInterval={3000}
-        >
-          BUILDING AT THE EDGE OF CODE, BLOCKCHAIN & INTELLIGENCE
-        </AsciiGlitchRipple>
-
-        {/* Lakshan Data Loading Progress Box */}
-        <div className="w-full max-w-xl mx-auto flex flex-col items-center space-y-4 pt-2">
-          {/* Active Step Indicator */}
-          <div className="flex items-center space-x-2 text-xs sm:text-sm text-[#E8E5DF] tracking-wider font-mono">
-            <span className="text-[#C75B32] font-bold">&gt;</span>
-            <AsciiGlitchRipple
-              as="span"
-              className="text-white font-semibold tracking-wider"
-              dur={900}
-              spread={1.2}
-              triggerOnChange={true}
-            >
-              {lakshanSteps[currentStep]}
-            </AsciiGlitchRipple>
-          </div>
-
-          {/* Minimalist Hairline Progress Bar */}
-          <div className="w-full max-w-md h-[1px] bg-white/10 relative overflow-hidden my-3">
-            <div
-              className="h-full bg-gradient-to-r from-[#C75B32] via-[#E88053] to-white transition-all duration-150 ease-out shadow-[0_0_15px_#C75B32]"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-
-          {/* Bottom Counter & Status */}
-          <div className="flex justify-between items-center w-full max-w-md text-[11px] font-mono text-[#8E8B85] pt-1">
-            <AsciiGlitchRipple
-              as="span"
-              className="tracking-widest uppercase text-[#8E8B85]/90"
-              dur={800}
-              triggerOnChange={true}
-            >
-              {progress < 100 ? 'LOADING PORTFOLIO DATA...' : 'DISSOLVING PRELOADER...'}
-            </AsciiGlitchRipple>
-
-            <div className="flex items-baseline space-x-1 font-mono">
-              <span className="text-base sm:text-lg font-bold text-white tracking-tight">
-                {String(progress).padStart(3, '0')}
-              </span>
-              <span className="text-[#C75B32] text-xs font-bold">%</span>
-            </div>
-          </div>
+          <p className="font-sans font-medium text-xs sm:text-sm tracking-[0.25em] text-[#5CE1E6] uppercase">
+            {SUBTITLE}
+          </p>
         </div>
-      </div>
-
-      {/* Bottom Telemetry Footer */}
-      <div
-        className={`relative z-20 flex justify-between items-center text-[10px] text-[#8E8B85]/70 border-t border-white/10 p-6 sm:p-10 pt-4 font-mono transition-opacity duration-500 ${
-          dissolveVal > 0.2 ? 'opacity-0' : 'opacity-100'
-        }`}
-      >
-        <AsciiGlitchRipple as="span" className="hover:text-white" dur={800} autoRippleInterval={4000}>
-          © 2026 LAKSHAN GANESAN // ALL RIGHTS RESERVED
-        </AsciiGlitchRipple>
-        <span className="tracking-widest uppercase">
-          AVAILABLE FOR SELECT PROJECTS
-        </span>
       </div>
     </div>
   );
 };
 
 export default Preloader;
+
+
+
+

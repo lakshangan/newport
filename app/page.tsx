@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Lenis from 'lenis';
-import { Preloader } from '@/components/ui/Preloader';
 import { DeveloperDecorations } from '@/components/ui/DeveloperDecorations';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Navbar } from '@/components/navigation/Navbar';
@@ -19,6 +19,12 @@ import { TechTicker } from '@/components/tech/TechTicker';
 import { DevLabBentoSection } from '@/components/sections/DevLabBentoSection';
 import { ContactSection } from '@/components/contact/ContactSection';
 import { Footer } from '@/components/footer/Footer';
+
+// Dynamically import Three.js R3F components with ssr: false to avoid vendor chunk SSR errors
+const Preloader = dynamic(
+  () => import('@/components/ui/Preloader').then((mod) => mod.Preloader),
+  { ssr: false }
+);
 
 export default function Home() {
   useEffect(() => {

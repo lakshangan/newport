@@ -6,82 +6,86 @@ import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="relative min-h-screen w-full flex flex-col justify-between pt-24 pb-8 px-6 sm:px-12 bg-[#08080a] overflow-hidden select-none">
+    <section className="relative min-h-screen w-full flex flex-col justify-between pt-24 pb-8 px-6 sm:px-12 bg-[#050505] overflow-hidden select-none">
       
-      {/* Warm Ambient Volumetric Spotlight Background Glow */}
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-tr from-[#C75B32]/45 via-amber-700/20 to-transparent rounded-full blur-[160px] pointer-events-none z-0" />
+      {/* Full-Screen Workspace Background Image */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/herosection.png"
+          alt="Lakshan Ganesan Workspace"
+          fill
+          priority
+          className="object-cover object-right md:object-center filter contrast-105 brightness-100"
+          sizes="100vw"
+        />
+      </div>
 
       {/* Top HUD Telemetry Metadata Bar */}
-      <div className="relative z-20 max-w-7xl mx-auto w-full flex justify-between items-start text-[11px] font-mono text-white/50 tracking-wider">
+      <div className="relative z-20 max-w-7xl mx-auto w-full flex justify-between items-start text-[11px] font-mono text-white/70 tracking-wider">
         <div className="space-y-0.5">
-          <div>TCR 01:04:32:15</div>
-          <div>REC 23.976 FPS</div>
+          <div className="flex items-center space-x-2">
+            <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
+            <span className="text-white font-semibold">DEV_ENV // ACTIVE</span>
+          </div>
+          <div>TCR 01:04:32:15 // REC 23.976 FPS</div>
         </div>
 
-        <div className="space-y-0.5 text-right">
-          <div>ISO 800</div>
-          <div>5600K</div>
+        <div className="space-y-0.5 text-right font-mono">
+          <div className="text-[#5CE1E6] font-semibold">WEB3 &amp; AI ARCHITECT</div>
+          <div>COIMBATORE, IN</div>
+        </div>
+      </div>
+
+      {/* Main Left-Aligned Typography Content Over Widescreen Background */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto my-auto flex flex-col items-start justify-center py-6">
+        <div className="max-w-3xl space-y-4 text-left">
+          
+          {/* Subtitle Badge */}
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase">
+            <span>CREATIVE DEVELOPER &amp; ANALYST</span>
+          </div>
+
+          {/* Main Display Headline */}
+          <h1 className="font-display font-black text-5xl xs:text-6xl sm:text-7xl md:text-[6rem] lg:text-[7.5rem] xl:text-[8.5rem] leading-[0.88] tracking-tight uppercase">
+            <span className="block text-outline">HELLO I&apos;M</span>
+            <span className="block text-white">LAKSHAN</span>
+            <span className="block text-accent-gradient">GANESAN</span>
+          </h1>
+
+          {/* Bio Description */}
+          <p className="text-xs sm:text-sm font-mono tracking-wider text-white/90 max-w-xl pt-2 leading-relaxed bg-black/30 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+            Architecting decentralized systems, smart contracts, and high-performance AI interfaces at the edge of code and intelligence.
+          </p>
+
+          {/* Floating Action CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 pt-4">
+            <a
+              href="#work"
+              className="w-full sm:w-auto px-7 py-3.5 bg-white text-black font-mono font-bold text-xs tracking-wider rounded-full hover:scale-105 transition-all shadow-2xl flex items-center justify-center space-x-2 text-center"
+              data-cursor="PORTFOLIO"
+            >
+              <span>▶ VIEW PORTFOLIO</span>
+            </a>
+
+            <a
+              href={`mailto:${PORTFOLIO_DATA.personal.email}`}
+              className="w-full sm:w-auto px-7 py-3.5 bg-black/50 border border-white/25 text-white font-mono text-xs tracking-wider rounded-full hover:bg-black/70 transition-all backdrop-blur-md text-center justify-center flex items-center"
+              data-cursor="RESUME"
+            >
+              <span>GET IN TOUCH</span>
+            </a>
+          </div>
         </div>
       </div>
 
       {/* Right Edge Vertical Scroll Indicator */}
-      <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 text-[10px] font-mono text-white/30 tracking-widest uppercase origin-bottom -rotate-90 z-20">
+      <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 text-[10px] font-mono text-white/50 tracking-widest uppercase origin-bottom -rotate-90 z-20">
         SCROLL ↓
-      </div>
-
-      {/* Main Center Content: Dual-Tone Outlined Typography & Portrait */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto my-auto flex flex-col lg:flex-row items-center justify-center py-6">
-        
-        {/* Left Side Typography */}
-        <div className="z-20 text-center lg:text-left space-y-0 -mb-2 sm:-mb-4 lg:mb-0 lg:-mr-12">
-          <h1 className="font-display font-black text-5xl xs:text-6xl sm:text-8xl md:text-[7.5rem] lg:text-[9.5rem] leading-[0.85] tracking-tight uppercase">
-            <span className="block text-outline">HELLO</span>
-            <span className="block text-white">I&apos;M</span>
-          </h1>
-        </div>
-
-        {/* Center Studio Portrait */}
-        <div className="relative w-[230px] xs:w-[270px] sm:w-[360px] lg:w-[420px] max-w-full aspect-[3/4] z-10 rounded-2xl overflow-hidden shadow-2xl border border-white/10 my-4 lg:my-0 group">
-          <Image
-            src="/images/hero_portrait.jpg"
-            alt="Lakshan Ganesan Studio Portrait"
-            fill
-            priority
-            className="object-cover object-top filter contrast-110 group-hover:scale-105 transition-transform duration-700 ease-out"
-            sizes="(max-width: 768px) 100vw, 420px"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-transparent to-transparent opacity-65 pointer-events-none" />
-        </div>
-
-        {/* Right Side Typography */}
-        <div className="z-20 text-center lg:text-left space-y-0 -mt-2 sm:-mt-4 lg:mt-0 lg:-ml-12">
-          <h1 className="font-display font-black text-5xl xs:text-6xl sm:text-8xl md:text-[7.5rem] lg:text-[9.5rem] leading-[0.85] tracking-tight uppercase">
-            <span className="block text-white">LAKSHAN</span>
-            <span className="block text-outline">GANESAN</span>
-          </h1>
-        </div>
-
-      </div>
-
-      {/* Bottom Floating Pill Action Controls */}
-      <div className="relative z-30 max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-4 pb-4">
-        <a
-          href="#work"
-          className="w-full sm:w-auto px-7 py-3.5 bg-white text-black font-mono font-bold text-xs tracking-wider rounded-full hover:scale-105 transition-all shadow-2xl flex items-center justify-center space-x-2 text-center"
-          data-cursor="PORTFOLIO"
-        >
-          <span>▶ VIEW PORTFOLIO</span>
-        </a>
-
-        <a
-          href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-          className="w-full sm:w-auto px-7 py-3.5 bg-white/5 border border-white/20 text-white font-mono text-xs tracking-wider rounded-full hover:bg-white/15 transition-all backdrop-blur-md text-center justify-center flex items-center"
-          data-cursor="RESUME"
-        >
-          <span>VIEW RESUME</span>
-        </a>
       </div>
 
     </section>
   );
 };
+
+
+
