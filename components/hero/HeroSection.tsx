@@ -8,7 +8,7 @@ import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 export const HeroSection: React.FC = () => {
   return (
     <section className="relative min-h-screen w-full flex flex-col justify-between pt-24 pb-8 px-6 sm:px-12 bg-[#050505] overflow-hidden select-none">
-      
+
       {/* Full-Screen Workspace Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
@@ -26,23 +26,12 @@ export const HeroSection: React.FC = () => {
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#080808]/50 via-transparent to-black/15 pointer-events-none" />
 
       {/* Clean Top Metadata Bar */}
-      <div className="relative z-20 max-w-7xl mx-auto w-full flex justify-between items-center text-[11px] font-mono tracking-wider">
-        <div className="flex items-center space-x-2 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 shadow-md">
-          <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
-          <span className="text-white font-semibold">DEV_ENV // ACTIVE</span>
-        </div>
 
-        <div className="hidden sm:flex items-center space-x-2 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 font-mono shadow-md">
-          <span className="text-[#5CE1E6] font-semibold">WEB3 &amp; AI ARCHITECT</span>
-          <span className="text-white/50">|</span>
-          <span className="text-white/80">COIMBATORE, IN</span>
-        </div>
-      </div>
 
       {/* Main Left-Aligned Typography Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto my-auto flex flex-col items-start justify-center py-6">
         <div className="max-w-3xl space-y-5 text-left">
-          
+
           {/* Subtitle Badge */}
           <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-[#5CE1E6]/30 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase shadow-xl">
             <span>CREATIVE DEVELOPER &amp; ANALYST</span>
@@ -57,7 +46,7 @@ export const HeroSection: React.FC = () => {
             </span>
             <span className="block text-white tracking-tight drop-shadow-2xl">
               <AsciiGlitchRipple dur={1200} className="hover:text-[#C75B32] transition-colors">
-                LAKSHAN GANESAN
+                LAKSHAN G
               </AsciiGlitchRipple>
             </span>
           </h1>
@@ -70,11 +59,14 @@ export const HeroSection: React.FC = () => {
           {/* Floating Action CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 pt-3">
             <a
-              href="#work"
+              href="/Lakshan_Resume copy.pdf"
+              download="Lakshan_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full sm:w-auto px-7 py-3.5 bg-white text-black font-mono font-bold text-xs tracking-wider rounded-full hover:bg-[#5CE1E6] hover:scale-105 transition-all shadow-2xl flex items-center justify-center space-x-2 text-center"
-              data-cursor="PORTFOLIO"
+              data-cursor="RESUME"
             >
-              <span>▶ VIEW PORTFOLIO</span>
+              <span>▶ DOWNLOAD RESUME</span>
             </a>
 
             <a
