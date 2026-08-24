@@ -2,8 +2,14 @@
 
 import React from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
+
+const HeroScene = dynamic(
+  () => import('@/components/3d/HeroScene').then((mod) => mod.HeroScene),
+  { ssr: false }
+);
 
 export const HeroSection: React.FC = () => {
   return (
@@ -19,6 +25,11 @@ export const HeroSection: React.FC = () => {
           className="object-cover object-right md:object-center filter contrast-105 brightness-105"
           sizes="100vw"
         />
+      </div>
+
+      {/* Interactive Three.js R3F 3D WebGL Particle & Lighting Layer */}
+      <div className="absolute inset-0 z-5 pointer-events-none">
+        <HeroScene />
       </div>
 
       {/* Light Ambient Overlays - keeps the workspace image bright, warm, and vivid */}

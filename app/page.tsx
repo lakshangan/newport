@@ -3,6 +3,8 @@
 import React, { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Lenis from 'lenis';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import { DeveloperDecorations } from '@/components/ui/DeveloperDecorations';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Navbar } from '@/components/navigation/Navbar';
@@ -22,6 +24,8 @@ import { Preloader } from '@/components/ui/Preloader';
 
 export default function Home() {
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
     // Initialize Lenis Smooth Scroll
     const lenis = new Lenis({
       duration: 1.2,
@@ -29,14 +33,18 @@ export default function Home() {
       smoothWheel: true,
     });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    // Synchronize Lenis smooth scroll with GSAP ScrollTrigger ticker
+    lenis.on('scroll', ScrollTrigger.update);
 
-    requestAnimationFrame(raf);
+    const updateLenis = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(updateLenis);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(updateLenis);
       lenis.destroy();
     };
   }, []);
