@@ -18,11 +18,7 @@ import { DevLabBentoSection } from '@/components/sections/DevLabBentoSection';
 import { ContactSection } from '@/components/contact/ContactSection';
 import { Footer } from '@/components/footer/Footer';
 
-// Dynamically import Three.js R3F components with ssr: false to avoid vendor chunk SSR errors
-const Preloader = dynamic(
-  () => import('@/components/ui/Preloader').then((mod) => mod.Preloader),
-  { ssr: false }
-);
+import { Preloader } from '@/components/ui/Preloader';
 
 export default function Home() {
   useEffect(() => {
