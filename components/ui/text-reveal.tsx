@@ -17,12 +17,17 @@ const TextRevealByWord: FC<TextRevealByWordProps> = ({
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start 0.8", "end 0.2"],
+    offset: ["start start", "end end"],
   });
+  
   const words = text.split(" ");
+  // Compress word range to [0.05, 0.78] so all words reveal 100% before the pinned section releases
+  const rangeStart = 0.05;
+  const rangeEnd = 0.78;
+  const totalRange = rangeEnd - rangeStart;
 
   return (
-    <div ref={targetRef} className={cn("relative z-10 min-h-[160vh] bg-[#080808]", className)}>
+    <div ref={targetRef} className={cn("relative z-10 min-h-[220vh] bg-[#080808]", className)}>
       <div
         className={
           "sticky top-0 mx-auto flex h-screen max-w-5xl items-center justify-center bg-transparent px-6 sm:px-12 py-20"
@@ -34,8 +39,9 @@ const TextRevealByWord: FC<TextRevealByWordProps> = ({
           }
         >
           {words.map((word, i) => {
-            const start = i / words.length;
-            const end = start + 1 / words.length;
+            const step = totalRange / words.length;
+            const start = rangeStart + i * step;
+            const end = start + step;
             return (
               <Word key={i} progress={scrollYProgress} range={[start, end]}>
                 {word}
