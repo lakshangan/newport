@@ -1,22 +1,24 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { AsciiGlitchRipple } from "@/components/ui/AsciiGlitchRipple";
 
 const WORD_ITEMS = [
-  { text: "code.", desc: "EVM Smart Contracts & Protocol Logic", color: "text-[#5CE1E6]" },
-  { text: "build.", desc: "High-Performance AI & 3D WebGL Interfaces", color: "text-[#38BDF8]" },
-  { text: "learn.", desc: "Web3 Cryptography & Distributed Systems", color: "text-[#C084FC]" },
-  { text: "ship.", desc: "Full-Stack Production Applications", color: "text-[#FF6B35]" },
-  { text: "innovate.", desc: "C2PA Provenance & Autonomous Agents", color: "text-[#FACC15]" },
+  { text: "code.", color: "text-[#5CE1E6]" },
+  { text: "build.", color: "text-[#38BDF8]" },
+  { text: "learn.", color: "text-[#C084FC]" },
+  { text: "ship.", color: "text-[#FF6B35]" },
+  { text: "innovate.", color: "text-[#FACC15]" },
+  { text: "design.", color: "text-[#FF4D4D]" },
+  { text: "prototype.", color: "text-[#E88053]" },
+  { text: "solve.", color: "text-[#2DD4BF]" },
 ];
 
 export default function ScrollAnimation() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const wordsRef = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -24,112 +26,114 @@ export default function ScrollAnimation() {
     const section = sectionRef.current;
     if (!section) return;
 
-    // Create GSAP ScrollTrigger timeline to step through active words cleanly on scroll
-    const st = ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: "+=2000",
-      pin: true,
-      pinSpacing: true,
-      scrub: 0.3,
-      onUpdate: (self) => {
-        const idx = Math.min(
-          WORD_ITEMS.length - 1,
-          Math.floor(self.progress * WORD_ITEMS.length)
-        );
-        setActiveIndex(idx);
+    const playVideo = () => {
+      const video = videoRef.current;
+      if (video) {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.currentTime = 0;
+        video.play().catch((err) => {
+          console.warn("Video playback:", err);
+        });
+      }
+    };
+
+    const words = wordsRef.current.filter(Boolean) as HTMLSpanElement[];
+    if (!words.length) return;
+
+    // Set initial word positions: first word at y:0%, opacity:1; others at y:100%, opacity:0
+    words.forEach((word, idx) => {
+      if (idx === 0) {
+        gsap.set(word, { opacity: 1, y: "0%" });
+      } else {
+        gsap.set(word, { opacity: 0, y: "100%" });
+      }
+    });
+
+    // Create GSAP ScrollTrigger timeline scrubbing on scroll with video playback trigger
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "+=3200",
+        pin: true,
+        pinSpacing: true,
+        scrub: 0.5,
+        onEnter: playVideo,
+        onEnterBack: playVideo,
       },
     });
 
+    // Scrub through each word: fade/slide out previous up, fade/slide in current up
+    for (let i = 1; i < words.length; i++) {
+      const prevWord = words[i - 1];
+      const currWord = words[i];
+
+      tl.to(prevWord, { opacity: 0, y: "-100%", duration: 1 }, `step-${i}`)
+        .fromTo(
+          currWord,
+          { opacity: 0, y: "100%" },
+          { opacity: 1, y: "0%", duration: 1 },
+          `step-${i}`
+        );
+    }
+
+    // Try playing initial load if already in section view
+    playVideo();
+
     return () => {
-      st.kill();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-screen flex items-center justify-center bg-[#050505] border-t border-white/10 overflow-hidden select-none"
+      className="relative w-full h-screen flex items-center justify-center bg-[#080808] overflow-hidden select-none"
     >
-      {/* Full-Screen Section Background Image */}
+      {/* Background Video */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <Image
-          src="/image.png"
-          alt="Artistic Section Background"
-          fill
-          priority
-          className="object-cover object-center filter contrast-105 brightness-105"
-          sizes="100vw"
+        <video
+          ref={videoRef}
+          src="/images/grok-video-977e7e29-8a81-4998-a90a-b71e113b8fd3.mp4"
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover filter brightness-90 contrast-105"
         />
       </div>
 
-      {/* Subtle Ambient Vignette Overlay to maintain image artwork visibility while ensuring text legibility */}
-      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/80 via-black/35 to-black/70 pointer-events-none" />
-      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/70 pointer-events-none" />
+      {/* Ambient Dark Overlays */}
+      <div className="absolute inset-0 z-1 bg-black/40 pointer-events-none" />
+      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/80 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 relative z-10">
-        
-        {/* Minimal Left Header Info positioned in free space */}
-        <div className="w-full lg:w-5/12 space-y-6 text-left">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1 bg-black/60 border border-white/20 text-[#C75B32] text-xs font-mono rounded-full backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
-            <span>DISCIPLINE &amp; EXECUTION</span>
-          </div>
+      {/* Single Straight Line Layout Container */}
+      <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex items-center justify-center md:justify-start">
+        <div className="flex items-center font-sans font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-none text-white">
+          
+          {/* Prefix "i love to" on a single straight horizontal line */}
+          <span className="select-none whitespace-nowrap mr-4 sm:mr-8 shrink-0">
+            i love to
+          </span>
 
-          <h2 className="font-mono text-5xl sm:text-7xl lg:text-8xl font-black uppercase text-white tracking-tight leading-none drop-shadow-2xl">
-            I LOVE<br />
-            <span className="text-[#C75B32]">TO.</span>
-          </h2>
-
-          <p className="font-sans text-xs sm:text-sm tracking-normal text-white/80 max-w-sm leading-relaxed bg-black/40 backdrop-blur-md p-3.5 rounded-xl border border-white/15">
-            Architecting minimal, robust, and high-performance technical systems across Web3 and AI.
-          </p>
-
-          {/* Active Highlight Detail Pill */}
-          <div>
-            <div className="inline-block p-3.5 bg-black/70 border border-white/20 rounded-xl space-y-0.5 backdrop-blur-md shadow-2xl transition-all duration-300">
-              <span className="text-[10px] font-mono text-[#5CE1E6] uppercase tracking-widest block">
-                FOCUS // 0{activeIndex + 1}
-              </span>
-              <p className="text-xs font-mono text-white/95">
-                {WORD_ITEMS[activeIndex].desc}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Minimal Right Stacked Word List */}
-        <div className="w-full lg:w-5/12 flex flex-col justify-center space-y-2 sm:space-y-3 py-4">
-          {WORD_ITEMS.map((item, i) => {
-            const isActive = activeIndex === i;
-
-            return (
-              <div
+          {/* In-Place Scroll-Revealed Rotating Text Container */}
+          <div className="relative h-[1.4em] inline-flex items-center min-w-[240px] sm:min-w-[440px] overflow-hidden">
+            {WORD_ITEMS.map((item, i) => (
+              <span
                 key={i}
-                onClick={() => setActiveIndex(i)}
-                onMouseEnter={() => setActiveIndex(i)}
-                className={`font-mono text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight transition-all duration-300 cursor-pointer select-none flex items-center justify-between border-b border-white/10 pb-2 ${
-                  isActive
-                    ? `${item.color} translate-x-3 sm:translate-x-5 opacity-100 scale-105 drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]`
-                    : "text-white/40 hover:text-white/80 opacity-40 translate-x-0 scale-100"
-                }`}
+                ref={(el) => {
+                  wordsRef.current[i] = el;
+                }}
+                className={`absolute inset-0 flex items-center ${item.color} font-sans font-black tracking-tight leading-none select-none drop-shadow-[0_0_35px_rgba(255,255,255,0.4)]`}
               >
-                <AsciiGlitchRipple as="span" dur={900}>
-                  {item.text}
-                </AsciiGlitchRipple>
+                {item.text}
+              </span>
+            ))}
+          </div>
 
-                <span
-                  className={`font-mono text-xs tracking-widest transition-all duration-300 ${
-                    isActive ? "opacity-100 text-[#5CE1E6] scale-110" : "opacity-0"
-                  }`}
-                >
-                  0{i + 1} ↗
-                </span>
-              </div>
-            );
-          })}
         </div>
-
       </div>
     </section>
   );
