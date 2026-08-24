@@ -12,9 +12,6 @@ const WORD_ITEMS = [
   { text: "learn.", desc: "Web3 Cryptography & Distributed Systems", color: "text-[#C084FC]" },
   { text: "ship.", desc: "Full-Stack Production Applications", color: "text-[#FF6B35]" },
   { text: "innovate.", desc: "C2PA Provenance & Autonomous Agents", color: "text-[#FACC15]" },
-  { text: "optimize.", desc: "Low-Latency Edge Execution & Performance", color: "text-[#34D399]" },
-  { text: "like.", desc: "Crafting Pixel-Perfect Modern Aesthetics", color: "text-[#F472B6]" },
-  { text: "do it.", desc: "Shipping End-to-End Scalable Systems", color: "text-[#FB7185]" },
 ];
 
 export default function ScrollAnimation() {
@@ -31,7 +28,7 @@ export default function ScrollAnimation() {
     const st = ScrollTrigger.create({
       trigger: section,
       start: "top top",
-      end: "+=2200",
+      end: "+=2000",
       pin: true,
       pinSpacing: true,
       scrub: 0.3,
@@ -57,8 +54,8 @@ export default function ScrollAnimation() {
       {/* Full-Screen Section Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
-          src="/section.png"
-          alt="Technical Section Background"
+          src="/image.png"
+          alt="Artistic Section Background"
           fill
           priority
           className="object-cover object-center filter contrast-105 brightness-105"
@@ -66,18 +63,15 @@ export default function ScrollAnimation() {
         />
       </div>
 
-      {/* Light Ambient Dark Overlays — maintains image clarity while ensuring crystal-clear text readability */}
-      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/75 via-black/45 to-black/60 pointer-events-none" />
-      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/60 pointer-events-none" />
-
-      {/* Subtle Tech Grid Accent */}
-      <div className="absolute inset-0 z-2 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-5 pointer-events-none" />
+      {/* Subtle Ambient Vignette Overlay to maintain image artwork visibility while ensuring text legibility */}
+      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/80 via-black/35 to-black/70 pointer-events-none" />
+      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/70 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 relative z-10">
         
-        {/* Left Pinned Section Info */}
+        {/* Minimal Left Header Info positioned in free space */}
         <div className="w-full lg:w-5/12 space-y-6 text-left">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 bg-black/70 border border-white/20 text-[#C75B32] text-xs font-mono rounded-full backdrop-blur-xl shadow-2xl">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1 bg-black/60 border border-white/20 text-[#C75B32] text-xs font-mono rounded-full backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
             <span>DISCIPLINE &amp; EXECUTION</span>
           </div>
@@ -87,25 +81,25 @@ export default function ScrollAnimation() {
             <span className="text-[#C75B32]">TO.</span>
           </h2>
 
-          <p className="font-sans text-sm sm:text-base tracking-normal text-white/90 max-w-md leading-relaxed bg-black/50 backdrop-blur-md p-4 rounded-xl border border-white/15 shadow-2xl">
-            Building minimal, robust, and high-performance technical systems across Web3 protocols, AI agents, and graphics.
+          <p className="font-sans text-xs sm:text-sm tracking-normal text-white/80 max-w-sm leading-relaxed bg-black/40 backdrop-blur-md p-3.5 rounded-xl border border-white/15">
+            Architecting minimal, robust, and high-performance technical systems across Web3 and AI.
           </p>
 
           {/* Active Highlight Detail Pill */}
-          <div className="pt-2">
-            <div className="inline-block p-4 bg-black/80 border border-white/20 rounded-xl space-y-1 backdrop-blur-xl shadow-2xl transition-all duration-300">
+          <div>
+            <div className="inline-block p-3.5 bg-black/70 border border-white/20 rounded-xl space-y-0.5 backdrop-blur-md shadow-2xl transition-all duration-300">
               <span className="text-[10px] font-mono text-[#5CE1E6] uppercase tracking-widest block">
                 FOCUS // 0{activeIndex + 1}
               </span>
-              <p className="text-xs sm:text-sm font-mono text-white/95">
+              <p className="text-xs font-mono text-white/95">
                 {WORD_ITEMS[activeIndex].desc}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Right Unclipped Stacked Word List */}
-        <div className="w-full lg:w-6/12 flex flex-col justify-center space-y-3 sm:space-y-4 py-4 bg-black/40 backdrop-blur-md p-6 rounded-2xl border border-white/15 shadow-2xl">
+        {/* Minimal Right Stacked Word List */}
+        <div className="w-full lg:w-5/12 flex flex-col justify-center space-y-2 sm:space-y-3 py-4">
           {WORD_ITEMS.map((item, i) => {
             const isActive = activeIndex === i;
 
@@ -114,9 +108,9 @@ export default function ScrollAnimation() {
                 key={i}
                 onClick={() => setActiveIndex(i)}
                 onMouseEnter={() => setActiveIndex(i)}
-                className={`font-mono text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight transition-all duration-300 cursor-pointer select-none flex items-center justify-between border-b border-white/10 pb-2 sm:pb-3 ${
+                className={`font-mono text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight transition-all duration-300 cursor-pointer select-none flex items-center justify-between border-b border-white/10 pb-2 ${
                   isActive
-                    ? `${item.color} translate-x-3 sm:translate-x-6 opacity-100 scale-105 drop-shadow-[0_0_35px_rgba(255,255,255,0.4)]`
+                    ? `${item.color} translate-x-3 sm:translate-x-5 opacity-100 scale-105 drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]`
                     : "text-white/40 hover:text-white/80 opacity-40 translate-x-0 scale-100"
                 }`}
               >
@@ -125,7 +119,7 @@ export default function ScrollAnimation() {
                 </AsciiGlitchRipple>
 
                 <span
-                  className={`font-mono text-xs sm:text-sm tracking-widest transition-all duration-300 ${
+                  className={`font-mono text-xs tracking-widest transition-all duration-300 ${
                     isActive ? "opacity-100 text-[#5CE1E6] scale-110" : "opacity-0"
                   }`}
                 >
