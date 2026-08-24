@@ -1,17 +1,18 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 const WORD_ITEMS = [
   { text: "code.", color: "text-[#5CE1E6]" },
-  { text: "build.", color: "text-[#38BDF8]" },
+  { text: "build.", color: "text-[#E88053]" },
   { text: "learn.", color: "text-[#C084FC]" },
   { text: "ship.", color: "text-[#FF6B35]" },
   { text: "innovate.", color: "text-[#FACC15]" },
   { text: "design.", color: "text-[#FF4D4D]" },
-  { text: "prototype.", color: "text-[#E88053]" },
+  { text: "prototype.", color: "text-[#F4A261]" },
   { text: "solve.", color: "text-[#2DD4BF]" },
 ];
 
@@ -23,21 +24,22 @@ export default function ScrollAnimation() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const playVideo = () => {
-      const video = videoRef.current;
-      if (video) {
-        video.muted = true;
-        video.defaultMuted = true;
-        video.playsInline = true;
-        video.currentTime = 0;
-        video.play().catch((err) => {
-          console.warn("Video playback:", err);
+    // Guaranteed video playback
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.warn("Video playback:", error);
         });
       }
-    };
+    }
+
+    const section = sectionRef.current;
+    if (!section) return;
 
     const words = wordsRef.current.filter(Boolean) as HTMLSpanElement[];
     if (!words.length) return;
@@ -51,7 +53,7 @@ export default function ScrollAnimation() {
       }
     });
 
-    // Create GSAP ScrollTrigger timeline scrubbing on scroll with video playback trigger
+    // Create GSAP ScrollTrigger timeline scrubbing on scroll
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -60,8 +62,6 @@ export default function ScrollAnimation() {
         pin: true,
         pinSpacing: true,
         scrub: 0.5,
-        onEnter: playVideo,
-        onEnterBack: playVideo,
       },
     });
 
@@ -79,9 +79,6 @@ export default function ScrollAnimation() {
         );
     }
 
-    // Try playing initial load if already in section view
-    playVideo();
-
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
@@ -98,6 +95,7 @@ export default function ScrollAnimation() {
           ref={videoRef}
           src="/images/grok-video-977e7e29-8a81-4998-a90a-b71e113b8fd3.mp4"
           autoPlay
+          loop
           muted
           playsInline
           preload="auto"
@@ -105,28 +103,43 @@ export default function ScrollAnimation() {
         />
       </div>
 
-      {/* Ambient Dark Overlays */}
-      <div className="absolute inset-0 z-1 bg-black/40 pointer-events-none" />
-      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/80 pointer-events-none" />
+      {/* Fallback Artwork Image */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+        <Image
+          src="/images/about section .png"
+          alt="Artistic Section Background"
+          fill
+          priority
+          className="object-cover object-[20%_center] filter contrast-105 brightness-95"
+          sizes="100vw"
+        />
+      </div>
 
-      {/* Single Straight Line Layout Container */}
-      <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex items-center justify-center md:justify-start">
-        <div className="flex items-center font-sans font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-none text-white">
+      {/* Film Overlay & Cinematic Vignette */}
+      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/70 via-black/35 to-black/80 pointer-events-none" />
+      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/85 pointer-events-none" />
+
+      {/* Ambient Volumetric Glow */}
+      <div className="absolute top-1/3 right-1/4 w-[600px] h-[400px] bg-[#C75B32]/15 rounded-full blur-[180px] pointer-events-none z-2" />
+
+      {/* Cinematic Placement Layout Container (Pushed to Open Right Sky Space) */}
+      <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex items-center justify-end">
+        <div className="w-full lg:w-8/12 lg:ml-auto flex items-baseline justify-start">
           
-          {/* Prefix "i love to" on a single straight horizontal line */}
-          <span className="select-none whitespace-nowrap mr-4 sm:mr-8 shrink-0">
+          {/* Prefix "i love to" in Artistic Serif Typography */}
+          <span className="font-serif italic font-normal text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#E8E5DF] select-none whitespace-nowrap mr-4 sm:mr-8 shrink-0 drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]">
             i love to
           </span>
 
-          {/* In-Place Scroll-Revealed Rotating Text Container */}
-          <div className="relative h-[1.4em] inline-flex items-center min-w-[240px] sm:min-w-[440px] overflow-hidden">
+          {/* In-Place Scroll-Revealed Rotating Text in Art Serif Bold Typography */}
+          <div className="relative h-[1.3em] inline-flex items-center min-w-[260px] sm:min-w-[480px] overflow-hidden">
             {WORD_ITEMS.map((item, i) => (
               <span
                 key={i}
                 ref={(el) => {
                   wordsRef.current[i] = el;
                 }}
-                className={`absolute inset-0 flex items-center ${item.color} font-sans font-black tracking-tight leading-none select-none drop-shadow-[0_0_35px_rgba(255,255,255,0.4)]`}
+                className={`absolute inset-0 flex items-center ${item.color} font-serif font-black italic text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight select-none drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]`}
               >
                 {item.text}
               </span>
