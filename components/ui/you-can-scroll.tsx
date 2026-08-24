@@ -10,10 +10,6 @@ const WORD_ITEMS = [
   { text: "build.", color: "text-[#E88053]" },
   { text: "learn.", color: "text-[#C084FC]" },
   { text: "ship.", color: "text-[#FF6B35]" },
-  { text: "innovate.", color: "text-[#FACC15]" },
-  { text: "design.", color: "text-[#FF4D4D]" },
-  { text: "prototype.", color: "text-[#F4A261]" },
-  { text: "solve.", color: "text-[#2DD4BF]" },
 ];
 
 export default function ScrollAnimation() {
@@ -44,37 +40,39 @@ export default function ScrollAnimation() {
     const words = wordsRef.current.filter(Boolean) as HTMLSpanElement[];
     if (!words.length) return;
 
-    // Set initial word positions: first word at y:0%, opacity:1; others at y:100%, opacity:0
+    // Set initial word positions with GPU acceleration
     words.forEach((word, idx) => {
       if (idx === 0) {
-        gsap.set(word, { opacity: 1, y: "0%" });
+        gsap.set(word, { opacity: 1, y: "0%", force3D: true });
       } else {
-        gsap.set(word, { opacity: 0, y: "100%" });
+        gsap.set(word, { opacity: 0, y: "100%", force3D: true });
       }
     });
 
-    // Create GSAP ScrollTrigger timeline scrubbing on scroll
+    // Create GSAP ScrollTrigger timeline scrubbing on scroll with inertia smoothing
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "+=3200",
+        end: "+=2400",
         pin: true,
         pinSpacing: true,
-        scrub: 0.5,
+        scrub: 0.8,
+        fastScrollEnd: true,
+        preventOverlaps: true,
       },
     });
 
-    // Scrub through each word: fade/slide out previous up, fade/slide in current up
+    // Scrub through each word with smooth power2 easing
     for (let i = 1; i < words.length; i++) {
       const prevWord = words[i - 1];
       const currWord = words[i];
 
-      tl.to(prevWord, { opacity: 0, y: "-100%", duration: 1 }, `step-${i}`)
+      tl.to(prevWord, { opacity: 0, y: "-100%", duration: 1, ease: "power2.inOut", force3D: true }, `step-${i}`)
         .fromTo(
           currWord,
-          { opacity: 0, y: "100%" },
-          { opacity: 1, y: "0%", duration: 1 },
+          { opacity: 0, y: "100%", force3D: true },
+          { opacity: 1, y: "0%", duration: 1, ease: "power2.inOut", force3D: true },
           `step-${i}`
         );
     }
@@ -125,10 +123,10 @@ export default function ScrollAnimation() {
       {/* Cinematic Placement Layout Container (Pushed to Open Right Sky Space) */}
       <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex items-center justify-end">
         <div className="w-full lg:w-8/12 lg:ml-auto flex items-center justify-start text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif leading-none">
-          
-          {/* Prefix "i love to" in Artistic Serif Typography */}
+
+          {/* Prefix "I love to" in Artistic Serif Typography */}
           <span className="font-serif italic font-normal text-[#E8E5DF] select-none whitespace-nowrap mr-3 sm:mr-6 shrink-0 drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]">
-            i love to
+            I love to
           </span>
 
           {/* In-Place Scroll-Revealed Rotating Text Wrapper (Calculates full 1.3em text height) */}
@@ -139,6 +137,7 @@ export default function ScrollAnimation() {
                 ref={(el) => {
                   wordsRef.current[i] = el;
                 }}
+                style={{ willChange: "transform, opacity" }}
                 className={`absolute left-0 top-0 w-full h-full flex items-center ${item.color} font-serif font-black italic select-none drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]`}
               >
                 {item.text}
