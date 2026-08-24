@@ -13,7 +13,6 @@ import ScrollAnimation from '@/components/ui/you-can-scroll';
 import { AboutSection } from '@/components/about/AboutSection';
 import { TextRevealByWord } from '@/components/ui/text-reveal';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
-import { AchievementsSection } from '@/components/achievements/AchievementsSection';
 import { PlaygroundSection } from '@/components/playground/PlaygroundSection';
 import { TechTicker } from '@/components/tech/TechTicker';
 import { DevLabBentoSection } from '@/components/sections/DevLabBentoSection';
@@ -77,9 +76,6 @@ export default function Home() {
 
       {/* Professional Experience Timeline */}
       <ExperienceSection />
-
-      {/* Honors & Hackathon Achievements */}
-      <AchievementsSection />
 
       {/* Playground Experiments */}
       <PlaygroundSection />
