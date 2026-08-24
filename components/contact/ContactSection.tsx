@@ -13,8 +13,15 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 bg-[#080808] border-t border-[#242424]">
-      <div className="max-w-7xl mx-auto space-y-12">
+    <section id="contact" className="py-24 px-6 bg-gradient-to-b from-[#080706] via-[#1f100a] to-[#050505] border-t border-[#242424] relative overflow-hidden">
+      {/* Wireframe Horizon Texture Background Asset */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#2a1810_1px,transparent_1px),linear-gradient(to_bottom,#2a1810_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-35 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(#381c12_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
+
+      {/* Dramatic Sunset Horizon Ambient Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#C75B32]/18 rounded-full blur-[180px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto space-y-12 relative z-10">
         
         {/* Section Header */}
         <div className="space-y-3 border-b border-[#242424] pb-8">

@@ -51,13 +51,17 @@ export default function ScrollAnimation() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-screen flex items-center justify-center bg-[#050505] border-t border-white/10 overflow-hidden select-none"
+      className="relative w-full h-screen flex items-center justify-center bg-gradient-to-b from-[#08080c] via-[#0f1018] to-[#08080c] border-t border-white/10 overflow-hidden select-none"
     >
-      {/* Subtle Background Tech Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f1f26_1px,transparent_1px),linear-gradient(to_bottom,#1f1f26_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-25 pointer-events-none" />
+      {/* Dark Cybernetic Vector Matrix Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e2230_1px,transparent_1px),linear-gradient(to_bottom,#1e2230_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] opacity-35 pointer-events-none" />
 
-      {/* Ambient Radial Glow */}
-      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#C75B32]/10 rounded-full blur-[160px] pointer-events-none" />
+      {/* Cybernetic Dot Matrix Telemetry Overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(#252a3d_1px,transparent_1px)] [background-size:16px_16px] opacity-40 pointer-events-none" />
+
+      {/* Ambient Neon Radial Spotlights */}
+      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#C75B32]/15 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-[#5CE1E6]/10 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 relative z-10">
         

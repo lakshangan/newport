@@ -114,10 +114,15 @@ export const PhotoGallerySection: React.FC = () => {
   return (
     <section
       id="gallery"
-      className="relative bg-[#08080a] text-[#f5f5f7] border-t border-white/10 overflow-hidden"
+      className="relative bg-gradient-to-b from-[#06060a] via-[#11121c] to-[#06060a] text-[#f5f5f7] border-t border-white/10 overflow-hidden"
     >
-      {/* Ambient Spotlight Background Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#C75B32]/6 rounded-full blur-[160px] pointer-events-none" />
+      {/* Darkroom Gallery Aperture Mesh Background Texture */}
+      <div className="absolute inset-0 bg-[linear-gradient(45deg,#181a28_25%,transparent_25%,transparent_75%,#181a28_75%),linear-gradient(45deg,#181a28_25%,transparent_25%,transparent_75%,#181a28_75%)] bg-[size:30px_30px] opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(#1e1e2d_1px,transparent_1px)] [background-size:24px_24px] opacity-35 pointer-events-none" />
+
+      {/* Deep Indigo & Violet Ambient Spotlight Glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-[#C75B32]/10 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[160px] pointer-events-none" />
 
       {/* Sticky Gallery Header Container */}
       <div className="py-16 px-4 sm:px-6 max-w-7xl mx-auto space-y-6 relative z-10">

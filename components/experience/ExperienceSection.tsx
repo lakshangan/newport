@@ -221,7 +221,14 @@ export const ExperienceSection: React.FC = () => {
   ];
 
   return (
-    <section id="experience" className="relative w-full bg-[#080808]">
+    <section id="experience" className="relative w-full bg-gradient-to-b from-[#06080a] via-[#0f1720] to-[#06080a] border-t border-white/10 overflow-hidden">
+      {/* Circuit Board Telemetry Grid Background Texture */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#13202e_1px,transparent_1px),linear-gradient(to_bottom,#13202e_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(#18283a_1.5px,transparent_1.5px)] bg-[size:24px_24px] opacity-40 pointer-events-none" />
+
+      {/* Cyan & Electric Blue Ambient Glow */}
+      <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-[#5CE1E6]/10 rounded-full blur-[170px] pointer-events-none" />
+
       <Timeline data={timelineData} />
     </section>
   );

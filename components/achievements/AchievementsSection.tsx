@@ -6,9 +6,13 @@ import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 
 export const AchievementsSection: React.FC = () => {
   return (
-    <section id="achievements" className="py-24 px-4 sm:px-6 bg-[#080808] border-t border-white/10 relative overflow-hidden">
-      {/* Subtle Background Radial Accent Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C75B32]/5 rounded-full blur-[140px] pointer-events-none" />
+    <section id="achievements" className="py-24 px-4 sm:px-6 bg-gradient-to-b from-[#080705] via-[#1c160b] to-[#080705] border-t border-white/10 relative overflow-hidden">
+      {/* Gold & Bronze Metallic Diamond Grid Texture */}
+      <div className="absolute inset-0 bg-[radial-gradient(#2e2412_1px,transparent_1px)] [background-size:20px_20px] opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(45deg,#231a0e_25%,transparent_25%,transparent_75%,#231a0e_75%),linear-gradient(45deg,#231a0e_25%,transparent_25%,transparent_75%,#231a0e_75%)] bg-[size:32px_32px] opacity-20 pointer-events-none" />
+
+      {/* Golden Radiance Ambient Spotlight Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#C75B32]/12 rounded-full blur-[170px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         {/* Section Header */}

@@ -5,9 +5,15 @@ import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 
 export const PlaygroundSection: React.FC = () => {
   return (
-    <section id="playground" className="py-24 px-6 bg-[#080808] border-t border-[#242424]">
-      <div className="max-w-7xl mx-auto space-y-12">
+    <section id="playground" className="py-24 px-6 bg-gradient-to-b from-[#050808] via-[#091518] to-[#050808] border-t border-[#242424] relative overflow-hidden">
+      {/* Cyan Blueprint Architecture Grid Background Texture */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f2a33_1px,transparent_1px),linear-gradient(to_bottom,#0f2a33_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-35 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(#123440_1px,transparent_1px)] bg-[size:16px_16px] opacity-40 pointer-events-none" />
+
+      {/* Cyan & Emerald Ambient Glow */}
+      <div className="absolute top-1/3 left-1/4 w-[650px] h-[650px] bg-[#5CE1E6]/10 rounded-full blur-[170px] pointer-events-none" />
         
+      <div className="max-w-7xl mx-auto space-y-12 relative z-10">
         {/* Section Header */}
         <div className="space-y-3 border-b border-[#242424] pb-8">
           <div className="text-xs font-mono tracking-widest text-[#C75B32]">
