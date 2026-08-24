@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
+import { SocialConnectCard } from '@/components/ui/SocialConnectCard';
 
 export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -54,6 +55,9 @@ export const ContactSection: React.FC = () => {
             {copied ? '✓ EMAIL COPIED' : 'COPY EMAIL ADDRESS'}
           </button>
         </div>
+
+        {/* Recreated Sleek Interactive Connect Dock */}
+        <SocialConnectCard />
 
         {/* Communication Telemetry Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-[#242424] text-xs font-mono text-[#8E8B85]">

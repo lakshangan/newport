@@ -55,6 +55,7 @@ export const PORTFOLIO_DATA = {
     github: 'https://github.com/lakshangan',
     linkedin: 'https://www.linkedin.com/in/lakshan-ganesan23317524b/',
     twitter: 'https://x.com/lakshangan',
+    instagram: 'https://instagram.com/lakshangan_',
     bioHeadline: 'I BUILD AT THE EDGE OF CODE, BLOCKCHAIN & INTELLIGENCE.',
     bioBody:
       'Fusing Web3 research with artificial intelligence and creative technology. I construct decentralized intelligent protocols, custom smart contract systems, and high-performance interactive digital experiences.',
