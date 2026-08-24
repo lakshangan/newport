@@ -6,153 +6,163 @@ import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="relative py-28 sm:py-36 px-6 sm:px-12 bg-[#050505] border-t border-white/10 overflow-hidden select-none">
+    <section id="about" className="relative py-28 sm:py-36 px-6 sm:px-12 bg-[#080808] border-t border-white/10 overflow-hidden select-none">
       
-      {/* Renaissance Masterpiece Background Artwork */}
+      {/* Background Artwork */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
           src="/images/about section .png"
-          alt="Art x Tech Renaissance Landscape"
+          alt="Artistic Section Background"
           fill
           priority
-          className="object-cover object-center filter contrast-105 brightness-95 opacity-65"
+          className="object-cover object-center filter contrast-105 brightness-95 opacity-55"
           sizes="100vw"
         />
       </div>
 
       {/* Warm Ambient Dark Overlays */}
-      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/85 via-black/50 to-black/80 pointer-events-none" />
-      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/70 pointer-events-none" />
+      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/85 via-black/55 to-black/85 pointer-events-none" />
+      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/80 pointer-events-none" />
 
       {/* Renaissance Editorial Architectural Grid Pattern */}
-      <div className="absolute inset-0 z-2 bg-[linear-gradient(to_right,#2a1810_1px,transparent_1px),linear-gradient(to_bottom,#2a1810_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20 pointer-events-none" />
-      <div className="absolute inset-0 z-2 bg-[radial-gradient(#2d1910_1.5px,transparent_1.5px)] bg-[size:24px_24px] opacity-30 pointer-events-none" />
+      <div className="absolute inset-0 z-2 bg-[linear-gradient(to_right,#2a1810_1px,transparent_1px),linear-gradient(to_bottom,#2a1810_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-15 pointer-events-none" />
 
-      {/* Soft Volumetric Warm Cloud Atmosphere */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[850px] h-[600px] bg-[#C75B32]/14 rounded-full blur-[180px] pointer-events-none z-2" />
-      <div className="absolute bottom-10 right-10 w-[600px] h-[450px] bg-[#5CE1E6]/8 rounded-full blur-[160px] pointer-events-none z-2" />
+      {/* Soft Volumetric Warm Atmospheric Glow */}
+      <div className="absolute top-1/4 left-1/3 w-[700px] h-[500px] bg-[#C75B32]/12 rounded-full blur-[180px] pointer-events-none z-2" />
+      <div className="absolute bottom-10 right-10 w-[550px] h-[400px] bg-[#5CE1E6]/8 rounded-full blur-[160px] pointer-events-none z-2" />
 
       <div className="max-w-7xl mx-auto space-y-20 relative z-10">
         
-        {/* Top Tag & Section Header */}
-        <div className="space-y-4 text-center max-w-3xl mx-auto">
+        {/* Top Tag & Hero Greeting */}
+        <div className="space-y-6 text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/60 border border-[#C75B32]/40 text-xs font-mono text-[#C75B32] tracking-widest uppercase backdrop-blur-md shadow-xl">
             <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
-            <span>01 // ART X TECH MANIFESTO</span>
+            <span>01 // ABOUT THE BUILDER</span>
           </div>
 
-          <h2 className="font-mono text-3xl sm:text-5xl lg:text-6xl font-black uppercase text-[#E8E5DF] tracking-tight leading-tight">
-            FULL-STACK DEVELOPER &amp; ARCHITECT AT THE INTERSECTION OF <br className="hidden sm:inline" />
-            <span className="text-[#C75B32]">ART &amp; CODE.</span>
+          <h2 className="font-sans text-4xl sm:text-6xl lg:text-7xl font-black text-[#E8E5DF] tracking-tight leading-tight">
+            Hey, I’m <span className="text-[#C75B32]">Lakshan.</span>
           </h2>
 
-          <p className="font-sans text-sm sm:text-base tracking-normal text-white/70 max-w-2xl mx-auto leading-relaxed">
-            I&apos;m <strong className="text-white font-semibold">Lakshan Ganesan</strong> — an engineer dedicated to <em className="italic text-white">writing maintainable, clean code</em> across EVM protocols, AI agents, and 3D WebGL interfaces.
+          <p className="font-serif italic text-xl sm:text-3xl text-white/90 max-w-3xl mx-auto leading-snug drop-shadow-md">
+            A developer exploring the space between <em className="text-[#5CE1E6] not-italic font-sans font-bold">interfaces</em>, <em className="text-[#E88053] not-italic font-sans font-bold">systems</em>, <em className="text-[#C084FC] not-italic font-sans font-bold">AI</em>, and <em className="text-[#FACC15] not-italic font-sans font-bold">blockchain</em>.
           </p>
         </div>
 
-        {/* Grand Central Renaissance Editorial Banner */}
-        <div className="relative my-16 p-8 sm:p-14 bg-gradient-to-r from-black/90 via-[#1a0e09]/80 to-black/90 border border-[#C75B32]/30 rounded-3xl backdrop-blur-xl shadow-2xl text-center overflow-hidden">
-          <div className="absolute top-0 right-0 w-72 h-72 bg-[#C75B32]/10 rounded-full blur-3xl pointer-events-none" />
+        {/* 2-Column Editorial Story Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-14 pt-4">
           
-          <span className="text-4xl sm:text-6xl text-[#C75B32] font-mono block mb-2 opacity-60">
-            &ldquo;
-          </span>
-          <blockquote className="font-mono font-bold text-xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white max-w-4xl mx-auto leading-snug">
-            The simplest example is <span className="text-[#5CE1E6]">kafka + golang</span> — engineering decentralized systems that <em className="italic text-[#E88053] font-sans lowercase">endure with speed and elegance</em>.
-          </blockquote>
-          <span className="text-4xl sm:text-6xl text-[#C75B32] font-mono block mt-2 opacity-60">
-            &rdquo;
-          </span>
-        </div>
+          {/* Left Column: Education & Hands-on Philosophy */}
+          <div className="space-y-8 p-8 sm:p-10 bg-black/40 border border-white/10 rounded-3xl backdrop-blur-xl shadow-2xl flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="text-xs font-mono text-[#5CE1E6] tracking-widest uppercase flex items-center space-x-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#5CE1E6]" />
+                <span>BEYOND THE CLASSROOM</span>
+              </div>
+              <h3 className="font-mono text-xl sm:text-2xl font-extrabold text-white tracking-tight uppercase">
+                <AsciiGlitchRipple dur={1000}>
+                  BUILDING REAL SYSTEMS
+                </AsciiGlitchRipple>
+              </h3>
+              <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed pt-2">
+                While studying <strong className="text-white font-semibold">Computer Technology with a focus on Blockchain</strong>, I never really stayed inside the classroom. I kept turning what I learned into things I could actually build — from full-stack applications and AI experiments to DApps, blockchain investigation tools, and DeFi concepts.
+              </p>
+            </div>
 
-        {/* Q & A Editorial Section Header */}
-        <div className="flex flex-col items-center justify-center space-y-2 py-4">
-          <div className="w-16 h-16 rounded-full border border-white/20 bg-black/60 backdrop-blur-md flex items-center justify-center font-mono font-extrabold text-xl text-[#C75B32] shadow-2xl">
-            Q&amp;A
+            <div className="pt-6 border-t border-white/10 flex flex-wrap gap-2 text-[11px] font-mono text-white/60">
+              <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full">✓ Full-Stack Apps</span>
+              <span className="px-3.5 py-1 bg-white/5 border border-white/10 rounded-full">✓ AI Experiments</span>
+              <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full">✓ DApps &amp; DeFi</span>
+              <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full">✓ On-Chain Forensic Tools</span>
+            </div>
           </div>
-          <span className="text-xs font-mono tracking-widest text-white/50 uppercase">
-            TECHNICAL PHILOSOPHY &amp; DISCIPLINE
-          </span>
+
+          {/* Right Column: Hackathons, OpenLedger & Uniswap Incubator */}
+          <div className="space-y-8 p-8 sm:p-10 bg-black/40 border border-white/10 rounded-3xl backdrop-blur-xl shadow-2xl flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="text-xs font-mono text-[#C75B32] tracking-widest uppercase flex items-center space-x-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C75B32]" />
+                <span>TRACK RECORD &amp; RESEARCH</span>
+              </div>
+              <h3 className="font-mono text-xl sm:text-2xl font-extrabold text-white tracking-tight uppercase">
+                <AsciiGlitchRipple dur={1000}>
+                  COMPETING &amp; GOING DEEPER
+                </AsciiGlitchRipple>
+              </h3>
+              <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed pt-2">
+                Along the way, I found myself competing, experimenting, and putting those ideas to the test. I’ve taken projects from ideas to working products, represented my work on competitive stages, <strong className="text-white font-semibold">won a track at Build on Chain</strong>, reached the <strong className="text-white font-semibold">finals of Smart India Hackathon</strong>, and competed across national-level AI and technology hackathons.
+              </p>
+              <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed">
+                I’ve also stepped beyond development itself, working with <strong className="text-[#5CE1E6] font-semibold">OpenLedger</strong> on Web3 and DeFi research, product workflows, and ecosystem strategy, while gaining deeper exposure to protocol development through the <strong className="text-[#E88053] font-semibold">Uniswap Hook Incubator</strong>.
+              </p>
+            </div>
+
+            {/* Achievement Highlights */}
+            <div className="pt-6 border-t border-white/10 grid grid-cols-2 gap-3 text-[11px] font-mono text-white/80">
+              <div className="p-2.5 bg-black/60 border border-[#C75B32]/30 rounded-xl">
+                <span className="text-[#C75B32] font-bold block">BUILD ON CHAIN</span>
+                <span>Track Winner</span>
+              </div>
+              <div className="p-2.5 bg-black/60 border border-[#5CE1E6]/30 rounded-xl">
+                <span className="text-[#5CE1E6] font-bold block">SMART INDIA HACKATHON</span>
+                <span>National Finalist</span>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        {/* 2-Column Art x Tech Editorial Q&A Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 pt-6">
+        {/* Grand Manifesto Banner: "That's Where I'm at Home" */}
+        <div className="relative my-16 p-8 sm:p-14 bg-gradient-to-r from-black/90 via-[#1c0f0a]/90 to-black/90 border border-[#C75B32]/40 rounded-3xl backdrop-blur-xl shadow-2xl overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-[#C75B32]/12 rounded-full blur-3xl pointer-events-none" />
           
-          {/* Left Column Q&A Items */}
-          <div className="space-y-12">
-            <div className="space-y-3 border-b border-white/10 pb-8">
-              <div className="text-[11px] font-mono text-[#5CE1E6] tracking-widest uppercase">
-                01 // PARADIGM
+          <div className="space-y-8 relative z-10 max-w-4xl mx-auto text-center sm:text-left">
+            <p className="font-mono text-xs sm:text-sm text-[#C75B32] tracking-widest uppercase">
+              // THE EVOLUTION
+            </p>
+            
+            <h3 className="font-sans text-2xl sm:text-4xl font-extrabold text-white leading-snug">
+              What started as an interest in writing code has turned into something bigger:
+            </h3>
+
+            {/* 3 Core Pillars */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
+              <div className="p-6 bg-black/60 border border-white/15 rounded-2xl space-y-2 text-left">
+                <span className="text-2xl font-mono text-[#5CE1E6]">01</span>
+                <p className="font-mono font-bold text-lg text-white">I like building things.</p>
               </div>
-              <h3 className="font-mono text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
-                <AsciiGlitchRipple dur={1000}>
-                  WHAT DRIVES THE ART X TECH PARADIGM?
-                </AsciiGlitchRipple>
-              </h3>
-              <p className="font-sans text-sm text-white/70 leading-relaxed pt-1">
-                Engineering smart contracts and Web3 protocols demands <em className="italic text-white">mathematical precision and architectural beauty</em>. Every line of code is structured to be clean, modular, and performant.
-              </p>
+
+              <div className="p-6 bg-black/60 border border-white/15 rounded-2xl space-y-2 text-left">
+                <span className="text-2xl font-mono text-[#E88053]">02</span>
+                <p className="font-mono font-bold text-lg text-white">I like understanding how they work.</p>
+              </div>
+
+              <div className="p-6 bg-black/60 border border-white/15 rounded-2xl space-y-2 text-left">
+                <span className="text-2xl font-mono text-[#FACC15]">03</span>
+                <p className="font-mono font-bold text-lg text-white">And I like going deeper than what’s on the surface.</p>
+              </div>
             </div>
 
-            <div className="space-y-3 border-b border-white/10 pb-8">
-              <div className="text-[11px] font-mono text-[#5CE1E6] tracking-widest uppercase">
-                02 // PROVENANCE &amp; AI
-              </div>
-              <h3 className="font-mono text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
-                <AsciiGlitchRipple dur={1000}>
-                  HOW DO AI AGENTS &amp; PROVENANCE INTERSECT?
-                </AsciiGlitchRipple>
-              </h3>
-              <p className="font-sans text-sm text-white/70 leading-relaxed pt-1">
-                Combining C2PA cryptographic signatures with context-aware AI models ensures <em className="italic text-white">verifiable media provenance and autonomous execution</em> across distributed networks.
-              </p>
-            </div>
-          </div>
-
-          {/* Right Column Q&A Items */}
-          <div className="space-y-12">
-            <div className="space-y-3 border-b border-white/10 pb-8">
-              <div className="text-[11px] font-mono text-[#C75B32] tracking-widest uppercase">
-                03 // DEFI &amp; HOOKS
-              </div>
-              <h3 className="font-mono text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
-                <AsciiGlitchRipple dur={1000}>
-                  WHAT IS THE ETHOS BEHIND UNISWAP V4 HOOKS?
-                </AsciiGlitchRipple>
-              </h3>
-              <p className="font-sans text-sm text-white/70 leading-relaxed pt-1">
-                Developing custom liquidity hooks allows dynamic pool logic and automated yield strategies while maintaining <em className="italic text-white">zero-compromise security and gas efficiency</em>.
-              </p>
-            </div>
-
-            <div className="space-y-3 border-b border-white/10 pb-8">
-              <div className="text-[11px] font-mono text-[#C75B32] tracking-widest uppercase">
-                04 // GRAPHICS &amp; WEBGL
-              </div>
-              <h3 className="font-mono text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
-                <AsciiGlitchRipple dur={1000}>
-                  WHY FOCUS ON LOW-LATENCY SHADERS?
-                </AsciiGlitchRipple>
-              </h3>
-              <p className="font-sans text-sm text-white/70 leading-relaxed pt-1">
-                WebGL shaders and Three.js scenes turn complex protocol analytics into <em className="italic text-white">captivating visual masterworks</em> that respond instantly to user interaction.
-              </p>
+            {/* Final Statement */}
+            <div className="pt-8 text-center">
+              <span className="font-serif italic text-3xl sm:text-5xl text-[#5CE1E6] drop-shadow-[0_0_30px_rgba(92,225,230,0.3)]">
+                &ldquo;That’s where I’m at home.&rdquo;
+              </span>
             </div>
           </div>
-
         </div>
 
-        {/* Technical Skill Tags (JetBrains Mono) */}
-        <div className="pt-10 border-t border-white/10 flex flex-wrap justify-center items-center gap-3">
+        {/* Technical & Strategic Skill Pillars */}
+        <div className="pt-6 border-t border-white/10 flex flex-wrap justify-center items-center gap-3">
           {[
-            'SOLIDITY & EVM',
-            'UNISWAP V4 HOOKS',
-            'KAFKA + GOLANG',
-            'LLM DIAGNOSTIC AGENTS',
-            'C2PA MEDIA PROVENANCE',
-            'REACT & NEXT.JS',
-            'THREE.JS & SHADERS',
+            'COMPUTER TECHNOLOGY (BLOCKCHAIN)',
+            'OPENLEDGER DEFI RESEARCH',
+            'UNISWAP HOOK INCUBATOR',
+            'BUILD ON CHAIN TRACK WINNER',
+            'SMART INDIA HACKATHON FINALIST',
+            'AI AGENTS & DAPPS',
+            'ON-CHAIN FORENSICS',
+            'FULL-STACK & SYSTEM ARCHITECTURE',
           ].map((skill, idx) => (
             <span
               key={idx}
