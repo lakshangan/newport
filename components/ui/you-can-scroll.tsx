@@ -124,22 +124,22 @@ export default function ScrollAnimation() {
 
       {/* Cinematic Placement Layout Container (Pushed to Open Right Sky Space) */}
       <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex items-center justify-end">
-        <div className="w-full lg:w-8/12 lg:ml-auto flex items-baseline justify-start">
+        <div className="w-full lg:w-8/12 lg:ml-auto flex items-center justify-start text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif leading-none">
           
           {/* Prefix "i love to" in Artistic Serif Typography */}
-          <span className="font-serif italic font-normal text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#E8E5DF] select-none whitespace-nowrap mr-4 sm:mr-8 shrink-0 drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]">
+          <span className="font-serif italic font-normal text-[#E8E5DF] select-none whitespace-nowrap mr-3 sm:mr-6 shrink-0 drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]">
             i love to
           </span>
 
-          {/* In-Place Scroll-Revealed Rotating Text in Art Serif Bold Typography */}
-          <div className="relative h-[1.3em] inline-flex items-center min-w-[260px] sm:min-w-[480px] overflow-hidden">
+          {/* In-Place Scroll-Revealed Rotating Text Wrapper (Calculates full 1.3em text height) */}
+          <div className="relative h-[1.3em] font-serif font-black italic inline-flex items-center min-w-[280px] sm:min-w-[500px]">
             {WORD_ITEMS.map((item, i) => (
               <span
                 key={i}
                 ref={(el) => {
                   wordsRef.current[i] = el;
                 }}
-                className={`absolute inset-0 flex items-center ${item.color} font-serif font-black italic text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight select-none drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]`}
+                className={`absolute left-0 top-0 w-full h-full flex items-center ${item.color} font-serif font-black italic select-none drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]`}
               >
                 {item.text}
               </span>
