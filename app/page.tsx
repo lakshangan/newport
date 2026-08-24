@@ -65,14 +65,14 @@ export default function Home() {
       {/* Full-Screen Hero Section */}
       <HeroSection />
 
+      {/* Fun & Relatable Word-by-Word Scroll Reveal Manifesto */}
+      <TextRevealByWord text="When I'm not pushing smart contracts to mainnet or debugging WebGL shaders at 3 AM, I'm building autonomous AI agents, brewing double-shot espresso, and turning wild ideas into production reality." />
+
       {/* GSAP ScrollTrigger Word Dimmer Timeline */}
       <ScrollAnimation />
 
       {/* About & Core Disciplines */}
       <AboutSection />
-
-      {/* Fun & Relatable Word-by-Word Scroll Reveal Manifesto */}
-      <TextRevealByWord text="When I'm not pushing smart contracts to mainnet or debugging WebGL shaders at 3 AM, I'm building autonomous AI agents, brewing double-shot espresso, and turning wild ideas into production reality." />
 
       {/* Professional Experience Timeline */}
       <ExperienceSection />
