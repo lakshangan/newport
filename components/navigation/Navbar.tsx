@@ -18,7 +18,7 @@ export const Navbar: React.FC = () => {
       }
 
       // Simple active section indicator
-      const sections = ['about', 'work', 'gallery', 'experience', 'playground', 'contact'];
+      const sections = ['about', 'work', 'experience', 'playground', 'contact'];
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -74,14 +74,6 @@ export const Navbar: React.FC = () => {
             }`}
           >
             Projects
-          </a>
-          <a
-            href="#gallery"
-            className={`transition-colors hover:text-[#E8E5DF] ${
-              activeSection === 'gallery' ? 'text-[#C75B32] font-semibold' : ''
-            }`}
-          >
-            Gallery
           </a>
           <a
             href="#experience"
@@ -148,9 +140,6 @@ export const Navbar: React.FC = () => {
             </a>
             <a href="#work" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
               PROJECTS
-            </a>
-            <a href="#gallery" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
-              GALLERY
             </a>
             <a href="#experience" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
               EXPERIENCE

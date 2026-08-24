@@ -11,7 +11,6 @@ import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
 import ScrollAnimation from '@/components/ui/you-can-scroll';
 import { AboutSection } from '@/components/about/AboutSection';
-import { PhotoGallerySection } from '@/components/gallery/PhotoGallerySection';
 import { TextRevealByWord } from '@/components/ui/text-reveal';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
 import { AchievementsSection } from '@/components/achievements/AchievementsSection';
@@ -72,9 +71,6 @@ export default function Home() {
 
       {/* About & Core Disciplines */}
       <AboutSection />
-
-      {/* Proof of Work: Polaroid Photo Gallery & Community Memories */}
-      <PhotoGallerySection />
 
       {/* Fun & Relatable Word-by-Word Scroll Reveal Manifesto */}
       <TextRevealByWord text="When I'm not pushing smart contracts to mainnet or debugging WebGL shaders at 3 AM, I'm building autonomous AI agents, brewing double-shot espresso, and turning wild ideas into production reality." />
