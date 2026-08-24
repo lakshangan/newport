@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { AsciiGlitchRipple } from "@/components/ui/AsciiGlitchRipple";
@@ -51,39 +52,48 @@ export default function ScrollAnimation() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-screen flex items-center justify-center bg-gradient-to-b from-[#08080c] via-[#0f1018] to-[#08080c] border-t border-white/10 overflow-hidden select-none"
+      className="relative w-full h-screen flex items-center justify-center bg-[#050505] border-t border-white/10 overflow-hidden select-none"
     >
-      {/* Dark Cybernetic Vector Matrix Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e2230_1px,transparent_1px),linear-gradient(to_bottom,#1e2230_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] opacity-35 pointer-events-none" />
+      {/* Full-Screen Section Background Image */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/section.png"
+          alt="Technical Section Background"
+          fill
+          priority
+          className="object-cover object-center filter contrast-105 brightness-105"
+          sizes="100vw"
+        />
+      </div>
 
-      {/* Cybernetic Dot Matrix Telemetry Overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(#252a3d_1px,transparent_1px)] [background-size:16px_16px] opacity-40 pointer-events-none" />
+      {/* Light Ambient Dark Overlays — maintains image clarity while ensuring crystal-clear text readability */}
+      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/75 via-black/45 to-black/60 pointer-events-none" />
+      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/60 pointer-events-none" />
 
-      {/* Ambient Neon Radial Spotlights */}
-      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#C75B32]/15 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-[#5CE1E6]/10 rounded-full blur-[150px] pointer-events-none" />
+      {/* Subtle Tech Grid Accent */}
+      <div className="absolute inset-0 z-2 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-5 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 relative z-10">
         
         {/* Left Pinned Section Info */}
         <div className="w-full lg:w-5/12 space-y-6 text-left">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 bg-black/60 border border-white/15 text-[#C75B32] text-xs font-mono rounded-full backdrop-blur-md">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 bg-black/70 border border-white/20 text-[#C75B32] text-xs font-mono rounded-full backdrop-blur-xl shadow-2xl">
             <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
             <span>DISCIPLINE &amp; EXECUTION</span>
           </div>
 
-          <h2 className="font-display text-5xl sm:text-7xl lg:text-8xl font-black uppercase text-white tracking-tight leading-none drop-shadow-2xl">
+          <h2 className="font-mono text-5xl sm:text-7xl lg:text-8xl font-black uppercase text-white tracking-tight leading-none drop-shadow-2xl">
             I LOVE<br />
             <span className="text-[#C75B32]">TO.</span>
           </h2>
 
-          <p className="text-xs sm:text-sm font-mono tracking-wider text-white/80 max-w-md leading-relaxed">
+          <p className="font-sans text-sm sm:text-base tracking-normal text-white/90 max-w-md leading-relaxed bg-black/50 backdrop-blur-md p-4 rounded-xl border border-white/15 shadow-2xl">
             Building minimal, robust, and high-performance technical systems across Web3 protocols, AI agents, and graphics.
           </p>
 
           {/* Active Highlight Detail Pill */}
           <div className="pt-2">
-            <div className="inline-block p-4 bg-[#0c0c0e]/90 border border-white/15 rounded-xl space-y-1 backdrop-blur-xl shadow-2xl transition-all duration-300">
+            <div className="inline-block p-4 bg-black/80 border border-white/20 rounded-xl space-y-1 backdrop-blur-xl shadow-2xl transition-all duration-300">
               <span className="text-[10px] font-mono text-[#5CE1E6] uppercase tracking-widest block">
                 FOCUS // 0{activeIndex + 1}
               </span>
@@ -95,7 +105,7 @@ export default function ScrollAnimation() {
         </div>
 
         {/* Right Unclipped Stacked Word List */}
-        <div className="w-full lg:w-6/12 flex flex-col justify-center space-y-3 sm:space-y-4 py-4">
+        <div className="w-full lg:w-6/12 flex flex-col justify-center space-y-3 sm:space-y-4 py-4 bg-black/40 backdrop-blur-md p-6 rounded-2xl border border-white/15 shadow-2xl">
           {WORD_ITEMS.map((item, i) => {
             const isActive = activeIndex === i;
 
@@ -104,9 +114,9 @@ export default function ScrollAnimation() {
                 key={i}
                 onClick={() => setActiveIndex(i)}
                 onMouseEnter={() => setActiveIndex(i)}
-                className={`font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight transition-all duration-300 cursor-pointer select-none flex items-center justify-between border-b border-white/10 pb-2 sm:pb-3 ${
+                className={`font-mono text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight transition-all duration-300 cursor-pointer select-none flex items-center justify-between border-b border-white/10 pb-2 sm:pb-3 ${
                   isActive
-                    ? `${item.color} translate-x-3 sm:translate-x-6 opacity-100 scale-105 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]`
+                    ? `${item.color} translate-x-3 sm:translate-x-6 opacity-100 scale-105 drop-shadow-[0_0_35px_rgba(255,255,255,0.4)]`
                     : "text-white/40 hover:text-white/80 opacity-40 translate-x-0 scale-100"
                 }`}
               >
