@@ -1,19 +1,36 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="relative py-28 sm:py-36 px-6 sm:px-12 bg-gradient-to-b from-[#070605] via-[#1a0e08] to-[#070605] border-t border-white/10 overflow-hidden select-none">
+    <section id="about" className="relative py-28 sm:py-36 px-6 sm:px-12 bg-[#050505] border-t border-white/10 overflow-hidden select-none">
       
+      {/* Renaissance Masterpiece Background Artwork */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/images/about section .png"
+          alt="Art x Tech Renaissance Landscape"
+          fill
+          priority
+          className="object-cover object-center filter contrast-105 brightness-95 opacity-65"
+          sizes="100vw"
+        />
+      </div>
+
+      {/* Warm Ambient Dark Overlays */}
+      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/85 via-black/50 to-black/80 pointer-events-none" />
+      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/70 pointer-events-none" />
+
       {/* Renaissance Editorial Architectural Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#2a1810_1px,transparent_1px),linear-gradient(to_bottom,#2a1810_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-30 pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(#2d1910_1.5px,transparent_1.5px)] bg-[size:24px_24px] opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 z-2 bg-[linear-gradient(to_right,#2a1810_1px,transparent_1px),linear-gradient(to_bottom,#2a1810_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 z-2 bg-[radial-gradient(#2d1910_1.5px,transparent_1.5px)] bg-[size:24px_24px] opacity-30 pointer-events-none" />
 
       {/* Soft Volumetric Warm Cloud Atmosphere */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[850px] h-[600px] bg-[#C75B32]/16 rounded-full blur-[180px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[600px] h-[450px] bg-[#5CE1E6]/8 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[850px] h-[600px] bg-[#C75B32]/14 rounded-full blur-[180px] pointer-events-none z-2" />
+      <div className="absolute bottom-10 right-10 w-[600px] h-[450px] bg-[#5CE1E6]/8 rounded-full blur-[160px] pointer-events-none z-2" />
 
       <div className="max-w-7xl mx-auto space-y-20 relative z-10">
         
