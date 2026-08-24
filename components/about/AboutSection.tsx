@@ -1,62 +1,61 @@
 'use client';
 
 import React from 'react';
-import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="relative py-28 sm:py-36 px-6 sm:px-12 bg-gradient-to-b from-[#080808] via-[#120a07] to-[#080808] border-t border-white/10 overflow-hidden select-none">
+    <section id="about" className="relative py-28 sm:py-36 px-6 sm:px-12 bg-gradient-to-b from-[#050505] via-[#110a08] to-[#050505] border-t border-white/10 overflow-hidden select-none">
       
-      {/* Soft Volumetric Warm Cloud Atmosphere (Matching Reference Style) */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[#C75B32]/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[500px] h-[400px] bg-[#5CE1E6]/5 rounded-full blur-[140px] pointer-events-none" />
+      {/* Soft Volumetric Warm Cloud Atmosphere (Matching Renaissance Editorial Reference) */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[550px] bg-[#C75B32]/12 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-[550px] h-[400px] bg-[#5CE1E6]/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto space-y-20 relative z-10">
         
         {/* Top Tag & Section Header */}
         <div className="space-y-4 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/60 border border-[#C75B32]/30 text-xs font-mono text-[#C75B32] tracking-widest uppercase backdrop-blur-md shadow-xl">
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/60 border border-[#C75B32]/40 text-xs font-mono text-[#C75B32] tracking-widest uppercase backdrop-blur-md shadow-xl">
             <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
             <span>01 // ART X TECH MANIFESTO</span>
           </div>
 
-          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase text-[#E8E5DF] tracking-tight leading-tight">
-            CRAFTING PROTOCOLS AT THE INTERSECTION OF <br className="hidden sm:inline" />
+          <h2 className="font-mono text-3xl sm:text-5xl lg:text-6xl font-black uppercase text-[#E8E5DF] tracking-tight leading-tight">
+            FULL-STACK DEVELOPER &amp; ARCHITECT AT THE INTERSECTION OF <br className="hidden sm:inline" />
             <span className="text-[#C75B32]">ART &amp; CODE.</span>
           </h2>
 
-          <p className="text-xs sm:text-sm font-mono tracking-wider text-white/60 max-w-xl mx-auto leading-relaxed">
-            I&apos;m <strong className="text-white font-semibold">Lakshan Ganesan</strong> — an engineer and technical researcher designing high-performance smart contracts, AI agents, and WebGL graphics.
+          <p className="font-sans text-sm sm:text-base tracking-normal text-white/70 max-w-2xl mx-auto leading-relaxed">
+            I&apos;m <strong className="text-white font-semibold">Lakshan Ganesan</strong> — an engineer dedicated to <em className="italic text-white">writing maintainable, clean code</em> across EVM protocols, AI agents, and 3D WebGL interfaces.
           </p>
         </div>
 
-        {/* Grand Central Editorial Quote Banner (Matching Reference Image Style) */}
-        <div className="relative my-16 p-8 sm:p-14 bg-gradient-to-r from-black/80 via-[#180d09]/70 to-black/80 border border-white/15 rounded-3xl backdrop-blur-xl shadow-2xl text-center overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#C75B32]/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Grand Central Renaissance Editorial Banner */}
+        <div className="relative my-16 p-8 sm:p-14 bg-gradient-to-r from-black/90 via-[#1a0e09]/80 to-black/90 border border-[#C75B32]/30 rounded-3xl backdrop-blur-xl shadow-2xl text-center overflow-hidden">
+          <div className="absolute top-0 right-0 w-72 h-72 bg-[#C75B32]/10 rounded-full blur-3xl pointer-events-none" />
           
-          <span className="text-4xl sm:text-6xl text-[#C75B32] font-serif block mb-2 opacity-60">
+          <span className="text-4xl sm:text-6xl text-[#C75B32] font-mono block mb-2 opacity-60">
             &ldquo;
           </span>
-          <blockquote className="font-display font-bold text-2xl sm:text-4xl md:text-5xl uppercase tracking-tight text-white max-w-4xl mx-auto leading-snug">
-            Decentralization and intelligence are not merely tools — they are the <span className="text-[#5CE1E6]">modern canvas</span> of technical architecture.
+          <blockquote className="font-mono font-bold text-xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white max-w-4xl mx-auto leading-snug">
+            The simplest example is <span className="text-[#5CE1E6]">kafka + golang</span> — engineering decentralized systems that <em className="italic text-[#E88053] font-sans lowercase">endure with speed and elegance</em>.
           </blockquote>
-          <span className="text-4xl sm:text-6xl text-[#C75B32] font-serif block mt-2 opacity-60">
+          <span className="text-4xl sm:text-6xl text-[#C75B32] font-mono block mt-2 opacity-60">
             &rdquo;
           </span>
         </div>
 
-        {/* Floating Q & A Editorial Header Icon */}
+        {/* Q & A Editorial Section Header */}
         <div className="flex flex-col items-center justify-center space-y-2 py-4">
-          <div className="w-16 h-16 rounded-full border border-white/20 bg-black/50 backdrop-blur-md flex items-center justify-center font-display font-extrabold text-xl text-[#C75B32] shadow-2xl">
+          <div className="w-16 h-16 rounded-full border border-white/20 bg-black/60 backdrop-blur-md flex items-center justify-center font-mono font-extrabold text-xl text-[#C75B32] shadow-2xl">
             Q&amp;A
           </div>
-          <span className="text-[10px] font-mono tracking-widest text-white/50 uppercase">
-            PHILOSOPHY &amp; DISCIPLINE
+          <span className="text-xs font-mono tracking-widest text-white/50 uppercase">
+            TECHNICAL PHILOSOPHY &amp; DISCIPLINE
           </span>
         </div>
 
-        {/* 2-Column Art x Tech Editorial Q&A Grid (Exact Layout from Reference Image) */}
+        {/* 2-Column Art x Tech Editorial Q&A Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 pt-6">
           
           {/* Left Column Q&A Items */}
@@ -65,13 +64,13 @@ export const AboutSection: React.FC = () => {
               <div className="text-[11px] font-mono text-[#5CE1E6] tracking-widest uppercase">
                 01 // PARADIGM
               </div>
-              <h3 className="font-display text-xl sm:text-2xl font-bold uppercase text-white tracking-tight">
+              <h3 className="font-mono text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
                 <AsciiGlitchRipple dur={1000}>
                   WHAT DRIVES THE ART X TECH PARADIGM?
                 </AsciiGlitchRipple>
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-white/70 leading-relaxed pt-1">
-                Engineering smart contracts and Web3 protocols demands the same precision as classical sculpture. Every line of code is structured to endure on public ledgers while delivering seamless, beautiful human interfaces.
+              <p className="font-sans text-sm text-white/70 leading-relaxed pt-1">
+                Engineering smart contracts and Web3 protocols demands <em className="italic text-white">mathematical precision and architectural beauty</em>. Every line of code is structured to be clean, modular, and performant.
               </p>
             </div>
 
@@ -79,13 +78,13 @@ export const AboutSection: React.FC = () => {
               <div className="text-[11px] font-mono text-[#5CE1E6] tracking-widest uppercase">
                 02 // PROVENANCE &amp; AI
               </div>
-              <h3 className="font-display text-xl sm:text-2xl font-bold uppercase text-white tracking-tight">
+              <h3 className="font-mono text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
                 <AsciiGlitchRipple dur={1000}>
-                  HOW DO AI &amp; PROVENANCE INTERSECT?
+                  HOW DO AI AGENTS &amp; PROVENANCE INTERSECT?
                 </AsciiGlitchRipple>
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-white/70 leading-relaxed pt-1">
-                With C2PA digital signatures and context-aware LLM agents, we restore authenticity and cryptographic trust to digital media in an era of infinite synthetic content.
+              <p className="font-sans text-sm text-white/70 leading-relaxed pt-1">
+                Combining C2PA cryptographic signatures with context-aware AI models ensures <em className="italic text-white">verifiable media provenance and autonomous execution</em> across distributed networks.
               </p>
             </div>
           </div>
@@ -96,13 +95,13 @@ export const AboutSection: React.FC = () => {
               <div className="text-[11px] font-mono text-[#C75B32] tracking-widest uppercase">
                 03 // DEFI &amp; HOOKS
               </div>
-              <h3 className="font-display text-xl sm:text-2xl font-bold uppercase text-white tracking-tight">
+              <h3 className="font-mono text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
                 <AsciiGlitchRipple dur={1000}>
-                  WHAT IS THE ETHOS BEHIND DEFI HOOKS?
+                  WHAT IS THE ETHOS BEHIND UNISWAP V4 HOOKS?
                 </AsciiGlitchRipple>
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-white/70 leading-relaxed pt-1">
-                Designing custom Uniswap v4 hooks allows dynamic execution policies, optimizing yield and automated market making with zero-compromise security.
+              <p className="font-sans text-sm text-white/70 leading-relaxed pt-1">
+                Developing custom liquidity hooks allows dynamic pool logic and automated yield strategies while maintaining <em className="italic text-white">zero-compromise security and gas efficiency</em>.
               </p>
             </div>
 
@@ -110,24 +109,25 @@ export const AboutSection: React.FC = () => {
               <div className="text-[11px] font-mono text-[#C75B32] tracking-widest uppercase">
                 04 // GRAPHICS &amp; WEBGL
               </div>
-              <h3 className="font-display text-xl sm:text-2xl font-bold uppercase text-white tracking-tight">
+              <h3 className="font-mono text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
                 <AsciiGlitchRipple dur={1000}>
-                  WHY FOCUS ON LOW-LATENCY GRAPHICS?
+                  WHY FOCUS ON LOW-LATENCY SHADERS?
                 </AsciiGlitchRipple>
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-white/70 leading-relaxed pt-1">
-                WebGL shaders and interactive R3F scenes convert complex cryptographic telemetry into intuitive visual experiences that engage developers and creators alike.
+              <p className="font-sans text-sm text-white/70 leading-relaxed pt-1">
+                WebGL shaders and Three.js scenes turn complex protocol analytics into <em className="italic text-white">captivating visual masterworks</em> that respond instantly to user interaction.
               </p>
             </div>
           </div>
 
         </div>
 
-        {/* Bottom Technical Arsenal Pills */}
+        {/* Technical Skill Tags (JetBrains Mono) */}
         <div className="pt-10 border-t border-white/10 flex flex-wrap justify-center items-center gap-3">
           {[
             'SOLIDITY & EVM',
             'UNISWAP V4 HOOKS',
+            'KAFKA + GOLANG',
             'LLM DIAGNOSTIC AGENTS',
             'C2PA MEDIA PROVENANCE',
             'REACT & NEXT.JS',
@@ -135,7 +135,7 @@ export const AboutSection: React.FC = () => {
           ].map((skill, idx) => (
             <span
               key={idx}
-              className="px-4 py-2 bg-black/60 border border-white/15 rounded-full font-mono text-xs text-white/80 hover:border-[#5CE1E6] hover:text-[#5CE1E6] transition-colors"
+              className="px-4 py-2 bg-black/60 border border-white/15 rounded-full font-mono text-xs text-white/90 hover:border-[#5CE1E6] hover:text-[#5CE1E6] transition-colors"
             >
               • {skill}
             </span>
