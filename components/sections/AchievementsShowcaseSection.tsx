@@ -63,14 +63,14 @@ export const AchievementsShowcaseSection: React.FC = () => {
   return (
     <section className="relative w-full py-24 sm:py-36 bg-[#080808] border-t border-white/10 overflow-hidden select-none min-h-[85vh] flex items-center">
       
-      {/* Background Artwork Image */}
+      {/* Background Halftone Artwork Image (number.png) */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
-          src="/images/image copy.png"
-          alt="Artistic Milestones Background"
+          src="/images/number.png"
+          alt="Halftone Camera & Hand Artwork"
           fill
           priority
-          className="object-cover object-left md:object-center filter contrast-105 brightness-95 opacity-85"
+          className="object-cover object-center filter contrast-105 brightness-105 opacity-90"
           sizes="100vw"
         />
       </div>
@@ -79,12 +79,12 @@ export const AchievementsShowcaseSection: React.FC = () => {
       <div className="absolute top-1/3 right-1/4 w-[600px] h-[400px] bg-[#C75B32]/12 rounded-full blur-[170px] pointer-events-none z-1" />
       <div className="absolute bottom-10 right-1/3 w-[450px] h-[300px] bg-[#5CE1E6]/10 rounded-full blur-[150px] pointer-events-none z-1" />
 
-      {/* Film Overlay Gradient for Flawless Contrast */}
-      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/85 via-black/45 to-black/80 pointer-events-none" />
+      {/* Film Overlay Gradient for Contrast */}
+      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/80 via-black/35 to-black/75 pointer-events-none" />
       <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/90 pointer-events-none" />
 
-      {/* Floating Right-Aligned Content Layout (Optimized for Image Open Space) */}
-      <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex justify-center md:justify-end">
+      {/* Floating Right-Shifted Content Layout (Aligned for number.png Open Right Area) */}
+      <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex justify-center lg:justify-end">
         <div className="w-full lg:w-9/12 lg:ml-auto text-center md:text-right space-y-12 sm:space-y-16">
           
           {/* Top Floating Badge */}
@@ -93,13 +93,13 @@ export const AchievementsShowcaseSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/70 border border-[#C75B32]/40 text-xs font-mono text-[#C75B32] tracking-widest uppercase backdrop-blur-xl shadow-2xl"
+            className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/75 border border-[#C75B32]/40 text-xs font-mono text-[#C75B32] tracking-widest uppercase backdrop-blur-xl shadow-2xl"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#C75B32] animate-pulse" />
             <span>// COMPETITIVE MILESTONES &amp; DISCIPLINE</span>
           </motion.div>
 
-          {/* 3 Floating High-Impact Stats (Aligned Suited for the Background Image) */}
+          {/* 3 Floating High-Impact Stats (Positioned over number.png open area) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 items-start text-center md:text-right">
             
             {/* Stat 1: 25+ Hackathons Participated */}
@@ -122,7 +122,7 @@ export const AchievementsShowcaseSection: React.FC = () => {
                 <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#5CE1E6] tracking-widest uppercase">
                   HACKATHONS PARTICIPATED
                 </h3>
-                <p className="text-xs text-white/70 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed">
+                <p className="text-xs text-white/75 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed">
                   National &amp; global marathons building real-world Web3, AI, and full-stack software.
                 </p>
               </div>
@@ -148,7 +148,7 @@ export const AchievementsShowcaseSection: React.FC = () => {
                 <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#E88053] tracking-widest uppercase">
                   FINALIST FINISHES
                 </h3>
-                <p className="text-xs text-white/70 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed">
+                <p className="text-xs text-white/75 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed">
                   Top-tier finalist placements delivering production-grade code under 36-hr deadlines.
                 </p>
               </div>
@@ -176,7 +176,7 @@ export const AchievementsShowcaseSection: React.FC = () => {
                 <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#FACC15] tracking-widest uppercase">
                   INTL SILAMBAM MEDALIST
                 </h3>
-                <p className="text-xs text-white/70 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed">
+                <p className="text-xs text-white/75 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed">
                   Bronze Medalist at the International Silambam Championship—combining physical mastery with digital precision.
                 </p>
               </div>
