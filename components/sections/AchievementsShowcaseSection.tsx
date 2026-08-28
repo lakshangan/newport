@@ -83,9 +83,9 @@ export const AchievementsShowcaseSection: React.FC = () => {
       <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#080808] to-transparent z-1 pointer-events-none" />
       <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#080808] to-transparent z-1 pointer-events-none" />
 
-      {/* Right-Aligned Floating Content Layout (Positioned over number.png Open Right Region) */}
+      {/* Perfectly Aligned Right Content Layout (Fits number.png Open Right Region) */}
       <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex justify-center lg:justify-end my-auto">
-        <div className="w-full lg:w-9/12 lg:ml-auto text-center md:text-right space-y-12 sm:space-y-16">
+        <div className="w-full lg:w-8/12 xl:w-7/12 lg:ml-auto text-center lg:text-right space-y-10 sm:space-y-14">
           
           {/* Top Floating Badge */}
           <motion.div
@@ -93,14 +93,14 @@ export const AchievementsShowcaseSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/80 border border-[#C75B32]/40 text-xs font-mono text-[#C75B32] tracking-widest uppercase backdrop-blur-xl shadow-2xl"
+            className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/90 border border-[#C75B32]/50 text-xs font-mono text-[#C75B32] tracking-[0.2em] uppercase backdrop-blur-xl shadow-2xl"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#C75B32] animate-pulse" />
             <span>// COMPETITIVE MILESTONES &amp; DISCIPLINE</span>
           </motion.div>
 
-          {/* 3 Floating High-Impact Stats (Aligned for number.png open right space) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 items-start text-center md:text-right">
+          {/* 3 High-Impact Stats (Matched Font & Precision Alignment) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-start text-center lg:text-right">
             
             {/* Stat 1: 25+ Hackathons Participated */}
             <motion.div
@@ -108,21 +108,21 @@ export const AchievementsShowcaseSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="space-y-3 group"
+              className="space-y-2.5 group"
             >
-              <div className="flex justify-center md:justify-end items-center text-[#5CE1E6] mb-1">
-                <Trophy className="w-7 h-7 drop-shadow-[0_0_15px_rgba(92,225,230,0.5)] group-hover:scale-110 transition-transform" />
+              <div className="flex justify-center lg:justify-end items-center text-[#5CE1E6] mb-1">
+                <Trophy className="w-7 h-7 drop-shadow-[0_0_15px_rgba(92,225,230,0.6)] group-hover:scale-110 transition-transform" />
               </div>
 
-              <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight text-white drop-shadow-[0_10px_35px_rgba(0,0,0,0.95)]">
+              <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight leading-none text-white drop-shadow-[0_0_30px_rgba(92,225,230,0.35)]">
                 <CounterNumber value="25+" />
               </p>
 
               <div className="space-y-1">
-                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#5CE1E6] tracking-widest uppercase drop-shadow-md">
+                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#5CE1E6] tracking-[0.18em] uppercase drop-shadow-md">
                   HACKATHONS PARTICIPATED
                 </h3>
-                <p className="text-xs text-white/80 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed drop-shadow-md">
+                <p className="text-xs text-white/75 font-sans font-medium max-w-xs mx-auto lg:ml-auto lg:mr-0 leading-relaxed drop-shadow-md">
                   National &amp; global marathons building real-world Web3, AI, and full-stack software.
                 </p>
               </div>
@@ -134,21 +134,21 @@ export const AchievementsShowcaseSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-3 group"
+              className="space-y-2.5 group"
             >
-              <div className="flex justify-center md:justify-end items-center text-[#C75B32] mb-1">
-                <Award className="w-7 h-7 drop-shadow-[0_0_15px_rgba(199,91,50,0.5)] group-hover:scale-110 transition-transform" />
+              <div className="flex justify-center lg:justify-end items-center text-[#C75B32] mb-1">
+                <Award className="w-7 h-7 drop-shadow-[0_0_15px_rgba(199,91,50,0.6)] group-hover:scale-110 transition-transform" />
               </div>
 
-              <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight text-[#C75B32] drop-shadow-[0_10px_35px_rgba(199,91,50,0.4)]">
+              <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight leading-none text-[#C75B32] drop-shadow-[0_0_30px_rgba(199,91,50,0.45)]">
                 <CounterNumber value="20+" />
               </p>
 
               <div className="space-y-1">
-                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#E88053] tracking-widest uppercase drop-shadow-md">
+                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#E88053] tracking-[0.18em] uppercase drop-shadow-md">
                   FINALIST FINISHES
                 </h3>
-                <p className="text-xs text-white/80 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed drop-shadow-md">
+                <p className="text-xs text-white/75 font-sans font-medium max-w-xs mx-auto lg:ml-auto lg:mr-0 leading-relaxed drop-shadow-md">
                   Top-tier finalist placements delivering production-grade code under 36-hr deadlines.
                 </p>
               </div>
@@ -160,23 +160,23 @@ export const AchievementsShowcaseSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="space-y-3 group"
+              className="space-y-2.5 group"
             >
-              <div className="flex justify-center md:justify-end items-center text-[#FACC15] mb-1">
-                <Medal className="w-7 h-7 drop-shadow-[0_0_15px_rgba(250,204,21,0.5)] group-hover:scale-110 transition-transform" />
+              <div className="flex justify-center lg:justify-end items-center text-[#FACC15] mb-1">
+                <Medal className="w-7 h-7 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)] group-hover:scale-110 transition-transform" />
               </div>
 
-              <div className="flex items-center justify-center md:justify-end space-x-2">
-                <span className="text-5xl sm:text-6xl lg:text-7xl font-display font-black text-[#FACC15] tracking-tight drop-shadow-[0_10px_35px_rgba(250,204,21,0.4)]">
+              <div className="flex items-center justify-center lg:justify-end space-x-2">
+                <span className="text-5xl sm:text-6xl lg:text-7xl font-display font-black tracking-tight leading-none text-[#FACC15] drop-shadow-[0_0_30px_rgba(250,204,21,0.4)]">
                   BRONZE
                 </span>
               </div>
 
               <div className="space-y-1">
-                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#FACC15] tracking-widest uppercase drop-shadow-md">
+                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#FACC15] tracking-[0.18em] uppercase drop-shadow-md">
                   INTL SILAMBAM MEDALIST
                 </h3>
-                <p className="text-xs text-white/80 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed drop-shadow-md">
+                <p className="text-xs text-white/75 font-sans font-medium max-w-xs mx-auto lg:ml-auto lg:mr-0 leading-relaxed drop-shadow-md">
                   Bronze Medalist at the International Silambam Championship—combining physical mastery with digital precision.
                 </p>
               </div>
