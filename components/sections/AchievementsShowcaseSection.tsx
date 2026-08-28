@@ -63,128 +63,122 @@ export const AchievementsShowcaseSection: React.FC = () => {
   return (
     <section className="relative w-full h-screen min-h-screen flex items-center justify-center bg-[#080808] border-t border-white/10 overflow-hidden select-none">
       
-      {/* Halftone Camera & Hand Artwork Background (number.png) */}
+      {/* Renaissance Parchment Artwork Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
-          src="/images/number.png"
-          alt="Halftone Camera & Hand Artwork Background"
+          src="/images/about section .png"
+          alt="Renaissance Artwork Milestones Background"
           fill
           priority
-          className="object-cover object-left md:object-center filter contrast-110 brightness-110 opacity-100"
+          className="object-cover object-center filter contrast-105 brightness-95 opacity-100"
           sizes="100vw"
         />
       </div>
 
-      {/* Volumetric Center Ambient Glows */}
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[400px] bg-[#C75B32]/12 rounded-full blur-[170px] pointer-events-none z-1" />
-      <div className="absolute bottom-10 right-1/3 w-[450px] h-[300px] bg-[#5CE1E6]/10 rounded-full blur-[150px] pointer-events-none z-1" />
-
       {/* Subtle Top & Bottom Vignettes */}
-      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#080808] to-transparent z-1 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#080808] to-transparent z-1 pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#080808] via-[#080808]/40 to-transparent z-1 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent z-1 pointer-events-none" />
 
-      {/* Perfectly Aligned Right Content Layout (Fits number.png Open Right Region) */}
-      <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex justify-center lg:justify-end my-auto">
-        <div className="w-full lg:w-8/12 xl:w-7/12 lg:ml-auto text-center lg:text-right space-y-10 sm:space-y-14">
+      {/* Perfectly Centered Content Layout with Single High-Contrast Dark Color (No Multi-Color) */}
+      <div className="max-w-6xl mx-auto w-full px-6 sm:px-12 relative z-10 text-center space-y-12 sm:space-y-16 my-auto flex flex-col items-center justify-center">
+        
+        {/* Top Floating Badge (Uniform Dark Obsidian Style) */}
+        <motion.div
+          initial={{ opacity: 0, y: -15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#111116] border border-[#111116] text-xs font-mono text-white tracking-[0.2em] uppercase shadow-2xl"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-[#C75B32] animate-pulse" />
+          <span>// COMPETITIVE MILESTONES &amp; DISCIPLINE</span>
+        </motion.div>
+
+        {/* 3 Centered High-Contrast Stat Columns (Uniform High-Contrast Color - No Multi-Color) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 items-start text-center w-full">
           
-          {/* Top Floating Badge */}
+          {/* Stat 1: 25+ Hackathons Participated */}
           <motion.div
-            initial={{ opacity: 0, y: -15 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/90 border border-[#C75B32]/50 text-xs font-mono text-[#C75B32] tracking-[0.2em] uppercase backdrop-blur-xl shadow-2xl"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="space-y-3 group"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#C75B32] animate-pulse" />
-            <span>// COMPETITIVE MILESTONES &amp; DISCIPLINE</span>
+            <div className="flex justify-center items-center text-[#111116] mb-1">
+              <Trophy className="w-7 h-7 group-hover:scale-110 transition-transform" />
+            </div>
+
+            <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight leading-none text-[#111116] drop-shadow-[0_2px_10px_rgba(255,255,255,0.6)]">
+              <CounterNumber value="25+" />
+            </p>
+
+            <div className="space-y-1">
+              <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#111116] tracking-[0.18em] uppercase">
+                HACKATHONS PARTICIPATED
+              </h3>
+              <p className="text-xs sm:text-sm text-[#27272a] font-sans font-semibold max-w-xs mx-auto leading-relaxed">
+                National &amp; global marathons building real-world Web3, AI, and full-stack software.
+              </p>
+            </div>
           </motion.div>
 
-          {/* 3 High-Impact Stats (Matched Font & Precision Alignment) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-start text-center lg:text-right">
-            
-            {/* Stat 1: 25+ Hackathons Participated */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="space-y-2.5 group"
-            >
-              <div className="flex justify-center lg:justify-end items-center text-[#5CE1E6] mb-1">
-                <Trophy className="w-7 h-7 drop-shadow-[0_0_15px_rgba(92,225,230,0.6)] group-hover:scale-110 transition-transform" />
-              </div>
+          {/* Stat 2: 20+ Finalist Finishes */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-3 group"
+          >
+            <div className="flex justify-center items-center text-[#111116] mb-1">
+              <Award className="w-7 h-7 group-hover:scale-110 transition-transform" />
+            </div>
 
-              <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight leading-none text-white drop-shadow-[0_0_30px_rgba(92,225,230,0.35)]">
-                <CounterNumber value="25+" />
+            <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight leading-none text-[#111116] drop-shadow-[0_2px_10px_rgba(255,255,255,0.6)]">
+              <CounterNumber value="20+" />
+            </p>
+
+            <div className="space-y-1">
+              <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#111116] tracking-[0.18em] uppercase">
+                FINALIST FINISHES
+              </h3>
+              <p className="text-xs sm:text-sm text-[#27272a] font-sans font-semibold max-w-xs mx-auto leading-relaxed">
+                Top-tier finalist placements delivering production-grade code under 36-hr deadlines.
               </p>
+            </div>
+          </motion.div>
 
-              <div className="space-y-1">
-                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#5CE1E6] tracking-[0.18em] uppercase drop-shadow-md">
-                  HACKATHONS PARTICIPATED
-                </h3>
-                <p className="text-xs text-white/75 font-sans font-medium max-w-xs mx-auto lg:ml-auto lg:mr-0 leading-relaxed drop-shadow-md">
-                  National &amp; global marathons building real-world Web3, AI, and full-stack software.
-                </p>
-              </div>
-            </motion.div>
+          {/* Stat 3: International Silambam Bronze Medalist */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="space-y-3 group"
+          >
+            <div className="flex justify-center items-center text-[#111116] mb-1">
+              <Medal className="w-7 h-7 group-hover:scale-110 transition-transform" />
+            </div>
 
-            {/* Stat 2: 20+ Finalist Finishes */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-2.5 group"
-            >
-              <div className="flex justify-center lg:justify-end items-center text-[#C75B32] mb-1">
-                <Award className="w-7 h-7 drop-shadow-[0_0_15px_rgba(199,91,50,0.6)] group-hover:scale-110 transition-transform" />
-              </div>
+            <div className="flex items-center justify-center space-x-2">
+              <span className="text-5xl sm:text-6xl lg:text-7xl font-display font-black tracking-tight leading-none text-[#111116] drop-shadow-[0_2px_10px_rgba(255,255,255,0.6)]">
+                BRONZE
+              </span>
+            </div>
 
-              <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight leading-none text-[#C75B32] drop-shadow-[0_0_30px_rgba(199,91,50,0.45)]">
-                <CounterNumber value="20+" />
+            <div className="space-y-1">
+              <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#111116] tracking-[0.18em] uppercase">
+                INTL SILAMBAM MEDALIST
+              </h3>
+              <p className="text-xs sm:text-sm text-[#27272a] font-sans font-semibold max-w-xs mx-auto leading-relaxed">
+                Bronze Medalist at the International Silambam Championship—combining physical mastery with digital precision.
               </p>
-
-              <div className="space-y-1">
-                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#E88053] tracking-[0.18em] uppercase drop-shadow-md">
-                  FINALIST FINISHES
-                </h3>
-                <p className="text-xs text-white/75 font-sans font-medium max-w-xs mx-auto lg:ml-auto lg:mr-0 leading-relaxed drop-shadow-md">
-                  Top-tier finalist placements delivering production-grade code under 36-hr deadlines.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Stat 3: International Silambam Bronze Medalist */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="space-y-2.5 group"
-            >
-              <div className="flex justify-center lg:justify-end items-center text-[#FACC15] mb-1">
-                <Medal className="w-7 h-7 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)] group-hover:scale-110 transition-transform" />
-              </div>
-
-              <div className="flex items-center justify-center lg:justify-end space-x-2">
-                <span className="text-5xl sm:text-6xl lg:text-7xl font-display font-black tracking-tight leading-none text-[#FACC15] drop-shadow-[0_0_30px_rgba(250,204,21,0.4)]">
-                  BRONZE
-                </span>
-              </div>
-
-              <div className="space-y-1">
-                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#FACC15] tracking-[0.18em] uppercase drop-shadow-md">
-                  INTL SILAMBAM MEDALIST
-                </h3>
-                <p className="text-xs text-white/75 font-sans font-medium max-w-xs mx-auto lg:ml-auto lg:mr-0 leading-relaxed drop-shadow-md">
-                  Bronze Medalist at the International Silambam Championship—combining physical mastery with digital precision.
-                </p>
-              </div>
-            </motion.div>
-
-          </div>
+            </div>
+          </motion.div>
 
         </div>
+
       </div>
     </section>
   );
