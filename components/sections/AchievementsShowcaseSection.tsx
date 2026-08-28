@@ -61,31 +61,35 @@ const CounterNumber: React.FC<CounterNumberProps> = ({ value, className }) => {
 
 export const AchievementsShowcaseSection: React.FC = () => {
   return (
-    <section className="relative w-full py-24 sm:py-36 bg-[#080808] border-t border-white/10 overflow-hidden select-none min-h-[85vh] flex items-center">
+    <section className="relative w-full h-screen min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0c0806] via-[#160d08] to-[#080808] border-t border-white/10 overflow-hidden select-none">
       
-      {/* Halftone Camera & Hand Artwork Background (number.png) - 100% Vivid Visibility */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      {/* Renaissance Architectural Blueprint Grid Overlay */}
+      <div className="absolute inset-0 z-1 bg-[linear-gradient(to_right,#2a1810_1px,transparent_1px),linear-gradient(to_bottom,#2a1810_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] opacity-35 pointer-events-none" />
+
+      {/* Renaissance Volumetric Warm Color Glows */}
+      <div className="absolute top-1/4 left-1/4 w-[650px] h-[450px] bg-[#C75B32]/18 rounded-full blur-[170px] pointer-events-none z-1" />
+      <div className="absolute bottom-1/4 right-1/4 w-[550px] h-[400px] bg-[#E88053]/15 rounded-full blur-[160px] pointer-events-none z-1" />
+      <div className="absolute top-1/2 right-1/3 w-[450px] h-[350px] bg-[#FACC15]/10 rounded-full blur-[150px] pointer-events-none z-1" />
+
+      {/* Halftone Camera & Hand Artwork Background (number.png) */}
+      <div className="absolute inset-0 z-2 pointer-events-none">
         <Image
           src="/images/number.png"
           alt="Halftone Camera & Hand Artwork Background"
           fill
           priority
-          className="object-cover object-left md:object-center filter contrast-110 brightness-110 opacity-100"
+          className="object-cover object-left md:object-center filter contrast-110 brightness-110 opacity-95"
           sizes="100vw"
         />
       </div>
 
-      {/* Volumetric Center Ambient Glows */}
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[400px] bg-[#C75B32]/12 rounded-full blur-[170px] pointer-events-none z-1" />
-      <div className="absolute bottom-10 right-1/3 w-[450px] h-[300px] bg-[#5CE1E6]/10 rounded-full blur-[150px] pointer-events-none z-1" />
+      {/* Renaissance Film Vignette Transitions */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#080808] to-transparent z-3 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#080808] to-transparent z-3 pointer-events-none" />
 
-      {/* Subtle Top & Bottom Vignette (Leaves Left Camera Artwork Uncovered) */}
-      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#080808] to-transparent z-1 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#080808] to-transparent z-1 pointer-events-none" />
-
-      {/* Right-Aligned Floating Content Layout (Fits number.png Open Dark Right Region) */}
-      <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex justify-center lg:justify-end">
-        <div className="w-full lg:w-9/12 lg:ml-auto text-center md:text-right space-y-12 sm:space-y-16">
+      {/* Floating Right-Shifted Content Layout (Full Screen Fit) */}
+      <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex justify-center lg:justify-end my-auto">
+        <div className="w-full lg:w-9/12 lg:ml-auto text-center md:text-right space-y-10 sm:space-y-14">
           
           {/* Top Floating Badge */}
           <motion.div
@@ -100,7 +104,7 @@ export const AchievementsShowcaseSection: React.FC = () => {
           </motion.div>
 
           {/* 3 Floating High-Impact Stats (Positioned cleanly in number.png open right region) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 items-start text-center md:text-right">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10 items-start text-center md:text-right">
             
             {/* Stat 1: 25+ Hackathons Participated */}
             <motion.div
