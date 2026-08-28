@@ -63,122 +63,128 @@ export const AchievementsShowcaseSection: React.FC = () => {
   return (
     <section className="relative w-full h-screen min-h-screen flex items-center justify-center bg-[#080808] border-t border-white/10 overflow-hidden select-none">
       
-      {/* Original Renaissance Parchment Artwork Background */}
+      {/* Halftone Camera & Hand Artwork Background (number.png) */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
-          src="/images/about section .png"
-          alt="Renaissance Artwork Milestones Background"
+          src="/images/number.png"
+          alt="Halftone Camera & Hand Artwork Background"
           fill
           priority
-          className="object-cover object-center filter contrast-105 brightness-95 opacity-100"
+          className="object-cover object-left md:object-center filter contrast-110 brightness-110 opacity-100"
           sizes="100vw"
         />
       </div>
 
-      {/* Subtle Top & Bottom Vignettes to Blend into Page */}
-      <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#080808] via-[#080808]/40 to-transparent z-1 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent z-1 pointer-events-none" />
+      {/* Volumetric Center Ambient Glows */}
+      <div className="absolute top-1/3 right-1/4 w-[600px] h-[400px] bg-[#C75B32]/12 rounded-full blur-[170px] pointer-events-none z-1" />
+      <div className="absolute bottom-10 right-1/3 w-[450px] h-[300px] bg-[#5CE1E6]/10 rounded-full blur-[150px] pointer-events-none z-1" />
 
-      {/* Center Sky Floating Content Layout (Matched Font & High-Contrast Typography) */}
-      <div className="max-w-6xl mx-auto w-full px-6 sm:px-12 relative z-10 text-center space-y-12 sm:space-y-16 my-auto">
-        
-        {/* Top Floating Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#0c0806]/85 border border-[#C75B32]/50 text-xs font-mono text-[#E88053] tracking-widest uppercase backdrop-blur-md shadow-2xl"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-[#E88053] animate-pulse" />
-          <span>// COMPETITIVE MILESTONES &amp; DISCIPLINE</span>
-        </motion.div>
+      {/* Subtle Top & Bottom Vignettes */}
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#080808] to-transparent z-1 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#080808] to-transparent z-1 pointer-events-none" />
 
-        {/* 3 High-Contrast Stat Columns Matched to Renaissance Parchment Background */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 items-start text-center">
+      {/* Right-Aligned Floating Content Layout (Positioned over number.png Open Right Region) */}
+      <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex justify-center lg:justify-end my-auto">
+        <div className="w-full lg:w-9/12 lg:ml-auto text-center md:text-right space-y-12 sm:space-y-16">
           
-          {/* Stat 1: 25+ Hackathons Participated */}
+          {/* Top Floating Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="space-y-3 group"
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/80 border border-[#C75B32]/40 text-xs font-mono text-[#C75B32] tracking-widest uppercase backdrop-blur-xl shadow-2xl"
           >
-            <div className="flex justify-center items-center text-[#0A3644] mb-1">
-              <Trophy className="w-7 h-7 drop-shadow-[0_2px_8px_rgba(255,255,255,0.6)] group-hover:scale-110 transition-transform" />
-            </div>
-
-            <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight text-[#0A3644] drop-shadow-[0_4px_12px_rgba(255,255,255,0.5)]">
-              <CounterNumber value="25+" />
-            </p>
-
-            <div className="space-y-1">
-              <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#084152] tracking-widest uppercase drop-shadow-sm">
-                HACKATHONS PARTICIPATED
-              </h3>
-              <p className="text-xs sm:text-sm text-[#1e293b] font-sans font-semibold max-w-xs mx-auto leading-relaxed drop-shadow-sm">
-                National &amp; global marathons building real-world Web3, AI, and full-stack software.
-              </p>
-            </div>
+            <Sparkles className="w-3.5 h-3.5 text-[#C75B32] animate-pulse" />
+            <span>// COMPETITIVE MILESTONES &amp; DISCIPLINE</span>
           </motion.div>
 
-          {/* Stat 2: 20+ Finalist Finishes */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-3 group"
-          >
-            <div className="flex justify-center items-center text-[#9E3A14] mb-1">
-              <Award className="w-7 h-7 drop-shadow-[0_2px_8px_rgba(255,255,255,0.6)] group-hover:scale-110 transition-transform" />
-            </div>
+          {/* 3 Floating High-Impact Stats (Aligned for number.png open right space) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 items-start text-center md:text-right">
+            
+            {/* Stat 1: 25+ Hackathons Participated */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="space-y-3 group"
+            >
+              <div className="flex justify-center md:justify-end items-center text-[#5CE1E6] mb-1">
+                <Trophy className="w-7 h-7 drop-shadow-[0_0_15px_rgba(92,225,230,0.5)] group-hover:scale-110 transition-transform" />
+              </div>
 
-            <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight text-[#9E3A14] drop-shadow-[0_4px_12px_rgba(255,255,255,0.5)]">
-              <CounterNumber value="20+" />
-            </p>
-
-            <div className="space-y-1">
-              <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#842e0d] tracking-widest uppercase drop-shadow-sm">
-                FINALIST FINISHES
-              </h3>
-              <p className="text-xs sm:text-sm text-[#1e293b] font-sans font-semibold max-w-xs mx-auto leading-relaxed drop-shadow-sm">
-                Top-tier finalist placements delivering production-grade code under 36-hr deadlines.
+              <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight text-white drop-shadow-[0_10px_35px_rgba(0,0,0,0.95)]">
+                <CounterNumber value="25+" />
               </p>
-            </div>
-          </motion.div>
 
-          {/* Stat 3: International Silambam Bronze Medalist */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-3 group"
-          >
-            <div className="flex justify-center items-center text-[#7A4E0A] mb-1">
-              <Medal className="w-7 h-7 drop-shadow-[0_2px_8px_rgba(255,255,255,0.6)] group-hover:scale-110 transition-transform" />
-            </div>
+              <div className="space-y-1">
+                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#5CE1E6] tracking-widest uppercase drop-shadow-md">
+                  HACKATHONS PARTICIPATED
+                </h3>
+                <p className="text-xs text-white/80 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed drop-shadow-md">
+                  National &amp; global marathons building real-world Web3, AI, and full-stack software.
+                </p>
+              </div>
+            </motion.div>
 
-            <div className="flex items-center justify-center space-x-2">
-              <span className="text-5xl sm:text-6xl lg:text-7xl font-display font-black text-[#7A4E0A] tracking-tight drop-shadow-[0_4px_12px_rgba(255,255,255,0.5)]">
-                BRONZE
-              </span>
-            </div>
+            {/* Stat 2: 20+ Finalist Finishes */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-3 group"
+            >
+              <div className="flex justify-center md:justify-end items-center text-[#C75B32] mb-1">
+                <Award className="w-7 h-7 drop-shadow-[0_0_15px_rgba(199,91,50,0.5)] group-hover:scale-110 transition-transform" />
+              </div>
 
-            <div className="space-y-1">
-              <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#6e4305] tracking-widest uppercase drop-shadow-sm">
-                INTL SILAMBAM MEDALIST
-              </h3>
-              <p className="text-xs sm:text-sm text-[#1e293b] font-sans font-semibold max-w-xs mx-auto leading-relaxed drop-shadow-sm">
-                Bronze Medalist at the International Silambam Championship—combining physical mastery with digital precision.
+              <p className="text-6xl sm:text-7xl lg:text-8xl font-display font-black tracking-tight text-[#C75B32] drop-shadow-[0_10px_35px_rgba(199,91,50,0.4)]">
+                <CounterNumber value="20+" />
               </p>
-            </div>
-          </motion.div>
+
+              <div className="space-y-1">
+                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#E88053] tracking-widest uppercase drop-shadow-md">
+                  FINALIST FINISHES
+                </h3>
+                <p className="text-xs text-white/80 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed drop-shadow-md">
+                  Top-tier finalist placements delivering production-grade code under 36-hr deadlines.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Stat 3: International Silambam Bronze Medalist */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="space-y-3 group"
+            >
+              <div className="flex justify-center md:justify-end items-center text-[#FACC15] mb-1">
+                <Medal className="w-7 h-7 drop-shadow-[0_0_15px_rgba(250,204,21,0.5)] group-hover:scale-110 transition-transform" />
+              </div>
+
+              <div className="flex items-center justify-center md:justify-end space-x-2">
+                <span className="text-5xl sm:text-6xl lg:text-7xl font-display font-black text-[#FACC15] tracking-tight drop-shadow-[0_10px_35px_rgba(250,204,21,0.4)]">
+                  BRONZE
+                </span>
+              </div>
+
+              <div className="space-y-1">
+                <h3 className="font-mono text-xs sm:text-sm font-extrabold text-[#FACC15] tracking-widest uppercase drop-shadow-md">
+                  INTL SILAMBAM MEDALIST
+                </h3>
+                <p className="text-xs text-white/80 font-sans max-w-xs mx-auto md:ml-auto md:mr-0 leading-relaxed drop-shadow-md">
+                  Bronze Medalist at the International Silambam Championship—combining physical mastery with digital precision.
+                </p>
+              </div>
+            </motion.div>
+
+          </div>
 
         </div>
-
       </div>
     </section>
   );
