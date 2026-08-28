@@ -12,7 +12,7 @@ import { HeroSection } from '@/components/hero/HeroSection';
 import ScrollAnimation from '@/components/ui/you-can-scroll';
 import { AboutSection } from '@/components/about/AboutSection';
 import { StatsBentoSection } from '@/components/sections/StatsBentoSection';
-import { RenaissanceStatsSection } from '@/components/sections/RenaissanceStatsSection';
+import { AchievementsShowcaseSection } from '@/components/sections/AchievementsShowcaseSection';
 import { TextRevealByWord } from '@/components/ui/text-reveal';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
 import { PlaygroundSection } from '@/components/playground/PlaygroundSection';
@@ -79,8 +79,8 @@ export default function Home() {
       {/* Key Metrics & Achievements Animated SVG Bento Section */}
       <StatsBentoSection />
 
-      {/* Renaissance Telemetry & Counting Stats Section */}
-      <RenaissanceStatsSection />
+      {/* Floating Milestone Showcase (25+ Hackathons, 20+ Finalists, Intl Silambam Bronze) */}
+      <AchievementsShowcaseSection />
 
       {/* Professional Experience Timeline */}
       <ExperienceSection />
