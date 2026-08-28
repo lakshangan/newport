@@ -163,3 +163,27 @@ body {
 .border-editorial {
   border-color: rgba(245, 245, 247, 0.12);
 }
+
+/* Animated SVG Background Gradient Keyframes */
+@keyframes background-gradient {
+  0% {
+    transform: translate(calc(var(--tx-1) * 80px), calc(var(--ty-1) * 80px)) scale(1);
+  }
+  25% {
+    transform: translate(calc(var(--tx-2) * 100px), calc(var(--ty-2) * 100px)) scale(1.1);
+  }
+  50% {
+    transform: translate(calc(var(--tx-3) * 80px), calc(var(--ty-3) * 80px)) scale(0.95);
+  }
+  75% {
+    transform: translate(calc(var(--tx-4) * 90px), calc(var(--ty-4) * 90px)) scale(1.05);
+  }
+  100% {
+    transform: translate(calc(var(--tx-1) * 80px), calc(var(--ty-1) * 80px)) scale(1);
+  }
+}
+
+.animate-background-gradient {
+  animation: background-gradient var(--background-gradient-speed, 12s) infinite ease-in-out;
+}
+

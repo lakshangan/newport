@@ -35,7 +35,7 @@ export const HeroSection: React.FC = () => {
 
           {/* Subtitle Badge */}
           <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-[#5CE1E6]/30 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase shadow-xl">
-            <span>CREATIVE DEVELOPER &amp; ANALYST</span>
+            <span>FULL STACK DEVELOPER • AI &amp; BLOCKCHAIN</span>
           </div>
 
           {/* Main Display Headline with ASCII Scramble Hover Effect */}
@@ -54,7 +54,7 @@ export const HeroSection: React.FC = () => {
 
           {/* Clean Bio Description */}
           <p className="text-xs sm:text-sm font-mono tracking-wider text-white/90 max-w-xl pt-2 leading-relaxed bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/15 shadow-2xl">
-            Architecting decentralized systems, smart contracts, and high-performance AI interfaces at the edge of code and intelligence.
+            Architecting scalable full-stack web applications, intelligent AI features, and blockchain protocols at the edge of code and intelligence.
           </p>
 
           {/* Floating Action CTA Buttons */}

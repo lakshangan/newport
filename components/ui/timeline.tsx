@@ -46,7 +46,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           Changelog from my journey
         </h2>
         <p className="text-white/60 text-sm md:text-base max-w-xl font-light">
-          Roles across Web3 technical research, liquidity incubators, blockchain engineering, and enterprise systems.
+          Roles across full-stack software engineering, AI systems, Web3 technical research, and enterprise infrastructure.
         </p>
       </div>
 

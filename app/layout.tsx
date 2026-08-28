@@ -23,9 +23,9 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://lakshan-dev.vercel.app'),
-  title: 'Lakshan Ganesan — Creative Developer, Web3 & AI',
+  title: 'Lakshan Ganesan — Full Stack Developer (AI & Blockchain)',
   description:
-    'Cinematic Personal Portfolio of Lakshan Ganesan. Creative Developer & Web3 Research Analyst engineering decentralized intelligence, smart contracts, and high-end interactive digital experiences.',
+    'Portfolio of Lakshan Ganesan. Full Stack Developer engineering scalable web applications, artificial intelligence systems, and blockchain protocols.',
   icons: {
     icon: '/icon.svg',
     shortcut: '/favicon.svg',
@@ -33,20 +33,21 @@ export const metadata: Metadata = {
   },
   keywords: [
     'Lakshan Ganesan',
-    'Creative Developer',
-    'Web3',
+    'Full Stack Developer',
     'AI Developer',
-    'Blockchain',
+    'Blockchain Developer',
+    'React',
+    'Next.js',
+    'Node.js',
     'Solidity',
-    'React Three Fiber',
     'Three.js',
     'Portfolio',
   ],
   authors: [{ name: 'Lakshan Ganesan' }],
   openGraph: {
-    title: 'Lakshan Ganesan — Creative Developer, Web3 & AI',
+    title: 'Lakshan Ganesan — Full Stack Developer (AI & Blockchain)',
     description:
-      'Cinematic Personal Portfolio of Lakshan Ganesan. Creative Developer & Web3 Research Analyst.',
+      'Portfolio of Lakshan Ganesan. Full Stack Developer engineering scalable web applications, AI systems, and blockchain protocols.',
     url: 'https://lakshan-dev.vercel.app',
     siteName: 'Lakshan Ganesan Portfolio',
     images: [
@@ -62,9 +63,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Lakshan Ganesan — Creative Developer, Web3 & AI',
+    title: 'Lakshan Ganesan — Full Stack Developer (AI & Blockchain)',
     description:
-      'Cinematic Personal Portfolio of Lakshan Ganesan. Creative Developer & Web3 Research Analyst.',
+      'Portfolio of Lakshan Ganesan. Full Stack Developer engineering scalable web applications, AI systems, and blockchain protocols.',
     creator: '@lakshangan',
     images: ['/images/hero_portrait.jpg'],
   },

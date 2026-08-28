@@ -11,6 +11,7 @@ import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
 import ScrollAnimation from '@/components/ui/you-can-scroll';
 import { AboutSection } from '@/components/about/AboutSection';
+import { StatsBentoSection } from '@/components/sections/StatsBentoSection';
 import { TextRevealByWord } from '@/components/ui/text-reveal';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
 import { PlaygroundSection } from '@/components/playground/PlaygroundSection';
@@ -66,13 +67,16 @@ export default function Home() {
       <HeroSection />
 
       {/* Fun & Relatable Word-by-Word Scroll Reveal Manifesto */}
-      <TextRevealByWord text="When I'm not pushing smart contracts to mainnet or debugging WebGL shaders at 3 AM, I'm building autonomous AI agents, brewing double-shot espresso, and turning wild ideas into production reality." />
+      <TextRevealByWord text="<\ I build software, design systems, and turn ideas into products. I work across web, blockchain, AI, and interactive technology, constantly exploring new tools, solving complex problems. >" />
 
       {/* GSAP ScrollTrigger Word Dimmer Timeline */}
       <ScrollAnimation />
 
       {/* About & Core Disciplines */}
       <AboutSection />
+
+      {/* Key Metrics & Achievements Animated SVG Bento Section */}
+      <StatsBentoSection />
 
       {/* Professional Experience Timeline */}
       <ExperienceSection />

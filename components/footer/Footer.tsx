@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
             {PORTFOLIO_DATA.personal.shortName}
           </div>
           <div className="text-[11px] text-[#8E8B85]/70">
-            CREATIVE DEVELOPER / BLOCKCHAIN / AI
+            FULL-STACK DEVELOPER / AI / BLOCKCHAIN
           </div>
         </div>
 

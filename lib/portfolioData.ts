@@ -46,7 +46,7 @@ export const PORTFOLIO_DATA = {
     name: 'Lakshan Ganesan',
     shortName: 'LAKSHAN G.',
     handle: 'LKG // 001',
-    role: 'Creative Developer & Web3 Research Analyst',
+    role: 'Full Stack Developer | AI & Blockchain',
     location: 'Coimbatore, India',
     year: '2026',
     status: 'AVAILABLE FOR SELECT PROJECTS',
@@ -56,16 +56,16 @@ export const PORTFOLIO_DATA = {
     linkedin: 'https://www.linkedin.com/in/lakshan-ganesan23317524b/',
     twitter: 'https://x.com/lakshangan',
     instagram: 'https://instagram.com/lakshangan_',
-    bioHeadline: 'I BUILD AT THE EDGE OF CODE, BLOCKCHAIN & INTELLIGENCE.',
+    bioHeadline: 'FULL-STACK DEVELOPER BUILDING WITH AI & BLOCKCHAIN.',
     bioBody:
-      'Fusing Web3 research with artificial intelligence and creative technology. I construct decentralized intelligent protocols, custom smart contract systems, and high-performance interactive digital experiences.',
+      'Building scalable full-stack web applications integrated with artificial intelligence and blockchain technology. I design intuitive frontends, robust backend systems, smart contract protocols, and intelligent AI features.',
   },
 
   heroMetadata: [
     { label: 'PORTFOLIO', value: '2026' },
     { label: 'LOCATION', value: 'COIMBATORE / INDIA' },
-    { label: 'DISCIPLINE', value: 'CREATIVE TECHNOLOGY' },
-    { label: 'FOCUS', value: 'WEB3 / BLOCKCHAIN / AI' },
+    { label: 'DISCIPLINE', value: 'FULL-STACK DEVELOPMENT' },
+    { label: 'FOCUS', value: 'FULL STACK / AI / BLOCKCHAIN' },
     { label: 'SYSTEM', value: 'LKG // 001' },
   ],
 
@@ -86,7 +86,7 @@ export const PORTFOLIO_DATA = {
         'Represent physical land deeds as ERC-721/ERC-1155 tokenized vaults with automated yield distribution.',
       solution:
         'Architected fractionalized asset vaults with automated rental dividend distribution and zero-friction secondary trading.',
-      myRole: 'Smart Contract Lead & Frontend Architect',
+      myRole: 'Full-Stack & Smart Contract Developer',
       githubUrl: 'https://github.com/lakshangan',
       demoUrl: 'https://lakshan-dev.vercel.app',
     },
@@ -106,7 +106,7 @@ export const PORTFOLIO_DATA = {
         'On-chain transaction network graph analysis with zero-knowledge cryptographic verification.',
       solution:
         'Built real-time wallet association algorithms mapping illicit transaction paths while preserving non-custodial user privacy.',
-      myRole: 'Lead Blockchain Researcher',
+      myRole: 'Full-Stack Developer & Analyst',
       githubUrl: 'https://github.com/lakshangan',
       demoUrl: 'https://lakshan-dev.vercel.app',
     },
@@ -126,7 +126,7 @@ export const PORTFOLIO_DATA = {
         'Embed tamper-proof cryptographic manifest metadata inside image EXIF payloads backed by on-chain root hashes.',
       solution:
         'Engineered an instant verification drag-and-drop audit platform parsing C2PA manifest history and neural model signatures.',
-      myRole: 'AI & Provenance Engineer',
+      myRole: 'Full-Stack AI & Provenance Developer',
       githubUrl: 'https://github.com/lakshangan',
       demoUrl: 'https://lakshan-dev.vercel.app',
     },
@@ -146,7 +146,7 @@ export const PORTFOLIO_DATA = {
         'LSB (Least Significant Bit) spatial domain modification to embed AES-256 encrypted bytes silently into image RGB channels.',
       solution:
         'Delivered a lightweight CLI tool supporting multi-format image steganography with zero visual perceptual degradation.',
-      myRole: 'Security Developer & Author',
+      myRole: 'Full-Stack Security Developer',
       githubUrl: 'https://github.com/lakshangan',
       demoUrl: 'https://github.com/lakshangan',
     },
@@ -186,7 +186,7 @@ export const PORTFOLIO_DATA = {
         'Domain-tuned medical LLM converting raw patient dialogue into structured diagnostic summaries.',
       solution:
         'Designed an intuitive interface enabling healthcare workers to quickly review AI diagnostic suggestions.',
-      myRole: 'AI Interface Developer',
+      myRole: 'Full-Stack AI Developer',
       githubUrl: 'https://github.com/lakshangan',
       demoUrl: 'https://lakshan-dev.vercel.app',
     },
@@ -197,7 +197,7 @@ export const PORTFOLIO_DATA = {
       year: '2026',
       company: 'OpenLedger',
       role: 'Twitter & Technical Researcher',
-      category: 'Web3 / Research / Content Strategy',
+      category: 'Full-Stack & Web3 Research',
       description:
         'Leading technical research on Web3 protocols, AI data pipelines, DeFi ecosystems, and executing content strategy for official X operations.',
       isCurrent: true,
@@ -206,14 +206,14 @@ export const PORTFOLIO_DATA = {
       year: '2025',
       company: 'Uniswap Foundation',
       role: 'Uniswap Hook Incubator Cohort',
-      category: 'DeFi / Smart Contracts',
+      category: 'DeFi / Full-Stack & Smart Contracts',
       description:
         'Selected for specialized program speedrunning Uniswap v4 architecture. Built custom liquidity hooks and dynamic fee modules.',
     },
     {
       year: '2024',
       company: 'Vodafone Idea Foundation',
-      role: 'Blockchain Engineering Intern',
+      role: 'Full-Stack & Blockchain Engineering Intern',
       category: 'Distributed Systems',
       description:
         '4-week intensive virtual internship exploring enterprise ledger architectures, smart contract security, and decentralized data storage.',

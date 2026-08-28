@@ -130,7 +130,7 @@ export const ProjectGallery: React.FC = () => {
             </AsciiGlitchRipple>
           </h2>
           <p className="text-base font-light text-[#8E8B85] max-w-xl">
-            Smart contract systems, transaction intelligence tools, AI provenance layers, and security tooling. Click any project card to expand case study details.
+            Full-stack web applications, AI provenance engines, smart contract systems, and security tooling. Click any project card to expand case study details.
           </p>
         </div>
 
