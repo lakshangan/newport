@@ -134,7 +134,7 @@ export const FlowAboutStorySection: React.FC = () => {
       {/* ========================================================================= */}
       {/* SLIDE 01: 01 — WHO I AM: CRAFTSMANSHIP & TECH STACK (INTRO1 RENAISSANCE ARTWORK) */}
       {/* ========================================================================= */}
-      <FlowSection id="about" aria-label="01 — Who I am" style={{ backgroundColor: '#080808', color: '#fff' }}>
+      <FlowSection id="about" aria-label="01 — Who I am" style={{ backgroundColor: '#EADFC9', color: '#1A130F' }}>
         {/* Renaissance Artwork Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
@@ -142,30 +142,23 @@ export const FlowAboutStorySection: React.FC = () => {
             alt="Renaissance Classical Tech Artwork"
             fill
             priority
-            className="object-cover object-center filter brightness-[0.70] contrast-110"
+            className="object-cover object-center"
             sizes="100vw"
           />
         </div>
-
-        {/* Subtle Vignette & Contrast Overlay */}
-        <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/80 via-black/40 to-black/80 pointer-events-none" />
-        <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/75 pointer-events-none" />
-
-        {/* Volumetric Warm Ambient Glow */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[380px] bg-[#C75B32]/15 rounded-full blur-[160px] pointer-events-none z-2" />
 
         {/* Content Container (Centered in open parchment area framed by left books & right globe) */}
         <div className="relative z-10 my-auto max-w-5xl mx-auto w-full flex flex-col justify-between h-full py-[clamp(2rem,4vw,3.5rem)] space-y-5 sm:space-y-7">
           {/* Top Header Badge */}
           <div className="space-y-3">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-black/70 border border-[#C75B32]/60 text-xs font-mono text-[#FACC15] tracking-[0.2em] uppercase backdrop-blur-md shadow-xl">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C75B32] animate-pulse" />
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#1A130F]/10 border border-[#8C4B18]/40 text-xs font-mono text-[#8C4B18] font-bold tracking-[0.2em] uppercase backdrop-blur-sm shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#8C4B18] animate-pulse" />
               <span>01 — WHO I AM // LAKSHAN G.</span>
             </div>
 
             {/* Title */}
             <div>
-              <h1 className="font-display text-[clamp(2.8rem,7.5vw,7rem)] font-extrabold leading-[0.88] uppercase tracking-tight text-[#E8E5DF] drop-shadow-[0_6px_25px_rgba(0,0,0,0.9)]">
+              <h1 className="font-display text-[clamp(2.8rem,7.5vw,7rem)] font-extrabold leading-[0.88] uppercase tracking-tight text-[#1A130F]">
                 CREATE
                 <br />
                 WITHOUT
@@ -176,35 +169,35 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
 
           {/* Description Paragraph */}
-          <p className="font-sans max-w-[54ch] text-[clamp(0.95rem,1.8vw,1.35rem)] font-medium leading-relaxed text-[#E8E5DF] drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] bg-black/65 p-4 sm:p-5 rounded-2xl border border-white/15 backdrop-blur-md shadow-2xl">
+          <p className="font-sans max-w-[54ch] text-[clamp(0.95rem,1.8vw,1.35rem)] font-medium leading-relaxed text-[#2C1D11] bg-[#1A130F]/5 p-4 sm:p-5 rounded-2xl border border-[#1A130F]/15 backdrop-blur-sm shadow-sm">
             Full-Stack Developer, AI Systems Engineer &amp; Web3 Researcher. Turning complex ideas into high-performance interfaces, backend infrastructure, and scalable applications.
           </p>
 
           {/* 3 Tech Feature Cards across the bottom */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-5">
-            <div className="p-4 bg-black/70 border border-white/15 rounded-xl backdrop-blur-md shadow-xl hover:border-[#5CE1E6]/60 transition-all hover:-translate-y-0.5 group">
-              <p className="font-mono mb-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#5CE1E6] flex items-center gap-1.5">
+            <div className="p-4 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
+              <p className="font-mono mb-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#8C4B18] flex items-center gap-1.5">
                 <span>⚡ First-Principles Mindset</span>
               </p>
-              <p className="font-sans text-xs sm:text-sm leading-relaxed text-white/80 font-normal">
+              <p className="font-sans text-xs sm:text-sm leading-relaxed text-[#2C1D11] font-medium">
                 Deconstructing architecture to fundamental truths before writing code. I turn raw concepts into production-ready software.
               </p>
             </div>
 
-            <div className="p-4 bg-black/70 border border-white/15 rounded-xl backdrop-blur-md shadow-xl hover:border-[#C084FC]/60 transition-all hover:-translate-y-0.5 group">
-              <p className="font-mono mb-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#C084FC] flex items-center gap-1.5">
+            <div className="p-4 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
+              <p className="font-mono mb-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#733610] flex items-center gap-1.5">
                 <span>🛠️ My Core Tech Stack</span>
               </p>
-              <p className="font-sans text-xs sm:text-sm leading-relaxed text-white/80 font-normal">
+              <p className="font-sans text-xs sm:text-sm leading-relaxed text-[#2C1D11] font-medium">
                 Next.js, TypeScript, React, Node.js, Python, Solidity, EVM Smart Contracts, Three.js, GSAP, &amp; LLM Agents.
               </p>
             </div>
 
-            <div className="p-4 bg-black/70 border border-white/15 rounded-xl backdrop-blur-md shadow-xl hover:border-[#FACC15]/60 transition-all hover:-translate-y-0.5 group">
-              <p className="font-mono mb-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#FACC15] flex items-center gap-1.5">
+            <div className="p-4 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
+              <p className="font-mono mb-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#8C4B18] flex items-center gap-1.5">
                 <span>🚀 Rapid Execution</span>
               </p>
-              <p className="font-sans text-xs sm:text-sm leading-relaxed text-white/80 font-normal">
+              <p className="font-sans text-xs sm:text-sm leading-relaxed text-[#2C1D11] font-medium">
                 Thriving under strict 36-hour marathon deadlines to ship full-stack web products, APIs, &amp; audited Web3 smart contracts.
               </p>
             </div>
