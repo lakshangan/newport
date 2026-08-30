@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { PORTFOLIO_DATA } from "@/lib/portfolioData";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 
 interface SocialItem {
   name: string;
@@ -15,7 +15,7 @@ export const SocialConnectCard: React.FC = () => {
 
   const socialLinks: SocialItem[] = [
     {
-      name: "GitHub",
+      name: 'GitHub',
       url: PORTFOLIO_DATA.personal.github,
       icon: (
         <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
@@ -24,7 +24,7 @@ export const SocialConnectCard: React.FC = () => {
       ),
     },
     {
-      name: "X (Twitter)",
+      name: 'X (Twitter)',
       url: PORTFOLIO_DATA.personal.twitter,
       icon: (
         <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -33,7 +33,7 @@ export const SocialConnectCard: React.FC = () => {
       ),
     },
     {
-      name: "LinkedIn",
+      name: 'LinkedIn',
       url: PORTFOLIO_DATA.personal.linkedin,
       icon: (
         <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -42,7 +42,7 @@ export const SocialConnectCard: React.FC = () => {
       ),
     },
     {
-      name: "Instagram",
+      name: 'Instagram',
       url: PORTFOLIO_DATA.personal.instagram,
       icon: (
         <svg className="w-5 h-5 fill-none stroke-current stroke-[2]" viewBox="0 0 24 24">
@@ -55,21 +55,20 @@ export const SocialConnectCard: React.FC = () => {
   ];
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-8 sm:p-12 bg-[#0c0c0c]/90 border border-white/10 rounded-3xl backdrop-blur-2xl shadow-2xl relative overflow-hidden flex flex-col items-center justify-center text-center my-12">
+    <div className="w-full p-6 sm:p-10 bg-[#0c0c0c]/90 border border-white/15 rounded-3xl backdrop-blur-2xl shadow-2xl relative overflow-hidden flex flex-col items-center justify-center text-center">
       {/* Background Volumetric Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#C75B32]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#C75B32]/12 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header Titles */}
-      <h3 className="font-sans font-extrabold text-3xl sm:text-4xl text-white tracking-tight leading-snug">
+      <h3 className="font-sans font-extrabold text-2xl sm:text-4xl text-white tracking-tight leading-snug">
         Connect with me
       </h3>
-      <p className="font-mono text-xs sm:text-sm text-white/50 tracking-wider pt-1.5 pb-8">
+      <p className="font-mono text-xs sm:text-sm text-white/60 tracking-wider pt-1.5 pb-6 sm:pb-8">
         Hover over the icons below
       </p>
 
       {/* Glassmorphic Dock Container */}
-      <div className="relative bg-[#181818]/90 border border-white/15 rounded-2xl px-6 py-4 flex items-center space-x-6 sm:space-x-8 shadow-2xl backdrop-blur-md">
-        
+      <div className="relative bg-[#161618]/90 border border-white/15 rounded-2xl px-5 sm:px-7 py-3.5 sm:py-4 flex items-center space-x-5 sm:space-x-8 shadow-2xl backdrop-blur-md">
         {/* Animated Tooltip Popup */}
         <AnimatePresence>
           {hoveredIndex !== null && (
@@ -77,7 +76,7 @@ export const SocialConnectCard: React.FC = () => {
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 6, scale: 0.95 }}
-              transition={{ duration: 0.18, ease: "easeOut" }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
               className="absolute -top-12 left-1/2 -translate-x-1/2 pointer-events-none z-20"
             >
               <div className="relative bg-white text-black font-sans font-bold text-xs px-3.5 py-1.5 rounded-lg shadow-xl whitespace-nowrap">
@@ -108,3 +107,5 @@ export const SocialConnectCard: React.FC = () => {
     </div>
   );
 };
+
+export default SocialConnectCard;
