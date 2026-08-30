@@ -233,10 +233,10 @@ export const FlowAboutStorySection: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             <div className="p-5 bg-black/60 border border-white/10 rounded-2xl backdrop-blur-xl shadow-xl space-y-2 hover:border-[#5CE1E6]/40 transition-colors">
               <div className="text-xs font-mono text-[#5CE1E6] uppercase font-bold tracking-wider flex items-center gap-1.5">
-                <Award className="w-4 h-4" /> Campus Ambassador &amp; Leader
+                <Award className="w-4 h-4" /> Tech Hub Lead &amp; Campus Ambassador
               </div>
               <p className="font-sans text-xs text-white/80 leading-relaxed font-medium">
-                Active Campus Ambassador driving Web3 &amp; AI developer workshops, guiding peer developers, and representing campus tech initiatives.
+                <strong>Tech Hub Lead</strong> at College Tech Organization &amp; active Campus Ambassador driving Web3 &amp; AI developer workshops, guiding peer developers, and leading campus tech initiatives.
               </p>
             </div>
 

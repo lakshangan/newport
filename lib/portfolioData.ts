@@ -230,6 +230,13 @@ export const PORTFOLIO_DATA = {
 
   achievements: [
     {
+      stat: '01',
+      label: 'TECH HUB LEAD',
+      subtitle: 'College Tech Organization Lead',
+      detail: 'Leading campus technology initiatives, Web3 & AI developer workshops, and organizing college tech events.',
+      tag: 'LEADERSHIP',
+    },
+    {
       stat: '25+',
       label: 'HACKATHONS',
       subtitle: 'Build & Ship Marathons',
