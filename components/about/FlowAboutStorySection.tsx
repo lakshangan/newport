@@ -1,51 +1,70 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import FlowArt, { FlowSection } from '@/components/ui/story-scroll';
 import { ExternalLink, Sparkles, Monitor, Globe, Award, ShieldCheck } from 'lucide-react';
 
-interface ProjectPreview {
+interface ShowcaseCard {
   id: string;
-  name: string;
-  tagline: string;
+  title: string;
+  domain: string;
   url: string;
-  tech: string[];
+  description: string;
+  tags: string[];
 }
 
-const LIVE_PROJECTS: ProjectPreview[] = [
+const SHOWCASE_CARDS: ShowcaseCard[] = [
   {
     id: 'sbk-3d',
-    name: 'SBK BIRTHDAY 3D',
-    tagline: 'Interactive 3D Spatial Audio Particle Experience',
+    title: 'SBK Birthday 3D',
+    domain: 'sbk-hd.vercel.app',
     url: 'https://sbk-hd.vercel.app',
-    tech: ['Three.js', 'Web Audio API', 'GSAP'],
+    description: 'Interactive 3D audio-visual experience with particle effects and gamified interactions.',
+    tags: ['THREE.JS', 'AUDIO', 'GSAP'],
   },
   {
     id: 'internocto',
-    name: 'INTERNOCTO',
-    tagline: 'High-Energy Motion Portfolio for OpenLedger Mascot',
+    title: 'InternOcTO',
+    domain: 'internocto-portfolio.vercel.app',
     url: 'https://internocto-portfolio.vercel.app',
-    tech: ['React', 'Framer Motion', 'Tailwind'],
+    description: "The official chaotic portfolio for OpenLedger's octopus mascot. Pure mayhem & motion.",
+    tags: ['REACT', 'CHAOS', 'TAILWIND'],
+  },
+  {
+    id: 'iphone-3d',
+    title: 'iPhone 3D Shop',
+    domain: 'antigravity-test-alpha.vercel.app',
+    url: 'https://antigravity-test-alpha.vercel.app',
+    description: 'Immersive 3D product showcase with GSAP animations and floating interactive models.',
+    tags: ['R3F', 'GSAP', 'DREI'],
   },
   {
     id: 'mediocto',
-    name: 'MEDIOCTO AI',
-    tagline: 'AI Mental Health Support Chat Companion Interface',
+    title: 'MediOcto AI',
+    domain: 'mediocto-lovat.vercel.app',
     url: 'https://mediocto-lovat.vercel.app/',
-    tech: ['Next.js', 'LLM API', 'Tailwind'],
+    description: 'AI-powered mental health support chat interface with a friendly octopus companion.',
+    tags: ['AI', 'HEALTH', 'NEXT.JS'],
   },
   {
-    id: 'nuna',
-    name: 'NUNA ORGANIC',
-    tagline: 'Bespoke Organic Product Event Showcase Platform',
+    id: 'lakshan-dev',
+    title: 'Lakshan Dev',
+    domain: 'lakshan-dev.vercel.app',
+    url: 'https://lakshan-dev.vercel.app',
+    description: 'Personal developer hub showcasing full-stack web applications, AI systems, & Web3 experiments.',
+    tags: ['PORTFOLIO', 'WEB3', 'FULLSTACK'],
+  },
+  {
+    id: 'nuna-organic',
+    title: 'Nuna Organic',
+    domain: 'nunaorganic.vercel.app',
     url: 'https://nunaorganic.vercel.app/',
-    tech: ['React', 'CSS Grid', 'GSAP'],
+    description: 'Special event showcase platform with custom motion animations and dynamic gallery.',
+    tags: ['EVENT', 'GALLERY', 'GSAP'],
   },
 ];
 
 export const FlowAboutStorySection: React.FC = () => {
-  const [activeProject, setActiveProject] = useState<ProjectPreview>(LIVE_PROJECTS[0]);
-
   return (
     <FlowArt aria-label="Présentation Flow Art">
       {/* ========================================================================= */}
@@ -181,82 +200,96 @@ export const FlowAboutStorySection: React.FC = () => {
       </FlowSection>
 
       {/* ========================================================================= */}
-      {/* 03 — LIVE DEPLOYED PROJECTS WITH INTERACTIVE IFRAME PREVIEW */}
+      {/* 03 — CREATIVE SHOWCASE: MACOS BROWSER MOCKUP CARDS GRID */}
       {/* ========================================================================= */}
-      <FlowSection aria-label="Live Deployed Projects" style={{ backgroundColor: '#F5F0E8', color: '#000' }}>
-        <div className="flex flex-col h-full space-y-4">
-          <div>
-            <p className="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[#C75B32]">
-              03 — Live Deployed Projects
-            </p>
-            <hr className="my-2 border-none border-t border-black/30" />
-            
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-2">
-              <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase tracking-tight leading-none">
-                Show Up. Stand Out.
+      <FlowSection aria-label="Creative Showcase" style={{ backgroundColor: '#080808', color: '#fff' }}>
+        <div className="space-y-6 my-auto max-w-7xl mx-auto w-full">
+          
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-4">
+            <div className="space-y-2">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md bg-[#FACC15] text-black font-mono text-xs font-bold uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>🚀 LATEST DEPLOYMENTS</span>
+              </div>
+              <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-white leading-none">
+                CREATIVE <span className="text-[#5CE1E6]">SHOWCASE</span>
               </h2>
-              <p className="font-sans text-xs sm:text-sm max-w-xl text-black/80 font-medium">
-                Interact with live production web applications shipped directly to Vercel. Click any project tab below to load the live preview.
-              </p>
             </div>
+            <p className="font-sans text-xs sm:text-sm max-w-md text-white/70 font-medium leading-relaxed">
+              Pushing the boundaries of frontend development with 3D interactions, AI integrations, smart contracts, and chaotic creativity.
+            </p>
           </div>
 
-          {/* Project Selector Tabs */}
-          <div className="flex flex-wrap gap-2 pt-1">
-            {LIVE_PROJECTS.map((proj) => (
-              <button
-                key={proj.id}
-                onClick={() => setActiveProject(proj)}
-                className={`px-3 py-1.5 rounded-lg font-mono text-xs uppercase tracking-wider font-bold transition-all flex items-center gap-1.5 ${
-                  activeProject.id === proj.id
-                    ? 'bg-black text-white shadow-lg scale-105'
-                    : 'bg-black/10 text-black hover:bg-black/20'
-                }`}
+          {/* 6-Card macOS Browser Mockup Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+            {SHOWCASE_CARDS.map((card) => (
+              <div
+                key={card.id}
+                className="rounded-2xl border border-white/15 bg-[#0e0e14] overflow-hidden shadow-2xl hover:border-[#5CE1E6]/60 transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1"
               >
-                <span>{proj.name}</span>
-                {activeProject.id === proj.id && <span className="w-1.5 h-1.5 rounded-full bg-[#5CE1E6] animate-pulse" />}
-              </button>
+                {/* macOS Browser Window Bar */}
+                <div className="px-3.5 py-2.5 bg-[#161620] border-b border-white/10 flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
+                  </div>
+                  <div className="px-3 py-0.5 rounded bg-black/60 border border-white/10 text-[10px] font-mono text-white/50 truncate max-w-[160px]">
+                    {card.domain}
+                  </div>
+                  <div className="w-6" />
+                </div>
+
+                {/* Live Preview Screen Container */}
+                <div className="relative w-full h-[180px] bg-black overflow-hidden group/screen">
+                  <iframe
+                    src={card.url}
+                    title={card.title}
+                    className="w-full h-full border-none pointer-events-none transform group-hover/screen:scale-105 transition-transform duration-500 bg-white"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e14] via-transparent to-transparent opacity-40 pointer-events-none" />
+                  
+                  <a
+                    href={card.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute bottom-3 right-3 px-3 py-1 bg-black/90 hover:bg-[#5CE1E6] hover:text-black border border-white/20 rounded-md font-mono text-[11px] font-bold text-white transition-all flex items-center gap-1 shadow-lg"
+                  >
+                    Launch ↗
+                  </a>
+                </div>
+
+                {/* Card Body & Details */}
+                <div className="p-4 sm:p-5 space-y-3 bg-[#0e0e14] flex-1 flex flex-col justify-between">
+                  <div className="space-y-1.5">
+                    <h3 className="font-mono text-base font-bold text-white uppercase group-hover:text-[#5CE1E6] transition-colors flex items-center justify-between">
+                      <span>{card.title}</span>
+                      <a href={card.url} target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white">
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </h3>
+                    <p className="font-sans text-xs text-white/70 font-medium leading-relaxed">
+                      {card.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-2 border-t border-white/10 flex flex-wrap gap-1.5 font-mono text-[9px] font-bold">
+                    {card.tags.map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="px-2 py-0.5 bg-white/5 border border-white/15 text-white/80 rounded uppercase tracking-wider"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
 
-          {/* Active Project Meta Details Bar */}
-          <div className="flex flex-wrap justify-between items-center bg-black/5 p-3 rounded-xl border border-black/10 gap-2 font-mono text-xs">
-            <div>
-              <span className="font-bold text-black uppercase">{activeProject.name}: </span>
-              <span className="text-black/70 font-sans">{activeProject.tagline}</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="flex gap-1.5">
-                {activeProject.tech.map((t, idx) => (
-                  <span key={idx} className="px-2 py-0.5 bg-black/10 text-black rounded text-[10px] font-bold">
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <a
-                href={activeProject.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-3 py-1 bg-[#C75B32] text-white font-mono text-xs font-bold rounded hover:bg-[#b04d27] transition-colors"
-              >
-                Open Live ↗ <ExternalLink className="w-3 h-3" />
-              </a>
-            </div>
-          </div>
-
-          {/* Embedded Interactive Iframe Container */}
-          <div className="relative w-full flex-1 min-h-[350px] sm:min-h-[420px] rounded-2xl overflow-hidden border-2 border-black/20 bg-black/90 shadow-2xl">
-            {/* Embedded Live Web App Iframe */}
-            <iframe
-              key={activeProject.id}
-              src={activeProject.url}
-              title={activeProject.name}
-              className="w-full h-full border-none rounded-xl bg-white"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-            />
-          </div>
         </div>
       </FlowSection>
 
