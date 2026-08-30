@@ -9,11 +9,10 @@ import { DeveloperDecorations } from '@/components/ui/DeveloperDecorations';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
-import ScrollAnimation from '@/components/ui/you-can-scroll';
-import { AboutSection } from '@/components/about/AboutSection';
-import { StatsBentoSection } from '@/components/sections/StatsBentoSection';
-import { AchievementsShowcaseSection } from '@/components/sections/AchievementsShowcaseSection';
 import { TextRevealByWord } from '@/components/ui/text-reveal';
+import ScrollAnimation from '@/components/ui/you-can-scroll';
+import { FlowAboutStorySection } from '@/components/about/FlowAboutStorySection';
+import { AchievementsShowcaseSection } from '@/components/sections/AchievementsShowcaseSection';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
 import { PlaygroundSection } from '@/components/playground/PlaygroundSection';
 import { TechTicker } from '@/components/tech/TechTicker';
@@ -44,14 +43,21 @@ export default function Home() {
     gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
 
+    // Refresh ScrollTrigger once DOM layout finishes initializing
+    const timer = setTimeout(() => {
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
+    }, 400);
+
     return () => {
+      clearTimeout(timer);
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
     };
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-[#080808] text-[#E8E5DF] overflow-x-hidden">
+    <main className="relative min-h-screen bg-[#080808] text-[#E8E5DF] overflow-x-clip">
       {/* Developer Terminal Preloader */}
       <Preloader />
 
@@ -73,11 +79,8 @@ export default function Home() {
       {/* GSAP ScrollTrigger Word Dimmer Timeline */}
       <ScrollAnimation />
 
-      {/* About & Core Disciplines */}
-      <AboutSection />
-
-      {/* Key Metrics & Achievements Animated SVG Bento Section */}
-      <StatsBentoSection />
+      {/* Flow Art Story Scroll Showcase */}
+      <FlowAboutStorySection />
 
       {/* Floating Milestone Showcase (25+ Hackathons, 20+ Finalists, Intl Silambam Bronze) */}
       <AchievementsShowcaseSection />

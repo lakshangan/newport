@@ -1,8 +1,9 @@
 "use client";
 
-import { FC, useEffect, useRef } from "react";
+import { FC, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { cn } from "@/lib/utils";
 
 interface TextRevealByWordProps {
@@ -19,57 +20,64 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
 
   const words = text.split(" ");
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+  useGSAP(
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
 
-    const container = containerRef.current;
-    if (!container) return;
+      const container = containerRef.current;
+      if (!container) return;
 
-    const wordEls = wordsRef.current.filter(Boolean) as HTMLSpanElement[];
-    if (!wordEls.length) return;
+      const wordEls = wordsRef.current.filter(Boolean) as HTMLSpanElement[];
+      if (!wordEls.length) return;
 
-    // Set initial dim opacity for all word elements
-    wordEls.forEach((el) => {
-      gsap.set(el, { opacity: 0.15, color: "rgba(255,255,255,0.15)" });
-    });
+      // Set initial dim opacity for all word elements
+      wordEls.forEach((el) => {
+        gsap.set(el, { opacity: 0.15, color: "rgba(255,255,255,0.15)" });
+      });
 
-    // Create GSAP ScrollTrigger timeline scrubbing on scroll (100% synced with Lenis)
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: "top top",
-        end: "+=2200",
-        pin: true,
-        pinSpacing: true,
-        scrub: 0.5,
-        anticipatePin: 1,
-        fastScrollEnd: true,
-        preventOverlaps: true,
-      },
-    });
-
-    // Sequentially illuminate each word
-    wordEls.forEach((wordEl) => {
-      tl.to(
-        wordEl,
-        {
-          opacity: 1,
-          color: "#ffffff",
-          textShadow: "0 0 25px rgba(255,255,255,0.6)",
-          duration: 1,
-          ease: "none",
+      // Create GSAP ScrollTrigger timeline scrubbing on scroll (100% synced with Lenis)
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top top",
+          end: "+=2200",
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.5,
+          anticipatePin: 1,
+          fastScrollEnd: true,
+          preventOverlaps: true,
         },
-        ">-=0.5"
-      );
-    });
+      });
 
-    // Hold all words fully revealed & glowing at the end before unpinning
-    tl.to({}, { duration: 2.5 });
+      // Sequentially illuminate each word
+      wordEls.forEach((wordEl) => {
+        tl.to(
+          wordEl,
+          {
+            opacity: 1,
+            color: "#ffffff",
+            textShadow: "0 0 25px rgba(255,255,255,0.6)",
+            duration: 1,
+            ease: "none",
+          },
+          ">-=0.5"
+        );
+      });
 
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, [text]);
+      // Hold all words fully revealed & glowing at the end before unpinning
+      tl.to({}, { duration: 2.5 });
+
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
+
+      return () => {
+        tl.kill();
+        if (tl.scrollTrigger) tl.scrollTrigger.kill();
+      };
+    },
+    { scope: containerRef, dependencies: [text] }
+  );
 
   return (
     <div

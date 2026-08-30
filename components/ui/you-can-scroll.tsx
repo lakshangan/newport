@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 const WORD_ITEMS = [
   { text: "code.", color: "text-[#5CE1E6]" },
@@ -17,70 +18,77 @@ export default function ScrollAnimation() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const wordsRef = useRef<(HTMLSpanElement | null)[]>([]);
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+  useGSAP(
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
 
-    // Guaranteed video playback
-    const video = videoRef.current;
-    if (video) {
-      video.muted = true;
-      video.defaultMuted = true;
-      video.playsInline = true;
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((error) => {
-          console.warn("Video playback:", error);
-        });
+      // Guaranteed video playback
+      const video = videoRef.current;
+      if (video) {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.warn("Video playback:", error);
+          });
+        }
       }
-    }
 
-    const section = sectionRef.current;
-    if (!section) return;
+      const section = sectionRef.current;
+      if (!section) return;
 
-    const words = wordsRef.current.filter(Boolean) as HTMLSpanElement[];
-    if (!words.length) return;
+      const words = wordsRef.current.filter(Boolean) as HTMLSpanElement[];
+      if (!words.length) return;
 
-    // Set initial word positions with GPU acceleration
-    words.forEach((word, idx) => {
-      if (idx === 0) {
-        gsap.set(word, { opacity: 1, y: "0%", force3D: true });
-      } else {
-        gsap.set(word, { opacity: 0, y: "100%", force3D: true });
+      // Set initial word positions with GPU acceleration
+      words.forEach((word, idx) => {
+        if (idx === 0) {
+          gsap.set(word, { opacity: 1, y: "0%", force3D: true });
+        } else {
+          gsap.set(word, { opacity: 0, y: "100%", force3D: true });
+        }
+      });
+
+      // Create GSAP ScrollTrigger timeline scrubbing on scroll with inertia smoothing
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=2400",
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.8,
+          fastScrollEnd: true,
+          preventOverlaps: true,
+        },
+      });
+
+      // Scrub through each word with smooth power2 easing
+      for (let i = 1; i < words.length; i++) {
+        const prevWord = words[i - 1];
+        const currWord = words[i];
+
+        tl.to(prevWord, { opacity: 0, y: "-100%", duration: 1, ease: "power2.inOut", force3D: true }, `step-${i}`)
+          .fromTo(
+            currWord,
+            { opacity: 0, y: "100%", force3D: true },
+            { opacity: 1, y: "0%", duration: 1, ease: "power2.inOut", force3D: true },
+            `step-${i}`
+          );
       }
-    });
 
-    // Create GSAP ScrollTrigger timeline scrubbing on scroll with inertia smoothing
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "+=2400",
-        pin: true,
-        pinSpacing: true,
-        scrub: 0.8,
-        fastScrollEnd: true,
-        preventOverlaps: true,
-      },
-    });
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
 
-    // Scrub through each word with smooth power2 easing
-    for (let i = 1; i < words.length; i++) {
-      const prevWord = words[i - 1];
-      const currWord = words[i];
-
-      tl.to(prevWord, { opacity: 0, y: "-100%", duration: 1, ease: "power2.inOut", force3D: true }, `step-${i}`)
-        .fromTo(
-          currWord,
-          { opacity: 0, y: "100%", force3D: true },
-          { opacity: 1, y: "0%", duration: 1, ease: "power2.inOut", force3D: true },
-          `step-${i}`
-        );
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
+      return () => {
+        tl.kill();
+        if (tl.scrollTrigger) tl.scrollTrigger.kill();
+      };
+    },
+    { scope: sectionRef }
+  );
 
   return (
     <section
