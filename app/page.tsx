@@ -14,7 +14,6 @@ import ScrollAnimation from '@/components/ui/you-can-scroll';
 import { FlowAboutStorySection } from '@/components/about/FlowAboutStorySection';
 import { AchievementsShowcaseSection } from '@/components/sections/AchievementsShowcaseSection';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
-import { PlaygroundSection } from '@/components/playground/PlaygroundSection';
 import { TechTicker } from '@/components/tech/TechTicker';
 import { DevLabBentoSection } from '@/components/sections/DevLabBentoSection';
 import { ContactSection } from '@/components/contact/ContactSection';
@@ -87,9 +86,6 @@ export default function Home() {
 
       {/* Professional Experience Timeline */}
       <ExperienceSection />
-
-      {/* Playground Experiments */}
-      <PlaygroundSection />
 
       {/* Moving Tech Arsenal Ticker */}
       <TechTicker />

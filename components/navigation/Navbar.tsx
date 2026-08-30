@@ -18,7 +18,7 @@ export const Navbar: React.FC = () => {
       }
 
       // Simple active section indicator
-      const sections = ['about', 'work', 'experience', 'playground', 'contact'];
+      const sections = ['about', 'showcase', 'experience', 'contact'];
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -68,9 +68,9 @@ export const Navbar: React.FC = () => {
             About
           </a>
           <a
-            href="#work"
+            href="#showcase"
             className={`transition-colors hover:text-[#E8E5DF] ${
-              activeSection === 'work' ? 'text-[#C75B32] font-semibold' : ''
+              activeSection === 'showcase' ? 'text-[#C75B32] font-semibold' : ''
             }`}
           >
             Projects
@@ -84,12 +84,12 @@ export const Navbar: React.FC = () => {
             Experience
           </a>
           <a
-            href="#playground"
+            href="#contact"
             className={`transition-colors hover:text-[#E8E5DF] ${
-              activeSection === 'playground' ? 'text-[#C75B32] font-semibold' : ''
+              activeSection === 'contact' ? 'text-[#C75B32] font-semibold' : ''
             }`}
           >
-            Experiments
+            Contact
           </a>
         </div>
 
