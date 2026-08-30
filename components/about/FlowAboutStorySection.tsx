@@ -65,58 +65,65 @@ interface ShowcaseCard {
   title: string;
   domain: string;
   url: string;
+  githubUrl: string;
   description: string;
   tags: string[];
 }
 
 const SHOWCASE_CARDS: ShowcaseCard[] = [
   {
-    id: 'sbk-3d',
-    title: 'SBK Birthday 3D',
-    domain: 'sbk-hd.vercel.app',
-    url: 'https://sbk-hd.vercel.app',
-    description: 'Interactive 3D audio-visual experience with particle effects and gamified interactions.',
-    tags: ['THREE.JS', 'AUDIO', 'GSAP'],
+    id: 'jayam',
+    title: 'Jayam Website',
+    domain: 'jayamwebsite.vercel.app',
+    url: 'https://jayamwebsite.vercel.app/',
+    githubUrl: 'https://github.com/lakshangan/jayam-website-',
+    description: 'Full-stack corporate platform & bespoke web application with responsive architecture.',
+    tags: ['REACT', 'NEXT.JS', 'TAILWIND'],
   },
   {
-    id: 'internocto',
-    title: 'InternOcTO',
-    domain: 'internocto-portfolio.vercel.app',
-    url: 'https://internocto-portfolio.vercel.app',
-    description: "The official chaotic portfolio for OpenLedger's octopus mascot. Pure mayhem & motion.",
-    tags: ['REACT', 'CHAOS', 'TAILWIND'],
-  },
-  {
-    id: 'iphone-3d',
-    title: 'iPhone 3D Shop',
-    domain: 'antigravity-test-alpha.vercel.app',
-    url: 'https://antigravity-test-alpha.vercel.app',
-    description: 'Immersive 3D product showcase with GSAP animations and floating interactive models.',
-    tags: ['R3F', 'GSAP', 'DREI'],
-  },
-  {
-    id: 'mediocto',
-    title: 'MediOcto AI',
-    domain: 'mediocto-lovat.vercel.app',
-    url: 'https://mediocto-lovat.vercel.app/',
-    description: 'AI-powered mental health support chat interface with a friendly octopus companion.',
-    tags: ['AI', 'HEALTH', 'NEXT.JS'],
-  },
-  {
-    id: 'lakshan-dev',
-    title: 'Lakshan Dev',
-    domain: 'lakshan-dev.vercel.app',
-    url: 'https://lakshan-dev.vercel.app',
-    description: 'Personal developer hub showcasing full-stack web applications, AI systems, & Web3 experiments.',
-    tags: ['PORTFOLIO', 'WEB3', 'FULLSTACK'],
+    id: 'land-vault',
+    title: 'LandVault Blockchain',
+    domain: 'land-vault-v2.vercel.app',
+    url: 'https://land-vault-v2.vercel.app/',
+    githubUrl: 'https://github.com/lakshangan/Land-vault-v2',
+    description: 'Tokenizing real estate assets & crypto transfers on EVM chains with automated yield.',
+    tags: ['SOLIDITY', 'EVM', 'WEB3.JS'],
   },
   {
     id: 'nuna-organic',
     title: 'Nuna Organic',
     domain: 'nunaorganic.vercel.app',
     url: 'https://nunaorganic.vercel.app/',
-    description: 'Special event showcase platform with custom motion animations and dynamic gallery.',
-    tags: ['EVENT', 'GALLERY', 'GSAP'],
+    githubUrl: 'https://github.com/lakshangan/nuna-natural-haven',
+    description: 'Special event organic showcase platform with bespoke motion transitions & gallery.',
+    tags: ['REACT', 'GSAP', 'GALLERY'],
+  },
+  {
+    id: 'mediocto',
+    title: 'MediOcto AI',
+    domain: 'mediocto-lovat.vercel.app',
+    url: 'https://mediocto-lovat.vercel.app/',
+    githubUrl: 'https://github.com/lakshangan',
+    description: 'AI-powered mental health support chat interface featuring an animated octopus companion.',
+    tags: ['AI', 'HEALTH', 'NEXT.JS'],
+  },
+  {
+    id: 'genproof',
+    title: 'GenProof AI',
+    domain: 'gen-proof-ai.vercel.app',
+    url: 'https://gen-proof-ai.vercel.app/',
+    githubUrl: 'https://github.com/lakshangan',
+    description: 'Cryptographic content credentials engine detecting AI synthetic media via C2PA standards.',
+    tags: ['PYTHON', 'C2PA', 'AI/ML'],
+  },
+  {
+    id: 'steganography',
+    title: 'Steganography CLI',
+    domain: 'github.com/lakshangan',
+    url: 'https://github.com/lakshangan/steganography',
+    githubUrl: 'https://github.com/lakshangan/steganography',
+    description: 'CLI tool securely hiding secret encrypted payloads inside digital image pixels via LSB.',
+    tags: ['PYTHON', 'SECURITY', 'LSB'],
   },
 ];
 
@@ -320,11 +327,30 @@ export const FlowAboutStorySection: React.FC = () => {
                 {/* Card Body & Details */}
                 <div className="p-4 sm:p-5 space-y-3 bg-[#0e0e14] flex-1 flex flex-col justify-between">
                   <div className="space-y-1.5">
-                    <h3 className="font-mono text-base font-bold text-white uppercase group-hover:text-[#5CE1E6] transition-colors flex items-center justify-between">
-                      <span>{card.title}</span>
-                      <a href={card.url} target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white">
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
+                    <h3 className="font-mono text-sm sm:text-base font-bold text-white uppercase group-hover:text-[#5CE1E6] transition-colors flex items-center justify-between gap-2">
+                      <span className="truncate">{card.title}</span>
+                      <div className="flex items-center gap-2 shrink-0">
+                        {card.githubUrl && (
+                          <a
+                            href={card.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#8E8B85] hover:text-[#5CE1E6] transition-colors text-[10px] font-mono flex items-center gap-0.5"
+                            title="View GitHub Repository"
+                          >
+                            Code ↗
+                          </a>
+                        )}
+                        <a
+                          href={card.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#5CE1E6] hover:text-white transition-colors"
+                          title="Open Live Website"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
                     </h3>
                     <p className="font-sans text-xs text-white/70 font-medium leading-relaxed">
                       {card.description}

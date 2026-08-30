@@ -71,9 +71,29 @@ export const PORTFOLIO_DATA = {
 
   projects: [
     {
-      id: 'land-vault',
+      id: 'jayam-website',
       number: '01',
-      title: 'LAND VAULT',
+      title: 'JAYAM WEBSITE',
+      tagline: 'Full-stack corporate platform & bespoke web application.',
+      description:
+        'A full-stack corporate platform and web application built with modern responsive architecture and motion UI.',
+      technologies: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Node.js'],
+      category: 'Full-Stack Web',
+      sceneType: 'landvault',
+      problem:
+        'Traditional legacy business platforms lack modern web speed, responsive mobile adaptation, and interactive UX.',
+      concept:
+        'Architect a lightning-fast Next.js platform with modular component architecture and streamlined lead pipelines.',
+      solution:
+        'Engineered an enterprise-grade full-stack website delivering top core web vitals and zero-friction navigation.',
+      myRole: 'Full-Stack Developer',
+      githubUrl: 'https://github.com/lakshangan/jayam-website-',
+      demoUrl: 'https://jayamwebsite.vercel.app/',
+    },
+    {
+      id: 'land-vault',
+      number: '02',
+      title: 'LAND VAULT V2',
       tagline: 'Tokenizing real estate for decentralized finance.',
       description:
         'A smart contract system for transferring crypto assets and enabling fractionalized real estate ownership on EVM chains.',
@@ -87,32 +107,52 @@ export const PORTFOLIO_DATA = {
       solution:
         'Architected fractionalized asset vaults with automated rental dividend distribution and zero-friction secondary trading.',
       myRole: 'Full-Stack & Smart Contract Developer',
-      githubUrl: 'https://github.com/lakshangan',
-      demoUrl: 'https://lakshan-dev.vercel.app',
+      githubUrl: 'https://github.com/lakshangan/Land-vault-v2',
+      demoUrl: 'https://land-vault-v2.vercel.app/',
     },
     {
-      id: 'anonxpose',
-      number: '02',
-      title: 'ANONXPOSE',
-      tagline: 'Blockchain investigation and transaction intelligence.',
+      id: 'nuna-organic',
+      number: '03',
+      title: 'NUNA NATURAL HAVEN',
+      tagline: 'Bespoke organic product showcase & event platform.',
       description:
-        'A decentralized identity verification tool designed to bring transparency and forensics to anonymous transactions.',
-      technologies: ['Solidity', 'Web3.js', 'Cybersecurity', 'React', 'Ethers.js'],
-      category: 'Blockchain Forensics',
-      sceneType: 'anonxpose',
+        'Special event showcase platform with bespoke motion transitions, dynamic gallery layout, and e-commerce UI.',
+      technologies: ['React', 'CSS Grid', 'GSAP', 'Tailwind', 'JavaScript'],
+      category: 'Web Design & Motion',
+      sceneType: 'rebal',
       problem:
-        'Anonymous wallet clustering obscures transaction trails during high-profile protocol exploits.',
+        'Organic wellness brands struggle to convey visual product quality through static boilerplate e-commerce templates.',
       concept:
-        'On-chain transaction network graph analysis with zero-knowledge cryptographic verification.',
+        'Interactive narrative storytelling paired with smooth GSAP scroll triggers and fluid gallery layouts.',
       solution:
-        'Built real-time wallet association algorithms mapping illicit transaction paths while preserving non-custodial user privacy.',
-      myRole: 'Full-Stack Developer & Analyst',
+        'Delivered a bespoke digital showcase increasing user session engagement and brand presentation depth.',
+      myRole: 'Frontend & Motion Developer',
+      githubUrl: 'https://github.com/lakshangan/nuna-natural-haven',
+      demoUrl: 'https://nunaorganic.vercel.app/',
+    },
+    {
+      id: 'medtech-ai',
+      number: '04',
+      title: 'MEDIOCTO AI',
+      tagline: 'Intelligent AI mental health support companion.',
+      description:
+        'Context-aware AI mental health support chat interface featuring an interactive animated octopus companion.',
+      technologies: ['LLMs', 'Generative AI', 'Next.js', 'Python', 'Tailwind'],
+      category: 'Healthcare AI',
+      sceneType: 'medtech',
+      problem:
+        'Traditional mental health intake chatbots feel robotic, clinical, and intimidating for young users.',
+      concept:
+        'Empathetic conversational LLM agent paired with an interactive animated companion character.',
+      solution:
+        'Designed an intuitive chat interface enabling supportive dialogue, emotional tracking, and instant coping guidance.',
+      myRole: 'Full-Stack AI Developer',
       githubUrl: 'https://github.com/lakshangan',
-      demoUrl: 'https://lakshan-dev.vercel.app',
+      demoUrl: 'https://mediocto-lovat.vercel.app/',
     },
     {
       id: 'genproof-ai',
-      number: '03',
+      number: '05',
       title: 'GENPROOF.AI',
       tagline: 'Content provenance and C2PA verification.',
       description:
@@ -128,13 +168,13 @@ export const PORTFOLIO_DATA = {
         'Engineered an instant verification drag-and-drop audit platform parsing C2PA manifest history and neural model signatures.',
       myRole: 'Full-Stack AI & Provenance Developer',
       githubUrl: 'https://github.com/lakshangan',
-      demoUrl: 'https://lakshan-dev.vercel.app',
+      demoUrl: 'https://gen-proof-ai.vercel.app/',
     },
     {
       id: 'steganography-cli',
-      number: '04',
-      title: 'STEGANOGRAPHY',
-      tagline: 'Experimental hidden-information tooling.',
+      number: '06',
+      title: 'STEGANOGRAPHY CLI',
+      tagline: 'Experimental hidden-information security tooling.',
       description:
         'A Python CLI tool securely hiding and extracting secret encrypted payloads inside digital image pixels via LSB techniques.',
       technologies: ['Python', 'Cryptography', 'Pillow', 'LSB Algorithm'],
@@ -147,48 +187,8 @@ export const PORTFOLIO_DATA = {
       solution:
         'Delivered a lightweight CLI tool supporting multi-format image steganography with zero visual perceptual degradation.',
       myRole: 'Full-Stack Security Developer',
-      githubUrl: 'https://github.com/lakshangan',
-      demoUrl: 'https://github.com/lakshangan',
-    },
-    {
-      id: 'ai-rebal',
-      number: '05',
-      title: 'AI REBAL',
-      tagline: 'Autonomous microgrid energy optimization.',
-      description:
-        'An AI-driven energy balance management system optimizing power distribution across renewable microgrids.',
-      technologies: ['Python', 'AI/ML', 'IoT', 'React', 'TensorFlow'],
-      category: 'AI / Smart Energy',
-      sceneType: 'rebal',
-      problem:
-        'Fluctuating solar/wind energy generation causes grid imbalance and power waste in local battery storage.',
-      concept:
-        'Predictive load-balancing neural networks dynamically routing kilowatt hours to active demand nodes.',
-      solution:
-        'Implemented real-time sensor ingestion algorithms reducing local microgrid power loss by 28%.',
-      myRole: 'Full-Stack AI Developer',
-      githubUrl: 'https://github.com/lakshangan',
-      demoUrl: 'https://lakshan-dev.vercel.app',
-    },
-    {
-      id: 'medtech-ai',
-      number: '06',
-      title: 'MEDTECH AI',
-      tagline: 'Intelligent clinical assistance platform.',
-      description:
-        'Context-aware AI medical assistant streamlining patient intake triage and clinical documentation.',
-      technologies: ['LLMs', 'Generative AI', 'Next.js', 'Python', 'Tailwind'],
-      category: 'Healthcare AI',
-      sceneType: 'medtech',
-      problem:
-        'Overburdened clinical staff spend excessive hours manualizing electronic health record (EHR) notes.',
-      concept:
-        'Domain-tuned medical LLM converting raw patient dialogue into structured diagnostic summaries.',
-      solution:
-        'Designed an intuitive interface enabling healthcare workers to quickly review AI diagnostic suggestions.',
-      myRole: 'Full-Stack AI Developer',
-      githubUrl: 'https://github.com/lakshangan',
-      demoUrl: 'https://lakshan-dev.vercel.app',
+      githubUrl: 'https://github.com/lakshangan/steganography',
+      demoUrl: 'https://github.com/lakshangan/steganography',
     },
   ] as Project[],
 
