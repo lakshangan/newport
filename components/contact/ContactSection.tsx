@@ -76,21 +76,11 @@ export const ContactSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Telemetry Footer Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-[#242424] text-xs font-mono text-[#8E8B85]">
+        {/* Telemetry Footer */}
+        <div className="pt-6 border-t border-[#242424] text-xs font-mono text-[#8E8B85]">
           <div className="space-y-1">
-            <span className="text-[#8E8B85]/60 uppercase">EMAIL</span>
-            <p className="text-[#E8E5DF] font-bold">{PORTFOLIO_DATA.personal.email}</p>
-          </div>
-
-          <div className="space-y-1">
-            <span className="text-[#8E8B85]/60 uppercase">PHONE</span>
-            <p className="text-[#E8E5DF] font-bold">{PORTFOLIO_DATA.personal.phone}</p>
-          </div>
-
-          <div className="space-y-1">
-            <span className="text-[#8E8B85]/60 uppercase">LOCATION</span>
-            <p className="text-[#E8E5DF] font-bold">{PORTFOLIO_DATA.personal.location}</p>
+            <span className="text-[#8E8B85]/60 uppercase">PRIMARY EMAIL CONTACT</span>
+            <p className="text-[#E8E5DF] font-bold text-sm">{PORTFOLIO_DATA.personal.email}</p>
           </div>
         </div>
       </div>
