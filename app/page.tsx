@@ -5,39 +5,24 @@ import dynamic from 'next/dynamic';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-
 import { DeveloperDecorations } from '@/components/ui/DeveloperDecorations';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
 import { TextRevealByWord } from '@/components/ui/text-reveal';
+import ScrollAnimation from '@/components/ui/you-can-scroll';
+import { FlowAboutStorySection } from '@/components/about/FlowAboutStorySection';
+import { AchievementsShowcaseSection } from '@/components/sections/AchievementsShowcaseSection';
+import { ExperienceSection } from '@/components/experience/ExperienceSection';
+import { TechTicker } from '@/components/tech/TechTicker';
+import { DevLabBentoSection } from '@/components/sections/DevLabBentoSection';
+import { ContactSection } from '@/components/contact/ContactSection';
 import { Footer } from '@/components/footer/Footer';
 
-// Dynamic Code-Splitting for Heavy WebGL & Interactive Components
-const Preloader = dynamic(
-  () => import('@/components/ui/Preloader').then((m) => m.Preloader),
-  { ssr: false }
-);
-const ScrollAnimation = dynamic(() => import('@/components/ui/you-can-scroll'), { ssr: false });
-const FlowAboutStorySection = dynamic(
-  () => import('@/components/about/FlowAboutStorySection').then((m) => m.FlowAboutStorySection),
-  { ssr: false }
-);
-const AchievementsShowcaseSection = dynamic(
-  () => import('@/components/sections/AchievementsShowcaseSection').then((m) => m.AchievementsShowcaseSection),
-  { ssr: false }
-);
-const ExperienceSection = dynamic(
-  () => import('@/components/experience/ExperienceSection').then((m) => m.ExperienceSection),
-  { ssr: false }
-);
-const TechTicker = dynamic(() => import('@/components/tech/TechTicker').then((m) => m.TechTicker), { ssr: false });
-const DevLabBentoSection = dynamic(
-  () => import('@/components/sections/DevLabBentoSection').then((m) => m.DevLabBentoSection),
-  { ssr: false }
-);
-const ContactSection = dynamic(
-  () => import('@/components/contact/ContactSection').then((m) => m.ContactSection),
+import { Preloader } from '@/components/ui/Preloader';
+
+const ScrollDissolveReveal = dynamic(
+  () => import('@/components/ui/ScrollDissolveReveal').then((mod) => mod.ScrollDissolveReveal),
   { ssr: false }
 );
 
@@ -45,15 +30,11 @@ export default function Home() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Initialize Optimized Lenis Smooth Scroll Physics Engine
+    // Initialize Lenis Smooth Scroll
     const lenis = new Lenis({
-      duration: 1.4,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.2,
     });
 
     // Synchronize Lenis smooth scroll with GSAP ScrollTrigger ticker
@@ -64,7 +45,7 @@ export default function Home() {
     };
 
     gsap.ticker.add(updateLenis);
-    gsap.ticker.lagSmoothing(500, 33);
+    gsap.ticker.lagSmoothing(0);
 
     // Refresh ScrollTrigger once DOM layout finishes initializing
     const timer = setTimeout(() => {
@@ -80,14 +61,14 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-[#080808] text-[#E8E5DF] overflow-x-clip gpu-accelerate">
+    <main className="relative min-h-screen bg-[#080808] text-[#E8E5DF] overflow-x-clip">
       {/* Developer Terminal Preloader */}
       <Preloader />
 
       {/* Subtle Developer Background Ambient Elements */}
       <DeveloperDecorations />
 
-      {/* Custom Velocity-Physics Smooth Cursor */}
+      {/* Custom Subtle Dot Cursor */}
       <CustomCursor />
 
       {/* Modern Cylinder Floating Navigation */}
@@ -96,16 +77,22 @@ export default function Home() {
       {/* Full-Screen Hero Section */}
       <HeroSection />
 
-      {/* Word-by-Word Scroll Reveal Manifesto */}
+      {/* Fun & Relatable Word-by-Word Scroll Reveal Manifesto */}
       <TextRevealByWord text="<\ I build software, design systems, and turn ideas into products. I work across web, blockchain, AI, and interactive technology, constantly exploring new tools, solving complex problems. >" />
 
       {/* GSAP ScrollTrigger Word Dimmer Timeline */}
       <ScrollAnimation />
 
+      {/* WebGL Shader Dissolve Transition */}
+      <ScrollDissolveReveal
+        imageFront="/herosection.png"
+        imageBack="/images/intro1.png"
+      />
+
       {/* Flow Art Story Scroll Showcase */}
       <FlowAboutStorySection />
 
-      {/* Pinned Scroll Expansion Milestones Showcase */}
+      {/* Floating Milestone Showcase (25+ Hackathons, 20+ Finalists, Intl Silambam Bronze) */}
       <AchievementsShowcaseSection />
 
       {/* Professional Experience Timeline */}
@@ -117,7 +104,7 @@ export default function Home() {
       {/* Dev Lab & Interactive Deployment Stack Bento Grid */}
       <DevLabBentoSection />
 
-      {/* Contact Section */}
+      {/* Dramatic Contact CTA */}
       <ContactSection />
 
       {/* Minimal Footer */}

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useRef, useMemo } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useTexture, OrthographicCamera } from "@react-three/drei";
 import * as THREE from "three";
@@ -25,8 +25,6 @@ const coverFragmentShader = `
   uniform float uGrayscale;
   uniform float uEdgeIntensity;
   uniform float uEdgeBrightness;
-
-  
   varying vec2 vUv;
 
   mat3 sobelX = mat3(
@@ -254,6 +252,9 @@ const Scene = ({ imageFront, imageBack, scrollYProgress }: SceneProps) => {
   const material1Ref = useRef<THREE.ShaderMaterial>(null);
   const material2Ref = useRef<THREE.ShaderMaterial>(null);
   const { size } = useThree();
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => scrollYProgress.on("change", () => invalidate()), [invalidate, scrollYProgress]);
 
   const uniforms1 = useMemo(
     () => ({
@@ -376,10 +377,10 @@ export function ScrollDissolveReveal({
   return (
     <div
       ref={containerRef}
-      className={cn("relative h-[300vh] w-full bg-black", containerClassName)}
+      className={cn("relative h-[200vh] w-full", containerClassName)}
     >
       <div className={cn("sticky top-0 h-screen w-full overflow-hidden", className)}>
-        <Canvas>
+        <Canvas dpr={1} frameloop="demand" gl={{ antialias: false, alpha: false }}>
           <OrthographicCamera
             makeDefault
             manual
