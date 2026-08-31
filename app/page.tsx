@@ -11,10 +11,13 @@ import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
 import { TextRevealByWord } from '@/components/ui/text-reveal';
-import { Preloader } from '@/components/ui/Preloader';
 import { Footer } from '@/components/footer/Footer';
 
-// Dynamic Code-Splitting for Below-the-Fold Heavy Interactive Components
+// Dynamic Code-Splitting for Heavy WebGL & Interactive Components
+const Preloader = dynamic(
+  () => import('@/components/ui/Preloader').then((m) => m.Preloader),
+  { ssr: false }
+);
 const ScrollAnimation = dynamic(() => import('@/components/ui/you-can-scroll'), { ssr: false });
 const FlowAboutStorySection = dynamic(
   () => import('@/components/about/FlowAboutStorySection').then((m) => m.FlowAboutStorySection),
