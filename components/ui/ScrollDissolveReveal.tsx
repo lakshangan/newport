@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useEffect, useRef, useMemo } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
@@ -379,7 +379,7 @@ export function ScrollDissolveReveal({
       ref={containerRef}
       className={cn("relative h-[200vh] w-full", containerClassName)}
     >
-      <div className={cn("sticky top-0 h-screen w-full overflow-hidden", className)}>
+      <div className={cn("sticky top-0 h-screen w-full", className)}>
         <Canvas dpr={1} frameloop="demand" gl={{ antialias: false, alpha: false }}>
           <OrthographicCamera
             makeDefault

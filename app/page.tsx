@@ -22,7 +22,7 @@ import { Footer } from '@/components/footer/Footer';
 import { Preloader } from '@/components/ui/Preloader';
 
 const ScrollDissolveReveal = dynamic(
-  () => import('@/components/ui/ScrollDissolveReveal').then((mod) => mod.ScrollDissolveReveal),
+  () => import('@/components/ui/ScrollDissolveReveal'),
   { ssr: false }
 );
 
@@ -83,17 +83,17 @@ export default function Home() {
       {/* GSAP ScrollTrigger Word Dimmer Timeline */}
       <ScrollAnimation />
 
-      {/* WebGL Shader Dissolve Transition */}
-      <ScrollDissolveReveal
-        imageFront="/herosection.png"
-        imageBack="/images/intro1.png"
-      />
-
       {/* Flow Art Story Scroll Showcase */}
       <FlowAboutStorySection />
 
       {/* Floating Milestone Showcase (25+ Hackathons, 20+ Finalists, Intl Silambam Bronze) */}
       <AchievementsShowcaseSection />
+
+      {/* WebGL Shader Scroll Dissolve Transition between 3rd & 4th section */}
+      <ScrollDissolveReveal
+        imageFront="/images/number.png"
+        imageBack="/section.png"
+      />
 
       {/* Professional Experience Timeline */}
       <ExperienceSection />
