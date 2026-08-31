@@ -370,14 +370,14 @@ export function ScrollDissolveReveal({
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"],
+    offset: ["start end", "end start"],
     ...(scrollContainerRef && { container: scrollContainerRef })
   });
 
   return (
     <div
       ref={containerRef}
-      className={cn("relative h-[200vh] w-full", containerClassName)}
+      className={cn("relative h-[100vh] w-full border-t border-b border-white/10 overflow-hidden select-none bg-black", containerClassName)}
     >
       <div className={cn("sticky top-0 h-screen w-full", className)}>
         <Canvas dpr={1} frameloop="demand" gl={{ antialias: false, alpha: false }}>
