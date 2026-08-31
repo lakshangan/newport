@@ -186,3 +186,27 @@ body {
   animation: background-gradient var(--background-gradient-speed, 12s) infinite ease-in-out;
 }
 
+/* Lenis Smooth Scroll Engine Performance Optimizations */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* GPU Hardware Acceleration Helper */
+.gpu-accelerate {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
