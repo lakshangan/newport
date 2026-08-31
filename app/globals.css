@@ -152,9 +152,8 @@ body {
 
 /* Hide cursor default when custom cursor is active on desktop */
 @media (min-width: 1024px) {
-  body.custom-cursor-active a,
-  body.custom-cursor-active button,
-  body.custom-cursor-active [data-cursor] {
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
     cursor: none !important;
   }
 }

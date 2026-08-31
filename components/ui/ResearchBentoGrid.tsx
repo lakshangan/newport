@@ -56,81 +56,8 @@ const DEFAULT_COPY: ResearchBentoGridCopy = {
   pausedDescription: "Workspace on standby mode. Ready to boot up whenever the next feature is ready to ship.",
 };
 
-function ArrowCursor({
-  className,
-  label,
-  inverted = false,
-  delay = 0,
-  active,
-  targetLeft,
-  targetTop,
-}: {
-  className?: string;
-  label: string;
-  inverted?: boolean;
-  delay?: number;
-  active?: boolean;
-  targetLeft?: string;
-  targetTop?: string;
-}) {
-  const reduceMotion = useReducedMotion();
-
-  return (
-    <motion.div
-      aria-hidden
-      className={cn("absolute z-30 flex flex-col items-start pointer-events-none", className)}
-      animate={reduceMotion
-        ? undefined
-        : active !== undefined
-          ? active
-            ? { x: -3, y: -36, rotate: -1.5 }
-            : { x: 0, y: 0, rotate: 0 }
-          : targetLeft
-            ? { left: targetLeft, top: targetTop, x: 0, y: [0, -3, 0], rotate: [0, 1.5, 0] }
-            : { x: 0, y: [0, -3, 0], rotate: [0, 1.5, 0] }}
-      transition={active !== undefined
-        ? {
-            duration: active ? 0.68 : 0.82,
-            ease: active ? [0.16, 1, 0.3, 1] : [0.22, 1, 0.36, 1],
-          }
-        : targetLeft
-          ? {
-              left: spring,
-              top: spring,
-              y: { duration: 4.6, delay, repeat: Infinity, ease: "easeInOut" },
-              rotate: { duration: 4.6, delay, repeat: Infinity, ease: "easeInOut" },
-            }
-          : { duration: 4.6, delay, repeat: Infinity, ease: "easeInOut" }}
-    >
-      <svg width="26" height="30" viewBox="0 0 26 30" fill="none" className="h-auto w-[18px] drop-shadow-md sm:w-[22px] lg:w-[26px]">
-        <path
-          d="M2.2 2.5 22 15.1l-9.4 2.1-4.1 9.1L2.2 2.5Z"
-          className={cn(
-            inverted
-              ? "fill-zinc-950 stroke-white dark:fill-white dark:stroke-[#080808]"
-              : "fill-[#C75B32] stroke-white dark:stroke-white/70",
-          )}
-          strokeWidth="2.1"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <span
-        className={cn(
-          "ml-2.5 -mt-1 px-2.5 py-1 text-[12px] font-mono font-bold tracking-tight sm:ml-3 sm:px-3 sm:text-[14px] lg:ml-4 lg:px-4 lg:py-1.5 lg:text-[15px]",
-          inverted
-            ? "rounded-full bg-[#f2f2f2] text-black shadow-[0_5px_18px_rgba(0,0,0,0.28)]"
-            : cn(
-                "rounded-[22px] border border-white/60 bg-[#C75B32] text-white",
-                active
-                  ? "shadow-[0_5px_18px_rgba(0,0,0,0.24),0_0_14px_rgba(199,91,50,0.4)]"
-                  : "shadow-[0_5px_18px_rgba(0,0,0,0.22)]",
-              ),
-        )}
-      >
-        {label}
-      </span>
-    </motion.div>
-  );
+function ArrowCursor(_props?: any) {
+  return null;
 }
 
 const DEFAULT_BRANDS: readonly ResearchBentoBrand[] = [

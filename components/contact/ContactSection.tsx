@@ -19,38 +19,7 @@ export const ContactSection: React.FC = () => {
       {/* Background Volumetric Sunset Ambient Glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#C75B32]/15 rounded-full blur-[180px] pointer-events-none z-0" />
 
-      <div className="max-w-7xl mx-auto space-y-12 relative z-10">
-        {/* Section Header */}
-        <div className="space-y-3 border-b border-[#242424] pb-8 text-left">
-          <div className="text-xs font-mono tracking-widest text-[#C75B32]">
-            // 05 CONTACT &amp; SOCIAL CONNECT
-          </div>
-          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-[#E8E5DF]">
-            LET&apos;S BUILD <span className="text-[#C75B32]">TOGETHER.</span>
-          </h2>
-          <p className="text-base font-light text-[#8E8B85] max-w-xl">
-            Available for select smart contract architecture, protocol research, full-stack builds, and AI integration projects.
-          </p>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-          <a
-            href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-            className="px-7 py-3.5 bg-[#C75B32] text-white font-mono text-xs tracking-widest hover:bg-[#E06D43] transition-colors text-center font-bold rounded-lg shadow-lg"
-            data-cursor="EMAIL"
-          >
-            GET IN TOUCH ↗
-          </a>
-
-          <button
-            onClick={handleCopyEmail}
-            className="px-7 py-3.5 border border-[#333] bg-black/60 text-[#E8E5DF] font-mono text-xs tracking-widest hover:border-[#5CE1E6] hover:text-[#5CE1E6] transition-colors text-center font-bold rounded-lg shadow-lg"
-            data-cursor="COPY"
-          >
-            {copied ? '✓ EMAIL COPIED' : 'COPY EMAIL ADDRESS'}
-          </button>
-        </div>
+      <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Renaissance Studio Artwork Background Box with Aligned Social Connect Dock */}
         <div className="relative w-full min-h-[480px] sm:min-h-[580px] rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-black flex items-center justify-end p-5 sm:p-10 lg:p-14">

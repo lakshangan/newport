@@ -61,10 +61,10 @@ export const SocialConnectCard: React.FC = () => {
 
       {/* Header Titles */}
       <h3 className="font-sans font-extrabold text-2xl sm:text-4xl text-white tracking-tight leading-snug">
-        Connect with me
+        Let's build together !
       </h3>
       <p className="font-mono text-xs sm:text-sm text-white/60 tracking-wider pt-1.5 pb-6 sm:pb-8">
-        Hover over the icons below
+        Hover over the icons to connect with me
       </p>
 
       {/* Glassmorphic Dock Container */}
