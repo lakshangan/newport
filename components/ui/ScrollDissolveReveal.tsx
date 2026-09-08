@@ -306,32 +306,35 @@ const Scene = ({ imageFront, imageBack, scrollYProgress }: SceneProps) => {
 
     if (material1Ref.current) {
       material1Ref.current.uniforms.uTime.value = timeInSeconds;
-      material1Ref.current.uniforms.uResolution.value.set(
-        size.width,
-        size.height
-      );
+      material1Ref.current.uniforms.uResolution.value.set(size.width, size.height);
+      if (texture1.image) {
+        const w = (texture1.image as any).width || size.width;
+        const h = (texture1.image as any).height || size.height;
+        material1Ref.current.uniforms.uImageResolution.value.set(w, h);
+      }
 
       material1Ref.current.uniforms.uDissolve.value = progress;
-      const grayscaleProgress = Math.min(1.0, progress / 0.4);
+      const grayscaleProgress = Math.min(1.0, progress / 0.5);
       material1Ref.current.uniforms.uGrayscale.value = grayscaleProgress;
-      material1Ref.current.uniforms.uEdgeIntensity.value = progress * 0.5;
-      material1Ref.current.uniforms.uEdgeBrightness.value = 1.0 - progress;
+      material1Ref.current.uniforms.uEdgeIntensity.value = progress * 0.6;
+      material1Ref.current.uniforms.uEdgeBrightness.value = 1.0 - progress * 0.5;
     }
 
     if (material2Ref.current) {
       material2Ref.current.uniforms.uTime.value = timeInSeconds;
-      material2Ref.current.uniforms.uResolution.value.set(
-        size.width,
-        size.height
-      );
+      material2Ref.current.uniforms.uResolution.value.set(size.width, size.height);
+      if (texture2.image) {
+        const w = (texture2.image as any).width || size.width;
+        const h = (texture2.image as any).height || size.height;
+        material2Ref.current.uniforms.uImageResolution.value.set(w, h);
+      }
 
-      const acceleratedProgress = Math.min(1.0, progress * 1.1);
-      material2Ref.current.uniforms.uEdgeIntensity.value =
-        0.6 * (1.0 - acceleratedProgress);
-      material2Ref.current.uniforms.uDarkness.value =
-        1.0 - acceleratedProgress;
-      material2Ref.current.uniforms.uGrayscale.value =
-        1.0 - acceleratedProgress;
+      // Smoothly bring imageBack from subtle dim to full brightness
+      const backDarkness = Math.max(0.0, 0.6 * (1.0 - progress));
+      const backGrayscale = Math.max(0.0, 1.0 - progress * 1.2);
+      material2Ref.current.uniforms.uEdgeIntensity.value = 0.4 * (1.0 - progress);
+      material2Ref.current.uniforms.uDarkness.value = backDarkness;
+      material2Ref.current.uniforms.uGrayscale.value = backGrayscale;
     }
   });
 
@@ -388,31 +391,39 @@ export function ScrollDissolveReveal({
   return (
     <div
       ref={containerRef}
-      className={cn("relative h-[300vh] w-full bg-[#080808]", containerClassName)}
+      className={cn("relative h-[200vh] w-full bg-[#080808]", containerClassName)}
     >
-      <div className={cn("sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between", className)}>
-        <Canvas dpr={1} frameloop="demand" gl={{ antialias: false, alpha: false }} className="absolute inset-0 z-0">
-          <OrthographicCamera
-            makeDefault
-            manual
-            left={-1}
-            right={1}
-            top={1}
-            bottom={-1}
-            near={0.1}
-            far={10}
-            position={[0, 0, 1]}
-          />
-          <React.Suspense fallback={null}>
-            <Scene
-              imageFront={imageFront}
-              imageBack={imageBack}
-              scrollYProgress={scrollYProgress}
+      <div className={cn("sticky top-0 h-screen w-full overflow-hidden bg-[#080808]", className)}>
+        <div className="absolute inset-0 z-0 w-full h-full">
+          <Canvas
+            dpr={[1, 2]}
+            frameloop="always"
+            gl={{ antialias: false, alpha: false }}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+          >
+            <OrthographicCamera
+              makeDefault
+              manual
+              left={-1}
+              right={1}
+              top={1}
+              bottom={-1}
+              near={0.1}
+              far={10}
+              position={[0, 0, 1]}
             />
-          </React.Suspense>
-        </Canvas>
+            <React.Suspense fallback={null}>
+              <Scene
+                imageFront={imageFront}
+                imageBack={imageBack}
+                scrollYProgress={scrollYProgress}
+              />
+            </React.Suspense>
+          </Canvas>
+        </div>
+
         {children && (
-          <div className="relative z-10 w-full h-full pointer-events-none flex flex-col justify-between p-6 sm:p-12 max-w-7xl mx-auto">
+          <div className="absolute inset-0 z-10 w-full h-full pointer-events-none flex flex-col justify-between p-6 sm:p-12 max-w-7xl mx-auto">
             {children}
           </div>
         )}
