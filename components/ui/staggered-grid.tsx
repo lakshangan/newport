@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { cn } from '@/lib/utils';
 import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 import { FaGithub, FaSlack, FaTwitter } from 'react-icons/fa';
@@ -44,6 +45,7 @@ export function StaggeredGrid({
   showFooter = true,
   scroller,
 }: StaggeredGridProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const gridFullRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const [activeBento, setActiveBento] = useState<number>(0);
@@ -56,8 +58,8 @@ export function StaggeredGrid({
     ));
   };
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
       // Animate Text Element
       if (textRef.current) {
         const chars = textRef.current.querySelectorAll('.char');
@@ -136,17 +138,12 @@ export function StaggeredGrid({
           });
         }
       }
-    });
 
-    const timer = setTimeout(() => {
+      ScrollTrigger.sort();
       ScrollTrigger.refresh();
-    }, 150);
-
-    return () => {
-      clearTimeout(timer);
-      ctx.revert();
-    };
-  }, []);
+    },
+    { scope: containerRef }
+  );
 
   const mixedGridItems: (string | 'BENTO_GROUP')[] = Array.from(
     { length: 21 },
@@ -156,6 +153,7 @@ export function StaggeredGrid({
 
   return (
     <div
+      ref={containerRef}
       className={cn('shadow relative overflow-hidden w-full bg-[#080808]', className)}
       style={
         {

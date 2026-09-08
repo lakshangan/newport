@@ -1,10 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const WORD_ITEMS = [
   { text: "code.", color: "text-[#5CE1E6]" },
@@ -14,88 +12,32 @@ const WORD_ITEMS = [
 ];
 
 export default function ScrollAnimation() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const wordsRef = useRef<(HTMLSpanElement | null)[]>([]);
 
-  useGSAP(
-    () => {
-      gsap.registerPlugin(ScrollTrigger);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % WORD_ITEMS.length);
+    }, 2000);
 
-      // Guaranteed video playback
-      const video = videoRef.current;
-      if (video) {
-        video.muted = true;
-        video.defaultMuted = true;
-        video.playsInline = true;
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.catch((error) => {
-            console.warn("Video playback:", error);
-          });
-        }
-      }
+    return () => clearInterval(timer);
+  }, []);
 
-      const section = sectionRef.current;
-      if (!section) return;
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.play().catch((err) => console.warn("Video playback warning:", err));
+    }
+  }, []);
 
-      const words = wordsRef.current.filter(Boolean) as HTMLSpanElement[];
-      if (!words.length) return;
-
-      // Set initial word positions with GPU acceleration
-      words.forEach((word, idx) => {
-        if (idx === 0) {
-          gsap.set(word, { opacity: 1, y: "0%", force3D: true });
-        } else {
-          gsap.set(word, { opacity: 0, y: "100%", force3D: true });
-        }
-      });
-
-      // Create GSAP ScrollTrigger timeline scrubbing on scroll with inertia smoothing
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=2400",
-          pin: true,
-          pinSpacing: true,
-          scrub: 0.8,
-          fastScrollEnd: true,
-          preventOverlaps: true,
-        },
-      });
-
-      // Scrub through each word with smooth power2 easing
-      for (let i = 1; i < words.length; i++) {
-        const prevWord = words[i - 1];
-        const currWord = words[i];
-
-        tl.to(prevWord, { opacity: 0, y: "-100%", duration: 1, ease: "power2.inOut", force3D: true }, `step-${i}`)
-          .fromTo(
-            currWord,
-            { opacity: 0, y: "100%", force3D: true },
-            { opacity: 1, y: "0%", duration: 1, ease: "power2.inOut", force3D: true },
-            `step-${i}`
-          );
-      }
-
-      ScrollTrigger.sort();
-      ScrollTrigger.refresh();
-
-      return () => {
-        tl.kill();
-        if (tl.scrollTrigger) tl.scrollTrigger.kill();
-      };
-    },
-    { scope: sectionRef }
-  );
+  const currentWord = WORD_ITEMS[index];
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full h-screen flex items-center justify-center bg-[#080808] overflow-hidden select-none"
-    >
-      {/* Background Video */}
+    <section className="relative w-full h-screen min-h-screen flex items-center justify-center bg-[#080808] overflow-hidden select-none">
+      {/* Background Video with Brightness Enhancement */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <video
           ref={videoRef}
@@ -105,52 +47,52 @@ export default function ScrollAnimation() {
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover filter brightness-90 contrast-105"
+          className="w-full h-full object-cover filter brightness-105 contrast-100 opacity-80"
         />
       </div>
 
       {/* Fallback Artwork Image */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-60">
         <Image
           src="/images/about section .png"
           alt="Artistic Section Background"
           fill
           priority
-          className="object-cover object-[20%_center] filter contrast-105 brightness-95"
+          className="object-cover object-[20%_center] filter contrast-100 brightness-105"
           sizes="100vw"
         />
       </div>
 
-      {/* Film Overlay & Cinematic Vignette */}
-      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/70 via-black/35 to-black/80 pointer-events-none" />
-      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/85 pointer-events-none" />
+      {/* Reduced Light Overlays */}
+      <div className="absolute inset-0 z-1 bg-gradient-to-r from-black/40 via-transparent to-black/50 pointer-events-none" />
+      <div className="absolute inset-0 z-1 bg-gradient-to-t from-[#080808]/70 via-transparent to-[#080808]/50 pointer-events-none" />
 
-      {/* Ambient Volumetric Glow */}
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[400px] bg-[#C75B32]/15 rounded-full blur-[180px] pointer-events-none z-2" />
+      {/* Ambient Volumetric Warm Glow */}
+      <div className="absolute top-1/3 right-1/4 w-[600px] h-[400px] bg-[#C75B32]/20 rounded-full blur-[160px] pointer-events-none z-2" />
 
-      {/* Cinematic Placement Layout Container (Pushed to Open Right Sky Space) */}
+      {/* Cinematic Layout Container */}
       <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex items-center justify-end">
         <div className="w-full lg:w-8/12 lg:ml-auto flex items-center justify-start text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-black uppercase tracking-tight leading-none">
 
-          {/* Prefix "I LOVE TO" in Uniform Display Typography */}
+          {/* Prefix "I LOVE TO" */}
           <span className="text-[#E8E5DF] select-none whitespace-nowrap mr-3 sm:mr-6 shrink-0 drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]">
             I LOVE TO
           </span>
 
-          {/* In-Place Scroll-Revealed Rotating Text Wrapper */}
-          <div className="relative h-[1.3em] font-display font-black uppercase tracking-tight inline-flex items-center min-w-[280px] sm:min-w-[500px]">
-            {WORD_ITEMS.map((item, i) => (
-              <span
-                key={i}
-                ref={(el) => {
-                  wordsRef.current[i] = el;
-                }}
-                style={{ willChange: "transform, opacity" }}
-                className={`absolute left-0 top-0 w-full h-full flex items-center ${item.color} font-display font-black uppercase tracking-tight select-none drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]`}
+          {/* In-Place Auto-Cycling Text Wrapper */}
+          <div className="relative h-[1.3em] font-display font-black uppercase tracking-tight inline-flex items-center min-w-[260px] sm:min-w-[450px] overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, y: 35 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -35 }}
+                transition={{ duration: 0.45, ease: [0.25, 1, 0.5, 1] }}
+                className={`absolute left-0 top-0 w-full h-full flex items-center ${currentWord.color} font-display font-black uppercase tracking-tight select-none drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]`}
               >
-                {item.text}
-              </span>
-            ))}
+                {currentWord.text}
+              </motion.span>
+            </AnimatePresence>
           </div>
 
         </div>

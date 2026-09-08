@@ -39,9 +39,9 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
+          pin: true,
           start: "top top",
           end: "+=2200",
-          pin: true,
           pinSpacing: true,
           scrub: 0.5,
           anticipatePin: 1,
@@ -83,7 +83,7 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
     <div
       ref={containerRef}
       className={cn(
-        "relative z-10 w-full h-screen flex items-center justify-center bg-[#080808] overflow-hidden select-none px-6 sm:px-12",
+        "relative z-10 w-full h-screen flex items-center justify-center bg-[#080808] select-none px-6 sm:px-12",
         className
       )}
     >

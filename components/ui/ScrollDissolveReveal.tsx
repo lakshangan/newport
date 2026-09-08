@@ -254,14 +254,20 @@ const Scene = ({ imageFront, imageBack, scrollYProgress }: SceneProps) => {
   const { size } = useThree();
   const invalidate = useThree((state) => state.invalidate);
 
-  useEffect(() => scrollYProgress.on("change", () => invalidate()), [invalidate, scrollYProgress]);
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", () => invalidate());
+    return () => unsubscribe();
+  }, [invalidate, scrollYProgress]);
 
   const uniforms1 = useMemo(
     () => ({
       uTexture: { value: texture1 },
-      uResolution: { value: new THREE.Vector2(size.width, size.height) },
+      uResolution: { value: new THREE.Vector2(size.width || 1, size.height || 1) },
       uImageResolution: {
-        value: new THREE.Vector2((texture1.image as any).width, (texture1.image as any).height),
+        value: new THREE.Vector2(
+          (texture1.image as any)?.width || 1920,
+          (texture1.image as any)?.height || 1080
+        ),
       },
       uDissolve: { value: 0.0 },
       uCenter: { value: new THREE.Vector2(0.5, 0.5) },
@@ -276,9 +282,12 @@ const Scene = ({ imageFront, imageBack, scrollYProgress }: SceneProps) => {
   const uniforms2 = useMemo(
     () => ({
       uTexture: { value: texture2 },
-      uResolution: { value: new THREE.Vector2(size.width, size.height) },
+      uResolution: { value: new THREE.Vector2(size.width || 1, size.height || 1) },
       uImageResolution: {
-        value: new THREE.Vector2((texture2.image as any).width, (texture2.image as any).height),
+        value: new THREE.Vector2(
+          (texture2.image as any)?.width || 1920,
+          (texture2.image as any)?.height || 1080
+        ),
       },
       uDissolve: { value: 0.0 },
       uCenter: { value: new THREE.Vector2(0.5, 0.5) },
@@ -293,7 +302,7 @@ const Scene = ({ imageFront, imageBack, scrollYProgress }: SceneProps) => {
 
   useFrame((state) => {
     const timeInSeconds = state.clock.getElapsedTime();
-    const progress = scrollYProgress.get();
+    const progress = Math.max(0, Math.min(1, scrollYProgress.get()));
 
     if (material1Ref.current) {
       material1Ref.current.uniforms.uTime.value = timeInSeconds;
@@ -358,6 +367,7 @@ export interface ScrollDissolveRevealProps {
   className?: string;
   containerClassName?: string;
   scrollContainerRef?: React.RefObject<HTMLElement | null>;
+  children?: React.ReactNode;
 }
 
 export function ScrollDissolveReveal({
@@ -366,21 +376,22 @@ export function ScrollDissolveReveal({
   className,
   containerClassName,
   scrollContainerRef,
+  children,
 }: ScrollDissolveRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"],
+    offset: ["start start", "end end"],
     ...(scrollContainerRef && { container: scrollContainerRef })
   });
 
   return (
     <div
       ref={containerRef}
-      className={cn("relative h-[100vh] w-full border-t border-b border-white/10 overflow-hidden select-none bg-black", containerClassName)}
+      className={cn("relative h-[300vh] w-full bg-[#080808]", containerClassName)}
     >
-      <div className={cn("sticky top-0 h-screen w-full", className)}>
-        <Canvas dpr={1} frameloop="demand" gl={{ antialias: false, alpha: false }}>
+      <div className={cn("sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between", className)}>
+        <Canvas dpr={1} frameloop="demand" gl={{ antialias: false, alpha: false }} className="absolute inset-0 z-0">
           <OrthographicCamera
             makeDefault
             manual
@@ -400,6 +411,11 @@ export function ScrollDissolveReveal({
             />
           </React.Suspense>
         </Canvas>
+        {children && (
+          <div className="relative z-10 w-full h-full pointer-events-none flex flex-col justify-between p-6 sm:p-12 max-w-7xl mx-auto">
+            {children}
+          </div>
+        )}
       </div>
     </div>
   );

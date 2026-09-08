@@ -21,8 +21,8 @@ import { Footer } from '@/components/footer/Footer';
 
 import { Preloader } from '@/components/ui/Preloader';
 
-const ScrollDissolveReveal = dynamic(
-  () => import('@/components/ui/ScrollDissolveReveal'),
+const SectionDissolveTransition = dynamic(
+  () => import('@/components/sections/SectionDissolveTransition').then((m) => m.SectionDissolveTransition),
   { ssr: false }
 );
 
@@ -86,14 +86,11 @@ export default function Home() {
       {/* Flow Art Story Scroll Showcase */}
       <FlowAboutStorySection />
 
+      {/* WebGL Shader Dissolve Section Transition between Story & Achievements */}
+      <SectionDissolveTransition />
+
       {/* Floating Milestone Showcase (25+ Hackathons, 20+ Finalists, Intl Silambam Bronze) */}
       <AchievementsShowcaseSection />
-
-      {/* WebGL Shader Scroll Dissolve Transition between 3rd & 4th section */}
-      <ScrollDissolveReveal
-        imageFront="/images/number.png"
-        imageBack="/section.png"
-      />
 
       {/* Professional Experience Timeline */}
       <ExperienceSection />

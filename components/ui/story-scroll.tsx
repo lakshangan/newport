@@ -106,9 +106,9 @@ export const FlowArt: React.FC<FlowArtProps> = ({
           triggers.push(
             ScrollTrigger.create({
               trigger: section,
+              pin: inner,
               start: 'bottom bottom',
               end: 'bottom top',
-              pin: true,
               pinSpacing: false,
             }),
           );

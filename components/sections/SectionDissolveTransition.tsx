@@ -11,41 +11,41 @@ const ScrollDissolveReveal = dynamic(
 
 export const SectionDissolveTransition: React.FC = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-black border-y border-white/10">
-      {/* Overlay Content */}
-      <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-between p-6 sm:p-12 max-w-7xl mx-auto">
+    <section className="relative w-full overflow-hidden bg-[#080808] border-y border-white/10">
+      <ScrollDissolveReveal
+        imageFront="/images/intro1.png"
+        imageBack="/images/number.png"
+      >
         {/* Top Tag */}
-        <div className="flex items-center space-x-3">
-          <span className="px-3 py-1 bg-black/60 border border-white/20 text-[#C75B32] text-xs font-mono font-bold rounded-full backdrop-blur-md">
+        <div className="flex items-center space-x-3 pointer-events-auto">
+          <span className="px-3.5 py-1 bg-black/70 border border-[#5CE1E6]/40 text-[#5CE1E6] text-xs font-mono font-bold rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#5CE1E6] animate-pulse" />
             // SHADER DISSOLVE TRANSITION
           </span>
         </div>
 
         {/* Center Headline Badge */}
-        <div className="space-y-3 max-w-2xl bg-black/50 border border-white/15 p-6 sm:p-8 rounded-2xl backdrop-blur-xl shadow-2xl">
-          <div className="text-xs font-mono text-[#E88053] tracking-widest uppercase">
-            COMMUNITY &amp; COMPETITION
+        <div className="space-y-3 max-w-2xl bg-black/60 border border-white/20 p-6 sm:p-8 rounded-2xl backdrop-blur-xl shadow-2xl pointer-events-auto my-auto">
+          <div className="text-xs font-mono text-[#E88053] tracking-widest uppercase flex items-center gap-2">
+            <span>STORY</span>
+            <span>→</span>
+            <span>MILESTONES</span>
           </div>
           <h3 className="font-display text-2xl sm:text-4xl md:text-5xl font-black uppercase text-white tracking-tight leading-tight">
-            FROM DEMO DAYS TO NATIONAL TRACK WINS.
+            FROM CRAFTSMANSHIP TO PROVEN IMPACT.
           </h3>
-          <p className="text-xs sm:text-sm font-mono text-white/70">
-            Scroll to trigger WebGL Sobel edge detection dissolve transition between builder events.
+          <p className="text-xs sm:text-sm font-mono text-white/70 leading-relaxed">
+            WebGL Sobel edge detection dissolve transition connecting builder story into competitive achievements &amp; national track wins.
           </p>
         </div>
 
         {/* Bottom Marker */}
-        <div className="text-[10px] sm:text-xs font-mono text-white/50 flex justify-between items-center">
-          <span>📍 BENGALURU ⇄ NIT CALICUT</span>
-          <span>SCROLL TO DISSOLVE ↓</span>
+        <div className="text-[10px] sm:text-xs font-mono text-white/60 flex justify-between items-center pointer-events-auto">
+          <span>01 — ABOUT THE BUILDER</span>
+          <span className="animate-bounce">KEEP SCROLLING TO DISSOLVE ↓</span>
+          <span>02 — MILESTONES</span>
         </div>
-      </div>
-
-      {/* WebGL R3F Dissolve Scene */}
-      <ScrollDissolveReveal
-        imageFront="/images/IMG_0400.jpeg"
-        imageBack="/images/IMG_8920.JPG"
-      />
+      </ScrollDissolveReveal>
     </section>
   );
 };

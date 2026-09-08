@@ -22,25 +22,25 @@ export const ContactSection: React.FC = () => {
       <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Renaissance Studio Artwork Background Box with Aligned Social Connect Dock */}
-        <div className="relative w-full min-h-[480px] sm:min-h-[580px] rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-black flex items-center justify-end p-5 sm:p-10 lg:p-14">
-          {/* Background Studio Artwork Image */}
+        <div className="relative w-full min-h-[500px] sm:min-h-[600px] lg:min-h-[640px] rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-black flex items-center justify-start p-5 sm:p-10 lg:p-14">
+          {/* Background Image mass.png */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="/image.png"
-              alt="Lakshan Ganesan Developer Studio Artwork"
+              src="/images/mass.png"
+              alt="Lakshan Ganesan Drone & Tech Photography"
               fill
               priority
-              className="object-cover object-left md:object-center filter brightness-95 contrast-105"
+              className="object-cover object-[70%_center] sm:object-[65%_center] filter brightness-95 contrast-105 transition-transform duration-700 hover:scale-105"
               sizes="(max-width: 1280px) 100vw, 1280px"
             />
           </div>
 
-          {/* Gradient Shading & Vignette Overlay for Depth */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-black/80 z-1 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 z-1 pointer-events-none" />
+          {/* Gradient Shading & Vignette Overlay for Contrast and Warm Sunset Ambiance */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-black/10 z-1 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-transparent to-black/40 z-1 pointer-events-none" />
 
-          {/* SocialConnectCard Div Aligned Perfectly on the Right Parchment Canvas */}
-          <div className="relative z-10 w-full md:w-8/12 lg:w-5/12 ml-auto">
+          {/* SocialConnectCard Div Aligned on the Left over Sunset Canvas so the subject on the right remains clear */}
+          <div className="relative z-10 w-full md:w-7/12 lg:w-5/12 mr-auto">
             <SocialConnectCard />
           </div>
         </div>
