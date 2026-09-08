@@ -1,13 +1,7 @@
 'use client';
 
 import React from 'react';
-import dynamic from 'next/dynamic';
-
-// Dynamic import with SSR false for R3F Canvas
-const ScrollDissolveReveal = dynamic(
-  () => import('../ui/ScrollDissolveReveal').then((m) => m.ScrollDissolveReveal),
-  { ssr: false }
-);
+import ScrollDissolveReveal from '../ui/ScrollDissolveReveal';
 
 export const SectionDissolveTransition: React.FC = () => {
   return (
@@ -49,3 +43,5 @@ export const SectionDissolveTransition: React.FC = () => {
     </section>
   );
 };
+
+export default SectionDissolveTransition;

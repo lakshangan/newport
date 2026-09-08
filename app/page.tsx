@@ -22,7 +22,7 @@ import { Footer } from '@/components/footer/Footer';
 import { Preloader } from '@/components/ui/Preloader';
 
 const SectionDissolveTransition = dynamic(
-  () => import('@/components/sections/SectionDissolveTransition').then((m) => m.SectionDissolveTransition),
+  () => import('@/components/sections/SectionDissolveTransition'),
   { ssr: false }
 );
 
