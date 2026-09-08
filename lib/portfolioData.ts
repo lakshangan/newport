@@ -44,7 +44,7 @@ export interface PlaygroundItem {
 export const PORTFOLIO_DATA = {
   personal: {
     name: 'Lakshan Ganesan',
-    shortName: 'LAKSHAN G.',
+    shortName: 'LAKSHAN G',
     handle: 'LKG // 001',
     role: 'Full Stack Developer | AI & Blockchain',
     location: 'Coimbatore, India',

@@ -55,20 +55,19 @@ export const SocialConnectCard: React.FC = () => {
   ];
 
   return (
-    <div className="w-full p-6 sm:p-10 bg-black/60 border border-white/20 rounded-3xl backdrop-blur-xl shadow-2xl relative overflow-hidden flex flex-col items-center justify-center text-center">
-      {/* Background Volumetric Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#C75B32]/20 rounded-full blur-3xl pointer-events-none" />
-
+    <div className="w-full flex flex-col items-start text-left space-y-4 sm:space-y-6">
       {/* Header Titles */}
-      <h3 className="font-sans font-extrabold text-2xl sm:text-4xl text-white tracking-tight leading-snug drop-shadow-md">
-        Let's build together !
-      </h3>
-      <p className="font-mono text-xs sm:text-sm text-white/70 tracking-wider pt-1.5 pb-6 sm:pb-8">
-        Hover over the icons to connect with me
-      </p>
+      <div className="space-y-2">
+        <h3 className="font-sans font-extrabold text-3xl sm:text-5xl text-white tracking-tight leading-snug drop-shadow-md">
+          Let's build together !
+        </h3>
+        <p className="font-mono text-xs sm:text-sm text-white/80 tracking-wider">
+          Hover over the icons to connect with me
+        </p>
+      </div>
 
       {/* Glassmorphic Dock Container */}
-      <div className="relative bg-zinc-950/80 border border-white/20 rounded-2xl px-5 sm:px-7 py-3.5 sm:py-4 flex items-center space-x-5 sm:space-x-8 shadow-2xl backdrop-blur-md">
+      <div className="relative bg-black/50 border border-white/20 rounded-2xl px-5 sm:px-7 py-3.5 sm:py-4 flex items-center space-x-5 sm:space-x-8 shadow-2xl backdrop-blur-md">
         {/* Animated Tooltip Popup */}
         <AnimatePresence>
           {hoveredIndex !== null && (
