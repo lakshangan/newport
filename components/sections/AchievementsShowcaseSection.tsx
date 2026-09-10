@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Trophy, Award, Medal, Sparkles } from "lucide-react";
 
 interface CounterNumberProps {
@@ -62,37 +62,22 @@ const CounterNumber: React.FC<CounterNumberProps> = ({ value, className }) => {
 export const AchievementsShowcaseSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Scroll Progress for Smooth Expansion & Reveal
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "center center"],
-  });
-
-  // Transform mappings for card expansion
-  const cardScale = useTransform(scrollYProgress, [0, 1], [0.86, 1]);
-  const cardBorderRadius = useTransform(scrollYProgress, [0, 1], ["40px", "24px"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.18, 1.0]);
-  const contentOpacity = useTransform(scrollYProgress, [0.2, 0.85], [0, 1]);
-  const contentY = useTransform(scrollYProgress, [0.2, 0.85], [45, 0]);
-
   return (
     <section
+      id="competitive-milestones"
       ref={containerRef}
-      className="relative w-full py-12 sm:py-24 px-3 sm:px-6 bg-[#080808] border-t border-white/10 overflow-hidden select-none"
+      className="relative w-full py-12 sm:py-24 px-3 sm:px-6 bg-[#080808] border-t border-white/10 overflow-hidden select-none scroll-mt-6"
     >
       {/* Expanding Card Wrapper */}
       <motion.div
-        style={{
-          scale: cardScale,
-          borderRadius: cardBorderRadius,
-        }}
-        className="relative w-full max-w-7xl mx-auto min-h-[80vh] sm:min-h-[85vh] flex items-center justify-center overflow-hidden border border-white/15 shadow-2xl bg-[#0c0c0e] my-auto"
+        initial={{ opacity: 0, scale: 0.94 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full max-w-7xl mx-auto min-h-[80vh] sm:min-h-[85vh] rounded-3xl flex items-center justify-center overflow-hidden border border-white/15 shadow-2xl bg-[#0c0c0e] my-auto"
       >
         {/* Parallax Expanding Background Image */}
-        <motion.div
-          style={{ scale: imageScale }}
-          className="absolute inset-0 z-0 pointer-events-none origin-center"
-        >
+        <div className="absolute inset-0 z-0 pointer-events-none origin-center">
           <Image
             src="/images/number.png"
             alt="Milestones Background"
@@ -101,20 +86,14 @@ export const AchievementsShowcaseSection: React.FC = () => {
             className="object-cover object-left md:object-center filter contrast-110 brightness-110 opacity-100"
             sizes="100vw"
           />
-        </motion.div>
+        </div>
 
         {/* Top & Bottom Vignettes */}
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#080808]/70 via-[#080808]/30 to-transparent z-1 pointer-events-none" />
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#080808]/70 via-[#080808]/30 to-transparent z-1 pointer-events-none" />
 
         {/* Content Container with Smooth Scroll Reveal */}
-        <motion.div
-          style={{
-            opacity: contentOpacity,
-            y: contentY,
-          }}
-          className="max-w-6xl mx-auto w-full px-6 sm:px-12 relative z-10 text-center space-y-12 sm:space-y-16 py-12 sm:py-16 flex flex-col items-center justify-center"
-        >
+        <div className="max-w-6xl mx-auto w-full px-6 sm:px-12 relative z-10 text-center space-y-12 sm:space-y-16 py-12 sm:py-16 flex flex-col items-center justify-center">
           {/* Top Floating Badge */}
           <motion.div
             initial={{ opacity: 0, y: -15 }}
@@ -214,8 +193,7 @@ export const AchievementsShowcaseSection: React.FC = () => {
             </motion.div>
 
           </div>
-
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );

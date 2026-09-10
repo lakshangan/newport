@@ -7,7 +7,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { AnimatedGradient } from '@/components/ui/animated-gradient-with-svg';
-import { Trophy, Award, Zap, Globe, Rocket, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck } from 'lucide-react';
+import { Trophy, Award, Zap, Globe, Rocket, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -151,6 +151,13 @@ export const FlowAboutStorySection: React.FC = () => {
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
 
+  const scrollToCompetitiveMilestones = () => {
+    const el = document.getElementById('competitive-milestones');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   useGSAP(
     () => {
       const container = horizontalContainerRef.current;
@@ -174,12 +181,23 @@ export const FlowAboutStorySection: React.FC = () => {
           end: () => `+=${totalDistance}`,
           invalidateOnRefresh: true,
           anticipatePin: 1,
+          snap: {
+            snapTo: 1 / (totalPanels - 1),
+            duration: { min: 0.15, max: 0.35 },
+            ease: 'power1.inOut',
+          },
           onUpdate: (self) => {
             const index = Math.min(
               totalPanels - 1,
               Math.floor(self.progress * totalPanels + 0.05)
             );
             setActiveSlide(index);
+          },
+          onLeave: () => {
+            const target = document.getElementById('competitive-milestones');
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
           },
         },
       });
@@ -522,17 +540,28 @@ export const FlowAboutStorySection: React.FC = () => {
 
             <div className="max-w-7xl mx-auto w-full space-y-4 sm:space-y-5 relative z-10 my-auto">
               {/* Header */}
-              <div className="space-y-1.5 border-b border-white/10 pb-3 text-left">
-                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-black/70 border border-[#5CE1E6]/40 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase backdrop-blur-md">
-                  <span className="w-2 h-2 rounded-full bg-[#5CE1E6] animate-pulse" />
-                  <span>04 // KEY METRICS &amp; TELEMETRY WORKSPACE</span>
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/10 pb-3 text-left">
+                <div className="space-y-1.5">
+                  <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-black/70 border border-[#5CE1E6]/40 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase backdrop-blur-md">
+                    <span className="w-2 h-2 rounded-full bg-[#5CE1E6] animate-pulse" />
+                    <span>04 // KEY METRICS &amp; TELEMETRY WORKSPACE</span>
+                  </div>
+                  <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-white">
+                    AGENT BENTO METRICS
+                  </h2>
+                  <p className="text-xs sm:text-sm font-light text-white/60 max-w-xl">
+                    Compact multi-agent workspace grid tracking competitive marathons, top placements, and deployed full-stack products.
+                  </p>
                 </div>
-                <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-white">
-                  AGENT BENTO METRICS
-                </h2>
-                <p className="text-xs sm:text-sm font-light text-white/60 max-w-xl">
-                  Compact multi-agent workspace grid tracking competitive marathons, top placements, and deployed full-stack products.
-                </p>
+
+                <button
+                  type="button"
+                  onClick={scrollToCompetitiveMilestones}
+                  className="self-start sm:self-end inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C75B32]/20 hover:bg-[#C75B32] border border-[#C75B32]/40 hover:border-[#C75B32] text-xs font-mono font-bold text-white transition-all shadow-md group cursor-pointer"
+                >
+                  <span>Competitive Milestones</span>
+                  <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform text-[#E88053] group-hover:text-white" />
+                </button>
               </div>
 
               {/* Outer Bento Grid Container */}
@@ -749,9 +778,22 @@ export const FlowAboutStorySection: React.FC = () => {
             </span>
           </div>
 
-          <div className="hidden sm:flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/70 border border-white/10 backdrop-blur-md text-white/50 shadow-lg">
-            <span>HORIZONTAL FLOW</span>
-            <span className="text-[#C75B32] font-semibold">SCROLL ↓ TO ADVANCE →</span>
+          <div className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/70 border border-white/10 backdrop-blur-md text-white/70 shadow-lg pointer-events-auto">
+            {activeSlide < 2 ? (
+              <>
+                <span className="hidden sm:inline text-white/50">HORIZONTAL FLOW</span>
+                <span className="text-[#C75B32] font-semibold">SCROLL ↓ TO ADVANCE →</span>
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={scrollToCompetitiveMilestones}
+                className="flex items-center gap-2 text-[#C75B32] hover:text-[#E88053] font-bold transition-colors cursor-pointer"
+              >
+                <span>COMPETITIVE MILESTONES</span>
+                <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+              </button>
+            )}
           </div>
         </div>
       </div>
