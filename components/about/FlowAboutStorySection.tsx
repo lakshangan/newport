@@ -191,9 +191,9 @@ export const FlowAboutStorySection: React.FC = () => {
       },
     });
 
-    // Horizontal shift across all panels
-    tl.to(panels, {
-      xPercent: -100 * (totalPanels - 1),
+    // Horizontal shift of the continuous track containing panorama background and panels
+    tl.to(track, {
+      x: () => -(window.innerWidth * (totalPanels - 1)),
       ease: 'none',
       duration: 0.82,
     });
@@ -299,14 +299,30 @@ export const FlowAboutStorySection: React.FC = () => {
       >
         <div
           ref={horizontalTrackRef}
-          className="flex flex-row w-[300vw] h-full will-change-transform"
+          className="flex flex-row w-[300vw] h-full will-change-transform relative"
         >
+          {/* Continuous Ultra-Wide Panoramic Desk & Engineering Workspace Background */}
+          <div className="absolute inset-0 z-0 w-full h-full pointer-events-none select-none overflow-hidden">
+            <Image
+              src="/images/slider.png"
+              alt="Creative Engineering Workspace Panorama"
+              fill
+              priority
+              className="object-cover object-center filter brightness-[0.75] contrast-[1.05]"
+              sizes="300vw"
+            />
+            {/* Subtle atmospheric vignette overlays for legibility */}
+            <div className="absolute inset-0 bg-[#08080c]/50 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#08080c] via-transparent to-[#08080c]/80 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
+          </div>
+
           {/* ========================================================================= */}
           {/* PANEL 1 (SLIDE 02): RECOGNITION & COLLEGE ACHIEVEMENTS */}
           {/* ========================================================================= */}
           <div
             id="recognition"
-            className="horizontal-panel w-screen h-screen shrink-0 relative flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-[#08080c]"
+            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
           >
             {/* Background Grid & Volumetric Glows */}
             <div className="absolute inset-0 z-1 bg-[linear-gradient(to_right,#111118_1px,transparent_1px),linear-gradient(to_bottom,#111118_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] opacity-30 pointer-events-none" />
@@ -385,7 +401,7 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="showcase"
-            className="horizontal-panel w-screen h-screen shrink-0 relative flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-[#080808]"
+            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
           >
             {/* Background Grid & Volumetric Ambient Glows */}
             <div className="absolute inset-0 z-1 bg-[linear-gradient(to_right,#1b1b26_1px,transparent_1px),linear-gradient(to_bottom,#1b1b26_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] opacity-25 pointer-events-none" />
@@ -528,7 +544,7 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="metrics"
-            className="horizontal-panel w-screen h-screen shrink-0 relative flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-[#08080c]"
+            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
           >
             {/* Background Glows */}
             <div className="absolute top-1/3 left-1/4 w-[450px] h-[350px] bg-[#5CE1E6]/8 rounded-full blur-[150px] pointer-events-none z-1" />
