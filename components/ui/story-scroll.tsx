@@ -25,13 +25,13 @@ export const FlowSection: React.FC<FlowSectionProps> = ({
     id={id}
     data-flow-section
     aria-label={ariaLabel}
-    className={cx('relative min-h-screen w-full overflow-hidden flex flex-col justify-center py-12', className)}
+    className={cx('relative min-h-screen w-full overflow-hidden flex flex-col justify-center', className)}
     style={style}
   >
     <div
       data-flow-inner
       className={cx(
-        'flow-art-container relative flex min-h-screen w-full flex-col justify-between gap-6 px-[4vw] pt-[clamp(2rem,8vw,4vw)] pb-[4vw]',
+        'flow-art-container relative flex min-h-screen w-full flex-col justify-between gap-4 px-[4vw] py-[2.5vw]',
       )}
     >
       {children}

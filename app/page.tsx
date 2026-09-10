@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -15,16 +14,10 @@ import { FlowAboutStorySection } from '@/components/about/FlowAboutStorySection'
 import { AchievementsShowcaseSection } from '@/components/sections/AchievementsShowcaseSection';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
 import { TechTicker } from '@/components/tech/TechTicker';
-import { DevLabBentoSection } from '@/components/sections/DevLabBentoSection';
 import { ContactSection } from '@/components/contact/ContactSection';
 import { Footer } from '@/components/footer/Footer';
 
 import { Preloader } from '@/components/ui/Preloader';
-
-const SectionDissolveTransition = dynamic(
-  () => import('@/components/sections/SectionDissolveTransition'),
-  { ssr: false }
-);
 
 export default function Home() {
   useEffect(() => {
@@ -86,9 +79,6 @@ export default function Home() {
       {/* Flow Art Story Scroll Showcase */}
       <FlowAboutStorySection />
 
-      {/* WebGL Shader Dissolve Section Transition between Story & Achievements */}
-      <SectionDissolveTransition />
-
       {/* Floating Milestone Showcase (25+ Hackathons, 20+ Finalists, Intl Silambam Bronze) */}
       <AchievementsShowcaseSection />
 
@@ -97,9 +87,6 @@ export default function Home() {
 
       {/* Moving Tech Arsenal Ticker */}
       <TechTicker />
-
-      {/* Dev Lab & Interactive Deployment Stack Bento Grid */}
-      <DevLabBentoSection />
 
       {/* Dramatic Contact CTA */}
       <ContactSection />
