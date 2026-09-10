@@ -158,62 +158,59 @@ export const FlowAboutStorySection: React.FC = () => {
     }
   };
 
-  useGSAP(
-    () => {
-      const container = horizontalContainerRef.current;
-      const track = horizontalTrackRef.current;
-      if (!container || !track) return;
+  useGSAP(() => {
+    const container = horizontalContainerRef.current;
+    const track = horizontalTrackRef.current;
+    if (!container || !track) return;
 
-      const panels = gsap.utils.toArray<HTMLElement>('.horizontal-panel', container);
-      const totalPanels = panels.length;
-      if (totalPanels <= 1) return;
+    const panels = gsap.utils.toArray<HTMLElement>('.horizontal-panel', container);
+    const totalPanels = panels.length;
+    if (totalPanels <= 1) return;
 
-      const totalDistance = window.innerWidth * (totalPanels - 1);
+    // Total scroll duration: horizontal movement + 600px resting buffer on panel 3
+    const totalDistance = window.innerWidth * (totalPanels - 1) + 600;
 
-      const horizontalTween = gsap.to(panels, {
-        xPercent: -100 * (totalPanels - 1),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: container,
-          pin: true,
-          scrub: 1,
-          start: 'top top',
-          end: () => `+=${totalDistance}`,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-          snap: {
-            snapTo: 1 / (totalPanels - 1),
-            duration: { min: 0.15, max: 0.35 },
-            ease: 'power1.inOut',
-          },
-          onUpdate: (self) => {
-            const index = Math.min(
-              totalPanels - 1,
-              Math.floor(self.progress * totalPanels + 0.05)
-            );
-            setActiveSlide(index);
-          },
-          onLeave: () => {
-            const target = document.getElementById('competitive-milestones');
-            if (target) {
-              target.scrollIntoView({ behavior: 'smooth' });
-            }
-          },
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container,
+        pin: true,
+        pinSpacing: true,
+        scrub: 1,
+        start: 'top top',
+        end: () => `+=${totalDistance}`,
+        invalidateOnRefresh: true,
+        anticipatePin: 1,
+        onUpdate: (self) => {
+          const moveProgress = Math.min(1, self.progress / 0.82);
+          const index = Math.min(
+            totalPanels - 1,
+            Math.floor(moveProgress * totalPanels)
+          );
+          setActiveSlide(index);
         },
-      });
+      },
+    });
 
-      ScrollTrigger.refresh();
+    // Horizontal shift across all panels
+    tl.to(panels, {
+      xPercent: -100 * (totalPanels - 1),
+      ease: 'none',
+      duration: 0.82,
+    });
 
-      return () => {
-        horizontalTween.kill();
-        if (horizontalTween.scrollTrigger) horizontalTween.scrollTrigger.kill();
-      };
-    },
-    { scope: horizontalContainerRef }
-  );
+    // Comfortable resting pause on the final panel before unpinning
+    tl.to({}, { duration: 0.18 });
+
+    ScrollTrigger.refresh();
+
+    return () => {
+      tl.kill();
+      if (tl.scrollTrigger) tl.scrollTrigger.kill();
+    };
+  });
 
   return (
-    <div className="w-full relative flex flex-col" aria-label="About the Builder Story Scroll">
+    <div className="w-full relative block" aria-label="About the Builder Story Scroll">
       {/* ========================================================================= */}
       {/* SLIDE 01: 01 — WHO I AM: CRAFTSMANSHIP & TECH STACK (INTRO1 RENAISSANCE ARTWORK) */}
       {/* ========================================================================= */}
