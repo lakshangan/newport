@@ -72,7 +72,7 @@ export default function ScrollAnimation() {
 
       {/* Cinematic Layout Container */}
       <div className="max-w-7xl mx-auto w-full px-6 sm:px-12 relative z-10 flex items-center justify-end">
-        <div className="w-full lg:w-8/12 lg:ml-auto flex items-center justify-start text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-black uppercase tracking-tight leading-none">
+        <div className="w-full lg:w-8/12 lg:ml-auto flex items-center justify-start text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-mono font-bold uppercase tracking-tight leading-none">
 
           {/* Prefix "I LOVE TO" */}
           <span className="text-[#E8E5DF] select-none whitespace-nowrap mr-3 sm:mr-6 shrink-0 drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]">
@@ -80,7 +80,7 @@ export default function ScrollAnimation() {
           </span>
 
           {/* In-Place Auto-Cycling Text Wrapper */}
-          <div className="relative h-[1.3em] font-display font-black uppercase tracking-tight inline-flex items-center min-w-[260px] sm:min-w-[450px] overflow-hidden">
+          <div className="relative h-[1.3em] font-mono font-bold uppercase tracking-tight inline-flex items-center min-w-[260px] sm:min-w-[450px] overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.span
                 key={index}
@@ -88,7 +88,7 @@ export default function ScrollAnimation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -35 }}
                 transition={{ duration: 0.45, ease: [0.25, 1, 0.5, 1] }}
-                className={`absolute left-0 top-0 w-full h-full flex items-center ${currentWord.color} font-display font-black uppercase tracking-tight select-none drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]`}
+                className={`absolute left-0 top-0 w-full h-full flex items-center ${currentWord.color} font-mono font-bold uppercase tracking-tight select-none`}
               >
                 {currentWord.text}
               </motion.span>
