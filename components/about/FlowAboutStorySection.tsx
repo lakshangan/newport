@@ -301,20 +301,20 @@ export const FlowAboutStorySection: React.FC = () => {
           ref={horizontalTrackRef}
           className="flex flex-row w-[300vw] h-full will-change-transform relative"
         >
-          {/* Continuous Ultra-Wide Panoramic Desk & Engineering Workspace Background */}
+          {/* Continuous Ultra-Wide Panoramic Studio & Engineering Workspace Background */}
           <div className="absolute inset-0 z-0 w-full h-full pointer-events-none select-none overflow-hidden">
             <Image
-              src="/images/slider.png"
-              alt="Creative Engineering Workspace Panorama"
+              src="/images/horizontal-workspace.png"
+              alt="Creative Engineering Workspace Studio Panorama"
               fill
               priority
-              className="object-cover object-center filter brightness-[0.75] contrast-[1.05]"
+              className="object-cover object-center filter brightness-[0.78] contrast-[1.08] saturate-[1.05]"
               sizes="300vw"
             />
-            {/* Subtle atmospheric vignette overlays for legibility */}
-            <div className="absolute inset-0 bg-[#08080c]/50 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#08080c] via-transparent to-[#08080c]/80 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
+            {/* Subtle atmospheric vignette and tone mapping overlays */}
+            <div className="absolute inset-0 bg-[#120D0A]/40 backdrop-blur-[0.5px] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907] via-transparent to-[#0C0907]/80 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/60 pointer-events-none" />
           </div>
 
           {/* ========================================================================= */}
@@ -324,72 +324,71 @@ export const FlowAboutStorySection: React.FC = () => {
             id="recognition"
             className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
           >
-            {/* Background Grid & Volumetric Glows */}
-            <div className="absolute inset-0 z-1 bg-[linear-gradient(to_right,#111118_1px,transparent_1px),linear-gradient(to_bottom,#111118_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] opacity-30 pointer-events-none" />
-            <div className="absolute top-1/3 left-1/4 w-[450px] h-[350px] bg-[#5CE1E6]/8 rounded-full blur-[150px] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#C75B32]/10 rounded-full blur-[150px] pointer-events-none z-1" />
+            {/* Ambient Volumetric Glows */}
+            <div className="absolute top-1/3 left-1/4 w-[450px] h-[350px] bg-[#E88053]/10 rounded-full blur-[160px] pointer-events-none z-1" />
+            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#C75B32]/12 rounded-full blur-[150px] pointer-events-none z-1" />
 
             <div className="max-w-7xl mx-auto w-full space-y-5 sm:space-y-6 relative z-10 my-auto">
               {/* Header */}
-              <div className="space-y-2 border-b border-white/10 pb-4 text-left">
-                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-black/70 border border-[#5CE1E6]/40 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase backdrop-blur-md">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#5CE1E6] animate-pulse" />
+              <div className="space-y-2 border-b border-[#D4BC98]/20 pb-4 text-left">
+                <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/30 text-xs font-mono text-[#E88053] tracking-widest uppercase backdrop-blur-md shadow-lg">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
                   <span>02 // RECOGNITION &amp; COLLEGE ACHIEVEMENTS</span>
                 </div>
-                <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white">
+                <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]">
                   RECOGNIZED ACROSS NATIONAL &amp; GLOBAL STAGES
                 </h2>
-                <p className="text-xs sm:text-sm font-light text-white/70 max-w-2xl">
+                <p className="text-xs sm:text-sm font-medium text-[#EADFC9]/95 max-w-2xl bg-[#16120E]/70 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
                   Studying Computer Technology, I’ve served as Campus Ambassador, led technical developer initiatives, and competed across 25+ national and global marathons.
                 </p>
               </div>
 
-              {/* 5 Renaissance Glass Cards Grid */}
+              {/* 5 Warm Bronze Glass Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-                <div className="p-4 sm:p-5 bg-black/60 border border-white/10 rounded-2xl backdrop-blur-xl shadow-xl space-y-2 hover:border-[#5CE1E6]/40 transition-colors">
+                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/95 transition-all group">
                   <div className="text-xs font-mono text-[#5CE1E6] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Award className="w-4 h-4" /> Tech Hub Lead &amp; Campus Ambassador
                   </div>
-                  <p className="font-sans text-xs text-white/80 leading-relaxed font-medium">
-                    <strong>Tech Hub Lead</strong> at College Tech Organization &amp; active Campus Ambassador driving Web3 &amp; AI developer workshops, guiding peer developers, and leading campus tech initiatives.
+                  <p className="font-sans text-xs text-[#EADFC9]/90 leading-relaxed font-medium">
+                    <strong className="text-white font-bold">Tech Hub Lead</strong> at College Tech Organization &amp; active Campus Ambassador driving Web3 &amp; AI developer workshops, guiding peer developers, and leading campus tech initiatives.
                   </p>
                 </div>
 
-                <div className="p-4 sm:p-5 bg-black/60 border border-white/10 rounded-2xl backdrop-blur-xl shadow-xl space-y-2 hover:border-[#FACC15]/40 transition-colors">
+                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#FACC15]/60 hover:bg-[#1E1712]/95 transition-all group">
                   <div className="text-xs font-mono text-[#FACC15] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Trophy className="w-4 h-4" /> 1st Place Track Winner
                   </div>
-                  <p className="font-sans text-xs text-white/80 leading-relaxed font-medium">
-                    🏆 <strong>Build On Chain @ NIT Calicut</strong> — 1st Place Track Prize for EVM smart contract tokenization and liquidity vault innovation.
+                  <p className="font-sans text-xs text-[#EADFC9]/90 leading-relaxed font-medium">
+                    🏆 <strong className="text-white font-bold">Build On Chain @ NIT Calicut</strong> — 1st Place Track Prize for EVM smart contract tokenization and liquidity vault innovation.
                   </p>
                 </div>
 
-                <div className="p-4 sm:p-5 bg-black/60 border border-white/10 rounded-2xl backdrop-blur-xl shadow-xl space-y-2 hover:border-[#E88053]/40 transition-colors">
+                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#E88053]/60 hover:bg-[#1E1712]/95 transition-all group">
                   <div className="text-xs font-mono text-[#E88053] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Globe className="w-4 h-4" /> Smart India Hackathon Finalist
                   </div>
-                  <p className="font-sans text-xs text-white/80 leading-relaxed font-medium">
-                    🇮🇳 National Stage Finalist in India&apos;s flagship government technology competition building real-world software solutions.
+                  <p className="font-sans text-xs text-[#EADFC9]/90 leading-relaxed font-medium">
+                    🇮🇳 <strong className="text-white font-bold">National Stage Finalist</strong> in India&apos;s flagship government technology competition building real-world software solutions.
                   </p>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-                <div className="p-4 sm:p-5 bg-black/60 border border-white/10 rounded-2xl backdrop-blur-xl shadow-xl space-y-2 hover:border-[#C084FC]/40 transition-colors">
+                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#C084FC]/60 hover:bg-[#1E1712]/95 transition-all group">
                   <div className="text-xs font-mono text-[#C084FC] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <ShieldCheck className="w-4 h-4" /> OpenLedger &amp; Uniswap Incubator
                   </div>
-                  <p className="font-sans text-xs text-white/80 leading-relaxed font-medium">
-                    Technical Researcher with OpenLedger (AI/Web3 data pipelines) and selected for the Uniswap v4 Hook Incubator cohort.
+                  <p className="font-sans text-xs text-[#EADFC9]/90 leading-relaxed font-medium">
+                    <strong className="text-white font-bold">Technical Researcher</strong> with OpenLedger (AI/Web3 data pipelines) and selected for the Uniswap v4 Hook Incubator cohort.
                   </p>
                 </div>
 
-                <div className="p-4 sm:p-5 bg-black/60 border border-white/10 rounded-2xl backdrop-blur-xl shadow-xl space-y-2 hover:border-[#5CE1E6]/40 transition-colors">
+                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/95 transition-all group">
                   <div className="text-xs font-mono text-[#5CE1E6] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Monitor className="w-4 h-4" /> International Silambam Medalist
                   </div>
-                  <p className="font-sans text-xs text-white/80 leading-relaxed font-medium">
-                    Bronze Medalist at the International Silambam Championship—combining physical mastery, focus, and digital precision.
+                  <p className="font-sans text-xs text-[#EADFC9]/90 leading-relaxed font-medium">
+                    <strong className="text-white font-bold">Bronze Medalist</strong> at the International Silambam Championship—combining physical mastery, focus, and digital precision.
                   </p>
                 </div>
               </div>
@@ -403,24 +402,23 @@ export const FlowAboutStorySection: React.FC = () => {
             id="showcase"
             className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
           >
-            {/* Background Grid & Volumetric Ambient Glows */}
-            <div className="absolute inset-0 z-1 bg-[linear-gradient(to_right,#1b1b26_1px,transparent_1px),linear-gradient(to_bottom,#1b1b26_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] opacity-25 pointer-events-none" />
-            <div className="absolute top-1/4 left-1/3 w-[500px] h-[400px] bg-[#C75B32]/10 rounded-full blur-[170px] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#C75B32]/8 rounded-full blur-[150px] pointer-events-none z-1" />
+            {/* Ambient Volumetric Glows */}
+            <div className="absolute top-1/4 left-1/3 w-[500px] h-[400px] bg-[#C75B32]/12 rounded-full blur-[170px] pointer-events-none z-1" />
+            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#E88053]/10 rounded-full blur-[150px] pointer-events-none z-1" />
 
             <div className="space-y-4 sm:space-y-5 my-auto max-w-7xl mx-auto w-full relative z-10">
               {/* Header */}
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-white/15 pb-3">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-[#D4BC98]/20 pb-3">
                 <div className="space-y-1.5">
-                  <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-black/60 border border-[#C75B32]/40 text-xs font-mono text-[#C75B32] tracking-wider uppercase backdrop-blur-md shadow-lg">
-                    <Sparkles className="w-3.5 h-3.5" />
+                  <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/30 text-xs font-mono text-[#E88053] tracking-wider uppercase backdrop-blur-md shadow-lg">
+                    <Sparkles className="w-3.5 h-3.5 text-[#E88053]" />
                     <span>03 // LATEST DEPLOYMENTS</span>
                   </div>
-                  <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white leading-none">
-                    CREATIVE <span className="text-[#C75B32] drop-shadow-[0_0_25px_rgba(199,91,50,0.5)]">SHOWCASE</span>
+                  <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] leading-none drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]">
+                    CREATIVE <span className="text-[#E88053] drop-shadow-[0_0_25px_rgba(232,128,83,0.5)]">SHOWCASE</span>
                   </h2>
                 </div>
-                <p className="font-sans text-xs sm:text-sm max-w-md text-white/80 font-medium leading-relaxed bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/10 shadow-xl">
+                <p className="font-sans text-xs sm:text-sm max-w-md text-[#EADFC9]/95 font-medium leading-relaxed bg-[#16120E]/70 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
                   Pushing the boundaries of full-stack engineering with 3D WebGL interactions, AI agents, smart contracts, and cryptographic tooling.
                 </p>
               </div>
@@ -430,26 +428,26 @@ export const FlowAboutStorySection: React.FC = () => {
                 {SHOWCASE_CARDS.map((card) => (
                   <div
                     key={card.id}
-                    className="rounded-2xl border border-white/15 bg-[#0e0e14]/90 backdrop-blur-xl overflow-hidden shadow-2xl hover:border-[#C75B32]/80 hover:bg-[#12121a] transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(199,91,50,0.2)]"
+                    className="rounded-2xl border border-[#D4BC98]/20 bg-[#16120E]/90 backdrop-blur-xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.5)] hover:border-[#C75B32] hover:bg-[#1E1712] transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(199,91,50,0.25)]"
                   >
                     {/* macOS Window Header */}
-                    <div className="px-3 py-1.5 bg-black/50 border-b border-white/15 flex items-center justify-between backdrop-blur-md">
+                    <div className="px-3 py-1.5 bg-[#0E0B08]/90 border-b border-[#D4BC98]/15 flex items-center justify-between backdrop-blur-md">
                       <div className="flex items-center gap-1">
                         <span className="w-2 h-2 rounded-full bg-[#FF5F56]" />
                         <span className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
                         <span className="w-2 h-2 rounded-full bg-[#27C93F]" />
                       </div>
-                      <div className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[9px] font-mono text-white/80 truncate max-w-[150px] backdrop-blur-sm">
+                      <div className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[9px] font-mono text-[#EADFC9] truncate max-w-[150px] backdrop-blur-sm">
                         {card.domain}
                       </div>
-                      <span className="text-[8px] font-mono font-bold text-[#C75B32] uppercase tracking-wider">
+                      <span className="text-[8px] font-mono font-bold text-[#E88053] uppercase tracking-wider">
                         {card.status}
                       </span>
                     </div>
 
                     {/* Card Screen Preview Container */}
                     {card.type === 'cli' ? (
-                      <div className="relative w-full h-[115px] sm:h-[130px] bg-[#0a0b10]/95 p-3 font-mono text-[10px] flex flex-col justify-between overflow-hidden border-b border-white/15 group-hover:border-[#C75B32]/40 transition-colors">
+                      <div className="relative w-full h-[115px] sm:h-[130px] bg-[#0A0806]/95 p-3 font-mono text-[10px] flex flex-col justify-between overflow-hidden border-b border-[#D4BC98]/15 group-hover:border-[#C75B32]/40 transition-colors">
                         <div className="space-y-1">
                           <div className="text-white/40 text-[9px]">$ stego-cli --embed --file secret.enc</div>
                           <div className="text-emerald-400 font-bold">[+] Encrypting AES-256...</div>
@@ -462,14 +460,14 @@ export const FlowAboutStorySection: React.FC = () => {
                             href={card.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#C75B32] hover:underline font-bold flex items-center gap-0.5"
+                            className="text-[#E88053] hover:underline font-bold flex items-center gap-0.5"
                           >
                             GitHub CLI ↗
                           </a>
                         </div>
                       </div>
                     ) : (
-                      <div className="relative w-full h-[115px] sm:h-[130px] bg-black/60 overflow-hidden group/screen border-b border-white/15">
+                      <div className="relative w-full h-[115px] sm:h-[130px] bg-black/70 overflow-hidden group/screen border-b border-[#D4BC98]/15">
                         <iframe
                           src={card.url}
                           title={card.title}
@@ -490,9 +488,9 @@ export const FlowAboutStorySection: React.FC = () => {
                     )}
 
                     {/* Card Body & Details */}
-                    <div className="p-3 sm:p-3.5 space-y-2 bg-black/20 backdrop-blur-md flex-1 flex flex-col justify-between">
+                    <div className="p-3 sm:p-3.5 space-y-2 bg-[#120E0B]/60 backdrop-blur-md flex-1 flex flex-col justify-between">
                       <div className="space-y-1">
-                        <h3 className="font-mono text-xs sm:text-sm font-bold text-white uppercase group-hover:text-[#C75B32] transition-colors flex items-center justify-between gap-2">
+                        <h3 className="font-mono text-xs sm:text-sm font-bold text-[#FFFDF9] uppercase group-hover:text-[#E88053] transition-colors flex items-center justify-between gap-2">
                           <span className="truncate">{card.title}</span>
                           <div className="flex items-center gap-1.5 shrink-0">
                             {card.githubUrl && (
@@ -500,7 +498,7 @@ export const FlowAboutStorySection: React.FC = () => {
                                 href={card.githubUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="px-2 py-0.5 rounded bg-white/10 hover:bg-[#C75B32] hover:text-white border border-white/15 text-[#E8E5DF] transition-all text-[9px] font-mono flex items-center gap-0.5 shadow-sm"
+                                className="px-2 py-0.5 rounded bg-white/10 hover:bg-[#C75B32] hover:text-white border border-[#D4BC98]/20 text-[#EADFC9] transition-all text-[9px] font-mono flex items-center gap-0.5 shadow-sm"
                                 title="View GitHub Repository"
                               >
                                 Code ↗
@@ -510,23 +508,23 @@ export const FlowAboutStorySection: React.FC = () => {
                               href={card.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="p-1 rounded bg-white/10 hover:bg-[#C75B32] hover:text-white border border-white/15 text-[#C75B32] hover:text-white transition-all"
+                              className="p-1 rounded bg-white/10 hover:bg-[#C75B32] hover:text-white border border-[#D4BC98]/20 text-[#E88053] hover:text-white transition-all"
                               title="Open Live Website"
                             >
                               <ExternalLink className="w-3 h-3" />
                             </a>
                           </div>
                         </h3>
-                        <p className="font-sans text-[11px] sm:text-xs text-white/80 font-medium leading-snug line-clamp-2">
+                        <p className="font-sans text-[11px] sm:text-xs text-[#EADFC9]/85 font-medium leading-snug line-clamp-2">
                           {card.description}
                         </p>
                       </div>
 
-                      <div className="pt-2 border-t border-white/15 flex flex-wrap gap-1 font-mono text-[8px] sm:text-[9px] font-bold">
+                      <div className="pt-2 border-t border-[#D4BC98]/15 flex flex-wrap gap-1 font-mono text-[8px] sm:text-[9px] font-bold">
                         {card.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-0.5 bg-white/10 border border-white/20 text-white/90 rounded uppercase tracking-wider backdrop-blur-md shadow-sm"
+                            className="px-2 py-0.5 bg-[#221A14]/90 border border-[#D4BC98]/20 text-[#EADFC9] rounded uppercase tracking-wider backdrop-blur-md shadow-sm"
                           >
                             {tag}
                           </span>
@@ -553,16 +551,16 @@ export const FlowAboutStorySection: React.FC = () => {
 
             <div className="max-w-7xl mx-auto w-full space-y-4 sm:space-y-5 relative z-10 my-auto">
               {/* Header */}
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/10 pb-3 text-left">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#D4BC98]/20 pb-3 text-left">
                 <div className="space-y-1.5">
-                  <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-black/70 border border-[#5CE1E6]/40 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase backdrop-blur-md">
+                  <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/90 border border-[#5CE1E6]/40 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase backdrop-blur-md shadow-lg">
                     <span className="w-2 h-2 rounded-full bg-[#5CE1E6] animate-pulse" />
                     <span>04 // KEY METRICS &amp; TELEMETRY WORKSPACE</span>
                   </div>
-                  <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-white">
+                  <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]">
                     AGENT BENTO METRICS
                   </h2>
-                  <p className="text-xs sm:text-sm font-light text-white/60 max-w-xl">
+                  <p className="text-xs sm:text-sm font-medium text-[#EADFC9]/90 max-w-xl">
                     Compact multi-agent workspace grid tracking competitive marathons, top placements, and deployed full-stack products.
                   </p>
                 </div>
@@ -570,7 +568,7 @@ export const FlowAboutStorySection: React.FC = () => {
                 <button
                   type="button"
                   onClick={scrollToCompetitiveMilestones}
-                  className="self-start sm:self-end inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C75B32]/20 hover:bg-[#C75B32] border border-[#C75B32]/40 hover:border-[#C75B32] text-xs font-mono font-bold text-white transition-all shadow-md group cursor-pointer"
+                  className="self-start sm:self-end inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C75B32]/30 hover:bg-[#C75B32] border border-[#C75B32]/60 hover:border-[#C75B32] text-xs font-mono font-bold text-white transition-all shadow-md group cursor-pointer"
                 >
                   <span>Competitive Milestones</span>
                   <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform text-[#E88053] group-hover:text-white" />
@@ -578,7 +576,7 @@ export const FlowAboutStorySection: React.FC = () => {
               </div>
 
               {/* Outer Bento Grid Container */}
-              <div className="p-3 sm:p-5 rounded-[1.5rem] sm:rounded-[2rem] bg-[#07070a]/95 border border-white/10 backdrop-blur-xl shadow-2xl space-y-3">
+              <div className="p-3 sm:p-5 rounded-[1.5rem] sm:rounded-[2rem] bg-[#14100C]/90 border border-[#D4BC98]/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] space-y-3">
                 {/* Top Row: 3 Agent Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {/* Card 1: Hackathon Pipeline */}
@@ -587,7 +585,7 @@ export const FlowAboutStorySection: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.05 }}
-                    className="relative overflow-hidden rounded-xl bg-[#0e0e14] border border-white/10 p-4 flex flex-col justify-between hover:border-[#5CE1E6]/40 transition-all group"
+                    className="relative overflow-hidden rounded-xl bg-[#18130F]/90 border border-[#5CE1E6]/30 p-4 flex flex-col justify-between hover:border-[#5CE1E6]/60 transition-all group shadow-lg"
                   >
                     <AnimatedGradient colors={["#5CE1E6", "#3B82F6", "#1E40AF"]} speed={0.08} blur="medium" />
 
@@ -597,18 +595,18 @@ export const FlowAboutStorySection: React.FC = () => {
                           <Trophy className="w-4 h-4 text-[#5CE1E6]" />
                           Hackathon Pipeline
                         </h3>
-                        <span className="px-2 py-0.5 rounded-full bg-[#5CE1E6]/10 border border-[#5CE1E6]/30 text-[9px] font-mono text-[#5CE1E6] uppercase">
+                        <span className="px-2 py-0.5 rounded-full bg-[#5CE1E6]/15 border border-[#5CE1E6]/30 text-[9px] font-mono text-[#5CE1E6] uppercase">
                           25+ MARATHONS
                         </span>
                       </div>
-                      <p className="text-xs text-white/60 font-sans leading-relaxed">
+                      <p className="text-xs text-[#EADFC9]/85 font-sans leading-relaxed">
                         Visualise 25+ hackathons &amp; rapid software shipping workflows in real time.
                       </p>
                     </div>
 
-                    <div className="relative z-10 mt-3 p-2.5 bg-[#08080c] border border-white/10 rounded-lg space-y-1 font-mono">
+                    <div className="relative z-10 mt-3 p-2.5 bg-[#0C0907]/90 border border-white/10 rounded-lg space-y-1 font-mono">
                       <div className="flex justify-between items-center text-xs">
-                        <span className="text-white/60 text-xs">Total Competed:</span>
+                        <span className="text-[#EADFC9]/70 text-xs">Total Competed:</span>
                         <span className="text-xl sm:text-2xl font-bold text-[#5CE1E6] font-display">
                           <CounterNumber value="25+" />
                         </span>
@@ -626,7 +624,7 @@ export const FlowAboutStorySection: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.1 }}
-                    className="relative overflow-hidden rounded-xl bg-[#0e0e14] border border-white/10 p-4 flex flex-col justify-between hover:border-[#C75B32]/40 transition-all group"
+                    className="relative overflow-hidden rounded-xl bg-[#18130F]/90 border border-[#C75B32]/30 p-4 flex flex-col justify-between hover:border-[#C75B32]/60 transition-all group shadow-lg"
                   >
                     <AnimatedGradient colors={["#C75B32", "#E88053", "#FF6B35"]} speed={0.08} blur="medium" />
 
@@ -636,25 +634,25 @@ export const FlowAboutStorySection: React.FC = () => {
                           <Award className="w-4 h-4 text-[#C75B32]" />
                           Finalist Monitor
                         </h3>
-                        <span className="px-2 py-0.5 rounded-full bg-[#C75B32]/10 border border-[#C75B32]/30 text-[9px] font-mono text-[#C75B32] uppercase">
+                        <span className="px-2 py-0.5 rounded-full bg-[#C75B32]/15 border border-[#C75B32]/30 text-[9px] font-mono text-[#C75B32] uppercase">
                           20+ PLACEMENTS
                         </span>
                       </div>
-                      <p className="text-xs text-white/60 font-sans leading-relaxed">
+                      <p className="text-xs text-[#EADFC9]/85 font-sans leading-relaxed">
                         Track 20+ top-tier placements &amp; high-impact prototype success rates.
                       </p>
                     </div>
 
-                    <div className="relative z-10 mt-3 p-2.5 bg-[#08080c] border border-white/10 rounded-lg space-y-1 font-mono">
+                    <div className="relative z-10 mt-3 p-2.5 bg-[#0C0907]/90 border border-white/10 rounded-lg space-y-1 font-mono">
                       <div className="flex justify-between items-center text-xs">
-                        <span className="text-white/60 text-xs">Finalist Placements:</span>
-                        <span className="text-xl sm:text-2xl font-bold text-[#C75B32] font-display">
+                        <span className="text-[#EADFC9]/70 text-xs">Finalist Placements:</span>
+                        <span className="text-xl sm:text-2xl font-bold text-[#E88053] font-display">
                           <CounterNumber value="20+" />
                         </span>
                       </div>
                       <div className="flex items-center justify-between pt-1 border-t border-white/10 text-[10px] text-white/50">
                         <span>Success Rate: ~80%</span>
-                        <span className="text-[#C75B32] font-bold">TOP-TIER</span>
+                        <span className="text-[#E88053] font-bold">TOP-TIER</span>
                       </div>
                     </div>
                   </motion.div>
@@ -665,7 +663,7 @@ export const FlowAboutStorySection: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.15 }}
-                    className="relative overflow-hidden rounded-xl bg-[#0e0e14] border border-white/10 p-4 flex flex-col justify-between hover:border-[#FACC15]/40 transition-all group"
+                    className="relative overflow-hidden rounded-xl bg-[#18130F]/90 border border-[#FACC15]/30 p-4 flex flex-col justify-between hover:border-[#FACC15]/60 transition-all group shadow-lg"
                   >
                     <AnimatedGradient colors={["#FACC15", "#E88053", "#C75B32"]} speed={0.08} blur="medium" />
 
@@ -675,23 +673,23 @@ export const FlowAboutStorySection: React.FC = () => {
                           <Zap className="w-4 h-4 text-[#FACC15]" />
                           Victory Feed
                         </h3>
-                        <span className="px-2 py-0.5 rounded-full bg-[#FACC15]/10 border border-[#FACC15]/30 text-[9px] font-mono text-[#FACC15] uppercase">
+                        <span className="px-2 py-0.5 rounded-full bg-[#FACC15]/15 border border-[#FACC15]/30 text-[9px] font-mono text-[#FACC15] uppercase">
                           1ST PLACE
                         </span>
                       </div>
-                      <p className="text-xs text-white/60 font-sans leading-relaxed">
+                      <p className="text-xs text-[#EADFC9]/85 font-sans leading-relaxed">
                         Real-time log of 1st place track wins &amp; EVM smart contract innovations.
                       </p>
                     </div>
 
-                    <div className="relative z-10 mt-3 p-2.5 bg-[#08080c] border border-white/10 rounded-lg space-y-1 font-mono text-xs">
-                      <div className="flex items-center justify-between text-white/80">
+                    <div className="relative z-10 mt-3 p-2.5 bg-[#0C0907]/90 border border-white/10 rounded-lg space-y-1 font-mono text-xs">
+                      <div className="flex items-center justify-between text-white/90">
                         <span className="truncate">🏆 Build On Chain @ NIT Calicut</span>
                         <span className="text-[#FACC15] font-bold font-display text-sm">
                           <CounterNumber value="01" />
                         </span>
                       </div>
-                      <div className="text-[10px] text-white/50 truncate">
+                      <div className="text-[10px] text-[#EADFC9]/60 truncate">
                         EVM Smart Contract Innovation
                       </div>
                     </div>
@@ -706,7 +704,7 @@ export const FlowAboutStorySection: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.2 }}
-                    className="md:col-span-3 relative overflow-hidden rounded-xl bg-[#0e0e14] border border-white/10 p-4 flex flex-col justify-between hover:border-[#C084FC]/40 transition-all group"
+                    className="md:col-span-3 relative overflow-hidden rounded-xl bg-[#18130F]/90 border border-[#C084FC]/30 p-4 flex flex-col justify-between hover:border-[#C084FC]/60 transition-all group shadow-lg"
                   >
                     <AnimatedGradient colors={["#C084FC", "#8B5CF6", "#5CE1E6"]} speed={0.08} blur="medium" />
 
@@ -716,23 +714,23 @@ export const FlowAboutStorySection: React.FC = () => {
                           <Globe className="w-4 h-4 text-[#C084FC]" />
                           Global Recognition
                         </h3>
-                        <span className="px-2 py-0.5 rounded-full bg-[#C084FC]/10 border border-[#C084FC]/30 text-[9px] font-mono text-[#C084FC] uppercase">
+                        <span className="px-2 py-0.5 rounded-full bg-[#C084FC]/15 border border-[#C084FC]/30 text-[9px] font-mono text-[#C084FC] uppercase">
                           2 SELECTIONS
                         </span>
                       </div>
-                      <p className="text-xs text-white/60 font-sans leading-relaxed">
+                      <p className="text-xs text-[#EADFC9]/85 font-sans leading-relaxed">
                         Selected across India&apos;s flagship Smart India Hackathon &amp; UNESCO-IOC Ocean Platform.
                       </p>
                     </div>
 
                     <div className="relative z-10 mt-3 grid grid-cols-2 gap-2 font-mono text-xs">
-                      <div className="p-2 bg-[#08080c] border border-white/10 rounded-lg space-y-0.5">
+                      <div className="p-2 bg-[#0C0907]/90 border border-white/10 rounded-lg space-y-0.5">
                         <span className="text-[#C084FC] font-bold block text-xs">Smart India Hackathon</span>
-                        <span className="text-[10px] text-white/50">National Stage Finalist</span>
+                        <span className="text-[10px] text-[#EADFC9]/60">National Stage Finalist</span>
                       </div>
-                      <div className="p-2 bg-[#08080c] border border-white/10 rounded-lg space-y-0.5">
+                      <div className="p-2 bg-[#0C0907]/90 border border-white/10 rounded-lg space-y-0.5">
                         <span className="text-[#5CE1E6] font-bold block text-xs">UNESCO-IOC Network</span>
-                        <span className="text-[10px] text-white/50">Circle Global Selection</span>
+                        <span className="text-[10px] text-[#EADFC9]/60">Circle Global Selection</span>
                       </div>
                     </div>
                   </motion.div>
@@ -743,7 +741,7 @@ export const FlowAboutStorySection: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.25 }}
-                    className="md:col-span-2 relative overflow-hidden rounded-xl bg-[#0e0e14] border border-white/10 p-4 flex flex-col justify-between hover:border-[#10B981]/40 transition-all group"
+                    className="md:col-span-2 relative overflow-hidden rounded-xl bg-[#18130F]/90 border border-[#10B981]/30 p-4 flex flex-col justify-between hover:border-[#10B981]/60 transition-all group shadow-lg"
                   >
                     <AnimatedGradient colors={["#10B981", "#059669", "#3B82F6"]} speed={0.08} blur="medium" />
 
@@ -753,18 +751,18 @@ export const FlowAboutStorySection: React.FC = () => {
                           <Rocket className="w-4 h-4 text-[#10B981]" />
                           Deployment Inspector
                         </h3>
-                        <span className="px-2 py-0.5 rounded-full bg-[#10B981]/10 border border-[#10B981]/30 text-[9px] font-mono text-[#10B981] uppercase">
+                        <span className="px-2 py-0.5 rounded-full bg-[#10B981]/15 border border-[#10B981]/30 text-[9px] font-mono text-[#10B981] uppercase">
                           15+ DEPLOYMENTS
                         </span>
                       </div>
-                      <p className="text-xs text-white/60 font-sans leading-relaxed">
+                      <p className="text-xs text-[#EADFC9]/85 font-sans leading-relaxed">
                         Full-stack web apps, AI provenance engines, &amp; EVM vaults.
                       </p>
                     </div>
 
-                    <div className="relative z-10 mt-3 p-2.5 bg-[#08080c] border border-white/10 rounded-lg flex justify-between items-center font-mono">
+                    <div className="relative z-10 mt-3 p-2.5 bg-[#0C0907]/90 border border-white/10 rounded-lg flex justify-between items-center font-mono">
                       <div className="space-y-0.5">
-                        <span className="text-xs text-white/60 block">Shipped Applications:</span>
+                        <span className="text-xs text-[#EADFC9]/70 block">Shipped Applications:</span>
                         <span className="text-[10px] text-[#10B981] flex items-center gap-1">
                           <CheckCircle2 className="w-3.5 h-3.5" /> VERIFIED DEPLOYED
                         </span>
@@ -782,8 +780,8 @@ export const FlowAboutStorySection: React.FC = () => {
 
         {/* Bottom Horizontal Scroll Progress HUD */}
         <div className="absolute bottom-4 left-6 right-6 z-20 flex items-center justify-between pointer-events-none text-xs font-mono">
-          <div className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/70 border border-white/10 backdrop-blur-md text-white/80 shadow-lg">
-            <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
+          <div className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/20 backdrop-blur-xl text-[#FFFDF9] shadow-2xl">
+            <span className="w-2 h-2 rounded-full bg-[#E88053] animate-pulse" />
             <span className="font-bold">
               {activeSlide === 0 && '01 / 03 — RECOGNITION & ACHIEVEMENTS'}
               {activeSlide === 1 && '02 / 03 — CREATIVE SHOWCASE'}
@@ -791,17 +789,17 @@ export const FlowAboutStorySection: React.FC = () => {
             </span>
           </div>
 
-          <div className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/70 border border-white/10 backdrop-blur-md text-white/70 shadow-lg pointer-events-auto">
+          <div className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/20 backdrop-blur-xl text-[#EADFC9] shadow-2xl pointer-events-auto">
             {activeSlide < 2 ? (
               <>
-                <span className="hidden sm:inline text-white/50">HORIZONTAL FLOW</span>
-                <span className="text-[#C75B32] font-semibold">SCROLL ↓ TO ADVANCE →</span>
+                <span className="hidden sm:inline text-[#EADFC9]/60">HORIZONTAL FLOW</span>
+                <span className="text-[#E88053] font-semibold">SCROLL ↓ TO ADVANCE →</span>
               </>
             ) : (
               <button
                 type="button"
                 onClick={scrollToCompetitiveMilestones}
-                className="flex items-center gap-2 text-[#C75B32] hover:text-[#E88053] font-bold transition-colors cursor-pointer"
+                className="flex items-center gap-2 text-[#E88053] hover:text-white font-bold transition-colors cursor-pointer"
               >
                 <span>COMPETITIVE MILESTONES</span>
                 <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
