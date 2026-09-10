@@ -149,6 +149,7 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
 export const FlowAboutStorySection: React.FC = () => {
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
+  const horizontalBgRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
 
   const scrollToCompetitiveMilestones = () => {
@@ -161,6 +162,7 @@ export const FlowAboutStorySection: React.FC = () => {
   useGSAP(() => {
     const container = horizontalContainerRef.current;
     const track = horizontalTrackRef.current;
+    const bg = horizontalBgRef.current;
     if (!container || !track) return;
 
     const panels = gsap.utils.toArray<HTMLElement>('.horizontal-panel', container);
@@ -191,12 +193,32 @@ export const FlowAboutStorySection: React.FC = () => {
       },
     });
 
-    // Horizontal shift of the continuous track containing panorama background and panels
-    tl.to(track, {
-      x: () => -(window.innerWidth * (totalPanels - 1)),
-      ease: 'none',
-      duration: 0.82,
-    });
+    // Horizontal shift of the continuous track containing panels
+    tl.to(
+      track,
+      {
+        x: () => -(window.innerWidth * (totalPanels - 1)),
+        ease: 'none',
+        duration: 0.82,
+      },
+      0
+    );
+
+    // Panoramic shift of the unzoomed background image across its native aspect ratio
+    if (bg) {
+      tl.to(
+        bg,
+        {
+          x: () => {
+            const maxScroll = Math.max(0, bg.offsetWidth - window.innerWidth);
+            return -maxScroll;
+          },
+          ease: 'none',
+          duration: 0.82,
+        },
+        0
+      );
+    }
 
     // Comfortable resting pause on the final panel before unpinning
     tl.to({}, { duration: 0.18 });
@@ -295,27 +317,34 @@ export const FlowAboutStorySection: React.FC = () => {
       {/* ========================================================================= */}
       <div
         ref={horizontalContainerRef}
-        className="relative w-full h-screen overflow-hidden bg-[#08080c] select-none"
+        className="relative w-full h-screen overflow-hidden bg-[#0C0907] select-none"
       >
+        {/* Continuous Panoramic Studio & Engineering Workspace Background */}
+        {/* Sized with natural 2048:768 aspect ratio (266.67vh) so the full height is visible with ZERO zoom */}
         <div
-          ref={horizontalTrackRef}
-          className="flex flex-row w-[300vw] h-full will-change-transform relative"
+          ref={horizontalBgRef}
+          className="absolute inset-y-0 left-0 h-full w-[266.67vh] min-w-full pointer-events-none select-none z-0 overflow-hidden will-change-transform"
         >
-          {/* Continuous Ultra-Wide Panoramic Studio & Engineering Workspace Background */}
-          <div className="absolute inset-0 z-0 w-full h-full pointer-events-none select-none overflow-hidden">
+          <div className="relative w-full h-full">
             <Image
               src="/images/horizontal-workspace.png"
               alt="Creative Engineering Workspace Studio Panorama"
               fill
               priority
-              className="object-cover object-center filter brightness-[0.78] contrast-[1.08] saturate-[1.05]"
-              sizes="300vw"
+              className="object-cover object-left md:object-center filter brightness-[0.85] contrast-[1.05]"
+              sizes="267vh"
             />
             {/* Subtle atmospheric vignette and tone mapping overlays */}
-            <div className="absolute inset-0 bg-[#120D0A]/40 backdrop-blur-[0.5px] pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907] via-transparent to-[#0C0907]/80 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/60 pointer-events-none" />
+            <div className="absolute inset-0 bg-[#0C0907]/25 backdrop-blur-[0.2px] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907]/90 via-transparent to-[#0C0907]/70 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 pointer-events-none" />
           </div>
+        </div>
+
+        <div
+          ref={horizontalTrackRef}
+          className="flex flex-row w-[300vw] h-full will-change-transform relative z-10"
+        >
 
           {/* ========================================================================= */}
           {/* PANEL 1 (SLIDE 02): RECOGNITION & COLLEGE ACHIEVEMENTS */}
