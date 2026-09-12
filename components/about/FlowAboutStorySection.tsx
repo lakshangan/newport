@@ -367,13 +367,12 @@ export const FlowAboutStorySection: React.FC = () => {
               alt="Creative Engineering Workspace Studio Panorama"
               fill
               priority
-              className="object-cover object-left md:object-center filter brightness-[0.85] contrast-[1.05]"
+              className="object-cover object-left md:object-center filter brightness-[1.05] contrast-[1.02] saturate-[1.08]"
               sizes="267vh"
             />
-            {/* Subtle atmospheric vignette and tone mapping overlays */}
-            <div className="absolute inset-0 bg-[#0C0907]/25 backdrop-blur-[0.2px] pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907]/90 via-transparent to-[#0C0907]/70 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 pointer-events-none" />
+            {/* Luminous warm ambient vignette - soft at outer edges only so text remains crisp while studio shines through */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907]/55 via-transparent to-[#0C0907]/35 pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(12,9,7,0.35)_100%)] pointer-events-none" />
           </div>
         </div>
 
@@ -389,21 +388,21 @@ export const FlowAboutStorySection: React.FC = () => {
             id="recognition"
             className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
           >
-            {/* Ambient Volumetric Glows */}
-            <div className="absolute top-1/3 left-1/4 w-[450px] h-[350px] bg-[#E88053]/10 rounded-full blur-[160px] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#C75B32]/12 rounded-full blur-[150px] pointer-events-none z-1" />
+            {/* Ambient Volumetric Glows - Warm Studio Golden Hour */}
+            <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[150px] pointer-events-none z-1" />
+            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[160px] pointer-events-none z-1" />
 
             <div className="max-w-7xl mx-auto w-full space-y-5 sm:space-y-6 relative z-10 my-auto">
               {/* Header */}
-              <div className="space-y-2 border-b border-[#D4BC98]/20 pb-4 text-left">
-                <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/30 text-xs font-mono text-[#E88053] tracking-widest uppercase backdrop-blur-md shadow-lg">
+              <div className="space-y-2 border-b border-[#D4BC98]/25 pb-4 text-left">
+                <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/35 text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-xl shadow-lg">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
                   <span>02 // LEADERSHIP &amp; ACCOLADES</span>
                 </div>
-                <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]">
+                <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                   PROVEN ON NATIONAL &amp; GLOBAL STAGES
                 </h2>
-                <p className="text-xs sm:text-sm font-medium text-[#EADFC9]/90 max-w-2xl bg-[#16120E]/70 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
+                <p className="text-xs sm:text-sm font-medium text-[#FFFDF9]/95 max-w-2xl bg-[#18120D]/50 backdrop-blur-xl p-3 rounded-xl border border-[#D4BC98]/25 shadow-lg leading-relaxed">
                   Combining competitive hackathon execution, decentralized protocol research, and campus community leadership with unwavering discipline.
                 </p>
               </div>
@@ -413,52 +412,52 @@ export const FlowAboutStorySection: React.FC = () => {
                 {/* Row 1: Two Major Headline Breakthroughs */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                   {/* Card 1: 1st Place Track Winner NIT Calicut */}
-                  <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/25 hover:border-[#E88053]/60 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 relative overflow-hidden flex flex-col justify-between">
+                  <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.14)_inset] transition-all duration-300 group hover:-translate-y-0.5 relative overflow-hidden flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#E88053] uppercase tracking-wider">
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
                           <Trophy className="w-3.5 h-3.5 text-[#E88053]" /> 1ST PLACE TRACK WINNER
                         </span>
-                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#C75B32]/15 border border-[#C75B32]/30 text-[#E88053]">
+                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#E88053]/20 border border-[#E88053]/40 text-[#FFA266] font-semibold">
                           NIT CALICUT
                         </span>
                       </div>
-                      <h3 className="text-lg sm:text-xl font-bold font-sans text-[#FFFDF9] mb-2 group-hover:text-[#E88053] transition-colors">
+                      <h3 className="text-lg sm:text-xl font-bold font-sans text-[#FFFDF9] mb-2 group-hover:text-[#FFA266] transition-colors drop-shadow-sm">
                         Build On Chain @ NIT Calicut
                       </h3>
-                      <p className="text-xs sm:text-sm text-[#EADFC9]/85 font-sans leading-relaxed mb-4">
+                      <p className="text-xs sm:text-sm text-[#F5EBD9] font-sans leading-relaxed mb-4">
                         Architected an audited on-chain tokenization protocol and automated liquidity vault under a grueling 36-hour hackathon marathon, placing 1st against top national university engineering teams.
                       </p>
                     </div>
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#D4BC98]/15 font-mono text-[10px]">
-                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">Solidity</span>
-                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">EVM Smart Contracts</span>
-                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">DeFi Vaults</span>
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#D4BC98]/20 font-mono text-[10px]">
+                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">Solidity</span>
+                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">EVM Smart Contracts</span>
+                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">DeFi Vaults</span>
                     </div>
                   </div>
 
                   {/* Card 2: Smart India Hackathon Finalist */}
-                  <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/25 hover:border-[#E88053]/60 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 relative overflow-hidden flex flex-col justify-between">
+                  <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.14)_inset] transition-all duration-300 group hover:-translate-y-0.5 relative overflow-hidden flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#EADFC9] uppercase tracking-wider">
-                          <Globe className="w-3.5 h-3.5 text-[#D4BC98]" /> NATIONAL STAGE FINALIST
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#FFFDF9] uppercase tracking-wider">
+                          <Globe className="w-3.5 h-3.5 text-[#E88053]" /> NATIONAL STAGE FINALIST
                         </span>
-                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#D4BC98]/15 border border-[#D4BC98]/30 text-[#EADFC9]">
+                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#D4BC98]/20 border border-[#D4BC98]/40 text-[#FFFDF9] font-semibold">
                           GOVT. OF INDIA
                         </span>
                       </div>
-                      <h3 className="text-lg sm:text-xl font-bold font-sans text-[#FFFDF9] mb-2 group-hover:text-[#E88053] transition-colors">
+                      <h3 className="text-lg sm:text-xl font-bold font-sans text-[#FFFDF9] mb-2 group-hover:text-[#FFA266] transition-colors drop-shadow-sm">
                         Smart India Hackathon
                       </h3>
-                      <p className="text-xs sm:text-sm text-[#EADFC9]/85 font-sans leading-relaxed mb-4">
+                      <p className="text-xs sm:text-sm text-[#F5EBD9] font-sans leading-relaxed mb-4">
                         Selected among tens of thousands of nationwide applicants in India’s premier government hackathon, engineering software solutions addressing national public infrastructure challenges.
                       </p>
                     </div>
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#D4BC98]/15 font-mono text-[10px]">
-                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">National Finalist</span>
-                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">Full-Stack Systems</span>
-                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">Public Infrastructure</span>
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#D4BC98]/20 font-mono text-[10px]">
+                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">National Finalist</span>
+                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">Full-Stack Systems</span>
+                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">Public Infrastructure</span>
                     </div>
                   </div>
                 </div>
@@ -466,40 +465,40 @@ export const FlowAboutStorySection: React.FC = () => {
                 {/* Row 2: Three Distinct Pillars */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
                   {/* Card 3: Campus Tech Lead */}
-                  <div className="p-4 sm:p-5 bg-[#16120E]/80 border border-[#D4BC98]/20 hover:border-[#D4BC98]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5">
-                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#E88053] uppercase tracking-wider mb-2">
-                      <Award className="w-3.5 h-3.5" /> LEADERSHIP
+                  <div className="p-4 sm:p-5 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#FFA266]/60 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider mb-2">
+                      <Award className="w-3.5 h-3.5 text-[#E88053]" /> LEADERSHIP
                     </div>
-                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5">
+                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5 group-hover:text-[#FFA266] transition-colors">
                       Tech Hub Lead &amp; Campus Ambassador
                     </h4>
-                    <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                    <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
                       Leading hands-on Web3, AI, and developer workshops for 200+ students, mentoring junior builders, and driving university technical initiatives.
                     </p>
                   </div>
 
                   {/* Card 4: Uniswap & OpenLedger */}
-                  <div className="p-4 sm:p-5 bg-[#16120E]/80 border border-[#D4BC98]/20 hover:border-[#D4BC98]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5">
-                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#D4BC98] uppercase tracking-wider mb-2">
-                      <ShieldCheck className="w-3.5 h-3.5" /> RESEARCH
+                  <div className="p-4 sm:p-5 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#FFA266]/60 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider mb-2">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#E88053]" /> RESEARCH
                     </div>
-                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5">
+                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5 group-hover:text-[#FFA266] transition-colors">
                       Uniswap v4 &amp; OpenLedger
                     </h4>
-                    <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                    <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
                       Selected for the Uniswap v4 Hook Incubator cohort and collaborating on decentralized AI data pipelines and automated liquidity research.
                     </p>
                   </div>
 
                   {/* Card 5: International Silambam */}
-                  <div className="p-4 sm:p-5 bg-[#16120E]/80 border border-[#D4BC98]/20 hover:border-[#D4BC98]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5">
-                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#E88053] uppercase tracking-wider mb-2">
-                      <Monitor className="w-3.5 h-3.5" /> DISCIPLINE
+                  <div className="p-4 sm:p-5 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#FFA266]/60 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider mb-2">
+                      <Monitor className="w-3.5 h-3.5 text-[#E88053]" /> DISCIPLINE
                     </div>
-                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5">
+                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5 group-hover:text-[#FFA266] transition-colors">
                       International Silambam Medalist
                     </h4>
-                    <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                    <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
                       Bronze Medalist at the International Silambam Championship. Physical mastery, precise execution, and discipline that directly shape my engineering stamina.
                     </p>
                   </div>
@@ -516,22 +515,22 @@ export const FlowAboutStorySection: React.FC = () => {
             className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
-            <div className="absolute top-1/4 left-1/3 w-[500px] h-[400px] bg-[#C75B32]/12 rounded-full blur-[170px] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#E88053]/10 rounded-full blur-[150px] pointer-events-none z-1" />
+            <div className="absolute top-1/4 left-1/3 w-[550px] h-[450px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
+            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[150px] pointer-events-none z-1" />
 
             <div className="space-y-4 sm:space-y-5 my-auto max-w-7xl mx-auto w-full relative z-10">
               {/* Header */}
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-[#D4BC98]/20 pb-3">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-[#D4BC98]/25 pb-3">
                 <div className="space-y-1.5">
-                  <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/30 text-xs font-mono text-[#E88053] tracking-wider uppercase backdrop-blur-md shadow-lg">
+                  <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/35 text-xs font-mono text-[#FFA266] tracking-wider uppercase backdrop-blur-xl shadow-lg">
                     <Sparkles className="w-3.5 h-3.5 text-[#E88053]" />
                     <span>03 // LATEST DEPLOYMENTS</span>
                   </div>
-                  <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] leading-none drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]">
-                    CREATIVE <span className="text-[#E88053] drop-shadow-[0_0_25px_rgba(232,128,83,0.5)]">SHOWCASE</span>
+                  <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                    CREATIVE <span className="text-[#FFA266] drop-shadow-[0_0_25px_rgba(232,128,83,0.5)]">SHOWCASE</span>
                   </h2>
                 </div>
-                <p className="font-sans text-xs sm:text-sm max-w-md text-[#EADFC9]/95 font-medium leading-relaxed bg-[#16120E]/70 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
+                <p className="font-sans text-xs sm:text-sm max-w-md text-[#FFFDF9]/95 font-medium leading-relaxed bg-[#18120D]/50 backdrop-blur-xl p-3 rounded-xl border border-[#D4BC98]/25 shadow-lg">
                   Pushing the boundaries of full-stack engineering with 3D WebGL interactions, AI agents, smart contracts, and cryptographic tooling.
                 </p>
               </div>
@@ -541,13 +540,13 @@ export const FlowAboutStorySection: React.FC = () => {
                 {SHOWCASE_CARDS.map((card) => (
                   <div
                     key={card.id}
-                    className="rounded-2xl border border-[#D4BC98]/20 bg-[#16120E]/90 backdrop-blur-xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.5)] hover:border-[#E88053]/50 hover:bg-[#1E1712] transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(199,91,50,0.2)]"
+                    className="rounded-2xl border border-[#D4BC98]/30 bg-[#18120D]/60 backdrop-blur-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] hover:border-[#E88053]/70 hover:bg-[#221811]/75 transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(232,128,83,0.25)]"
                   >
                     {/* Architectural Header */}
-                    <div className="px-3.5 py-2 bg-[#0E0B08]/90 border-b border-[#D4BC98]/15 flex items-center justify-between backdrop-blur-md">
+                    <div className="px-3.5 py-2 bg-[#120D09]/70 border-b border-[#D4BC98]/20 flex items-center justify-between backdrop-blur-md">
                       <div className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#E88053]" />
-                        <span className="text-[10px] font-mono text-[#D4BC98] uppercase tracking-wider font-semibold">
+                        <span className="text-[10px] font-mono text-[#F2E5D0] uppercase tracking-wider font-semibold">
                           {card.status}
                         </span>
                       </div>
@@ -557,7 +556,7 @@ export const FlowAboutStorySection: React.FC = () => {
                             href={card.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#EADFC9]/60 hover:text-[#FFFDF9] transition-colors flex items-center gap-0.5"
+                            className="text-[#F5EBD9]/75 hover:text-[#FFFDF9] transition-colors flex items-center gap-0.5"
                             title="View GitHub Repository"
                           >
                             Code ↗
@@ -567,7 +566,7 @@ export const FlowAboutStorySection: React.FC = () => {
                           href={card.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#E88053] hover:text-[#FFFDF9] font-bold transition-colors flex items-center gap-0.5"
+                          className="text-[#FFA266] hover:text-[#FFFDF9] font-bold transition-colors flex items-center gap-0.5"
                           title="Open Live Website"
                         >
                           Visit ↗
@@ -577,33 +576,33 @@ export const FlowAboutStorySection: React.FC = () => {
 
                     {/* Card Screen Preview Container */}
                     {card.type === 'cli' ? (
-                      <div className="relative w-full h-[120px] sm:h-[135px] bg-[#0A0806]/95 p-3.5 font-mono text-[10px] flex flex-col justify-between overflow-hidden border-b border-[#D4BC98]/15 group-hover:border-[#E88053]/30 transition-colors">
+                      <div className="relative w-full h-[120px] sm:h-[135px] bg-[#0E0A07]/90 p-3.5 font-mono text-[10px] flex flex-col justify-between overflow-hidden border-b border-[#D4BC98]/20 group-hover:border-[#E88053]/40 transition-colors">
                         <div className="space-y-1">
-                          <div className="text-white/40 text-[9px]">$ stego-cli --embed --file secret.enc</div>
+                          <div className="text-white/60 text-[9px]">$ stego-cli --embed --file secret.enc</div>
                           <div className="text-emerald-400 font-bold">[+] Encrypting AES-256...</div>
-                          <div className="text-[#E88053]">[+] Embedding LSB into cover.png</div>
-                          <div className="text-white/90 font-bold">[✓] Payload hidden successfully.</div>
+                          <div className="text-[#FFA266]">[+] Embedding LSB into cover.png</div>
+                          <div className="text-white/95 font-bold">[✓] Payload hidden successfully.</div>
                         </div>
-                        <div className="flex justify-between items-center text-[9px] text-white/50 pt-1.5 border-t border-white/10">
+                        <div className="flex justify-between items-center text-[9px] text-white/60 pt-1.5 border-t border-white/10">
                           <span>LSB Spatial Algorithm</span>
-                          <span className="text-[#E88053] font-bold">Python CLI</span>
+                          <span className="text-[#FFA266] font-bold">Python CLI</span>
                         </div>
                       </div>
                     ) : (
-                      <div className="relative w-full h-[120px] sm:h-[135px] bg-black/70 overflow-hidden group/screen border-b border-[#D4BC98]/15">
+                      <div className="relative w-full h-[120px] sm:h-[135px] bg-black/60 overflow-hidden group/screen border-b border-[#D4BC98]/20">
                         <iframe
                           src={card.url}
                           title={card.title}
                           className="w-full h-full border-none pointer-events-none transform group-hover/screen:scale-105 transition-transform duration-500 bg-white"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent opacity-80 pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-70 pointer-events-none" />
 
                         <a
                           href={card.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="absolute bottom-2.5 right-2.5 px-3 py-1 bg-[#C75B32] hover:bg-[#E88053] text-white font-mono font-bold text-[10px] tracking-wider rounded-md transition-all shadow-[0_4px_15px_rgba(199,91,50,0.4)] flex items-center gap-1 hover:scale-105"
+                          className="absolute bottom-2.5 right-2.5 px-3 py-1 bg-[#C75B32] hover:bg-[#E88053] text-white font-mono font-bold text-[10px] tracking-wider rounded-md transition-all shadow-[0_4px_15px_rgba(199,91,50,0.5)] flex items-center gap-1 hover:scale-105"
                         >
                           Launch ↗
                         </a>
@@ -611,21 +610,21 @@ export const FlowAboutStorySection: React.FC = () => {
                     )}
 
                     {/* Card Body & Details */}
-                    <div className="p-3.5 sm:p-4 space-y-2.5 bg-[#120E0B]/60 backdrop-blur-md flex-1 flex flex-col justify-between">
+                    <div className="p-3.5 sm:p-4 space-y-2.5 bg-[#140E0A]/50 backdrop-blur-md flex-1 flex flex-col justify-between">
                       <div className="space-y-1">
-                        <h3 className="font-sans text-sm sm:text-base font-bold text-[#FFFDF9] group-hover:text-[#E88053] transition-colors truncate">
+                        <h3 className="font-sans text-sm sm:text-base font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors truncate">
                           {card.title}
                         </h3>
-                        <p className="font-sans text-xs text-[#EADFC9]/85 font-medium leading-relaxed line-clamp-2">
+                        <p className="font-sans text-xs text-[#F5EBD9] font-medium leading-relaxed line-clamp-2">
                           {card.description}
                         </p>
                       </div>
 
-                      <div className="pt-2 border-t border-[#D4BC98]/15 flex flex-wrap gap-1 font-mono text-[9px] font-bold">
+                      <div className="pt-2 border-t border-[#D4BC98]/20 flex flex-wrap gap-1 font-mono text-[9px] font-bold">
                         {card.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-0.5 bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98] rounded uppercase tracking-wider backdrop-blur-md"
+                            className="px-2 py-0.5 bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0] rounded uppercase tracking-wider backdrop-blur-md"
                           >
                             {tag}
                           </span>
@@ -646,21 +645,21 @@ export const FlowAboutStorySection: React.FC = () => {
             className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
-            <div className="absolute top-1/3 left-1/4 w-[500px] h-[350px] bg-[#E88053]/10 rounded-full blur-[160px] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#C75B32]/12 rounded-full blur-[150px] pointer-events-none z-1" />
+            <div className="absolute top-1/3 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
+            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[150px] pointer-events-none z-1" />
 
             <div className="max-w-7xl mx-auto w-full space-y-5 sm:space-y-6 relative z-10 my-auto">
               {/* Header */}
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#D4BC98]/20 pb-4 text-left">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#D4BC98]/25 pb-4 text-left">
                 <div className="space-y-2">
-                  <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/30 text-xs font-mono text-[#E88053] tracking-widest uppercase backdrop-blur-md shadow-lg">
+                  <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/35 text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-xl shadow-lg">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
                     <span>04 // THE BUILDER’S TRACK RECORD</span>
                   </div>
-                  <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]">
+                  <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     ENGINEERING VELOCITY &amp; REAL IMPACT
                   </h2>
-                  <p className="text-xs sm:text-sm font-medium text-[#EADFC9]/90 max-w-xl">
+                  <p className="text-xs sm:text-sm font-medium text-[#FFFDF9]/95 max-w-xl bg-[#18120D]/50 backdrop-blur-xl p-3 rounded-xl border border-[#D4BC98]/25 shadow-lg leading-relaxed">
                     Real output over artificial metrics. A track record built through competitive hackathon marathons, production deployments, and peer developer mentorship.
                   </p>
                 </div>
@@ -668,23 +667,23 @@ export const FlowAboutStorySection: React.FC = () => {
                 <button
                   type="button"
                   onClick={scrollToCompetitiveMilestones}
-                  className="self-start sm:self-end inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#16120E]/90 hover:bg-[#1F1610] border border-[#D4BC98]/25 hover:border-[#E88053]/60 text-xs font-mono text-[#EADFC9] hover:text-[#FFFDF9] transition-all shadow-md group cursor-pointer backdrop-blur-xl shrink-0"
+                  className="self-start sm:self-end inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#18120D]/80 hover:bg-[#221811] border border-[#D4BC98]/35 hover:border-[#E88053]/70 text-xs font-mono text-[#F5EBD9] hover:text-[#FFFDF9] transition-all shadow-lg group cursor-pointer backdrop-blur-xl shrink-0"
                 >
                   <span>Explore Milestones</span>
-                  <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform text-[#E88053]" />
+                  <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform text-[#FFA266]" />
                 </button>
               </div>
 
               {/* 4 Clean Authentic Impact Pillars */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                 {/* Pillar 1: Hackathons */}
-                <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/20 hover:border-[#E88053]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#E88053] transition-colors">
+                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
                         <CounterNumber value="25+" />
                       </span>
-                      <span className="p-2 rounded-xl bg-[#1F1711] border border-[#D4BC98]/20 text-[#E88053]">
+                      <span className="p-2 rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
                         <Trophy className="w-4 h-4" />
                       </span>
                     </div>
@@ -692,24 +691,24 @@ export const FlowAboutStorySection: React.FC = () => {
                       <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
                         Competitive Marathons
                       </h3>
-                      <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                      <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
                         Thriving under 24-to-36 hour sprint constraints to build production-grade prototypes, APIs, and working smart contracts from scratch.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/15 font-mono text-[10px] text-[#D4BC98]/75">
+                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/20 font-mono text-[10px] text-[#FFA266] font-semibold">
                     36H MARATHON SPRINTS
                   </div>
                 </div>
 
                 {/* Pillar 2: Podium Placements */}
-                <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/20 hover:border-[#E88053]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#E88053] transition-colors">
+                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
                         <CounterNumber value="20+" />
                       </span>
-                      <span className="p-2 rounded-xl bg-[#1F1711] border border-[#D4BC98]/20 text-[#E88053]">
+                      <span className="p-2 rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
                         <Award className="w-4 h-4" />
                       </span>
                     </div>
@@ -717,24 +716,24 @@ export const FlowAboutStorySection: React.FC = () => {
                       <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
                         Podium &amp; Finalist Finishes
                       </h3>
-                      <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                      <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
                         Recognized across premier national platforms including 1st Place Track at NIT Calicut and finalist entry in Smart India Hackathon.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/15 font-mono text-[10px] text-[#D4BC98]/75">
+                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/20 font-mono text-[10px] text-[#FFA266] font-semibold">
                     NATIONAL RECOGNITION
                   </div>
                 </div>
 
                 {/* Pillar 3: Deployed Systems */}
-                <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/20 hover:border-[#E88053]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#E88053] transition-colors">
+                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
                         <CounterNumber value="15+" />
                       </span>
-                      <span className="p-2 rounded-xl bg-[#1F1711] border border-[#D4BC98]/20 text-[#E88053]">
+                      <span className="p-2 rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
                         <Rocket className="w-4 h-4" />
                       </span>
                     </div>
@@ -742,24 +741,24 @@ export const FlowAboutStorySection: React.FC = () => {
                       <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
                         Applications Shipped
                       </h3>
-                      <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                      <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
                         Full-stack corporate platforms, AI provenance engines, EVM liquidity vaults, and open-source cryptographic security packages.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/15 font-mono text-[10px] text-[#D4BC98]/75">
+                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/20 font-mono text-[10px] text-[#FFA266] font-semibold">
                     LIVE IN PRODUCTION
                   </div>
                 </div>
 
                 {/* Pillar 4: Community Mentorship */}
-                <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/20 hover:border-[#E88053]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#E88053] transition-colors">
+                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
                         <CounterNumber value="200+" />
                       </span>
-                      <span className="p-2 rounded-xl bg-[#1F1711] border border-[#D4BC98]/20 text-[#E88053]">
+                      <span className="p-2 rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
                         <Globe className="w-4 h-4" />
                       </span>
                     </div>
@@ -767,12 +766,12 @@ export const FlowAboutStorySection: React.FC = () => {
                       <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
                         Developers Mentored
                       </h3>
-                      <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                      <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
                         Serving as Campus Ambassador to organize technical workshops, lead peer study circles in Web3 and AI, and inspire future builders.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/15 font-mono text-[10px] text-[#D4BC98]/75">
+                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/20 font-mono text-[10px] text-[#FFA266] font-semibold">
                     COMMUNITY LEADERSHIP
                   </div>
                 </div>
@@ -787,7 +786,7 @@ export const FlowAboutStorySection: React.FC = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-[#16120E]/85 hover:bg-[#1E1611] border border-[#D4BC98]/25 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.5),0_0_0_1px_rgba(212,188,152,0.1)_inset] transition-all"
+            className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-[#18120D]/75 hover:bg-[#221811]/90 border border-[#D4BC98]/35 backdrop-blur-2xl shadow-[0_12px_32px_rgba(0,0,0,0.4),0_1px_0_rgba(255,255,255,0.15)_inset] transition-all"
           >
             {[0, 1, 2].map((idx) => {
               const isActive = activeSlide === idx;
@@ -804,8 +803,8 @@ export const FlowAboutStorySection: React.FC = () => {
                     transition={{ type: 'spring', stiffness: 350, damping: 25 }}
                     className={`h-2 sm:h-2.5 rounded-full transition-colors duration-300 ${
                       isActive
-                        ? 'w-7 sm:w-8 bg-[#E88053] shadow-[0_0_12px_rgba(232,128,83,0.5)]'
-                        : 'w-2 sm:w-2.5 bg-[#D4BC98]/30 group-hover:bg-[#D4BC98]/60'
+                        ? 'w-7 sm:w-8 bg-[#E88053] shadow-[0_0_12px_rgba(232,128,83,0.6)]'
+                        : 'w-2 sm:w-2.5 bg-[#D4BC98]/40 group-hover:bg-[#D4BC98]/70'
                     }`}
                   />
                 </button>
