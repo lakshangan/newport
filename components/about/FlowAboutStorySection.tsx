@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { AnimatedGradient } from '@/components/ui/animated-gradient-with-svg';
 import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
-import { Trophy, Award, Zap, Globe, Rocket, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown, ArrowRight } from 'lucide-react';
+import { Trophy, Award, Zap, Globe, Rocket, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -147,11 +147,6 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
   },
 ];
 
-const NEXT_STEPS = [
-  { label: 'Creative Showcase' },
-  { label: 'System Metrics' },
-  { label: 'Competitive Milestones' },
-];
 
 export const FlowAboutStorySection: React.FC = () => {
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
@@ -848,9 +843,8 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Floating Bar */}
-        <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-10 lg:left-12 right-6 sm:right-10 lg:right-12 z-30 flex items-center justify-between pointer-events-none select-none">
-          {/* Apple-Style Pagination Indicator Capsule */}
+        {/* Centered Apple-Style Dotted Status Bar */}
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none select-none">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -880,45 +874,6 @@ export const FlowAboutStorySection: React.FC = () => {
               );
             })}
           </motion.div>
-
-          {/* Minimal Next Section Indicator */}
-          <AnimatePresence mode="wait">
-            {activeSlide < 2 ? (
-              <motion.button
-                key={activeSlide}
-                type="button"
-                onClick={() => advanceToSlide(activeSlide + 1)}
-                initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -8, scale: 0.96 }}
-                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                className="group pointer-events-auto flex items-center gap-2.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#16120E]/85 hover:bg-[#1F1610] border border-[#D4BC98]/25 hover:border-[#E88053]/60 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.5),0_0_0_1px_rgba(212,188,152,0.1)_inset] transition-all duration-300 cursor-pointer active:scale-95 text-xs font-mono"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse shrink-0" />
-                <span className="text-[#D4BC98]/70 group-hover:text-[#FFFDF9] transition-colors tracking-wide uppercase">
-                  Next: <strong className="text-[#FFFDF9] font-bold">{NEXT_STEPS[activeSlide].label}</strong>
-                </span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#E88053] group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-            ) : (
-              <motion.button
-                key="milestones"
-                type="button"
-                onClick={scrollToCompetitiveMilestones}
-                initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -8, scale: 0.96 }}
-                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                className="group pointer-events-auto flex items-center gap-2.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#16120E]/90 hover:bg-[#1F1610] border border-[#E88053]/45 hover:border-[#E88053] backdrop-blur-xl shadow-[0_12px_32px_rgba(199,91,50,0.25),0_0_0_1px_rgba(232,128,83,0.15)_inset] transition-all duration-300 cursor-pointer active:scale-95 text-xs font-mono"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-ping shrink-0" />
-                <span className="text-[#E88053] font-bold tracking-wide uppercase">
-                  Next Section: <span className="text-[#FFFDF9]">Competitive Milestones</span>
-                </span>
-                <ArrowDown className="w-3.5 h-3.5 text-[#E88053] group-hover:translate-y-0.5 animate-bounce transition-transform" />
-              </motion.button>
-            )}
-          </AnimatePresence>
         </div>
       </div>
     </div>
