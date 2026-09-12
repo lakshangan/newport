@@ -81,25 +81,25 @@ interface ShowcaseCard {
 const SHOWCASE_CARDS: ShowcaseCard[] = [
   {
     id: 'jayam',
-    title: 'Jayam Website',
+    title: 'Jayam Fashion Institute',
     domain: 'jayamwebsite.vercel.app',
     url: 'https://jayamwebsite.vercel.app/',
     githubUrl: 'https://github.com/lakshangan/jayam-website-',
-    description: 'Full-stack corporate platform & bespoke web application with responsive architecture.',
-    tags: ['REACT', 'NEXT.JS', 'TAILWIND'],
+    description: 'Bespoke corporate platform built for an apparel design institute with responsive editorial layout, course catalog, and fluid performance.',
+    tags: ['Next.js', 'React', 'Tailwind CSS'],
     type: 'web',
-    status: 'ONLINE',
+    status: 'Corporate Platform',
   },
   {
     id: 'land-vault',
-    title: 'LandVault Blockchain',
+    title: 'LandVault Protocol',
     domain: 'land-vault-v2.vercel.app',
     url: 'https://land-vault-v2.vercel.app/',
     githubUrl: 'https://github.com/lakshangan/Land-vault-v2',
-    description: 'Tokenizing real estate assets & crypto transfers on EVM chains with automated yield.',
-    tags: ['SOLIDITY', 'EVM', 'WEB3.JS'],
+    description: 'Decentralized real-world asset (RWA) protocol tokenizing real estate with automated yield distribution smart contracts on EVM networks.',
+    tags: ['Solidity', 'EVM', 'Web3.js'],
     type: 'web3',
-    status: 'EVM CHAIN',
+    status: 'RWA Protocol',
   },
   {
     id: 'nuna-organic',
@@ -107,10 +107,10 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
     domain: 'nunaorganic.vercel.app',
     url: 'https://nunaorganic.vercel.app/',
     githubUrl: 'https://github.com/lakshangan/nuna-natural-haven',
-    description: 'Special event organic showcase platform with bespoke motion transitions & gallery.',
-    tags: ['REACT', 'GSAP', 'GALLERY'],
+    description: 'Interactive brand showcase crafted with bespoke GSAP motion choreography, kinetic transitions, and immersive visual storytelling.',
+    tags: ['React', 'GSAP', 'Kinetic Motion'],
     type: 'web',
-    status: 'ONLINE',
+    status: 'Brand Experience',
   },
   {
     id: 'mediocto',
@@ -118,10 +118,10 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
     domain: 'mediocto-lovat.vercel.app',
     url: 'https://mediocto-lovat.vercel.app/',
     githubUrl: 'https://github.com/lakshangan',
-    description: 'AI-powered mental health support chat interface featuring an animated octopus companion.',
-    tags: ['AI', 'HEALTH', 'NEXT.JS'],
+    description: 'Conversational mental wellness interface integrating intelligent LLM agent routing with an interactive real-time 3D companion.',
+    tags: ['AI Agents', 'Three.js', 'Next.js'],
     type: 'ai',
-    status: 'AI AGENT',
+    status: 'AI Wellness',
   },
   {
     id: 'genproof',
@@ -129,21 +129,21 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
     domain: 'gen-proof-ai.vercel.app',
     url: 'https://gen-proof-ai.vercel.app/',
     githubUrl: 'https://github.com/lakshangan',
-    description: 'Cryptographic content credentials engine detecting AI synthetic media via C2PA standards.',
-    tags: ['PYTHON', 'C2PA', 'AI/ML'],
+    description: 'Cryptographic provenance verification engine implementing C2PA open standards to detect and verify synthetic AI media.',
+    tags: ['Python', 'C2PA Standards', 'AI Forensics'],
     type: 'ai',
-    status: 'C2PA AUDIT',
+    status: 'Provenance Engine',
   },
   {
     id: 'steganography',
-    title: 'Steganography CLI',
+    title: 'Steganography Tool',
     domain: 'github.com/lakshangan/steganography',
     url: 'https://github.com/lakshangan/steganography',
     githubUrl: 'https://github.com/lakshangan/steganography',
-    description: 'CLI tool securely hiding secret encrypted payloads inside digital image pixels via LSB.',
-    tags: ['PYTHON', 'SECURITY', 'LSB'],
+    description: 'Open-source security CLI embedding AES-256 encrypted payloads into image pixel bit planes via least significant bit (LSB) manipulation.',
+    tags: ['Python', 'AES-256', 'Cryptography'],
     type: 'cli',
-    status: 'SECURITY CLI',
+    status: 'Security CLI',
   },
 ];
 
@@ -398,63 +398,111 @@ export const FlowAboutStorySection: React.FC = () => {
               <div className="space-y-2 border-b border-[#D4BC98]/20 pb-4 text-left">
                 <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/30 text-xs font-mono text-[#E88053] tracking-widest uppercase backdrop-blur-md shadow-lg">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
-                  <span>02 // RECOGNITION &amp; COLLEGE ACHIEVEMENTS</span>
+                  <span>02 // LEADERSHIP &amp; ACCOLADES</span>
                 </div>
                 <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]">
-                  RECOGNIZED ACROSS NATIONAL &amp; GLOBAL STAGES
+                  PROVEN ON NATIONAL &amp; GLOBAL STAGES
                 </h2>
-                <p className="text-xs sm:text-sm font-medium text-[#EADFC9]/95 max-w-2xl bg-[#16120E]/70 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
-                  Studying Computer Technology, I’ve served as Campus Ambassador, led technical developer initiatives, and competed across 25+ national and global marathons.
+                <p className="text-xs sm:text-sm font-medium text-[#EADFC9]/90 max-w-2xl bg-[#16120E]/70 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
+                  Combining competitive hackathon execution, decentralized protocol research, and campus community leadership with unwavering discipline.
                 </p>
               </div>
 
-              {/* 5 Warm Bronze Glass Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/95 transition-all group">
-                  <div className="text-xs font-mono text-[#5CE1E6] uppercase font-bold tracking-wider flex items-center gap-1.5">
-                    <Award className="w-4 h-4" /> Tech Hub Lead &amp; Campus Ambassador
+              {/* Natural Editorial Grid: 2 Headline Breakthroughs + 3 Distinct Pillars */}
+              <div className="space-y-4">
+                {/* Row 1: Two Major Headline Breakthroughs */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                  {/* Card 1: 1st Place Track Winner NIT Calicut */}
+                  <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/25 hover:border-[#E88053]/60 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 relative overflow-hidden flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#E88053] uppercase tracking-wider">
+                          <Trophy className="w-3.5 h-3.5 text-[#E88053]" /> 1ST PLACE TRACK WINNER
+                        </span>
+                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#C75B32]/15 border border-[#C75B32]/30 text-[#E88053]">
+                          NIT CALICUT
+                        </span>
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-bold font-sans text-[#FFFDF9] mb-2 group-hover:text-[#E88053] transition-colors">
+                        Build On Chain @ NIT Calicut
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#EADFC9]/85 font-sans leading-relaxed mb-4">
+                        Architected an audited on-chain tokenization protocol and automated liquidity vault under a grueling 36-hour hackathon marathon, placing 1st against top national university engineering teams.
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#D4BC98]/15 font-mono text-[10px]">
+                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">Solidity</span>
+                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">EVM Smart Contracts</span>
+                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">DeFi Vaults</span>
+                    </div>
                   </div>
-                  <p className="font-sans text-xs text-[#EADFC9]/90 leading-relaxed font-medium">
-                    <strong className="text-white font-bold">Tech Hub Lead</strong> at College Tech Organization &amp; active Campus Ambassador driving Web3 &amp; AI developer workshops, guiding peer developers, and leading campus tech initiatives.
-                  </p>
+
+                  {/* Card 2: Smart India Hackathon Finalist */}
+                  <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/25 hover:border-[#E88053]/60 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 relative overflow-hidden flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#EADFC9] uppercase tracking-wider">
+                          <Globe className="w-3.5 h-3.5 text-[#D4BC98]" /> NATIONAL STAGE FINALIST
+                        </span>
+                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#D4BC98]/15 border border-[#D4BC98]/30 text-[#EADFC9]">
+                          GOVT. OF INDIA
+                        </span>
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-bold font-sans text-[#FFFDF9] mb-2 group-hover:text-[#E88053] transition-colors">
+                        Smart India Hackathon
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#EADFC9]/85 font-sans leading-relaxed mb-4">
+                        Selected among tens of thousands of nationwide applicants in India’s premier government hackathon, engineering software solutions addressing national public infrastructure challenges.
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#D4BC98]/15 font-mono text-[10px]">
+                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">National Finalist</span>
+                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">Full-Stack Systems</span>
+                      <span className="px-2 py-0.5 rounded bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98]">Public Infrastructure</span>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#FACC15]/60 hover:bg-[#1E1712]/95 transition-all group">
-                  <div className="text-xs font-mono text-[#FACC15] uppercase font-bold tracking-wider flex items-center gap-1.5">
-                    <Trophy className="w-4 h-4" /> 1st Place Track Winner
+                {/* Row 2: Three Distinct Pillars */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+                  {/* Card 3: Campus Tech Lead */}
+                  <div className="p-4 sm:p-5 bg-[#16120E]/80 border border-[#D4BC98]/20 hover:border-[#D4BC98]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#E88053] uppercase tracking-wider mb-2">
+                      <Award className="w-3.5 h-3.5" /> LEADERSHIP
+                    </div>
+                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5">
+                      Tech Hub Lead &amp; Campus Ambassador
+                    </h4>
+                    <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                      Leading hands-on Web3, AI, and developer workshops for 200+ students, mentoring junior builders, and driving university technical initiatives.
+                    </p>
                   </div>
-                  <p className="font-sans text-xs text-[#EADFC9]/90 leading-relaxed font-medium">
-                    🏆 <strong className="text-white font-bold">Build On Chain @ NIT Calicut</strong> — 1st Place Track Prize for EVM smart contract tokenization and liquidity vault innovation.
-                  </p>
-                </div>
 
-                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#E88053]/60 hover:bg-[#1E1712]/95 transition-all group">
-                  <div className="text-xs font-mono text-[#E88053] uppercase font-bold tracking-wider flex items-center gap-1.5">
-                    <Globe className="w-4 h-4" /> Smart India Hackathon Finalist
+                  {/* Card 4: Uniswap & OpenLedger */}
+                  <div className="p-4 sm:p-5 bg-[#16120E]/80 border border-[#D4BC98]/20 hover:border-[#D4BC98]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#D4BC98] uppercase tracking-wider mb-2">
+                      <ShieldCheck className="w-3.5 h-3.5" /> RESEARCH
+                    </div>
+                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5">
+                      Uniswap v4 &amp; OpenLedger
+                    </h4>
+                    <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                      Selected for the Uniswap v4 Hook Incubator cohort and collaborating on decentralized AI data pipelines and automated liquidity research.
+                    </p>
                   </div>
-                  <p className="font-sans text-xs text-[#EADFC9]/90 leading-relaxed font-medium">
-                    🇮🇳 <strong className="text-white font-bold">National Stage Finalist</strong> in India&apos;s flagship government technology competition building real-world software solutions.
-                  </p>
-                </div>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#C084FC]/60 hover:bg-[#1E1712]/95 transition-all group">
-                  <div className="text-xs font-mono text-[#C084FC] uppercase font-bold tracking-wider flex items-center gap-1.5">
-                    <ShieldCheck className="w-4 h-4" /> OpenLedger &amp; Uniswap Incubator
+                  {/* Card 5: International Silambam */}
+                  <div className="p-4 sm:p-5 bg-[#16120E]/80 border border-[#D4BC98]/20 hover:border-[#D4BC98]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#E88053] uppercase tracking-wider mb-2">
+                      <Monitor className="w-3.5 h-3.5" /> DISCIPLINE
+                    </div>
+                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5">
+                      International Silambam Medalist
+                    </h4>
+                    <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                      Bronze Medalist at the International Silambam Championship. Physical mastery, precise execution, and discipline that directly shape my engineering stamina.
+                    </p>
                   </div>
-                  <p className="font-sans text-xs text-[#EADFC9]/90 leading-relaxed font-medium">
-                    <strong className="text-white font-bold">Technical Researcher</strong> with OpenLedger (AI/Web3 data pipelines) and selected for the Uniswap v4 Hook Incubator cohort.
-                  </p>
-                </div>
-
-                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/95 transition-all group">
-                  <div className="text-xs font-mono text-[#5CE1E6] uppercase font-bold tracking-wider flex items-center gap-1.5">
-                    <Monitor className="w-4 h-4" /> International Silambam Medalist
-                  </div>
-                  <p className="font-sans text-xs text-[#EADFC9]/90 leading-relaxed font-medium">
-                    <strong className="text-white font-bold">Bronze Medalist</strong> at the International Silambam Championship—combining physical mastery, focus, and digital precision.
-                  </p>
                 </div>
               </div>
             </div>
@@ -488,64 +536,74 @@ export const FlowAboutStorySection: React.FC = () => {
                 </p>
               </div>
 
-              {/* 6 Ultra-Modern Glassmorphic Cards Grid */}
+              {/* 6 Clean Architectural Project Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
                 {SHOWCASE_CARDS.map((card) => (
                   <div
                     key={card.id}
-                    className="rounded-2xl border border-[#D4BC98]/20 bg-[#16120E]/90 backdrop-blur-xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.5)] hover:border-[#C75B32] hover:bg-[#1E1712] transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(199,91,50,0.25)]"
+                    className="rounded-2xl border border-[#D4BC98]/20 bg-[#16120E]/90 backdrop-blur-xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.5)] hover:border-[#E88053]/50 hover:bg-[#1E1712] transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(199,91,50,0.2)]"
                   >
-                    {/* macOS Window Header */}
-                    <div className="px-3 py-1.5 bg-[#0E0B08]/90 border-b border-[#D4BC98]/15 flex items-center justify-between backdrop-blur-md">
-                      <div className="flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-[#FF5F56]" />
-                        <span className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
-                        <span className="w-2 h-2 rounded-full bg-[#27C93F]" />
+                    {/* Architectural Header */}
+                    <div className="px-3.5 py-2 bg-[#0E0B08]/90 border-b border-[#D4BC98]/15 flex items-center justify-between backdrop-blur-md">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#E88053]" />
+                        <span className="text-[10px] font-mono text-[#D4BC98] uppercase tracking-wider font-semibold">
+                          {card.status}
+                        </span>
                       </div>
-                      <div className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[9px] font-mono text-[#EADFC9] truncate max-w-[150px] backdrop-blur-sm">
-                        {card.domain}
+                      <div className="flex items-center gap-2 font-mono text-[10px]">
+                        {card.githubUrl && (
+                          <a
+                            href={card.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#EADFC9]/60 hover:text-[#FFFDF9] transition-colors flex items-center gap-0.5"
+                            title="View GitHub Repository"
+                          >
+                            Code ↗
+                          </a>
+                        )}
+                        <a
+                          href={card.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#E88053] hover:text-[#FFFDF9] font-bold transition-colors flex items-center gap-0.5"
+                          title="Open Live Website"
+                        >
+                          Visit ↗
+                        </a>
                       </div>
-                      <span className="text-[8px] font-mono font-bold text-[#E88053] uppercase tracking-wider">
-                        {card.status}
-                      </span>
                     </div>
 
                     {/* Card Screen Preview Container */}
                     {card.type === 'cli' ? (
-                      <div className="relative w-full h-[115px] sm:h-[130px] bg-[#0A0806]/95 p-3 font-mono text-[10px] flex flex-col justify-between overflow-hidden border-b border-[#D4BC98]/15 group-hover:border-[#C75B32]/40 transition-colors">
+                      <div className="relative w-full h-[120px] sm:h-[135px] bg-[#0A0806]/95 p-3.5 font-mono text-[10px] flex flex-col justify-between overflow-hidden border-b border-[#D4BC98]/15 group-hover:border-[#E88053]/30 transition-colors">
                         <div className="space-y-1">
                           <div className="text-white/40 text-[9px]">$ stego-cli --embed --file secret.enc</div>
                           <div className="text-emerald-400 font-bold">[+] Encrypting AES-256...</div>
                           <div className="text-[#E88053]">[+] Embedding LSB into cover.png</div>
                           <div className="text-white/90 font-bold">[✓] Payload hidden successfully.</div>
                         </div>
-                        <div className="flex justify-between items-center text-[9px] text-white/50 pt-1 border-t border-white/10">
+                        <div className="flex justify-between items-center text-[9px] text-white/50 pt-1.5 border-t border-white/10">
                           <span>LSB Spatial Algorithm</span>
-                          <a
-                            href={card.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[#E88053] hover:underline font-bold flex items-center gap-0.5"
-                          >
-                            GitHub CLI ↗
-                          </a>
+                          <span className="text-[#E88053] font-bold">Python CLI</span>
                         </div>
                       </div>
                     ) : (
-                      <div className="relative w-full h-[115px] sm:h-[130px] bg-black/70 overflow-hidden group/screen border-b border-[#D4BC98]/15">
+                      <div className="relative w-full h-[120px] sm:h-[135px] bg-black/70 overflow-hidden group/screen border-b border-[#D4BC98]/15">
                         <iframe
                           src={card.url}
                           title={card.title}
                           className="w-full h-full border-none pointer-events-none transform group-hover/screen:scale-105 transition-transform duration-500 bg-white"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-75 pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent opacity-80 pointer-events-none" />
 
                         <a
                           href={card.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="absolute bottom-2.5 right-2.5 px-3 py-1 bg-[#C75B32] hover:bg-[#E88053] text-white font-mono font-bold text-[11px] tracking-wider rounded-md transition-all shadow-[0_4px_15px_rgba(199,91,50,0.4)] flex items-center gap-1 hover:scale-105"
+                          className="absolute bottom-2.5 right-2.5 px-3 py-1 bg-[#C75B32] hover:bg-[#E88053] text-white font-mono font-bold text-[10px] tracking-wider rounded-md transition-all shadow-[0_4px_15px_rgba(199,91,50,0.4)] flex items-center gap-1 hover:scale-105"
                         >
                           Launch ↗
                         </a>
@@ -553,43 +611,21 @@ export const FlowAboutStorySection: React.FC = () => {
                     )}
 
                     {/* Card Body & Details */}
-                    <div className="p-3 sm:p-3.5 space-y-2 bg-[#120E0B]/60 backdrop-blur-md flex-1 flex flex-col justify-between">
+                    <div className="p-3.5 sm:p-4 space-y-2.5 bg-[#120E0B]/60 backdrop-blur-md flex-1 flex flex-col justify-between">
                       <div className="space-y-1">
-                        <h3 className="font-mono text-xs sm:text-sm font-bold text-[#FFFDF9] uppercase group-hover:text-[#E88053] transition-colors flex items-center justify-between gap-2">
-                          <span className="truncate">{card.title}</span>
-                          <div className="flex items-center gap-1.5 shrink-0">
-                            {card.githubUrl && (
-                              <a
-                                href={card.githubUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-2 py-0.5 rounded bg-white/10 hover:bg-[#C75B32] hover:text-white border border-[#D4BC98]/20 text-[#EADFC9] transition-all text-[9px] font-mono flex items-center gap-0.5 shadow-sm"
-                                title="View GitHub Repository"
-                              >
-                                Code ↗
-                              </a>
-                            )}
-                            <a
-                              href={card.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="p-1 rounded bg-white/10 hover:bg-[#C75B32] hover:text-white border border-[#D4BC98]/20 text-[#E88053] hover:text-white transition-all"
-                              title="Open Live Website"
-                            >
-                              <ExternalLink className="w-3 h-3" />
-                            </a>
-                          </div>
+                        <h3 className="font-sans text-sm sm:text-base font-bold text-[#FFFDF9] group-hover:text-[#E88053] transition-colors truncate">
+                          {card.title}
                         </h3>
-                        <p className="font-sans text-[11px] sm:text-xs text-[#EADFC9]/85 font-medium leading-snug line-clamp-2">
+                        <p className="font-sans text-xs text-[#EADFC9]/85 font-medium leading-relaxed line-clamp-2">
                           {card.description}
                         </p>
                       </div>
 
-                      <div className="pt-2 border-t border-[#D4BC98]/15 flex flex-wrap gap-1 font-mono text-[8px] sm:text-[9px] font-bold">
+                      <div className="pt-2 border-t border-[#D4BC98]/15 flex flex-wrap gap-1 font-mono text-[9px] font-bold">
                         {card.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-0.5 bg-[#221A14]/90 border border-[#D4BC98]/20 text-[#EADFC9] rounded uppercase tracking-wider backdrop-blur-md shadow-sm"
+                            className="px-2 py-0.5 bg-[#1F1711] border border-[#D4BC98]/20 text-[#D4BC98] rounded uppercase tracking-wider backdrop-blur-md"
                           >
                             {tag}
                           </span>
@@ -603,240 +639,142 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
 
           {/* ========================================================================= */}
-          {/* PANEL 3 (SLIDE 04): KEY METRICS & TELEMETRY WORKSPACE */}
+          {/* PANEL 3 (SLIDE 04): ENGINEERING IMPACT & VELOCITY */}
           {/* ========================================================================= */}
           <div
             id="metrics"
             className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
           >
-            {/* Background Glows */}
-            <div className="absolute top-1/3 left-1/4 w-[450px] h-[350px] bg-[#5CE1E6]/8 rounded-full blur-[150px] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#C75B32]/10 rounded-full blur-[150px] pointer-events-none z-1" />
-            <div className="absolute inset-0 z-1 bg-[linear-gradient(to_right,#111118_1px,transparent_1px),linear-gradient(to_bottom,#111118_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] opacity-30 pointer-events-none" />
+            {/* Ambient Volumetric Glows */}
+            <div className="absolute top-1/3 left-1/4 w-[500px] h-[350px] bg-[#E88053]/10 rounded-full blur-[160px] pointer-events-none z-1" />
+            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#C75B32]/12 rounded-full blur-[150px] pointer-events-none z-1" />
 
-            <div className="max-w-7xl mx-auto w-full space-y-4 sm:space-y-5 relative z-10 my-auto">
+            <div className="max-w-7xl mx-auto w-full space-y-5 sm:space-y-6 relative z-10 my-auto">
               {/* Header */}
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#D4BC98]/20 pb-3 text-left">
-                <div className="space-y-1.5">
-                  <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/90 border border-[#5CE1E6]/40 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase backdrop-blur-md shadow-lg">
-                    <span className="w-2 h-2 rounded-full bg-[#5CE1E6] animate-pulse" />
-                    <span>04 // KEY METRICS &amp; TELEMETRY WORKSPACE</span>
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#D4BC98]/20 pb-4 text-left">
+                <div className="space-y-2">
+                  <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/30 text-xs font-mono text-[#E88053] tracking-widest uppercase backdrop-blur-md shadow-lg">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
+                    <span>04 // THE BUILDER’S TRACK RECORD</span>
                   </div>
-                  <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]">
-                    AGENT BENTO METRICS
+                  <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]">
+                    ENGINEERING VELOCITY &amp; REAL IMPACT
                   </h2>
                   <p className="text-xs sm:text-sm font-medium text-[#EADFC9]/90 max-w-xl">
-                    Compact multi-agent workspace grid tracking competitive marathons, top placements, and deployed full-stack products.
+                    Real output over artificial metrics. A track record built through competitive hackathon marathons, production deployments, and peer developer mentorship.
                   </p>
                 </div>
 
                 <button
                   type="button"
                   onClick={scrollToCompetitiveMilestones}
-                  className="self-start sm:self-end inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C75B32]/30 hover:bg-[#C75B32] border border-[#C75B32]/60 hover:border-[#C75B32] text-xs font-mono font-bold text-white transition-all shadow-md group cursor-pointer"
+                  className="self-start sm:self-end inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#16120E]/90 hover:bg-[#1F1610] border border-[#D4BC98]/25 hover:border-[#E88053]/60 text-xs font-mono text-[#EADFC9] hover:text-[#FFFDF9] transition-all shadow-md group cursor-pointer backdrop-blur-xl shrink-0"
                 >
-                  <span>Competitive Milestones</span>
-                  <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform text-[#E88053] group-hover:text-white" />
+                  <span>Explore Milestones</span>
+                  <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform text-[#E88053]" />
                 </button>
               </div>
 
-              {/* Outer Bento Grid Container */}
-              <div className="p-3 sm:p-5 rounded-[1.5rem] sm:rounded-[2rem] bg-[#14100C]/90 border border-[#D4BC98]/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] space-y-3">
-                {/* Top Row: 3 Agent Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {/* Card 1: Hackathon Pipeline */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.05 }}
-                    className="relative overflow-hidden rounded-xl bg-[#18130F]/90 border border-[#5CE1E6]/30 p-4 flex flex-col justify-between hover:border-[#5CE1E6]/60 transition-all group shadow-lg"
-                  >
-                    <AnimatedGradient colors={["#5CE1E6", "#3B82F6", "#1E40AF"]} speed={0.08} blur="medium" />
-
-                    <div className="relative z-10 space-y-1.5">
-                      <div className="flex justify-between items-center">
-                        <h3 className="text-xs font-bold font-mono text-white flex items-center gap-1.5">
-                          <Trophy className="w-4 h-4 text-[#5CE1E6]" />
-                          Hackathon Pipeline
-                        </h3>
-                        <span className="px-2 py-0.5 rounded-full bg-[#5CE1E6]/15 border border-[#5CE1E6]/30 text-[9px] font-mono text-[#5CE1E6] uppercase">
-                          25+ MARATHONS
-                        </span>
-                      </div>
-                      <p className="text-xs text-[#EADFC9]/85 font-sans leading-relaxed">
-                        Visualise 25+ hackathons &amp; rapid software shipping workflows in real time.
-                      </p>
-                    </div>
-
-                    <div className="relative z-10 mt-3 p-2.5 bg-[#0C0907]/90 border border-white/10 rounded-lg space-y-1 font-mono">
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="text-[#EADFC9]/70 text-xs">Total Competed:</span>
-                        <span className="text-xl sm:text-2xl font-bold text-[#5CE1E6] font-display">
-                          <CounterNumber value="25+" />
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1.5 pt-1 border-t border-white/10 text-[10px] text-white/50">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#5CE1E6] animate-ping" />
-                        <span>Sprint Duration: 36h Max</span>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Card 2: Finalist Monitor */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.1 }}
-                    className="relative overflow-hidden rounded-xl bg-[#18130F]/90 border border-[#C75B32]/30 p-4 flex flex-col justify-between hover:border-[#C75B32]/60 transition-all group shadow-lg"
-                  >
-                    <AnimatedGradient colors={["#C75B32", "#E88053", "#FF6B35"]} speed={0.08} blur="medium" />
-
-                    <div className="relative z-10 space-y-1.5">
-                      <div className="flex justify-between items-center">
-                        <h3 className="text-xs font-bold font-mono text-white flex items-center gap-1.5">
-                          <Award className="w-4 h-4 text-[#C75B32]" />
-                          Finalist Monitor
-                        </h3>
-                        <span className="px-2 py-0.5 rounded-full bg-[#C75B32]/15 border border-[#C75B32]/30 text-[9px] font-mono text-[#C75B32] uppercase">
-                          20+ PLACEMENTS
-                        </span>
-                      </div>
-                      <p className="text-xs text-[#EADFC9]/85 font-sans leading-relaxed">
-                        Track 20+ top-tier placements &amp; high-impact prototype success rates.
-                      </p>
-                    </div>
-
-                    <div className="relative z-10 mt-3 p-2.5 bg-[#0C0907]/90 border border-white/10 rounded-lg space-y-1 font-mono">
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="text-[#EADFC9]/70 text-xs">Finalist Placements:</span>
-                        <span className="text-xl sm:text-2xl font-bold text-[#E88053] font-display">
-                          <CounterNumber value="20+" />
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between pt-1 border-t border-white/10 text-[10px] text-white/50">
-                        <span>Success Rate: ~80%</span>
-                        <span className="text-[#E88053] font-bold">TOP-TIER</span>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Card 3: Victory Feed */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.15 }}
-                    className="relative overflow-hidden rounded-xl bg-[#18130F]/90 border border-[#FACC15]/30 p-4 flex flex-col justify-between hover:border-[#FACC15]/60 transition-all group shadow-lg"
-                  >
-                    <AnimatedGradient colors={["#FACC15", "#E88053", "#C75B32"]} speed={0.08} blur="medium" />
-
-                    <div className="relative z-10 space-y-1.5">
-                      <div className="flex justify-between items-center">
-                        <h3 className="text-xs font-bold font-mono text-white flex items-center gap-1.5">
-                          <Zap className="w-4 h-4 text-[#FACC15]" />
-                          Victory Feed
-                        </h3>
-                        <span className="px-2 py-0.5 rounded-full bg-[#FACC15]/15 border border-[#FACC15]/30 text-[9px] font-mono text-[#FACC15] uppercase">
-                          1ST PLACE
-                        </span>
-                      </div>
-                      <p className="text-xs text-[#EADFC9]/85 font-sans leading-relaxed">
-                        Real-time log of 1st place track wins &amp; EVM smart contract innovations.
-                      </p>
-                    </div>
-
-                    <div className="relative z-10 mt-3 p-2.5 bg-[#0C0907]/90 border border-white/10 rounded-lg space-y-1 font-mono text-xs">
-                      <div className="flex items-center justify-between text-white/90">
-                        <span className="truncate">🏆 Build On Chain @ NIT Calicut</span>
-                        <span className="text-[#FACC15] font-bold font-display text-sm">
-                          <CounterNumber value="01" />
-                        </span>
-                      </div>
-                      <div className="text-[10px] text-[#EADFC9]/60 truncate">
-                        EVM Smart Contract Innovation
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Bottom Row: 2 Wider Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-                  {/* Card 4: Global Recognition */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.2 }}
-                    className="md:col-span-3 relative overflow-hidden rounded-xl bg-[#18130F]/90 border border-[#C084FC]/30 p-4 flex flex-col justify-between hover:border-[#C084FC]/60 transition-all group shadow-lg"
-                  >
-                    <AnimatedGradient colors={["#C084FC", "#8B5CF6", "#5CE1E6"]} speed={0.08} blur="medium" />
-
-                    <div className="relative z-10 space-y-1.5">
-                      <div className="flex justify-between items-center">
-                        <h3 className="text-xs font-bold font-mono text-white flex items-center gap-1.5">
-                          <Globe className="w-4 h-4 text-[#C084FC]" />
-                          Global Recognition
-                        </h3>
-                        <span className="px-2 py-0.5 rounded-full bg-[#C084FC]/15 border border-[#C084FC]/30 text-[9px] font-mono text-[#C084FC] uppercase">
-                          2 SELECTIONS
-                        </span>
-                      </div>
-                      <p className="text-xs text-[#EADFC9]/85 font-sans leading-relaxed">
-                        Selected across India&apos;s flagship Smart India Hackathon &amp; UNESCO-IOC Ocean Platform.
-                      </p>
-                    </div>
-
-                    <div className="relative z-10 mt-3 grid grid-cols-2 gap-2 font-mono text-xs">
-                      <div className="p-2 bg-[#0C0907]/90 border border-white/10 rounded-lg space-y-0.5">
-                        <span className="text-[#C084FC] font-bold block text-xs">Smart India Hackathon</span>
-                        <span className="text-[10px] text-[#EADFC9]/60">National Stage Finalist</span>
-                      </div>
-                      <div className="p-2 bg-[#0C0907]/90 border border-white/10 rounded-lg space-y-0.5">
-                        <span className="text-[#5CE1E6] font-bold block text-xs">UNESCO-IOC Network</span>
-                        <span className="text-[10px] text-[#EADFC9]/60">Circle Global Selection</span>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Card 5: Deployment Inspector */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.25 }}
-                    className="md:col-span-2 relative overflow-hidden rounded-xl bg-[#18130F]/90 border border-[#10B981]/30 p-4 flex flex-col justify-between hover:border-[#10B981]/60 transition-all group shadow-lg"
-                  >
-                    <AnimatedGradient colors={["#10B981", "#059669", "#3B82F6"]} speed={0.08} blur="medium" />
-
-                    <div className="relative z-10 space-y-1.5">
-                      <div className="flex justify-between items-center">
-                        <h3 className="text-xs font-bold font-mono text-white flex items-center gap-1.5">
-                          <Rocket className="w-4 h-4 text-[#10B981]" />
-                          Deployment Inspector
-                        </h3>
-                        <span className="px-2 py-0.5 rounded-full bg-[#10B981]/15 border border-[#10B981]/30 text-[9px] font-mono text-[#10B981] uppercase">
-                          15+ DEPLOYMENTS
-                        </span>
-                      </div>
-                      <p className="text-xs text-[#EADFC9]/85 font-sans leading-relaxed">
-                        Full-stack web apps, AI provenance engines, &amp; EVM vaults.
-                      </p>
-                    </div>
-
-                    <div className="relative z-10 mt-3 p-2.5 bg-[#0C0907]/90 border border-white/10 rounded-lg flex justify-between items-center font-mono">
-                      <div className="space-y-0.5">
-                        <span className="text-xs text-[#EADFC9]/70 block">Shipped Applications:</span>
-                        <span className="text-[10px] text-[#10B981] flex items-center gap-1">
-                          <CheckCircle2 className="w-3.5 h-3.5" /> VERIFIED DEPLOYED
-                        </span>
-                      </div>
-                      <span className="text-xl sm:text-2xl font-bold text-[#10B981] font-display">
-                        <CounterNumber value="15+" />
+              {/* 4 Clean Authentic Impact Pillars */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                {/* Pillar 1: Hackathons */}
+                <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/20 hover:border-[#E88053]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#E88053] transition-colors">
+                        <CounterNumber value="25+" />
+                      </span>
+                      <span className="p-2 rounded-xl bg-[#1F1711] border border-[#D4BC98]/20 text-[#E88053]">
+                        <Trophy className="w-4 h-4" />
                       </span>
                     </div>
-                  </motion.div>
+                    <div className="space-y-1">
+                      <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
+                        Competitive Marathons
+                      </h3>
+                      <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                        Thriving under 24-to-36 hour sprint constraints to build production-grade prototypes, APIs, and working smart contracts from scratch.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/15 font-mono text-[10px] text-[#D4BC98]/75">
+                    36H MARATHON SPRINTS
+                  </div>
+                </div>
+
+                {/* Pillar 2: Podium Placements */}
+                <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/20 hover:border-[#E88053]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#E88053] transition-colors">
+                        <CounterNumber value="20+" />
+                      </span>
+                      <span className="p-2 rounded-xl bg-[#1F1711] border border-[#D4BC98]/20 text-[#E88053]">
+                        <Award className="w-4 h-4" />
+                      </span>
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
+                        Podium &amp; Finalist Finishes
+                      </h3>
+                      <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                        Recognized across premier national platforms including 1st Place Track at NIT Calicut and finalist entry in Smart India Hackathon.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/15 font-mono text-[10px] text-[#D4BC98]/75">
+                    NATIONAL RECOGNITION
+                  </div>
+                </div>
+
+                {/* Pillar 3: Deployed Systems */}
+                <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/20 hover:border-[#E88053]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#E88053] transition-colors">
+                        <CounterNumber value="15+" />
+                      </span>
+                      <span className="p-2 rounded-xl bg-[#1F1711] border border-[#D4BC98]/20 text-[#E88053]">
+                        <Rocket className="w-4 h-4" />
+                      </span>
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
+                        Applications Shipped
+                      </h3>
+                      <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                        Full-stack corporate platforms, AI provenance engines, EVM liquidity vaults, and open-source cryptographic security packages.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/15 font-mono text-[10px] text-[#D4BC98]/75">
+                    LIVE IN PRODUCTION
+                  </div>
+                </div>
+
+                {/* Pillar 4: Community Mentorship */}
+                <div className="p-5 sm:p-6 bg-[#16120E]/85 border border-[#D4BC98]/20 hover:border-[#E88053]/50 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#E88053] transition-colors">
+                        <CounterNumber value="200+" />
+                      </span>
+                      <span className="p-2 rounded-xl bg-[#1F1711] border border-[#D4BC98]/20 text-[#E88053]">
+                        <Globe className="w-4 h-4" />
+                      </span>
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
+                        Developers Mentored
+                      </h3>
+                      <p className="text-xs text-[#EADFC9]/80 font-sans leading-relaxed">
+                        Serving as Campus Ambassador to organize technical workshops, lead peer study circles in Web3 and AI, and inspire future builders.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/15 font-mono text-[10px] text-[#D4BC98]/75">
+                    COMMUNITY LEADERSHIP
+                  </div>
                 </div>
               </div>
             </div>
