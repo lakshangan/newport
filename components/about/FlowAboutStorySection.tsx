@@ -848,8 +848,40 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
         </div>
 
-        {/* Minimal Next Section Indicator */}
-        <div className="absolute bottom-6 sm:bottom-8 right-6 sm:right-10 lg:right-12 z-30 pointer-events-none select-none">
+        {/* Bottom Floating Bar */}
+        <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-10 lg:left-12 right-6 sm:right-10 lg:right-12 z-30 flex items-center justify-between pointer-events-none select-none">
+          {/* Apple-Style Pagination Indicator Capsule */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-[#16120E]/85 hover:bg-[#1E1611] border border-[#D4BC98]/25 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.5),0_0_0_1px_rgba(212,188,152,0.1)_inset] transition-all"
+          >
+            {[0, 1, 2].map((idx) => {
+              const isActive = activeSlide === idx;
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => advanceToSlide(idx)}
+                  className="p-1 cursor-pointer focus:outline-none flex items-center justify-center group"
+                  aria-label={`Go to slide ${idx + 1}`}
+                >
+                  <motion.div
+                    layout
+                    transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+                    className={`h-2 sm:h-2.5 rounded-full transition-colors duration-300 ${
+                      isActive
+                        ? 'w-7 sm:w-8 bg-[#E88053] shadow-[0_0_12px_rgba(232,128,83,0.5)]'
+                        : 'w-2 sm:w-2.5 bg-[#D4BC98]/30 group-hover:bg-[#D4BC98]/60'
+                    }`}
+                  />
+                </button>
+              );
+            })}
+          </motion.div>
+
+          {/* Minimal Next Section Indicator */}
           <AnimatePresence mode="wait">
             {activeSlide < 2 ? (
               <motion.button
