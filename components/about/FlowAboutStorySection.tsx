@@ -848,13 +848,14 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
         </div>
 
-        {/* Apple-Style Floating Dock Capsule (Recognition & Achievements Section Flow) */}
-        <div className="absolute bottom-5 sm:bottom-7 left-0 right-0 z-30 flex justify-center px-4 pointer-events-none">
+        {/* Bottom HUD Bar */}
+        <div className="absolute bottom-5 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 z-30 flex items-center justify-between pointer-events-none select-none">
+          {/* Apple-Style Dark Bronze Pill Capsule in the Lower Left */}
           <motion.div
-            initial={{ opacity: 0, y: 25, scale: 0.96 }}
+            initial={{ opacity: 0, y: 20, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-xl sm:max-w-2xl bg-[#F5F5F7]/95 hover:bg-white text-[#1D1D1F] backdrop-blur-2xl rounded-full px-4 sm:px-6 py-2.5 sm:py-3 shadow-[0_20px_60px_rgba(0,0,0,0.45),0_0_0_1px_rgba(255,255,255,0.8)_inset] border border-white/60 flex items-center justify-between gap-3 sm:gap-6 pointer-events-auto transition-all duration-300 select-none"
+            className="w-full sm:w-auto max-w-xl bg-[#16120E]/90 hover:bg-[#1C1612]/95 backdrop-blur-2xl rounded-full px-4 sm:px-5 py-2 sm:py-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_0_1px_rgba(212,188,152,0.18)_inset] border border-[#D4BC98]/25 flex items-center justify-between gap-3 sm:gap-5 pointer-events-auto transition-all duration-300"
           >
             {/* Left Typography Block */}
             <div className="flex-1 min-w-0 pr-1">
@@ -868,41 +869,41 @@ export const FlowAboutStorySection: React.FC = () => {
                   className="flex flex-col text-left"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#0071E3] animate-pulse shrink-0" />
-                    <span className="font-semibold text-xs sm:text-sm text-[#1D1D1F] tracking-tight truncate">
+                    <span className="w-2 h-2 rounded-full bg-[#E88053] animate-pulse shrink-0" />
+                    <span className="font-bold text-xs sm:text-sm text-[#FFFDF9] tracking-tight truncate font-sans">
                       {SLIDE_INFO[activeSlide].step} — {SLIDE_INFO[activeSlide].title}
                     </span>
                   </div>
-                  <p className="text-[11px] sm:text-xs text-[#515154] font-normal truncate mt-0.5 pl-4">
+                  <p className="text-[11px] text-[#D4BC98]/75 font-sans truncate mt-0.5 pl-4 hidden xs:block">
                     {SLIDE_INFO[activeSlide].subtitle}
                   </p>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* Slide Navigation Dots (Apple subtle indicator) */}
+            {/* Slide Navigation Dots (Subtle Warm Indicators) */}
             <div className="hidden md:flex items-center gap-1.5 shrink-0 px-1">
               {[0, 1, 2].map((idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => advanceToSlide(idx)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                     activeSlide === idx
-                      ? 'w-5 bg-[#0071E3]'
-                      : 'w-1.5 bg-[#1D1D1F]/20 hover:bg-[#1D1D1F]/40'
+                      ? 'w-5 bg-[#E88053]'
+                      : 'w-1.5 bg-[#D4BC98]/25 hover:bg-[#D4BC98]/50'
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
               ))}
             </div>
 
-            {/* Right Action Button (Apple Style Blue Pill) */}
+            {/* Right Action Button (Warm Orange Apple Pill) */}
             <div className="flex items-center shrink-0">
               <button
                 type="button"
                 onClick={() => advanceToSlide(activeSlide + 1)}
-                className="group relative inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-95 text-white font-medium text-xs sm:text-sm shadow-sm transition-all duration-200 cursor-pointer overflow-hidden"
+                className="group relative inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#C75B32] hover:bg-[#E88053] active:scale-95 text-white font-sans font-semibold text-xs shadow-[0_4px_16px_rgba(199,91,50,0.35)] transition-all duration-200 cursor-pointer overflow-hidden"
               >
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -924,6 +925,25 @@ export const FlowAboutStorySection: React.FC = () => {
               </button>
             </div>
           </motion.div>
+
+          {/* Lower Right Scroll Indicator (matches original layout) */}
+          <div className="hidden sm:flex items-center gap-3 px-3.5 py-2 rounded-full bg-[#16120E]/80 border border-[#D4BC98]/20 backdrop-blur-xl text-[#EADFC9] shadow-xl pointer-events-auto text-xs font-mono">
+            {activeSlide < 2 ? (
+              <>
+                <span className="text-[#EADFC9]/60">HORIZONTAL FLOW</span>
+                <span className="text-[#E88053] font-semibold">SCROLL ↓ TO ADVANCE →</span>
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={scrollToCompetitiveMilestones}
+                className="flex items-center gap-2 text-[#E88053] hover:text-white font-bold transition-colors cursor-pointer"
+              >
+                <span>COMPETITIVE MILESTONES</span>
+                <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
