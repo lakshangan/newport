@@ -280,7 +280,7 @@ export const FlowAboutStorySection: React.FC = () => {
       <section
         id="about"
         aria-label="01 — Who I am"
-        className="relative h-screen min-h-screen w-full overflow-hidden flex flex-col justify-center px-4 sm:px-8 lg:px-12"
+        className="relative h-screen min-h-screen w-full overflow-hidden flex flex-col justify-center px-6 sm:px-10 lg:px-16 pt-24 sm:pt-28 pb-8 sm:pb-12"
         style={{ backgroundColor: '#EADFC9', color: '#1A130F' }}
       >
         {/* Renaissance Artwork Background Image */}
@@ -295,34 +295,31 @@ export const FlowAboutStorySection: React.FC = () => {
           />
         </div>
 
-        {/* Content Container (Centered in open parchment area framed by left books & right globe) */}
-        <div className="relative z-10 my-auto max-w-5xl mx-auto w-full flex flex-col justify-between h-full py-2 sm:py-4 space-y-3 sm:space-y-4">
-          {/* Top Header Badge */}
-          <div className="space-y-2">
+        {/* Content Container (Comfortably positioned below the navbar with cohesive spacing) */}
+        <div className="relative z-10 my-auto max-w-5xl mx-auto w-full flex flex-col justify-center space-y-4 sm:space-y-5 md:space-y-6">
+          {/* Top Header Badge & Display Title */}
+          <div className="space-y-2 sm:space-y-3 text-left">
             <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#1A130F]/10 border border-[#8C4B18]/40 text-xs font-mono text-[#8C4B18] font-bold tracking-[0.2em] uppercase backdrop-blur-sm shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#8C4B18] animate-pulse" />
               <span>01 — WHO I AM // LAKSHAN G.</span>
             </div>
 
-            {/* Title */}
-            <div>
-              <h1 className="font-display text-[clamp(2.5rem,6.5vw,5.8rem)] font-extrabold leading-[0.88] uppercase tracking-tight text-[#1A130F]">
-                CREATE
-                <br />
-                WITHOUT
-                <br />
-                LIMITS
-              </h1>
-            </div>
+            <h1 className="font-display text-[clamp(2.2rem,5vw,4.5rem)] font-extrabold leading-[0.9] uppercase tracking-tight text-[#1A130F]">
+              CREATE
+              <br />
+              WITHOUT
+              <br />
+              LIMITS
+            </h1>
           </div>
 
           {/* Description Paragraph */}
-          <p className="font-sans max-w-[54ch] text-[clamp(0.85rem,1.5vw,1.15rem)] font-medium leading-relaxed text-[#2C1D11] bg-[#1A130F]/5 p-3 sm:p-4 rounded-2xl border border-[#1A130F]/15 backdrop-blur-sm shadow-sm">
+          <p className="font-sans max-w-[56ch] text-xs sm:text-sm md:text-[0.95rem] font-medium leading-relaxed text-[#2C1D11] bg-[#1A130F]/5 p-3.5 sm:p-4 rounded-2xl border border-[#1A130F]/15 backdrop-blur-sm shadow-sm">
             Full-Stack Developer, AI Systems Engineer &amp; Web3 Researcher. Turning complex ideas into high-performance interfaces, backend infrastructure, and scalable applications.
           </p>
 
           {/* 3 Tech Feature Cards across the bottom */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 pt-1">
             <div className="p-3 sm:p-3.5 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
               <p className="font-mono mb-1 text-xs font-bold uppercase tracking-wider text-[#8C4B18] flex items-center gap-1.5">
                 <span>⚡ First-Principles Mindset</span>
