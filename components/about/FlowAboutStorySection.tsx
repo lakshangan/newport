@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { AnimatedGradient } from '@/components/ui/animated-gradient-with-svg';
 import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
-import { Trophy, Award, Zap, Globe, Rocket, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown, ArrowRight } from 'lucide-react';
+import { Trophy, Award, Zap, Globe, Rocket, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -147,27 +147,6 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
   },
 ];
 
-const SLIDE_INFO = [
-  {
-    step: '01 / 03',
-    title: 'Recognition & Achievements',
-    subtitle: 'National stage finalist & EVM track prize winner',
-    action: 'Explore Showcase',
-  },
-  {
-    step: '02 / 03',
-    title: 'Creative Showcase',
-    subtitle: '3D WebGL interactions, AI agents & deployed web apps',
-    action: 'View Metrics',
-  },
-  {
-    step: '03 / 03',
-    title: 'Agent Bento Metrics',
-    subtitle: '15+ deployed products & competitive hackathon pipeline',
-    action: 'Milestones ↓',
-  },
-];
-
 export const FlowAboutStorySection: React.FC = () => {
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
@@ -178,25 +157,6 @@ export const FlowAboutStorySection: React.FC = () => {
     const el = document.getElementById('competitive-milestones');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const advanceToSlide = (targetIndex: number) => {
-    if (targetIndex >= 3) {
-      scrollToCompetitiveMilestones();
-      return;
-    }
-    const st = ScrollTrigger.getById('about-horizontal');
-    if (st) {
-      const start = st.start;
-      const end = st.end;
-      const targetProgress = targetIndex === 1 ? 0.42 * 0.82 : 0.78 * 0.82;
-      const targetScroll = start + targetProgress * (end - start);
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    } else {
-      if (targetIndex >= 3) {
-        scrollToCompetitiveMilestones();
-      }
     }
   };
 
@@ -215,7 +175,6 @@ export const FlowAboutStorySection: React.FC = () => {
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        id: 'about-horizontal',
         trigger: container,
         pin: true,
         pinSpacing: true,
@@ -281,7 +240,7 @@ export const FlowAboutStorySection: React.FC = () => {
       <section
         id="about"
         aria-label="01 — Who I am"
-        className="relative h-screen min-h-screen w-full overflow-hidden flex flex-col justify-center px-6 sm:px-10 lg:px-16 pt-24 sm:pt-28 pb-8 sm:pb-12"
+        className="relative min-h-screen w-full overflow-hidden flex flex-col justify-center px-6 sm:px-10 lg:px-16 pt-24 sm:pt-28 pb-10 sm:pb-14"
         style={{ backgroundColor: '#EADFC9', color: '#1A130F' }}
       >
         {/* Renaissance Artwork Background Image */}
@@ -296,9 +255,9 @@ export const FlowAboutStorySection: React.FC = () => {
           />
         </div>
 
-        {/* Content Container (Comfortably positioned below the navbar with cohesive spacing) */}
-        <div className="relative z-10 my-auto max-w-5xl mx-auto w-full flex flex-col justify-center space-y-4 sm:space-y-5 md:space-y-6">
-          {/* Top Header Badge & Display Title */}
+        {/* Content Container (Balanced vertical layout centered in open parchment area) */}
+        <div className="relative z-10 max-w-5xl mx-auto w-full flex flex-col justify-center space-y-5 sm:space-y-6 md:space-y-7">
+          {/* Top Header Badge & One-Line Display Title */}
           <div className="space-y-2 sm:space-y-3 text-left">
             <div className="flex items-center gap-3">
               <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#1A130F]/10 border border-[#8C4B18]/40 text-xs font-mono text-[#8C4B18] font-bold tracking-[0.2em] uppercase backdrop-blur-sm shadow-sm">
@@ -310,56 +269,57 @@ export const FlowAboutStorySection: React.FC = () => {
               </span>
             </div>
 
-            <h1 className="font-display font-black text-[clamp(3rem,6.8vw,5.6rem)] leading-[0.87] uppercase tracking-tight select-none">
-              <span className="block text-[#1A130F] drop-shadow-sm">
-                <AsciiGlitchRipple dur={900} className="hover:text-[#8C4B18] transition-colors cursor-default">
+            {/* One-Line Headline */}
+            <h1 className="font-display font-black text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[4.75rem] leading-none tracking-tight uppercase select-none flex flex-wrap items-baseline gap-x-2.5 sm:gap-x-4">
+              <span className="text-[#1A130F] hover:text-[#8C4B18] transition-colors cursor-default">
+                <AsciiGlitchRipple dur={900}>
                   CREATE
                 </AsciiGlitchRipple>
               </span>
-              <span className="block text-transparent [-webkit-text-stroke:2px_#2C1D11] hover:text-[#2C1D11] hover:[-webkit-text-stroke:0px] transition-all duration-300 tracking-wide my-0.5">
-                <AsciiGlitchRipple dur={1100} className="cursor-default">
+              <span className="text-transparent [-webkit-text-stroke:1.5px_#2C1D11] sm:[-webkit-text-stroke:2px_#2C1D11] hover:text-[#2C1D11] hover:[-webkit-text-stroke:0px] transition-all duration-300 cursor-default">
+                <AsciiGlitchRipple dur={1000}>
                   WITHOUT
                 </AsciiGlitchRipple>
               </span>
-              <span className="inline-flex items-center gap-2.5 text-[#C75B32] drop-shadow-[0_2px_18px_rgba(199,91,50,0.3)]">
-                <AsciiGlitchRipple dur={1200} className="hover:text-[#E06D43] transition-colors cursor-default">
+              <span className="inline-flex items-baseline gap-1.5 sm:gap-2 text-[#C75B32] drop-shadow-[0_2px_18px_rgba(199,91,50,0.3)] hover:text-[#E06D43] transition-colors cursor-default">
+                <AsciiGlitchRipple dur={1200}>
                   LIMITS
                 </AsciiGlitchRipple>
-                <span className="inline-block w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#C75B32] animate-pulse" />
+                <span className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#C75B32] animate-pulse align-middle" />
               </span>
             </h1>
           </div>
 
           {/* Description Paragraph */}
-          <p className="font-sans max-w-[56ch] text-xs sm:text-sm md:text-[0.95rem] font-medium leading-relaxed text-[#2C1D11] bg-[#1A130F]/5 p-3.5 sm:p-4 rounded-xl border border-[#1A130F]/15 border-l-[3px] border-l-[#C75B32] backdrop-blur-sm shadow-sm">
+          <p className="font-sans max-w-[58ch] text-xs sm:text-sm md:text-base font-medium leading-relaxed text-[#2C1D11] bg-[#1A130F]/5 p-3.5 sm:p-4 rounded-xl border border-[#1A130F]/15 border-l-[3px] border-l-[#C75B32] backdrop-blur-sm shadow-sm">
             Full-Stack Developer, AI Systems Engineer &amp; Web3 Researcher. Turning complex ideas into high-performance interfaces, backend infrastructure, and scalable applications.
           </p>
 
           {/* 3 Tech Feature Cards across the bottom */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 pt-1">
-            <div className="p-3 sm:p-3.5 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
-              <p className="font-mono mb-1 text-xs font-bold uppercase tracking-wider text-[#8C4B18] flex items-center gap-1.5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4 pt-1">
+            <div className="p-3.5 sm:p-4 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
+              <p className="font-mono mb-1.5 text-xs font-bold uppercase tracking-wider text-[#8C4B18] flex items-center gap-1.5">
                 <span>⚡ First-Principles Mindset</span>
               </p>
-              <p className="font-sans text-xs leading-relaxed text-[#2C1D11] font-medium">
+              <p className="font-sans text-xs sm:text-[13px] leading-relaxed text-[#2C1D11] font-medium">
                 Deconstructing architecture to fundamental truths before writing code. I turn raw concepts into production-ready software.
               </p>
             </div>
 
-            <div className="p-3 sm:p-3.5 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
-              <p className="font-mono mb-1 text-xs font-bold uppercase tracking-wider text-[#733610] flex items-center gap-1.5">
+            <div className="p-3.5 sm:p-4 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
+              <p className="font-mono mb-1.5 text-xs font-bold uppercase tracking-wider text-[#733610] flex items-center gap-1.5">
                 <span>🛠️ My Core Tech Stack</span>
               </p>
-              <p className="font-sans text-xs leading-relaxed text-[#2C1D11] font-medium">
+              <p className="font-sans text-xs sm:text-[13px] leading-relaxed text-[#2C1D11] font-medium">
                 Next.js, TypeScript, React, Node.js, Python, Solidity, EVM Smart Contracts, Three.js, GSAP, &amp; LLM Agents.
               </p>
             </div>
 
-            <div className="p-3 sm:p-3.5 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
-              <p className="font-mono mb-1 text-xs font-bold uppercase tracking-wider text-[#8C4B18] flex items-center gap-1.5">
+            <div className="p-3.5 sm:p-4 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
+              <p className="font-mono mb-1.5 text-xs font-bold uppercase tracking-wider text-[#8C4B18] flex items-center gap-1.5">
                 <span>🚀 Rapid Execution</span>
               </p>
-              <p className="font-sans text-xs leading-relaxed text-[#2C1D11] font-medium">
+              <p className="font-sans text-xs sm:text-[13px] leading-relaxed text-[#2C1D11] font-medium">
                 Thriving under strict 36-hour marathon deadlines to ship full-stack web products, APIs, &amp; audited Web3 smart contracts.
               </p>
             </div>
@@ -386,13 +346,13 @@ export const FlowAboutStorySection: React.FC = () => {
               alt="Creative Engineering Workspace Studio Panorama"
               fill
               priority
-              className="object-cover object-left md:object-center filter brightness-[0.98] contrast-[1.02]"
+              className="object-cover object-left md:object-center filter brightness-[0.85] contrast-[1.05]"
               sizes="267vh"
             />
-            {/* Soft atmospheric vignette - reduced overlay intensity */}
-            <div className="absolute inset-0 bg-[#0C0907]/10 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907]/45 via-transparent to-[#0C0907]/20 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/20 pointer-events-none" />
+            {/* Subtle atmospheric vignette and tone mapping overlays */}
+            <div className="absolute inset-0 bg-[#0C0907]/25 backdrop-blur-[0.2px] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907]/90 via-transparent to-[#0C0907]/70 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 pointer-events-none" />
           </div>
         </div>
 
@@ -409,27 +369,27 @@ export const FlowAboutStorySection: React.FC = () => {
             className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
-            <div className="absolute top-1/3 left-1/4 w-[450px] h-[350px] bg-[#E88053]/8 rounded-full blur-[160px] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#C75B32]/8 rounded-full blur-[150px] pointer-events-none z-1" />
+            <div className="absolute top-1/3 left-1/4 w-[450px] h-[350px] bg-[#E88053]/10 rounded-full blur-[160px] pointer-events-none z-1" />
+            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#C75B32]/12 rounded-full blur-[150px] pointer-events-none z-1" />
 
             <div className="max-w-7xl mx-auto w-full space-y-5 sm:space-y-6 relative z-10 my-auto">
               {/* Header */}
               <div className="space-y-2 border-b border-[#D4BC98]/20 pb-4 text-left">
-                <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/75 border border-[#D4BC98]/30 text-xs font-mono text-[#E88053] tracking-widest uppercase backdrop-blur-md shadow-lg">
+                <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/30 text-xs font-mono text-[#E88053] tracking-widest uppercase backdrop-blur-md shadow-lg">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
                   <span>02 // RECOGNITION &amp; COLLEGE ACHIEVEMENTS</span>
                 </div>
                 <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]">
                   RECOGNIZED ACROSS NATIONAL &amp; GLOBAL STAGES
                 </h2>
-                <p className="text-xs sm:text-sm font-medium text-[#EADFC9]/95 max-w-2xl bg-[#16120E]/40 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
+                <p className="text-xs sm:text-sm font-medium text-[#EADFC9]/95 max-w-2xl bg-[#16120E]/70 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
                   Studying Computer Technology, I’ve served as Campus Ambassador, led technical developer initiatives, and competed across 25+ national and global marathons.
                 </p>
               </div>
 
               {/* 5 Warm Bronze Glass Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-                <div className="p-4 sm:p-5 bg-[#16120E]/50 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.4)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/80 transition-all group">
+                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/95 transition-all group">
                   <div className="text-xs font-mono text-[#5CE1E6] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Award className="w-4 h-4" /> Tech Hub Lead &amp; Campus Ambassador
                   </div>
@@ -438,7 +398,7 @@ export const FlowAboutStorySection: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="p-4 sm:p-5 bg-[#16120E]/50 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.4)] space-y-2 hover:border-[#FACC15]/60 hover:bg-[#1E1712]/80 transition-all group">
+                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#FACC15]/60 hover:bg-[#1E1712]/95 transition-all group">
                   <div className="text-xs font-mono text-[#FACC15] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Trophy className="w-4 h-4" /> 1st Place Track Winner
                   </div>
@@ -447,7 +407,7 @@ export const FlowAboutStorySection: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="p-4 sm:p-5 bg-[#16120E]/50 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.4)] space-y-2 hover:border-[#E88053]/60 hover:bg-[#1E1712]/80 transition-all group">
+                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#E88053]/60 hover:bg-[#1E1712]/95 transition-all group">
                   <div className="text-xs font-mono text-[#E88053] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Globe className="w-4 h-4" /> Smart India Hackathon Finalist
                   </div>
@@ -458,7 +418,7 @@ export const FlowAboutStorySection: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-                <div className="p-4 sm:p-5 bg-[#16120E]/50 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.4)] space-y-2 hover:border-[#C084FC]/60 hover:bg-[#1E1712]/80 transition-all group">
+                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#C084FC]/60 hover:bg-[#1E1712]/95 transition-all group">
                   <div className="text-xs font-mono text-[#C084FC] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <ShieldCheck className="w-4 h-4" /> OpenLedger &amp; Uniswap Incubator
                   </div>
@@ -467,7 +427,7 @@ export const FlowAboutStorySection: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="p-4 sm:p-5 bg-[#16120E]/50 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.4)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/80 transition-all group">
+                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/95 transition-all group">
                   <div className="text-xs font-mono text-[#5CE1E6] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Monitor className="w-4 h-4" /> International Silambam Medalist
                   </div>
@@ -502,7 +462,7 @@ export const FlowAboutStorySection: React.FC = () => {
                     CREATIVE <span className="text-[#E88053] drop-shadow-[0_0_25px_rgba(232,128,83,0.5)]">SHOWCASE</span>
                   </h2>
                 </div>
-                <p className="font-sans text-xs sm:text-sm max-w-md text-[#EADFC9]/95 font-medium leading-relaxed bg-[#16120E]/40 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
+                <p className="font-sans text-xs sm:text-sm max-w-md text-[#EADFC9]/95 font-medium leading-relaxed bg-[#16120E]/70 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
                   Pushing the boundaries of full-stack engineering with 3D WebGL interactions, AI agents, smart contracts, and cryptographic tooling.
                 </p>
               </div>
@@ -559,7 +519,7 @@ export const FlowAboutStorySection: React.FC = () => {
                           loading="lazy"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-75 pointer-events-none" />
-                        
+
                         <a
                           href={card.url}
                           target="_blank"
@@ -862,89 +822,21 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom HUD Bar */}
-        <div className="absolute bottom-5 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 z-30 flex items-center justify-between pointer-events-none select-none">
-          {/* Apple-Style Dark Bronze Pill Capsule in the Lower Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full sm:w-auto max-w-xl bg-[#16120E]/90 hover:bg-[#1C1612]/95 backdrop-blur-2xl rounded-full px-4 sm:px-5 py-2 sm:py-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_0_1px_rgba(212,188,152,0.18)_inset] border border-[#D4BC98]/25 flex items-center justify-between gap-3 sm:gap-5 pointer-events-auto transition-all duration-300"
-          >
-            {/* Left Typography Block */}
-            <div className="flex-1 min-w-0 pr-1">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeSlide}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col text-left"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#E88053] animate-pulse shrink-0" />
-                    <span className="font-bold text-xs sm:text-sm text-[#FFFDF9] tracking-tight truncate font-sans">
-                      {SLIDE_INFO[activeSlide].step} — {SLIDE_INFO[activeSlide].title}
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-[#D4BC98]/75 font-sans truncate mt-0.5 pl-4 hidden xs:block">
-                    {SLIDE_INFO[activeSlide].subtitle}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+        {/* Bottom Horizontal Scroll Progress HUD */}
+        <div className="absolute bottom-4 left-6 right-6 z-20 flex items-center justify-between pointer-events-none text-xs font-mono">
+          <div className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/20 backdrop-blur-xl text-[#FFFDF9] shadow-2xl">
+            <span className="w-2 h-2 rounded-full bg-[#E88053] animate-pulse" />
+            <span className="font-bold">
+              {activeSlide === 0 && '01 / 03 — RECOGNITION & ACHIEVEMENTS'}
+              {activeSlide === 1 && '02 / 03 — CREATIVE SHOWCASE'}
+              {activeSlide === 2 && '03 / 03 — AGENT BENTO METRICS'}
+            </span>
+          </div>
 
-            {/* Slide Navigation Dots (Subtle Warm Indicators) */}
-            <div className="hidden md:flex items-center gap-1.5 shrink-0 px-1">
-              {[0, 1, 2].map((idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => advanceToSlide(idx)}
-                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    activeSlide === idx
-                      ? 'w-5 bg-[#E88053]'
-                      : 'w-1.5 bg-[#D4BC98]/25 hover:bg-[#D4BC98]/50'
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Right Action Button (Warm Orange Apple Pill) */}
-            <div className="flex items-center shrink-0">
-              <button
-                type="button"
-                onClick={() => advanceToSlide(activeSlide + 1)}
-                className="group relative inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#C75B32] hover:bg-[#E88053] active:scale-95 text-white font-sans font-semibold text-xs shadow-[0_4px_16px_rgba(199,91,50,0.35)] transition-all duration-200 cursor-pointer overflow-hidden"
-              >
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={activeSlide}
-                    initial={{ opacity: 0, x: 4 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -4 }}
-                    transition={{ duration: 0.18 }}
-                    className="flex items-center gap-1.5"
-                  >
-                    <span>{SLIDE_INFO[activeSlide].action}</span>
-                    {activeSlide < 2 ? (
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                    ) : (
-                      <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
-                    )}
-                  </motion.span>
-                </AnimatePresence>
-              </button>
-            </div>
-          </motion.div>
-
-          {/* Lower Right Scroll Indicator (matches original layout) */}
-          <div className="hidden sm:flex items-center gap-3 px-3.5 py-2 rounded-full bg-[#16120E]/80 border border-[#D4BC98]/20 backdrop-blur-xl text-[#EADFC9] shadow-xl pointer-events-auto text-xs font-mono">
+          <div className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/20 backdrop-blur-xl text-[#EADFC9] shadow-2xl pointer-events-auto">
             {activeSlide < 2 ? (
               <>
-                <span className="text-[#EADFC9]/60">HORIZONTAL FLOW</span>
+                <span className="hidden sm:inline text-[#EADFC9]/60">HORIZONTAL FLOW</span>
                 <span className="text-[#E88053] font-semibold">SCROLL ↓ TO ADVANCE →</span>
               </>
             ) : (
