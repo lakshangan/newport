@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const WORD_ITEMS = [
-  { text: "code.", color: "text-[#5CE1E6]" },
+  { text: "code.", color: "text-[#C75B32]" },
   { text: "build.", color: "text-[#E88053]" },
   { text: "learn.", color: "text-[#C084FC]" },
   { text: "ship.", color: "text-[#FF6B35]" },
@@ -37,7 +36,7 @@ export default function ScrollAnimation() {
 
   return (
     <section className="relative w-full h-screen min-h-screen flex items-center justify-center bg-[#080808] overflow-hidden select-none">
-      {/* Background Video with Brightness Enhancement */}
+      {/* Background Video */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <video
           ref={videoRef}
@@ -47,19 +46,7 @@ export default function ScrollAnimation() {
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover filter brightness-105 contrast-100 opacity-80"
-        />
-      </div>
-
-      {/* Fallback Artwork Image */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-60">
-        <Image
-          src="/images/about section .png"
-          alt="Artistic Section Background"
-          fill
-          priority
-          className="object-cover object-[20%_center] filter contrast-100 brightness-105"
-          sizes="100vw"
+          className="w-full h-full object-cover filter brightness-105 contrast-100"
         />
       </div>
 
