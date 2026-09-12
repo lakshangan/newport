@@ -92,7 +92,7 @@ const coverFragmentShader = `
     float edgeZone = smoothstep(dissolveThreshold - edgeWidth, dissolveThreshold, normalizedDist) * 
                      smoothstep(dissolveThreshold + edgeWidth, dissolveThreshold, normalizedDist);
     
-    vec3 edgeColor = vec3(0.36, 0.88, 0.90); // #5CE1E6 Cyan glow accent
+    vec3 edgeColor = vec3(0.85, 0.42, 0.22); // #C75B32 Warm orange glow accent
     float sparkle = hash(floor(vUv * uResolution / 4.0) + floor(uTime * 15.0)) * edgeZone;
     
     vec3 baseColor = vec3(0.02, 0.02, 0.02); // Solid dark #050505
@@ -307,7 +307,7 @@ export const Preloader: React.FC = () => {
               : 'opacity-0 translate-y-4'
           }`}
         >
-          <p className="font-sans font-medium text-xs sm:text-sm tracking-[0.25em] text-[#5CE1E6] uppercase">
+          <p className="font-sans font-medium text-xs sm:text-sm tracking-[0.25em] text-[#C75B32] uppercase">
             {SUBTITLE}
           </p>
         </div>

@@ -34,8 +34,9 @@ export const HeroSection: React.FC = () => {
         <div className="max-w-3xl space-y-5 text-left">
 
           {/* Subtitle Badge */}
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-[#C75B32]/40 text-xs font-mono text-[#C75B32] tracking-widest uppercase shadow-xl">
-            <span>FULL STACK DEVELOPER • AI &amp; BLOCKCHAIN</span>
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-[#C75B32]/50 text-xs font-mono text-[#C75B32] tracking-widest uppercase shadow-xl">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
+            <span className="text-[#C75B32] font-medium">FULL STACK DEVELOPER • AI &amp; BLOCKCHAIN</span>
           </div>
 
           {/* Main Display Headline with ASCII Scramble Hover Effect */}
