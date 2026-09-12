@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { AnimatedGradient } from '@/components/ui/animated-gradient-with-svg';
-import { Trophy, Award, Zap, Globe, Rocket, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown } from 'lucide-react';
+import { Trophy, Award, Zap, Globe, Rocket, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown, ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -146,6 +146,27 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
   },
 ];
 
+const SLIDE_INFO = [
+  {
+    step: '01 / 03',
+    title: 'Recognition & Achievements',
+    subtitle: 'National stage finalist & EVM track prize winner',
+    action: 'Explore Showcase',
+  },
+  {
+    step: '02 / 03',
+    title: 'Creative Showcase',
+    subtitle: '3D WebGL interactions, AI agents & deployed web apps',
+    action: 'View Metrics',
+  },
+  {
+    step: '03 / 03',
+    title: 'Agent Bento Metrics',
+    subtitle: '15+ deployed products & competitive hackathon pipeline',
+    action: 'Milestones ↓',
+  },
+];
+
 export const FlowAboutStorySection: React.FC = () => {
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
@@ -156,6 +177,25 @@ export const FlowAboutStorySection: React.FC = () => {
     const el = document.getElementById('competitive-milestones');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const advanceToSlide = (targetIndex: number) => {
+    if (targetIndex >= 3) {
+      scrollToCompetitiveMilestones();
+      return;
+    }
+    const st = ScrollTrigger.getById('about-horizontal');
+    if (st) {
+      const start = st.start;
+      const end = st.end;
+      const targetProgress = targetIndex === 1 ? 0.42 * 0.82 : 0.78 * 0.82;
+      const targetScroll = start + targetProgress * (end - start);
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    } else {
+      if (targetIndex >= 3) {
+        scrollToCompetitiveMilestones();
+      }
     }
   };
 
@@ -174,6 +214,7 @@ export const FlowAboutStorySection: React.FC = () => {
 
     const tl = gsap.timeline({
       scrollTrigger: {
+        id: 'about-horizontal',
         trigger: container,
         pin: true,
         pinSpacing: true,
@@ -331,13 +372,13 @@ export const FlowAboutStorySection: React.FC = () => {
               alt="Creative Engineering Workspace Studio Panorama"
               fill
               priority
-              className="object-cover object-left md:object-center filter brightness-[0.85] contrast-[1.05]"
+              className="object-cover object-left md:object-center filter brightness-[0.98] contrast-[1.02]"
               sizes="267vh"
             />
-            {/* Subtle atmospheric vignette and tone mapping overlays */}
-            <div className="absolute inset-0 bg-[#0C0907]/25 backdrop-blur-[0.2px] pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907]/90 via-transparent to-[#0C0907]/70 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 pointer-events-none" />
+            {/* Soft atmospheric vignette - reduced overlay intensity */}
+            <div className="absolute inset-0 bg-[#0C0907]/10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907]/45 via-transparent to-[#0C0907]/20 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/20 pointer-events-none" />
           </div>
         </div>
 
@@ -354,27 +395,27 @@ export const FlowAboutStorySection: React.FC = () => {
             className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
-            <div className="absolute top-1/3 left-1/4 w-[450px] h-[350px] bg-[#E88053]/10 rounded-full blur-[160px] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#C75B32]/12 rounded-full blur-[150px] pointer-events-none z-1" />
+            <div className="absolute top-1/3 left-1/4 w-[450px] h-[350px] bg-[#E88053]/8 rounded-full blur-[160px] pointer-events-none z-1" />
+            <div className="absolute bottom-10 right-1/4 w-[450px] h-[350px] bg-[#C75B32]/8 rounded-full blur-[150px] pointer-events-none z-1" />
 
             <div className="max-w-7xl mx-auto w-full space-y-5 sm:space-y-6 relative z-10 my-auto">
               {/* Header */}
               <div className="space-y-2 border-b border-[#D4BC98]/20 pb-4 text-left">
-                <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/30 text-xs font-mono text-[#E88053] tracking-widest uppercase backdrop-blur-md shadow-lg">
+                <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#16120E]/75 border border-[#D4BC98]/30 text-xs font-mono text-[#E88053] tracking-widest uppercase backdrop-blur-md shadow-lg">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
                   <span>02 // RECOGNITION &amp; COLLEGE ACHIEVEMENTS</span>
                 </div>
                 <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]">
                   RECOGNIZED ACROSS NATIONAL &amp; GLOBAL STAGES
                 </h2>
-                <p className="text-xs sm:text-sm font-medium text-[#EADFC9]/95 max-w-2xl bg-[#16120E]/70 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
+                <p className="text-xs sm:text-sm font-medium text-[#EADFC9]/95 max-w-2xl bg-[#16120E]/40 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
                   Studying Computer Technology, I’ve served as Campus Ambassador, led technical developer initiatives, and competed across 25+ national and global marathons.
                 </p>
               </div>
 
               {/* 5 Warm Bronze Glass Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/95 transition-all group">
+                <div className="p-4 sm:p-5 bg-[#16120E]/50 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.4)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/80 transition-all group">
                   <div className="text-xs font-mono text-[#5CE1E6] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Award className="w-4 h-4" /> Tech Hub Lead &amp; Campus Ambassador
                   </div>
@@ -383,7 +424,7 @@ export const FlowAboutStorySection: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#FACC15]/60 hover:bg-[#1E1712]/95 transition-all group">
+                <div className="p-4 sm:p-5 bg-[#16120E]/50 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.4)] space-y-2 hover:border-[#FACC15]/60 hover:bg-[#1E1712]/80 transition-all group">
                   <div className="text-xs font-mono text-[#FACC15] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Trophy className="w-4 h-4" /> 1st Place Track Winner
                   </div>
@@ -392,7 +433,7 @@ export const FlowAboutStorySection: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#E88053]/60 hover:bg-[#1E1712]/95 transition-all group">
+                <div className="p-4 sm:p-5 bg-[#16120E]/50 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.4)] space-y-2 hover:border-[#E88053]/60 hover:bg-[#1E1712]/80 transition-all group">
                   <div className="text-xs font-mono text-[#E88053] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Globe className="w-4 h-4" /> Smart India Hackathon Finalist
                   </div>
@@ -403,7 +444,7 @@ export const FlowAboutStorySection: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#C084FC]/60 hover:bg-[#1E1712]/95 transition-all group">
+                <div className="p-4 sm:p-5 bg-[#16120E]/50 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.4)] space-y-2 hover:border-[#C084FC]/60 hover:bg-[#1E1712]/80 transition-all group">
                   <div className="text-xs font-mono text-[#C084FC] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <ShieldCheck className="w-4 h-4" /> OpenLedger &amp; Uniswap Incubator
                   </div>
@@ -412,7 +453,7 @@ export const FlowAboutStorySection: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="p-4 sm:p-5 bg-[#16120E]/85 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/95 transition-all group">
+                <div className="p-4 sm:p-5 bg-[#16120E]/50 border border-[#D4BC98]/20 rounded-2xl backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.4)] space-y-2 hover:border-[#5CE1E6]/60 hover:bg-[#1E1712]/80 transition-all group">
                   <div className="text-xs font-mono text-[#5CE1E6] uppercase font-bold tracking-wider flex items-center gap-1.5">
                     <Monitor className="w-4 h-4" /> International Silambam Medalist
                   </div>
@@ -447,7 +488,7 @@ export const FlowAboutStorySection: React.FC = () => {
                     CREATIVE <span className="text-[#E88053] drop-shadow-[0_0_25px_rgba(232,128,83,0.5)]">SHOWCASE</span>
                   </h2>
                 </div>
-                <p className="font-sans text-xs sm:text-sm max-w-md text-[#EADFC9]/95 font-medium leading-relaxed bg-[#16120E]/70 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
+                <p className="font-sans text-xs sm:text-sm max-w-md text-[#EADFC9]/95 font-medium leading-relaxed bg-[#16120E]/40 backdrop-blur-md p-3 rounded-xl border border-[#D4BC98]/20 shadow-md">
                   Pushing the boundaries of full-stack engineering with 3D WebGL interactions, AI agents, smart contracts, and cryptographic tooling.
                 </p>
               </div>
@@ -807,34 +848,82 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Horizontal Scroll Progress HUD */}
-        <div className="absolute bottom-4 left-6 right-6 z-20 flex items-center justify-between pointer-events-none text-xs font-mono">
-          <div className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/20 backdrop-blur-xl text-[#FFFDF9] shadow-2xl">
-            <span className="w-2 h-2 rounded-full bg-[#E88053] animate-pulse" />
-            <span className="font-bold">
-              {activeSlide === 0 && '01 / 03 — RECOGNITION & ACHIEVEMENTS'}
-              {activeSlide === 1 && '02 / 03 — CREATIVE SHOWCASE'}
-              {activeSlide === 2 && '03 / 03 — AGENT BENTO METRICS'}
-            </span>
-          </div>
+        {/* Apple-Style Floating Dock Capsule (Recognition & Achievements Section Flow) */}
+        <div className="absolute bottom-5 sm:bottom-7 left-0 right-0 z-30 flex justify-center px-4 pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0, y: 25, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-xl sm:max-w-2xl bg-[#F5F5F7]/95 hover:bg-white text-[#1D1D1F] backdrop-blur-2xl rounded-full px-4 sm:px-6 py-2.5 sm:py-3 shadow-[0_20px_60px_rgba(0,0,0,0.45),0_0_0_1px_rgba(255,255,255,0.8)_inset] border border-white/60 flex items-center justify-between gap-3 sm:gap-6 pointer-events-auto transition-all duration-300 select-none"
+          >
+            {/* Left Typography Block */}
+            <div className="flex-1 min-w-0 pr-1">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeSlide}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-col text-left"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#0071E3] animate-pulse shrink-0" />
+                    <span className="font-semibold text-xs sm:text-sm text-[#1D1D1F] tracking-tight truncate">
+                      {SLIDE_INFO[activeSlide].step} — {SLIDE_INFO[activeSlide].title}
+                    </span>
+                  </div>
+                  <p className="text-[11px] sm:text-xs text-[#515154] font-normal truncate mt-0.5 pl-4">
+                    {SLIDE_INFO[activeSlide].subtitle}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-          <div className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-[#16120E]/90 border border-[#D4BC98]/20 backdrop-blur-xl text-[#EADFC9] shadow-2xl pointer-events-auto">
-            {activeSlide < 2 ? (
-              <>
-                <span className="hidden sm:inline text-[#EADFC9]/60">HORIZONTAL FLOW</span>
-                <span className="text-[#E88053] font-semibold">SCROLL ↓ TO ADVANCE →</span>
-              </>
-            ) : (
+            {/* Slide Navigation Dots (Apple subtle indicator) */}
+            <div className="hidden md:flex items-center gap-1.5 shrink-0 px-1">
+              {[0, 1, 2].map((idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => advanceToSlide(idx)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    activeSlide === idx
+                      ? 'w-5 bg-[#0071E3]'
+                      : 'w-1.5 bg-[#1D1D1F]/20 hover:bg-[#1D1D1F]/40'
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Right Action Button (Apple Style Blue Pill) */}
+            <div className="flex items-center shrink-0">
               <button
                 type="button"
-                onClick={scrollToCompetitiveMilestones}
-                className="flex items-center gap-2 text-[#E88053] hover:text-white font-bold transition-colors cursor-pointer"
+                onClick={() => advanceToSlide(activeSlide + 1)}
+                className="group relative inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-95 text-white font-medium text-xs sm:text-sm shadow-sm transition-all duration-200 cursor-pointer overflow-hidden"
               >
-                <span>COMPETITIVE MILESTONES</span>
-                <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={activeSlide}
+                    initial={{ opacity: 0, x: 4 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -4 }}
+                    transition={{ duration: 0.18 }}
+                    className="flex items-center gap-1.5"
+                  >
+                    <span>{SLIDE_INFO[activeSlide].action}</span>
+                    {activeSlide < 2 ? (
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    ) : (
+                      <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
+                    )}
+                  </motion.span>
+                </AnimatePresence>
               </button>
-            )}
-          </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>

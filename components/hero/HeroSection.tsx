@@ -34,14 +34,14 @@ export const HeroSection: React.FC = () => {
         <div className="max-w-3xl space-y-5 text-left">
 
           {/* Subtitle Badge */}
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-[#5CE1E6]/30 text-xs font-mono text-[#5CE1E6] tracking-widest uppercase shadow-xl">
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-[#C75B32]/40 text-xs font-mono text-[#C75B32] tracking-widest uppercase shadow-xl">
             <span>FULL STACK DEVELOPER • AI &amp; BLOCKCHAIN</span>
           </div>
 
           {/* Main Display Headline with ASCII Scramble Hover Effect */}
           <h1 className="font-display font-black text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] leading-[0.95] tracking-tight uppercase">
             <span className="block text-white/80 font-light text-2xl xs:text-3xl sm:text-4xl md:text-5xl tracking-widest mb-1 sm:mb-2">
-              <AsciiGlitchRipple dur={1000} className="hover:text-[#5CE1E6] transition-colors">
+              <AsciiGlitchRipple dur={1000} className="hover:text-[#C75B32] transition-colors">
                 HELLO, I&apos;M
               </AsciiGlitchRipple>
             </span>
@@ -64,7 +64,7 @@ export const HeroSection: React.FC = () => {
               download="Lakshan_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-7 py-3.5 bg-white text-black font-mono font-bold text-xs tracking-wider rounded-full hover:bg-[#5CE1E6] hover:scale-105 transition-all shadow-2xl flex items-center justify-center space-x-2 text-center"
+              className="w-full sm:w-auto px-7 py-3.5 bg-white text-black font-mono font-bold text-xs tracking-wider rounded-full hover:bg-[#C75B32] hover:text-white hover:scale-105 transition-all shadow-2xl flex items-center justify-center space-x-2 text-center"
               data-cursor="RESUME"
             >
               <span>▶ DOWNLOAD RESUME</span>
