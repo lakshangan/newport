@@ -7,6 +7,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { AnimatedGradient } from '@/components/ui/animated-gradient-with-svg';
+import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 import { Trophy, Award, Zap, Globe, Rocket, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown, ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -299,22 +300,38 @@ export const FlowAboutStorySection: React.FC = () => {
         <div className="relative z-10 my-auto max-w-5xl mx-auto w-full flex flex-col justify-center space-y-4 sm:space-y-5 md:space-y-6">
           {/* Top Header Badge & Display Title */}
           <div className="space-y-2 sm:space-y-3 text-left">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#1A130F]/10 border border-[#8C4B18]/40 text-xs font-mono text-[#8C4B18] font-bold tracking-[0.2em] uppercase backdrop-blur-sm shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#8C4B18] animate-pulse" />
-              <span>01 — WHO I AM // LAKSHAN G.</span>
+            <div className="flex items-center gap-3">
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#1A130F]/10 border border-[#8C4B18]/40 text-xs font-mono text-[#8C4B18] font-bold tracking-[0.2em] uppercase backdrop-blur-sm shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8C4B18] animate-pulse" />
+                <span>01 — WHO I AM // LAKSHAN G.</span>
+              </div>
+              <span className="hidden sm:inline-block text-[10px] font-mono tracking-widest text-[#733610]/60 uppercase">
+                [ ARCHITECTURE &amp; CRAFT ]
+              </span>
             </div>
 
-            <h1 className="font-display text-[clamp(2.2rem,5vw,4.5rem)] font-extrabold leading-[0.9] uppercase tracking-tight text-[#1A130F]">
-              CREATE
-              <br />
-              WITHOUT
-              <br />
-              LIMITS
+            <h1 className="font-display font-black text-[clamp(3rem,6.8vw,5.6rem)] leading-[0.87] uppercase tracking-tight select-none">
+              <span className="block text-[#1A130F] drop-shadow-sm">
+                <AsciiGlitchRipple dur={900} className="hover:text-[#8C4B18] transition-colors cursor-default">
+                  CREATE
+                </AsciiGlitchRipple>
+              </span>
+              <span className="block text-transparent [-webkit-text-stroke:2px_#2C1D11] hover:text-[#2C1D11] hover:[-webkit-text-stroke:0px] transition-all duration-300 tracking-wide my-0.5">
+                <AsciiGlitchRipple dur={1100} className="cursor-default">
+                  WITHOUT
+                </AsciiGlitchRipple>
+              </span>
+              <span className="inline-flex items-center gap-2.5 text-[#C75B32] drop-shadow-[0_2px_18px_rgba(199,91,50,0.3)]">
+                <AsciiGlitchRipple dur={1200} className="hover:text-[#E06D43] transition-colors cursor-default">
+                  LIMITS
+                </AsciiGlitchRipple>
+                <span className="inline-block w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#C75B32] animate-pulse" />
+              </span>
             </h1>
           </div>
 
           {/* Description Paragraph */}
-          <p className="font-sans max-w-[56ch] text-xs sm:text-sm md:text-[0.95rem] font-medium leading-relaxed text-[#2C1D11] bg-[#1A130F]/5 p-3.5 sm:p-4 rounded-2xl border border-[#1A130F]/15 backdrop-blur-sm shadow-sm">
+          <p className="font-sans max-w-[56ch] text-xs sm:text-sm md:text-[0.95rem] font-medium leading-relaxed text-[#2C1D11] bg-[#1A130F]/5 p-3.5 sm:p-4 rounded-xl border border-[#1A130F]/15 border-l-[3px] border-l-[#C75B32] backdrop-blur-sm shadow-sm">
             Full-Stack Developer, AI Systems Engineer &amp; Web3 Researcher. Turning complex ideas into high-performance interfaces, backend infrastructure, and scalable applications.
           </p>
 
