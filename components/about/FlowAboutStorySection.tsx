@@ -147,25 +147,10 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
   },
 ];
 
-const SLIDE_INFO = [
-  {
-    step: '01 / 03',
-    title: 'Recognition & Achievements',
-    subtitle: 'National stage finalist & EVM track prize winner',
-    action: 'Explore Showcase',
-  },
-  {
-    step: '02 / 03',
-    title: 'Creative Showcase',
-    subtitle: '3D WebGL interactions, AI agents & deployed web apps',
-    action: 'View Metrics',
-  },
-  {
-    step: '03 / 03',
-    title: 'Agent Bento Metrics',
-    subtitle: '15+ deployed products & competitive hackathon pipeline',
-    action: 'Milestones ↓',
-  },
+const NEXT_STEPS = [
+  { label: 'Creative Showcase' },
+  { label: 'System Metrics' },
+  { label: 'Competitive Milestones' },
 ];
 
 export const FlowAboutStorySection: React.FC = () => {
@@ -863,102 +848,45 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom HUD Bar in Nice Floating Position */}
-        <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-10 lg:left-12 right-6 sm:right-10 lg:right-12 z-30 flex items-center justify-between pointer-events-none select-none">
-          {/* Apple-Style Dark Bronze Pill Capsule in Lower Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full sm:w-auto max-w-lg bg-[#16120E]/90 hover:bg-[#1C1612]/95 backdrop-blur-2xl rounded-full px-4 sm:px-5 py-2 sm:py-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_0_1px_rgba(212,188,152,0.18)_inset] border border-[#D4BC98]/25 flex items-center justify-between gap-3 sm:gap-5 pointer-events-auto transition-all duration-300"
-          >
-            {/* Left Typography Block (Apple 2-Line Layout) */}
-            <div className="flex-1 min-w-0 pr-1">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeSlide}
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -5 }}
-                  transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col text-left"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#E88053] animate-pulse shrink-0" />
-                    <span className="font-bold text-xs sm:text-sm text-[#FFFDF9] tracking-tight truncate font-sans">
-                      {SLIDE_INFO[activeSlide].step} — {SLIDE_INFO[activeSlide].title}
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-[#D4BC98]/75 font-sans truncate mt-0.5 pl-4 hidden xs:block">
-                    {SLIDE_INFO[activeSlide].subtitle}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Slide Navigation Dots (Subtle Warm Indicators) */}
-            <div className="hidden md:flex items-center gap-1.5 shrink-0 px-1">
-              {[0, 1, 2].map((idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => advanceToSlide(idx)}
-                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    activeSlide === idx
-                      ? 'w-5 bg-[#E88053]'
-                      : 'w-1.5 bg-[#D4BC98]/25 hover:bg-[#D4BC98]/50'
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Right Action Button (Warm Orange Apple Pill) */}
-            <div className="flex items-center shrink-0">
-              <button
+        {/* Minimal Next Section Indicator */}
+        <div className="absolute bottom-6 sm:bottom-8 right-6 sm:right-10 lg:right-12 z-30 pointer-events-none select-none">
+          <AnimatePresence mode="wait">
+            {activeSlide < 2 ? (
+              <motion.button
+                key={activeSlide}
                 type="button"
                 onClick={() => advanceToSlide(activeSlide + 1)}
-                className="group relative inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#C75B32] hover:bg-[#E88053] active:scale-95 text-white font-sans font-semibold text-xs shadow-[0_4px_16px_rgba(199,91,50,0.35)] transition-all duration-200 cursor-pointer overflow-hidden"
+                initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                className="group pointer-events-auto flex items-center gap-2.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#16120E]/85 hover:bg-[#1F1610] border border-[#D4BC98]/25 hover:border-[#E88053]/60 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.5),0_0_0_1px_rgba(212,188,152,0.1)_inset] transition-all duration-300 cursor-pointer active:scale-95 text-xs font-mono"
               >
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={activeSlide}
-                    initial={{ opacity: 0, x: 4 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -4 }}
-                    transition={{ duration: 0.18 }}
-                    className="flex items-center gap-1.5"
-                  >
-                    <span>{SLIDE_INFO[activeSlide].action}</span>
-                    {activeSlide < 2 ? (
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                    ) : (
-                      <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
-                    )}
-                  </motion.span>
-                </AnimatePresence>
-              </button>
-            </div>
-          </motion.div>
-
-          {/* Lower Right Scroll Indicator */}
-          <div className="hidden sm:flex items-center gap-3 px-3.5 py-2 rounded-full bg-[#16120E]/80 border border-[#D4BC98]/20 backdrop-blur-xl text-[#EADFC9] shadow-xl pointer-events-auto text-xs font-mono">
-            {activeSlide < 2 ? (
-              <>
-                <span className="text-[#EADFC9]/60">HORIZONTAL FLOW</span>
-                <span className="text-[#E88053] font-semibold">SCROLL ↓ TO ADVANCE →</span>
-              </>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse shrink-0" />
+                <span className="text-[#D4BC98]/70 group-hover:text-[#FFFDF9] transition-colors tracking-wide uppercase">
+                  Next: <strong className="text-[#FFFDF9] font-bold">{NEXT_STEPS[activeSlide].label}</strong>
+                </span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#E88053] group-hover:translate-x-1 transition-transform" />
+              </motion.button>
             ) : (
-              <button
+              <motion.button
+                key="milestones"
                 type="button"
                 onClick={scrollToCompetitiveMilestones}
-                className="flex items-center gap-2 text-[#E88053] hover:text-white font-bold transition-colors cursor-pointer"
+                initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                className="group pointer-events-auto flex items-center gap-2.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#16120E]/90 hover:bg-[#1F1610] border border-[#E88053]/45 hover:border-[#E88053] backdrop-blur-xl shadow-[0_12px_32px_rgba(199,91,50,0.25),0_0_0_1px_rgba(232,128,83,0.15)_inset] transition-all duration-300 cursor-pointer active:scale-95 text-xs font-mono"
               >
-                <span>COMPETITIVE MILESTONES</span>
-                <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-              </button>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-ping shrink-0" />
+                <span className="text-[#E88053] font-bold tracking-wide uppercase">
+                  Next Section: <span className="text-[#FFFDF9]">Competitive Milestones</span>
+                </span>
+                <ArrowDown className="w-3.5 h-3.5 text-[#E88053] group-hover:translate-y-0.5 animate-bounce transition-transform" />
+              </motion.button>
             )}
-          </div>
+          </AnimatePresence>
         </div>
       </div>
     </div>
