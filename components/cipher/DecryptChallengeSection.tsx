@@ -19,6 +19,7 @@ import {
   Bot,
 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
+import { AnimatedCoffeeCup } from '@/components/ui/AnimatedCoffeeCup';
 
 // =========================================================================
 // CONFIGURATION
@@ -333,11 +334,12 @@ With the help of this decoding key and the parameters above, please derive the A
             <span>// DECRYPT_THIS</span>
           </div>
 
-          <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#FFFDF9]">
-            IF YOU CRACK THIS,{' '}
+          <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#FFFDF9] flex items-center justify-center flex-wrap gap-x-2.5">
+            <span>IF YOU CRACK THIS,</span>{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFA266] via-[#E88053] to-[#FF7A45] drop-shadow-[0_0_30px_rgba(232,128,83,0.35)]">
-              COFFEE&apos;S ON ME ☕
+              COFFEE&apos;S ON ME
             </span>
+            <AnimatedCoffeeCup className="w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16 inline-block shrink-0 -mt-1.5 sm:-mt-3" />
           </h2>
 
           <p className="text-xs sm:text-sm text-[#F5EBD9]/70 max-w-xl mx-auto font-sans font-medium leading-relaxed">
@@ -463,7 +465,10 @@ With the help of this decoding key and the parameters above, please derive the A
                   <div className="space-y-1.5">
                     <div className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider">
                       <Check className="w-3.5 h-3.5" />
-                      <span>CIPHER CRACKED &bull; COFFEE UNLOCKED ☕</span>
+                      <span className="flex items-center gap-1">
+                        CIPHER CRACKED &bull; COFFEE UNLOCKED
+                        <AnimatedCoffeeCup className="w-4 h-4 inline-block shrink-0 -mt-0.5" />
+                      </span>
                     </div>
                     <p className="text-base sm:text-lg font-mono font-bold text-white tracking-wide">
                       &ldquo;{revealedMessage}&rdquo;
