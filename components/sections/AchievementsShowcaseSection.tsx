@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { Trophy, Award, Medal, Sparkles } from "lucide-react";
+import { HiddenClueWord } from "@/components/cipher/HiddenClueWord";
 
 interface CounterNumberProps {
   value: string | number;
@@ -131,7 +132,8 @@ export const AchievementsShowcaseSection: React.FC = () => {
                   HACKATHONS PARTICIPATED
                 </h3>
                 <p className="text-xs sm:text-sm text-[#27272a] font-sans font-semibold max-w-xs mx-auto leading-relaxed">
-                  National &amp; global marathons building real-world Web3, AI, and full-stack software.
+                  National &amp; global marathons building real-world Web3, AI, and full-stack software fueled by relentless{' '}
+                  <HiddenClueWord word="passion" clueIndex={1} />.
                 </p>
               </div>
             </motion.div>
@@ -187,7 +189,8 @@ export const AchievementsShowcaseSection: React.FC = () => {
                   INTL SILAMBAM MEDALIST
                 </h3>
                 <p className="text-xs sm:text-sm text-[#27272a] font-sans font-semibold max-w-xs mx-auto leading-relaxed">
-                  Bronze Medalist at the International Silambam Championship, combining physical mastery with digital precision.
+                  Bronze Medalist at the International Silambam Championship, combining physical{' '}
+                  <HiddenClueWord word="discipline" clueIndex={2} /> with digital precision.
                 </p>
               </div>
             </motion.div>

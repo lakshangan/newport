@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { AnimatedGradient } from '@/components/ui/animated-gradient-with-svg';
 import { Trophy, Award, Globe, Zap, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown, Layers, Cpu } from 'lucide-react';
+import { HiddenClueWord } from '@/components/cipher/HiddenClueWord';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -492,13 +493,14 @@ export const FlowAboutStorySection: React.FC = () => {
                   {/* Card 5: International Silambam */}
                   <div className="p-3.5 sm:p-4 md:p-5 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#FFA266]/60 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5">
                     <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider mb-1.5 sm:mb-2">
-                      <Monitor className="w-3.5 h-3.5 text-[#E88053]" /> DISCIPLINE
+                      <Monitor className="w-3.5 h-3.5 text-[#E88053]" /> <HiddenClueWord word="DISCIPLINE" clueIndex={2} />
                     </div>
                     <h4 className="text-xs sm:text-base font-bold font-sans text-[#FFFDF9] mb-1 sm:mb-1.5 group-hover:text-[#FFA266] transition-colors">
                       International Silambam Medalist
                     </h4>
                     <p className="text-[11px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-3 sm:line-clamp-none">
-                      Bronze Medalist at the International Silambam Championship. Physical mastery, precise execution, and discipline that directly shape my engineering stamina.
+                      Bronze Medalist at the International Silambam Championship. Physical mastery, precise execution, and{' '}
+                      <HiddenClueWord word="discipline" clueIndex={2} /> that directly shape my engineering stamina.
                     </p>
                   </div>
                 </div>
@@ -643,7 +645,15 @@ export const FlowAboutStorySection: React.FC = () => {
                     {/* Card Body - Airy, Breathable, Well-Proportioned */}
                     <div className="p-3 sm:p-3.5 space-y-1 bg-[#140E0A]/60 flex-1 flex flex-col justify-center">
                       <h3 className="font-sans text-sm sm:text-base font-bold text-white group-hover:text-[#FFA266] transition-colors flex items-center justify-between">
-                        <span>{card.title}</span>
+                        <span>
+                          {card.id === 'genproof' ? (
+                            <>
+                              Gen<HiddenClueWord word="Proof" clueIndex={0} /> AI
+                            </>
+                          ) : (
+                            card.title
+                          )}
+                        </span>
                         <a
                           href={card.url}
                           target="_blank"
@@ -655,7 +665,13 @@ export const FlowAboutStorySection: React.FC = () => {
                         </a>
                       </h3>
                       <p className="font-sans text-[11px] sm:text-xs text-[#F5EBD9]/85 font-medium leading-relaxed line-clamp-2">
-                        {card.description}
+                        {card.id === 'genproof' ? (
+                          <>
+                            Cryptographic <HiddenClueWord word="proof" clueIndex={0} /> verification engine implementing C2PA open standards to detect and verify synthetic AI media.
+                          </>
+                        ) : (
+                          card.description
+                        )}
                       </p>
                     </div>
                   </div>

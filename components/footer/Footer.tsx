@@ -1,9 +1,25 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 
 export const Footer: React.FC = () => {
+  useEffect(() => {
+    // Subtle DevTools easter egg for developers exploring the site
+    if (typeof window !== 'undefined') {
+      console.log(
+        '%c// DECRYPT_THIS %cEverything you need is already here.\n' +
+          '%c3 words are hidden naturally across this portfolio.\n' +
+          'Hover over the right words to catch their subtle system signal.\n' +
+          'Combine them: WORD1-WORD2-WORD3\n' +
+          'KDF: PBKDF2 (SHA-256, 100k rounds) → AES-256-GCM',
+        'color: #FFA266; font-weight: bold; font-family: monospace; font-size: 13px;',
+        'color: #D4BC98; font-style: italic; font-family: monospace;',
+        'color: #8E8B85; font-family: monospace; font-size: 11px;'
+      );
+    }
+  }, []);
+
   return (
     <footer className="py-12 px-6 bg-[#080808] border-t border-[#242424] text-xs font-mono text-[#8E8B85]">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
@@ -52,9 +68,14 @@ export const Footer: React.FC = () => {
           </a>
         </div>
 
-        {/* Right: Copyright */}
-        <div className="text-[11px] text-[#8E8B85]/70 text-center md:text-right">
-          © {PORTFOLIO_DATA.personal.year} {PORTFOLIO_DATA.personal.name}. ALL RIGHTS RESERVED.
+        {/* Right: Copyright & System Status */}
+        <div className="text-[11px] text-[#8E8B85]/70 text-center md:text-right space-y-1">
+          <div>
+            © {PORTFOLIO_DATA.personal.year} {PORTFOLIO_DATA.personal.name}. ALL RIGHTS RESERVED.
+          </div>
+          <div className="text-[10px] text-[#8E8B85]/40 select-none">
+            SYS_INTEGRITY: 200 OK &bull; ALL SYSTEMS OPERATIONAL
+          </div>
         </div>
 
       </div>
