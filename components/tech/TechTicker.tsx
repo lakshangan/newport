@@ -138,7 +138,7 @@ const JOURNEY_GALLERY: GridPhotoItem[] = [
 
 export const TechTicker: React.FC = () => {
   return (
-    <section id="proof-of-work" className="relative py-16 bg-[#080808] border-t border-white/10 overflow-hidden">
+    <section id="proof-of-work" className="relative pt-16 pb-0 bg-[#080808] border-t border-white/10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-4">
         {/* Section Header */}
         <div className="space-y-2 border-b border-white/15 pb-6">

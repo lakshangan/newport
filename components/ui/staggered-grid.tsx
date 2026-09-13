@@ -161,7 +161,7 @@ export function StaggeredGrid({
       <section className="grid place-items-center w-full relative">
         <div
           ref={gridFullRef}
-          className="grid--full relative w-full my-[4vh] sm:my-[6vh] h-auto aspect-[1.1] max-w-none p-2 sm:p-4 grid gap-1.5 sm:gap-4 grid-cols-7 grid-rows-5"
+          className="grid--full relative w-full my-[2vh] sm:my-[3vh] h-auto max-w-none p-2 sm:p-4 grid gap-1.5 sm:gap-3 lg:gap-4 grid-cols-7"
         >
           <div className="grid-overlay absolute inset-0 z-[15] pointer-events-none opacity-0 bg-black/80 rounded-lg transition-opacity duration-500" />
           
@@ -170,7 +170,7 @@ export function StaggeredGrid({
               <figure
                 key={`img-${i}`}
                 data-col={i % 7}
-                className="grid__item m-0 relative z-10 [perspective:800px] will-change-[transform,opacity] group cursor-pointer"
+                className="grid__item m-0 relative z-10 [perspective:800px] will-change-[transform,opacity] group cursor-pointer aspect-[3/4] w-full"
               >
                 <div className="grid__item-img w-full h-full [backface-visibility:hidden] will-change-transform rounded-xl overflow-hidden shadow-sm border border-zinc-800 bg-zinc-950 flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-105 group-hover:shadow-xl group-hover:border-[#C75B32]/60">
                   <img

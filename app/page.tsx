@@ -14,6 +14,7 @@ import { FlowAboutStorySection } from '@/components/about/FlowAboutStorySection'
 import { AchievementsShowcaseSection } from '@/components/sections/AchievementsShowcaseSection';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
 import { TechTicker } from '@/components/tech/TechTicker';
+import { DecryptChallengeSection } from '@/components/cipher/DecryptChallengeSection';
 import { ContactSection } from '@/components/contact/ContactSection';
 import { Footer } from '@/components/footer/Footer';
 
@@ -87,6 +88,9 @@ export default function Home() {
 
       {/* Proof of Work & Community Staggered Grid */}
       <TechTicker />
+
+      {/* Interactive Cryptographic Decrypt Challenge */}
+      <DecryptChallengeSection />
 
       {/* Dramatic Contact CTA */}
       <ContactSection />

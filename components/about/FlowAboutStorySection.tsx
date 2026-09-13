@@ -7,8 +7,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { AnimatedGradient } from '@/components/ui/animated-gradient-with-svg';
-import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
-import { Trophy, Award, Zap, Globe, Rocket, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown } from 'lucide-react';
+import { Trophy, Award, Globe, Zap, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown, Layers, Cpu } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -126,6 +125,119 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
   },
 ];
 
+interface TechExpertiseDomain {
+  id: string;
+  num: string;
+  category: string;
+  title: string;
+  description: string;
+  skills: string[];
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const TECHNICAL_EXPERTISE: TechExpertiseDomain[] = [
+  {
+    id: 'fullstack',
+    num: '01',
+    category: 'FULL-STACK',
+    title: 'Full-Stack Architecture',
+    description: 'High-throughput web applications, server actions, and type-safe relational schemas designed for scale.',
+    skills: ['Next.js', 'TypeScript', 'React', 'Node.js', 'PostgreSQL'],
+    icon: Layers,
+  },
+  {
+    id: 'web3',
+    num: '02',
+    category: 'WEB3 & EVM',
+    title: 'Smart Contracts & DeFi',
+    description: 'Audited EVM smart contracts, Uniswap v4 liquidity hooks, tokenized RWA vaults, and protocol security.',
+    skills: ['Solidity', 'Foundry', 'Hardhat', 'Uniswap v4', 'Ethers.js'],
+    icon: ShieldCheck,
+  },
+  {
+    id: 'ai',
+    num: '03',
+    category: 'AI SYSTEMS',
+    title: 'AI & Neural Systems',
+    description: 'Autonomous multi-agent pipelines, RAG semantic search, multimodal LLMs, and cryptographic C2PA provenance.',
+    skills: ['Python', 'LangChain', 'LLM Agents', 'Vector DBs', 'C2PA'],
+    icon: Cpu,
+  },
+  {
+    id: 'graphics',
+    num: '04',
+    category: 'CREATIVE 3D',
+    title: '3D & Creative UI',
+    description: 'GPU-accelerated interactive 3D web spaces, custom GLSL fragment shaders, physics simulation, and 60fps motion.',
+    skills: ['Three.js', 'R3F', 'GLSL', 'GSAP', 'WebGL'],
+    icon: Monitor,
+  },
+];
+
+const TechExpertiseCard: React.FC<{ tech: TechExpertiseDomain }> = ({ tech }) => {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const IconComponent = tech.icon;
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      className="relative p-4 sm:p-5 lg:p-6 bg-[#16100B]/60 hover:bg-[#1E150F]/75 border border-[#D4BC98]/25 hover:border-[#FFA266]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.08)_inset] hover:shadow-[0_20px_40px_rgba(232,128,83,0.18)] transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between overflow-hidden text-left"
+    >
+      {/* Subtle Dynamic Cursor Spotlight */}
+      <div
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+        style={{
+          background: `radial-gradient(220px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 128, 83, 0.15), transparent 80%)`,
+        }}
+      />
+
+      <div className="space-y-3 relative z-10">
+        {/* Header: Index number + Glass Icon */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-xs font-bold text-[#FFA266]">
+              {tech.num}
+            </span>
+            <span className="text-[#D4BC98]/30 font-mono text-xs">//</span>
+            <span className="font-mono text-[10px] text-[#F5EBD9]/70 uppercase tracking-wider font-semibold">
+              {tech.category}
+            </span>
+          </div>
+          <span className="p-2 rounded-xl bg-[#281A12]/70 border border-[#D4BC98]/20 text-[#FFA266] group-hover:border-[#FFA266]/50 group-hover:bg-[#E88053] group-hover:text-white transition-all duration-300 shadow-sm">
+            <IconComponent className="w-4 h-4" />
+          </span>
+        </div>
+
+        {/* Title & Description */}
+        <div className="space-y-1">
+          <h3 className="text-base sm:text-lg font-bold font-sans text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors tracking-tight">
+            {tech.title}
+          </h3>
+          <p className="text-xs text-[#F5EBD9]/80 font-sans leading-relaxed line-clamp-3">
+            {tech.description}
+          </p>
+        </div>
+
+        {/* Clean Tech Pills */}
+        <div className="flex flex-wrap gap-1.5 pt-1.5">
+          {tech.skills.map((skill) => (
+            <span
+              key={skill}
+              className="px-2.5 py-0.5 rounded-full bg-black/40 border border-[#D4BC98]/15 text-[10px] font-mono text-[#F5EBD9]/85 group-hover:border-[#FFA266]/30 transition-colors"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const FlowAboutStorySection: React.FC = () => {
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
@@ -235,104 +347,12 @@ export const FlowAboutStorySection: React.FC = () => {
   return (
     <div className="w-full relative block" aria-label="About the Builder Story Scroll">
       {/* ========================================================================= */}
-      {/* SLIDE 01: 01 // WHO I AM: CRAFTSMANSHIP & TECH STACK (INTRO1 RENAISSANCE ARTWORK) */}
-      {/* ========================================================================= */}
-      <section
-        id="about"
-        aria-label="01 // Who I am"
-        className="relative min-h-screen w-full overflow-hidden flex flex-col justify-center px-4 sm:px-10 lg:px-16 pt-20 sm:pt-28 pb-8 sm:pb-14"
-        style={{ backgroundColor: '#EADFC9', color: '#1A130F' }}
-      >
-        {/* Renaissance Artwork Background Image */}
-        <div className="absolute inset-0 z-0 pointer-events-none w-full h-full">
-          <Image
-            src="/images/intro1.png"
-            alt="Renaissance Classical Tech Artwork"
-            fill
-            priority
-            className="object-cover object-center w-full h-full"
-            sizes="100vw"
-          />
-        </div>
-
-        {/* Content Container (Balanced vertical layout centered in open parchment area) */}
-        <div className="relative z-10 max-w-5xl mx-auto w-full flex flex-col justify-center space-y-4 sm:space-y-6 md:space-y-7">
-          {/* Top Header Badge & One-Line Display Title */}
-          <div className="space-y-2 sm:space-y-3 text-left">
-            <div className="flex items-center gap-3">
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#1A130F]/10 border border-[#8C4B18]/40 text-xs font-mono text-[#8C4B18] font-bold tracking-[0.2em] uppercase backdrop-blur-sm shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8C4B18] animate-pulse" />
-                <span>01 // WHO I AM // LAKSHAN G.</span>
-              </div>
-              <span className="hidden sm:inline-block text-[10px] font-mono tracking-widest text-[#733610]/60 uppercase">
-                [ ARCHITECTURE &amp; CRAFT ]
-              </span>
-            </div>
-
-            {/* One-Line Headline */}
-            <h1 className="font-display font-black text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[4.75rem] leading-none tracking-tight uppercase select-none flex flex-wrap items-baseline gap-x-2.5 sm:gap-x-4">
-              <span className="text-[#1A130F] hover:text-[#8C4B18] transition-colors cursor-default">
-                <AsciiGlitchRipple dur={900}>
-                  CREATE
-                </AsciiGlitchRipple>
-              </span>
-              <span className="text-transparent [-webkit-text-stroke:1.5px_#2C1D11] sm:[-webkit-text-stroke:2px_#2C1D11] hover:text-[#2C1D11] hover:[-webkit-text-stroke:0px] transition-all duration-300 cursor-default">
-                <AsciiGlitchRipple dur={1000}>
-                  WITHOUT
-                </AsciiGlitchRipple>
-              </span>
-              <span className="inline-flex items-baseline gap-1.5 sm:gap-2 text-[#C75B32] drop-shadow-[0_2px_18px_rgba(199,91,50,0.3)] hover:text-[#E06D43] transition-colors cursor-default">
-                <AsciiGlitchRipple dur={1200}>
-                  LIMITS
-                </AsciiGlitchRipple>
-                <span className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#C75B32] animate-pulse align-middle" />
-              </span>
-            </h1>
-          </div>
-
-          {/* Description Paragraph */}
-          <p className="font-sans max-w-[58ch] text-xs sm:text-sm md:text-base font-medium leading-relaxed text-[#2C1D11] bg-[#1A130F]/5 p-3.5 sm:p-4 rounded-xl border border-[#1A130F]/15 border-l-[3px] border-l-[#C75B32] backdrop-blur-sm shadow-sm">
-            Full-Stack Developer, AI Systems Engineer &amp; Web3 Researcher. Turning complex ideas into high-performance interfaces, backend infrastructure, and scalable applications.
-          </p>
-
-          {/* 3 Tech Feature Cards across the bottom */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4 pt-1">
-            <div className="p-3.5 sm:p-4 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
-              <p className="font-mono mb-1.5 text-xs font-bold uppercase tracking-wider text-[#8C4B18] flex items-center gap-1.5">
-                <span>⚡ First-Principles Mindset</span>
-              </p>
-              <p className="font-sans text-xs sm:text-[13px] leading-relaxed text-[#2C1D11] font-medium">
-                Deconstructing architecture to fundamental truths before writing code. I turn raw concepts into production-ready software.
-              </p>
-            </div>
-
-            <div className="p-3.5 sm:p-4 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
-              <p className="font-mono mb-1.5 text-xs font-bold uppercase tracking-wider text-[#733610] flex items-center gap-1.5">
-                <span>🛠️ My Core Tech Stack</span>
-              </p>
-              <p className="font-sans text-xs sm:text-[13px] leading-relaxed text-[#2C1D11] font-medium">
-                Next.js, TypeScript, React, Node.js, Python, Solidity, EVM Smart Contracts, Three.js, GSAP, &amp; LLM Agents.
-              </p>
-            </div>
-
-            <div className="p-3.5 sm:p-4 bg-[#1A130F]/10 border border-[#1A130F]/20 rounded-xl backdrop-blur-sm shadow-sm hover:border-[#8C4B18]/50 transition-all hover:-translate-y-0.5 group">
-              <p className="font-mono mb-1.5 text-xs font-bold uppercase tracking-wider text-[#8C4B18] flex items-center gap-1.5">
-                <span>🚀 Rapid Execution</span>
-              </p>
-              <p className="font-sans text-xs sm:text-[13px] leading-relaxed text-[#2C1D11] font-medium">
-                Thriving under strict 36-hour marathon deadlines to ship full-stack web products, APIs, &amp; audited Web3 smart contracts.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* PINNED HORIZONTAL SCROLL: 02 RECOGNITION, 03 SHOWCASE, 04 METRICS */}
+      {/* PINNED HORIZONTAL SCROLL: RECOGNITION, SHOWCASE, TECHNICAL EXPERTISE */}
       {/* ========================================================================= */}
       <div
+        id="about"
         ref={horizontalContainerRef}
-        className="relative w-full h-screen overflow-hidden bg-[#0C0907] select-none"
+        className="relative w-full h-screen overflow-hidden bg-[#0C0907] select-none scroll-mt-6"
       >
         {/* Continuous Panoramic Studio & Engineering Workspace Background */}
         {/* Sized with natural 2048:768 aspect ratio (266.67vh) so the full height is visible with ZERO zoom */}
@@ -645,10 +665,10 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
 
           {/* ========================================================================= */}
-          {/* PANEL 3 (SLIDE 04): ENGINEERING IMPACT & VELOCITY */}
+          {/* PANEL 3 (SLIDE 04): TECHNICAL EXPERTISE */}
           {/* ========================================================================= */}
           <div
-            id="metrics"
+            id="technical-expertise"
             className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-0 pb-16 sm:pb-20 md:pb-0 overflow-y-auto md:overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
@@ -661,13 +681,13 @@ export const FlowAboutStorySection: React.FC = () => {
                 <div className="space-y-1 sm:space-y-2">
                   <div className="inline-flex items-center space-x-2 px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/35 text-[10px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-xl shadow-lg">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
-                    <span>04 // THE BUILDER’S TRACK RECORD</span>
+                    <span>04 // CORE ARCHITECTURAL CAPABILITIES</span>
                   </div>
                   <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
-                    ENGINEERING VELOCITY &amp; REAL IMPACT
+                    TECHNICAL <span className="text-[#FFA266] drop-shadow-[0_0_25px_rgba(232,128,83,0.5)]">EXPERTISE</span>
                   </h2>
                   <p className="text-xs sm:text-sm font-medium text-[#FFFDF9]/95 max-w-xl bg-[#18120D]/50 backdrop-blur-xl p-2.5 sm:p-3 rounded-xl border border-[#D4BC98]/25 shadow-lg leading-relaxed line-clamp-2 sm:line-clamp-none">
-                    Real output over artificial metrics. A track record built through competitive hackathon marathons, production deployments, and peer developer mentorship.
+                    Deconstructing complex engineering challenges into resilient full-stack systems, audited EVM protocols, autonomous AI agents, and high-performance WebGL graphics.
                   </p>
                 </div>
 
@@ -681,107 +701,11 @@ export const FlowAboutStorySection: React.FC = () => {
                 </button>
               </div>
 
-              {/* 4 Clean Authentic Impact Pillars - 2x2 on Mobile, 4-col on Desktop */}
+              {/* 4 Clean Minimal Technical Expertise Cards - 2x2 on Mobile, 4-col on Desktop */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-5">
-                {/* Pillar 1: Hackathons */}
-                <div className="p-3 sm:p-5 lg:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-xl sm:rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
-                  <div className="space-y-2 sm:space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
-                        <CounterNumber value="25+" />
-                      </span>
-                      <span className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
-                        <Trophy className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      </span>
-                    </div>
-                    <div className="space-y-0.5 sm:space-y-1">
-                      <h3 className="text-xs sm:text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
-                        Competitive Marathons
-                      </h3>
-                      <p className="text-[10px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-2 sm:line-clamp-none">
-                        Thriving under 24-to-36 hour sprint constraints to build production-grade prototypes, APIs, and working smart contracts from scratch.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="pt-2 mt-2 sm:pt-3 sm:mt-4 border-t border-[#D4BC98]/20 font-mono text-[8px] sm:text-[10px] text-[#FFA266] font-semibold truncate">
-                    36H MARATHON SPRINTS
-                  </div>
-                </div>
-
-                {/* Pillar 2: Podium Placements */}
-                <div className="p-3 sm:p-5 lg:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-xl sm:rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
-                  <div className="space-y-2 sm:space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
-                        <CounterNumber value="20+" />
-                      </span>
-                      <span className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
-                        <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      </span>
-                    </div>
-                    <div className="space-y-0.5 sm:space-y-1">
-                      <h3 className="text-xs sm:text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
-                        Podium Finishes
-                      </h3>
-                      <p className="text-[10px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-2 sm:line-clamp-none">
-                        Recognized across premier national platforms including 1st Place Track at NIT Calicut and finalist entry in Smart India Hackathon.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="pt-2 mt-2 sm:pt-3 sm:mt-4 border-t border-[#D4BC98]/20 font-mono text-[8px] sm:text-[10px] text-[#FFA266] font-semibold truncate">
-                    NATIONAL RECOGNITION
-                  </div>
-                </div>
-
-                {/* Pillar 3: Deployed Systems */}
-                <div className="p-3 sm:p-5 lg:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-xl sm:rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
-                  <div className="space-y-2 sm:space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
-                        <CounterNumber value="15+" />
-                      </span>
-                      <span className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
-                        <Rocket className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      </span>
-                    </div>
-                    <div className="space-y-0.5 sm:space-y-1">
-                      <h3 className="text-xs sm:text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
-                        Shipped Systems
-                      </h3>
-                      <p className="text-[10px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-2 sm:line-clamp-none">
-                        Full-stack corporate platforms, AI provenance engines, EVM liquidity vaults, and open-source cryptographic security packages.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="pt-2 mt-2 sm:pt-3 sm:mt-4 border-t border-[#D4BC98]/20 font-mono text-[8px] sm:text-[10px] text-[#FFA266] font-semibold truncate">
-                    LIVE IN PRODUCTION
-                  </div>
-                </div>
-
-                {/* Pillar 4: Community Mentorship */}
-                <div className="p-3 sm:p-5 lg:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-xl sm:rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
-                  <div className="space-y-2 sm:space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
-                        <CounterNumber value="200+" />
-                      </span>
-                      <span className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
-                        <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      </span>
-                    </div>
-                    <div className="space-y-0.5 sm:space-y-1">
-                      <h3 className="text-xs sm:text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
-                        Mentored Peers
-                      </h3>
-                      <p className="text-[10px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-2 sm:line-clamp-none">
-                        Serving as Campus Ambassador to organize technical workshops, lead peer study circles in Web3 and AI, and inspire future builders.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="pt-2 mt-2 sm:pt-3 sm:mt-4 border-t border-[#D4BC98]/20 font-mono text-[8px] sm:text-[10px] text-[#FFA266] font-semibold truncate">
-                    COMMUNITY LEADERSHIP
-                  </div>
-                </div>
+                {TECHNICAL_EXPERTISE.map((tech) => (
+                  <TechExpertiseCard key={tech.id} tech={tech} />
+                ))}
               </div>
             </div>
           </div>
