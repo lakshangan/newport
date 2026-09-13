@@ -23,17 +23,16 @@ export const ContactSection: React.FC = () => {
           alt="Lakshan Ganesan Drone & Tech Photography"
           fill
           priority
-          className="object-cover object-[75%_center] sm:object-[68%_center] filter brightness-95 contrast-105"
+          className="object-cover object-[75%_center] sm:object-[68%_center] filter brightness-105 contrast-[1.02]"
           sizes="100vw"
         />
       </div>
 
-      {/* Full-Screen Gradient Shading & Vignette Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-1 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-transparent to-black/40 z-1 pointer-events-none" />
+      {/* Localized text backdrop on left side only - zero overlay over face and subject */}
+      <div className="absolute inset-y-0 left-0 w-full sm:w-3/5 lg:w-5/12 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-1 pointer-events-none" />
 
-      {/* Volumetric Sunset Ambient Glow */}
-      <div className="absolute bottom-0 left-1/4 w-[800px] h-[500px] bg-[#C75B32]/15 rounded-full blur-[180px] pointer-events-none z-1" />
+      {/* Subtle bottom edge shade strictly for the email footer */}
+      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/85 via-black/40 to-transparent z-1 pointer-events-none" />
 
       {/* Main Content Area (Full width, centered container) */}
       <div className="relative z-10 max-w-7xl mx-auto w-full px-6 sm:px-12 pt-24 sm:pt-32 flex-1 flex items-center justify-start">
