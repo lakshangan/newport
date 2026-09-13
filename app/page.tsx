@@ -85,7 +85,7 @@ export default function Home() {
       {/* Professional Experience Timeline */}
       <ExperienceSection />
 
-      {/* Moving Tech Arsenal Ticker */}
+      {/* Proof of Work & Community Staggered Grid */}
       <TechTicker />
 
       {/* Dramatic Contact CTA */}
