@@ -1,159 +1,152 @@
 'use client';
 
-import React from 'react';
+import React, { useId } from 'react';
 import { motion } from 'framer-motion';
 
 interface AnimatedCoffeeCupProps {
   className?: string;
-  steamColor?: string;
-  cupColor?: string;
   accentColor?: string;
-  size?: number;
 }
 
 export const AnimatedCoffeeCup: React.FC<AnimatedCoffeeCupProps> = ({
   className = 'w-10 h-10 sm:w-14 sm:h-14 inline-block align-middle ml-2.5 -mt-2',
-  steamColor = '#38BDF8', // Cyan-teal matching user sketch
-  accentColor = '#38BDF8',
-  cupColor = '#FFFDF9',
+  accentColor = '#FFA266',
 }) => {
+  const uniqueId = useId().replace(/:/g, '');
+  const gradId = `coffeeGrad_${uniqueId}`;
+  const steamGradId = `coffeeSteamGrad_${uniqueId}`;
+  const glowId = `coffeeGlow_${uniqueId}`;
+
   return (
     <span className={`relative inline-flex items-center justify-center select-none ${className}`}>
       <svg
-        viewBox="0 0 100 100"
+        viewBox="0 0 64 64"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full overflow-visible drop-shadow-[0_0_12px_rgba(56,189,248,0.35)]"
+        className="w-full h-full overflow-visible drop-shadow-[0_0_12px_rgba(255,162,102,0.35)]"
       >
         <defs>
-          <filter id="coffeeGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="0" stdDeviation="2" floodColor={steamColor} floodOpacity="0.6" />
+          <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFA266" />
+            <stop offset="100%" stopColor="#E88053" />
+          </linearGradient>
+
+          <linearGradient id={steamGradId} x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stopColor="#FFA266" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#FFA266" stopOpacity="0.15" />
+          </linearGradient>
+
+          <filter id={glowId} x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="0" stdDeviation="1.5" floodColor={accentColor} floodOpacity="0.65" />
           </filter>
         </defs>
 
         {/* ========================================================================= */}
         {/* ANIMATED STEAM WISPS (Left, Center, Right) */}
         {/* ========================================================================= */}
-        <g filter="url(#coffeeGlow)">
+        <g filter={`url(#${glowId})`}>
           {/* Steam 1: Left */}
           <motion.path
-            d="M 32 30 C 27 24, 37 18, 31 10 C 27 5, 33 0, 31 -4"
-            stroke={steamColor}
-            strokeWidth="3.5"
+            d="M 23 23 C 20.5 18, 25.5 14, 22.5 9 C 20 5.5, 23 2.5, 22.5 -0.5"
+            stroke={`url(#${steamGradId})`}
+            strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
-            initial={{ opacity: 0.35, y: 3 }}
+            initial={{ opacity: 0.35, y: 1 }}
             animate={{
-              opacity: [0.25, 0.95, 0.4, 0.85, 0.25],
-              y: [-1, -6, -2, -8, -1],
-              scaleY: [0.95, 1.05, 0.95, 1.08, 0.95],
+              opacity: [0.3, 0.9, 0.45, 0.85, 0.3],
+              y: [0, -4, -1, -5, 0],
+              scaleY: [0.95, 1.05, 0.95, 1.06, 0.95],
             }}
             transition={{
-              duration: 2.4,
+              duration: 2.3,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
           />
 
-          {/* Steam 2: Center (Slightly taller) */}
+          {/* Steam 2: Center (Taller) */}
           <motion.path
-            d="M 45 28 C 40 21, 50 15, 44 7 C 40 1, 47 -4, 44 -9"
-            stroke={steamColor}
-            strokeWidth="3.8"
+            d="M 31 22 C 28 16, 34 12, 31 6 C 28.5 1.5, 32.5 -2, 31 -5"
+            stroke={`url(#${steamGradId})`}
+            strokeWidth="2.4"
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
-            initial={{ opacity: 0.5, y: 2 }}
+            initial={{ opacity: 0.5, y: 1 }}
             animate={{
-              opacity: [0.35, 1, 0.5, 0.9, 0.35],
-              y: [-2, -9, -3, -10, -2],
-              scaleY: [0.92, 1.08, 0.95, 1.1, 0.92],
+              opacity: [0.4, 1, 0.55, 0.95, 0.4],
+              y: [-1, -6, -2, -7, -1],
+              scaleY: [0.92, 1.08, 0.94, 1.1, 0.92],
             }}
             transition={{
-              duration: 2.1,
+              duration: 2.0,
               repeat: Infinity,
               ease: 'easeInOut',
-              delay: 0.4,
+              delay: 0.35,
             }}
           />
 
           {/* Steam 3: Right */}
           <motion.path
-            d="M 58 30 C 53 24, 63 18, 57 10 C 53 5, 59 0, 57 -4"
-            stroke={steamColor}
-            strokeWidth="3.5"
+            d="M 39 23 C 36.5 18, 41.5 14, 38.5 9 C 36 5.5, 39 2.5, 38.5 -0.5"
+            stroke={`url(#${steamGradId})`}
+            strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
-            initial={{ opacity: 0.4, y: 3 }}
+            initial={{ opacity: 0.4, y: 1 }}
             animate={{
-              opacity: [0.3, 0.9, 0.45, 0.8, 0.3],
-              y: [-1, -7, -2, -8, -1],
-              scaleY: [0.96, 1.04, 0.95, 1.06, 0.96],
+              opacity: [0.35, 0.85, 0.4, 0.8, 0.35],
+              y: [0, -4.5, -1, -5.5, 0],
+              scaleY: [0.96, 1.04, 0.95, 1.05, 0.96],
             }}
             transition={{
-              duration: 2.6,
+              duration: 2.5,
               repeat: Infinity,
               ease: 'easeInOut',
-              delay: 0.8,
+              delay: 0.7,
             }}
           />
         </g>
 
         {/* ========================================================================= */}
-        {/* CUP BODY & HANDLE */}
+        {/* CUP BODY & SAUCER */}
         {/* ========================================================================= */}
         {/* Handle */}
         <path
-          d="M 67 43 C 82 43, 82 63, 67 65"
-          stroke={cupColor}
-          strokeWidth="4.5"
+          d="M 45 32 C 54.5 32, 54.5 44, 45 44"
+          stroke={`url(#${gradId})`}
+          strokeWidth="3.2"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
         />
 
-        {/* Cup Outer & Base */}
+        {/* Cup Silhouette Body */}
         <path
-          d="M 22 36 L 68 36 L 66 61 C 66 70, 24 70, 24 61 Z"
-          fill="#16110D"
-          stroke={cupColor}
-          strokeWidth="4.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          d="M 16 28 H 46 V 42 C 46 48.5, 41 50, 31 50 C 21 50, 16 48.5, 16 42 Z"
+          fill={`url(#${gradId})`}
         />
 
-        {/* Accent Liquid Stripe */}
-        <motion.path
-          d="M 23 45 L 67 45"
-          stroke={accentColor}
-          strokeWidth="3.8"
+        {/* Subtle Modern Coffee Surface Gloss Line */}
+        <path
+          d="M 18.5 31 Q 31 33.5 43.5 31"
+          stroke="rgba(255, 255, 255, 0.35)"
+          strokeWidth="1.2"
           strokeLinecap="round"
-          animate={{
-            opacity: [0.8, 1, 0.8],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          fill="none"
         />
 
-        {/* ========================================================================= */}
-        {/* SAUCER BASE */}
-        {/* ========================================================================= */}
+        {/* Saucer */}
         <rect
-          x="13"
-          y="74"
-          width="64"
-          height="8.5"
-          rx="4.25"
-          fill="#16110D"
-          stroke={cupColor}
-          strokeWidth="4.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          x="12"
+          y="52.5"
+          width="38"
+          height="3.5"
+          rx="1.75"
+          fill={`url(#${gradId})`}
         />
       </svg>
     </span>
