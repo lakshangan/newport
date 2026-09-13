@@ -71,11 +71,8 @@ interface ShowcaseCard {
   title: string;
   domain: string;
   url: string;
-  githubUrl: string;
+  githubUrl?: string;
   description: string;
-  tags: string[];
-  type?: 'web' | 'cli' | 'ai' | 'web3';
-  status?: string;
 }
 
 const SHOWCASE_CARDS: ShowcaseCard[] = [
@@ -86,9 +83,6 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
     url: 'https://jayamwebsite.vercel.app/',
     githubUrl: 'https://github.com/lakshangan/jayam-website-',
     description: 'Bespoke corporate platform built for an apparel design institute with responsive editorial layout, course catalog, and fluid performance.',
-    tags: ['Next.js', 'React', 'Tailwind CSS'],
-    type: 'web',
-    status: 'Corporate Platform',
   },
   {
     id: 'land-vault',
@@ -97,9 +91,6 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
     url: 'https://land-vault-v2.vercel.app/',
     githubUrl: 'https://github.com/lakshangan/Land-vault-v2',
     description: 'Decentralized real-world asset (RWA) protocol tokenizing real estate with automated yield distribution smart contracts on EVM networks.',
-    tags: ['Solidity', 'EVM', 'Web3.js'],
-    type: 'web3',
-    status: 'RWA Protocol',
   },
   {
     id: 'nuna-organic',
@@ -108,9 +99,6 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
     url: 'https://nunaorganic.vercel.app/',
     githubUrl: 'https://github.com/lakshangan/nuna-natural-haven',
     description: 'Interactive brand showcase crafted with bespoke GSAP motion choreography, kinetic transitions, and immersive visual storytelling.',
-    tags: ['React', 'GSAP', 'Kinetic Motion'],
-    type: 'web',
-    status: 'Brand Experience',
   },
   {
     id: 'mediocto',
@@ -119,9 +107,6 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
     url: 'https://mediocto-lovat.vercel.app/',
     githubUrl: 'https://github.com/lakshangan',
     description: 'Conversational mental wellness interface integrating intelligent LLM agent routing with an interactive real-time 3D companion.',
-    tags: ['AI Agents', 'Three.js', 'Next.js'],
-    type: 'ai',
-    status: 'AI Wellness',
   },
   {
     id: 'genproof',
@@ -130,20 +115,14 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
     url: 'https://gen-proof-ai.vercel.app/',
     githubUrl: 'https://github.com/lakshangan',
     description: 'Cryptographic provenance verification engine implementing C2PA open standards to detect and verify synthetic AI media.',
-    tags: ['Python', 'C2PA Standards', 'AI Forensics'],
-    type: 'ai',
-    status: 'Provenance Engine',
   },
   {
-    id: 'steganography',
-    title: 'Steganography Tool',
-    domain: 'github.com/lakshangan/steganography',
-    url: 'https://github.com/lakshangan/steganography',
-    githubUrl: 'https://github.com/lakshangan/steganography',
-    description: 'Open-source security CLI embedding AES-256 encrypted payloads into image pixel bit planes via least significant bit (LSB) manipulation.',
-    tags: ['Python', 'AES-256', 'Cryptography'],
-    type: 'cli',
-    status: 'Security CLI',
+    id: 'internocto',
+    title: 'InternOcTO',
+    domain: 'internocto-portfolio.vercel.app',
+    url: 'https://internocto-portfolio.vercel.app',
+    githubUrl: 'https://github.com/lakshangan',
+    description: "The official chaotic portfolio for OpenLedger's octopus mascot. Pure mayhem, interactive 3D motion, and fluid physics.",
   },
 ];
 
@@ -535,28 +514,35 @@ export const FlowAboutStorySection: React.FC = () => {
                 </p>
               </div>
 
-              {/* 6 Clean Architectural Project Cards - Breathable, Modern, Spacious */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              {/* 6 Clean Architectural Project Cards - Spacious Reference Design */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
                 {SHOWCASE_CARDS.map((card) => (
                   <div
                     key={card.id}
-                    className="rounded-2xl border border-[#D4BC98]/30 bg-[#18120D]/65 hover:bg-[#221811]/80 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.14)_inset] hover:border-[#FFA266]/70 transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_25px_50px_rgba(232,128,83,0.22)]"
+                    className="rounded-2xl border border-[#D4BC98]/25 bg-[#16110D]/80 hover:bg-[#1E1610]/95 backdrop-blur-2xl overflow-hidden shadow-2xl hover:border-[#FFA266]/70 transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_25px_50px_rgba(232,128,83,0.25)]"
                   >
-                    {/* Minimal Architectural Window Header */}
-                    <div className="px-4 py-2.5 bg-[#120D09]/80 border-b border-[#D4BC98]/20 flex items-center justify-between backdrop-blur-md">
-                      <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] group-hover:scale-125 transition-transform" />
-                        <span className="text-[10px] font-mono text-[#F2E5D0] uppercase tracking-wider font-semibold">
-                          {card.status}
-                        </span>
+                    {/* macOS Browser Window Header */}
+                    <div className="px-3.5 py-2.5 bg-[#1A120B]/90 border-b border-[#D4BC98]/20 flex items-center justify-between backdrop-blur-md">
+                      {/* macOS Window Traffic Lights */}
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
                       </div>
-                      <div className="flex items-center gap-2.5 font-mono text-[11px]">
+
+                      {/* Centered Minimal Domain Pill */}
+                      <div className="px-3 py-0.5 rounded-full bg-black/60 border border-[#D4BC98]/20 text-[10px] font-mono text-[#EADFC9]/75 truncate max-w-[160px] shadow-inner">
+                        {card.domain}
+                      </div>
+
+                      {/* Header Actions */}
+                      <div className="flex items-center gap-2 font-mono text-[11px]">
                         {card.githubUrl && (
                           <a
                             href={card.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#F5EBD9]/70 hover:text-[#FFFDF9] transition-colors flex items-center gap-0.5"
+                            className="text-[#F5EBD9]/60 hover:text-white transition-colors"
                             title="View Source Code"
                           >
                             Code ↗
@@ -566,7 +552,7 @@ export const FlowAboutStorySection: React.FC = () => {
                           href={card.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-2.5 py-0.5 rounded-full bg-[#E88053]/15 hover:bg-[#E88053] text-[#FFA266] hover:text-white font-bold transition-all flex items-center gap-0.5 border border-[#E88053]/30 hover:border-transparent"
+                          className="text-[#FFA266] hover:text-white font-bold transition-colors"
                           title="Open Live Deployment"
                         >
                           Visit ↗
@@ -574,71 +560,45 @@ export const FlowAboutStorySection: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Expansive Website Preview Container (Scaled Desktop Viewport) */}
-                    {card.type === 'cli' ? (
-                      <div className="relative w-full h-[165px] sm:h-[185px] bg-[#0A0806] p-4 font-mono text-[10px] sm:text-[11px] flex flex-col justify-between overflow-hidden border-b border-[#D4BC98]/20 group-hover:border-[#FFA266]/40 transition-colors">
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-1.5 text-white/30 text-[9px] pb-1.5 border-b border-white/10">
-                            <span className="w-2 h-2 rounded-full bg-[#FF5F56]/80" />
-                            <span className="w-2 h-2 rounded-full bg-[#FFBD2E]/80" />
-                            <span className="w-2 h-2 rounded-full bg-[#27C93F]/80" />
-                            <span className="ml-2 font-mono text-white/50">stego-cli — zsh</span>
-                          </div>
-                          <div className="text-white/50 text-[10px]">$ stego-cli --embed --file payload.enc -o carrier.png</div>
-                          <div className="text-emerald-400 font-medium flex items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            [+] Encrypted with AES-256-GCM cipher
-                          </div>
-                          <div className="text-[#FFA266] font-medium">[+] Embedding LSB into 24-bit image planes...</div>
-                          <div className="text-white/95 font-bold">[✓] Payload hidden successfully. PSNR: 52.4 dB</div>
-                        </div>
-                        <div className="flex justify-between items-center text-[10px] text-white/60 pt-2 border-t border-white/10">
-                          <span>Spatial LSB Steganography</span>
-                          <span className="text-[#FFA266] font-bold">Python CLI</span>
-                        </div>
-                      </div>
-                    ) : (
+                    {/* Live Preview Screen Container - Full Website Preview with Generous Spacing */}
+                    <div className="relative w-full h-[185px] sm:h-[205px] bg-black overflow-hidden group/screen">
+                      <iframe
+                        src={card.url}
+                        title={card.title}
+                        className="w-full h-full border-none pointer-events-none transform group-hover/screen:scale-105 transition-transform duration-500 bg-white"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#140E0A]/40 via-transparent to-transparent opacity-30 pointer-events-none" />
+
                       <a
                         href={card.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="relative block w-full h-[165px] sm:h-[185px] bg-[#0E0A07] overflow-hidden border-b border-[#D4BC98]/20 cursor-pointer group/screen"
-                        title={`Open live site: ${card.title}`}
+                        className="absolute bottom-3 right-3 px-3 py-1 bg-black/85 hover:bg-[#E88053] hover:text-white border border-white/20 rounded-md font-mono text-[11px] font-bold text-white transition-all flex items-center gap-1 shadow-lg opacity-0 group-hover/screen:opacity-100 duration-200 z-10"
                       >
-                        {/* Scaled 1200px Desktop Viewport for Crystal-Clear Website Rendering */}
-                        <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
-                          <iframe
-                            src={card.url}
-                            title={card.title}
-                            tabIndex={-1}
-                            className="w-[1200px] h-[680px] origin-top-left border-none bg-[#0E0A07] transform transition-transform duration-700 group-hover/screen:scale-[0.32]"
-                            style={{
-                              transform: 'scale(0.31)',
-                              transformOrigin: '0 0',
-                              width: '1200px',
-                              height: '680px',
-                            }}
-                            loading="lazy"
-                          />
-                        </div>
-
-                        {/* Subtle interactive hover highlight */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#140E0A]/80 via-transparent to-transparent opacity-0 group-hover/screen:opacity-100 transition-opacity duration-300 flex items-end justify-end p-3 pointer-events-none">
-                          <span className="px-3 py-1 rounded-full bg-[#E88053] text-white font-mono text-[10px] font-bold tracking-wider shadow-lg flex items-center gap-1">
-                            Launch Live Site ↗
-                          </span>
-                        </div>
+                        Launch ↗
                       </a>
-                    )}
+                    </div>
 
-                    {/* Airy, Breathable Card Body (No Clumsy Tech Stack Tags) */}
-                    <div className="p-4 sm:p-5 space-y-1.5 bg-[#140E0A]/40 backdrop-blur-md flex-1 flex flex-col justify-center">
-                      <h3 className="font-sans text-base sm:text-lg font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors truncate">
-                        {card.title}
-                      </h3>
-                      <p className="font-sans text-xs sm:text-[13px] text-[#F5EBD9]/85 font-medium leading-relaxed line-clamp-2">
-                        {card.description}
-                      </p>
+                    {/* Card Body - Airy, Breathable, No Clutter */}
+                    <div className="p-4 sm:p-5 space-y-2 bg-[#140E0A]/60 flex-1 flex flex-col justify-between">
+                      <div className="space-y-1.5">
+                        <h3 className="font-sans text-base sm:text-lg font-bold text-white group-hover:text-[#FFA266] transition-colors flex items-center justify-between">
+                          <span>{card.title}</span>
+                          <a
+                            href={card.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#D4BC98]/50 hover:text-white transition-colors"
+                            title="Open Project"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        </h3>
+                        <p className="font-sans text-xs sm:text-[13px] text-[#F5EBD9]/85 font-medium leading-relaxed line-clamp-2">
+                          {card.description}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
