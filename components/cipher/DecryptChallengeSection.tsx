@@ -16,6 +16,7 @@ import {
   Cpu,
   RefreshCw,
   Zap,
+  Bot,
 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 
@@ -188,7 +189,35 @@ export const DecryptChallengeSection: React.FC = () => {
   const [isBypassing, setIsBypassing] = useState(false);
   const [tapCount, setTapCount] = useState(0);
   const REQUIRED_TAPS = 25;
+  const [copiedAiPrompt, setCopiedAiPrompt] = useState(false);
+  const [showAiPromptText, setShowAiPromptText] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const AI_SOLVER_PROMPT = `I am solving an interactive encrypted payload challenge on a developer's portfolio website.
+
+Here is the exact technical data and discovered contextual clues from the website:
+
+1. CRYPTOGRAPHIC SPECIFICATION:
+- Algorithm: AES-256-GCM
+- Key Derivation Function (KDF): PBKDF2 with HMAC-SHA256
+- Iteration Rounds: 100,000
+- Derived Key Length: 256 bits (32 bytes)
+- Encrypted Ciphertext (Base64): ${CIPHERTEXT_B64}
+- Salt (Base64): ${SALT_B64}
+- IV / Nonce (Base64): ${IV_B64}
+
+2. THREE DISCOVERED KEYWORDS:
+I searched through the creator's portfolio and found three hidden words:
+- Word 1: "PROOF" (From the GenProof AI project showcase)
+- Word 2: "PASSION" (From the 25+ Hackathons milestone)
+- Word 3: "DISCIPLINE" (From the International Silambam martial arts championship)
+
+3. KEY DERIVATION ORDER:
+The creator specified that these three keywords must be ordered correctly and joined:
+Candidate Passphrase: "PROOF-PASSION-DISCIPLINE" (also accepts "proof passion discipline")
+
+4. YOUR OBJECTIVE:
+With the help of this decoding key and the parameters above, please derive the AES-256-GCM key using PBKDF2, decrypt the ciphertext payload, and tell me the secret plaintext message!`;
 
   const scrambleIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -208,6 +237,12 @@ export const DecryptChallengeSection: React.FC = () => {
     navigator.clipboard.writeText(CIPHERTEXT_B64);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyAiPrompt = () => {
+    navigator.clipboard.writeText(AI_SOLVER_PROMPT);
+    setCopiedAiPrompt(true);
+    setTimeout(() => setCopiedAiPrompt(false), 2500);
   };
 
   // Smooth Scramble & Character Resolve Animation
@@ -731,6 +766,63 @@ export const DecryptChallengeSection: React.FC = () => {
                         Once the message scrambler unlocks the secret payload, hit the coffee button to send me your solve!
                       </p>
                     </div>
+                  </div>
+
+                  {/* AI Assistant Solver Prompt Bar */}
+                  <div className="pt-2 border-t border-[#D4BC98]/15 space-y-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 p-3 rounded-xl bg-black/75 border border-[#FFA266]/30 shadow-inner">
+                      <div className="space-y-0.5">
+                        <div className="flex items-center gap-2 text-xs font-mono font-bold text-white">
+                          <Bot className="w-4 h-4 text-[#FFA266]" />
+                          <span>WANT AI TO HELP CRACK IT?</span>
+                        </div>
+                        <p className="text-[11px] text-[#F5EBD9]/70 font-sans leading-relaxed">
+                          Copy this pre-structured prompt with the ciphertext, parameters, and 3 discovered clue words to ChatGPT, Claude, or Gemini.
+                        </p>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => setShowAiPromptText(!showAiPromptText)}
+                          className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[11px] font-mono text-[#F5EBD9]/70 hover:text-white transition-colors cursor-pointer"
+                        >
+                          {showAiPromptText ? 'Hide Prompt' : 'Preview Prompt'}
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={handleCopyAiPrompt}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#E88053] to-[#C75B32] hover:from-[#FFA266] hover:to-[#E88053] text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer"
+                        >
+                          {copiedAiPrompt ? (
+                            <>
+                              <Check className="w-3.5 h-3.5 text-emerald-300" />
+                              <span className="text-emerald-300">Copied for AI!</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3.5 h-3.5 text-white" />
+                              <span>Copy Prompt for AI</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Expandable Prompt Preview */}
+                    <AnimatePresence>
+                      {showAiPromptText && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="rounded-xl bg-black/90 border border-[#D4BC98]/20 p-3.5 font-mono text-[10px] sm:text-[11px] text-zinc-300 whitespace-pre-wrap select-all leading-relaxed max-h-52 overflow-y-auto shadow-inner"
+                        >
+                          {AI_SOLVER_PROMPT}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </motion.div>
               )}
