@@ -535,29 +535,29 @@ export const FlowAboutStorySection: React.FC = () => {
                 </p>
               </div>
 
-              {/* 6 Clean Architectural Project Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
+              {/* 6 Clean Architectural Project Cards - Breathable, Modern, Spacious */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 {SHOWCASE_CARDS.map((card) => (
                   <div
                     key={card.id}
-                    className="rounded-2xl border border-[#D4BC98]/30 bg-[#18120D]/60 backdrop-blur-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] hover:border-[#E88053]/70 hover:bg-[#221811]/75 transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(232,128,83,0.25)]"
+                    className="rounded-2xl border border-[#D4BC98]/30 bg-[#18120D]/65 hover:bg-[#221811]/80 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.14)_inset] hover:border-[#FFA266]/70 transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_25px_50px_rgba(232,128,83,0.22)]"
                   >
-                    {/* Architectural Header */}
-                    <div className="px-3.5 py-2 bg-[#120D09]/70 border-b border-[#D4BC98]/20 flex items-center justify-between backdrop-blur-md">
+                    {/* Minimal Architectural Window Header */}
+                    <div className="px-4 py-2.5 bg-[#120D09]/80 border-b border-[#D4BC98]/20 flex items-center justify-between backdrop-blur-md">
                       <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#E88053]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] group-hover:scale-125 transition-transform" />
                         <span className="text-[10px] font-mono text-[#F2E5D0] uppercase tracking-wider font-semibold">
                           {card.status}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2 font-mono text-[10px]">
+                      <div className="flex items-center gap-2.5 font-mono text-[11px]">
                         {card.githubUrl && (
                           <a
                             href={card.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#F5EBD9]/75 hover:text-[#FFFDF9] transition-colors flex items-center gap-0.5"
-                            title="View GitHub Repository"
+                            className="text-[#F5EBD9]/70 hover:text-[#FFFDF9] transition-colors flex items-center gap-0.5"
+                            title="View Source Code"
                           >
                             Code ↗
                           </a>
@@ -566,70 +566,79 @@ export const FlowAboutStorySection: React.FC = () => {
                           href={card.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#FFA266] hover:text-[#FFFDF9] font-bold transition-colors flex items-center gap-0.5"
-                          title="Open Live Website"
+                          className="px-2.5 py-0.5 rounded-full bg-[#E88053]/15 hover:bg-[#E88053] text-[#FFA266] hover:text-white font-bold transition-all flex items-center gap-0.5 border border-[#E88053]/30 hover:border-transparent"
+                          title="Open Live Deployment"
                         >
                           Visit ↗
                         </a>
                       </div>
                     </div>
 
-                    {/* Card Screen Preview Container */}
+                    {/* Expansive Website Preview Container (Scaled Desktop Viewport) */}
                     {card.type === 'cli' ? (
-                      <div className="relative w-full h-[120px] sm:h-[135px] bg-[#0E0A07]/90 p-3.5 font-mono text-[10px] flex flex-col justify-between overflow-hidden border-b border-[#D4BC98]/20 group-hover:border-[#E88053]/40 transition-colors">
-                        <div className="space-y-1">
-                          <div className="text-white/60 text-[9px]">$ stego-cli --embed --file secret.enc</div>
-                          <div className="text-emerald-400 font-bold">[+] Encrypting AES-256...</div>
-                          <div className="text-[#FFA266]">[+] Embedding LSB into cover.png</div>
-                          <div className="text-white/95 font-bold">[✓] Payload hidden successfully.</div>
+                      <div className="relative w-full h-[165px] sm:h-[185px] bg-[#0A0806] p-4 font-mono text-[10px] sm:text-[11px] flex flex-col justify-between overflow-hidden border-b border-[#D4BC98]/20 group-hover:border-[#FFA266]/40 transition-colors">
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-1.5 text-white/30 text-[9px] pb-1.5 border-b border-white/10">
+                            <span className="w-2 h-2 rounded-full bg-[#FF5F56]/80" />
+                            <span className="w-2 h-2 rounded-full bg-[#FFBD2E]/80" />
+                            <span className="w-2 h-2 rounded-full bg-[#27C93F]/80" />
+                            <span className="ml-2 font-mono text-white/50">stego-cli — zsh</span>
+                          </div>
+                          <div className="text-white/50 text-[10px]">$ stego-cli --embed --file payload.enc -o carrier.png</div>
+                          <div className="text-emerald-400 font-medium flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            [+] Encrypted with AES-256-GCM cipher
+                          </div>
+                          <div className="text-[#FFA266] font-medium">[+] Embedding LSB into 24-bit image planes...</div>
+                          <div className="text-white/95 font-bold">[✓] Payload hidden successfully. PSNR: 52.4 dB</div>
                         </div>
-                        <div className="flex justify-between items-center text-[9px] text-white/60 pt-1.5 border-t border-white/10">
-                          <span>LSB Spatial Algorithm</span>
+                        <div className="flex justify-between items-center text-[10px] text-white/60 pt-2 border-t border-white/10">
+                          <span>Spatial LSB Steganography</span>
                           <span className="text-[#FFA266] font-bold">Python CLI</span>
                         </div>
                       </div>
                     ) : (
-                      <div className="relative w-full h-[120px] sm:h-[135px] bg-black/60 overflow-hidden group/screen border-b border-[#D4BC98]/20">
-                        <iframe
-                          src={card.url}
-                          title={card.title}
-                          className="w-full h-full border-none pointer-events-none transform group-hover/screen:scale-105 transition-transform duration-500 bg-white"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-70 pointer-events-none" />
+                      <a
+                        href={card.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative block w-full h-[165px] sm:h-[185px] bg-[#0E0A07] overflow-hidden border-b border-[#D4BC98]/20 cursor-pointer group/screen"
+                        title={`Open live site: ${card.title}`}
+                      >
+                        {/* Scaled 1200px Desktop Viewport for Crystal-Clear Website Rendering */}
+                        <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+                          <iframe
+                            src={card.url}
+                            title={card.title}
+                            tabIndex={-1}
+                            className="w-[1200px] h-[680px] origin-top-left border-none bg-[#0E0A07] transform transition-transform duration-700 group-hover/screen:scale-[0.32]"
+                            style={{
+                              transform: 'scale(0.31)',
+                              transformOrigin: '0 0',
+                              width: '1200px',
+                              height: '680px',
+                            }}
+                            loading="lazy"
+                          />
+                        </div>
 
-                        <a
-                          href={card.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="absolute bottom-2.5 right-2.5 px-3 py-1 bg-[#C75B32] hover:bg-[#E88053] text-white font-mono font-bold text-[10px] tracking-wider rounded-md transition-all shadow-[0_4px_15px_rgba(199,91,50,0.5)] flex items-center gap-1 hover:scale-105"
-                        >
-                          Launch ↗
-                        </a>
-                      </div>
+                        {/* Subtle interactive hover highlight */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#140E0A]/80 via-transparent to-transparent opacity-0 group-hover/screen:opacity-100 transition-opacity duration-300 flex items-end justify-end p-3 pointer-events-none">
+                          <span className="px-3 py-1 rounded-full bg-[#E88053] text-white font-mono text-[10px] font-bold tracking-wider shadow-lg flex items-center gap-1">
+                            Launch Live Site ↗
+                          </span>
+                        </div>
+                      </a>
                     )}
 
-                    {/* Card Body & Details */}
-                    <div className="p-3.5 sm:p-4 space-y-2.5 bg-[#140E0A]/50 backdrop-blur-md flex-1 flex flex-col justify-between">
-                      <div className="space-y-1">
-                        <h3 className="font-sans text-sm sm:text-base font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors truncate">
-                          {card.title}
-                        </h3>
-                        <p className="font-sans text-xs text-[#F5EBD9] font-medium leading-relaxed line-clamp-2">
-                          {card.description}
-                        </p>
-                      </div>
-
-                      <div className="pt-2 border-t border-[#D4BC98]/20 flex flex-wrap gap-1 font-mono text-[9px] font-bold">
-                        {card.tags.map((tag, idx) => (
-                          <span
-                            key={idx}
-                            className="px-2 py-0.5 bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0] rounded uppercase tracking-wider backdrop-blur-md"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                    {/* Airy, Breathable Card Body (No Clumsy Tech Stack Tags) */}
+                    <div className="p-4 sm:p-5 space-y-1.5 bg-[#140E0A]/40 backdrop-blur-md flex-1 flex flex-col justify-center">
+                      <h3 className="font-sans text-base sm:text-lg font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors truncate">
+                        {card.title}
+                      </h3>
+                      <p className="font-sans text-xs sm:text-[13px] text-[#F5EBD9]/85 font-medium leading-relaxed line-clamp-2">
+                        {card.description}
+                      </p>
                     </div>
                   </div>
                 ))}
