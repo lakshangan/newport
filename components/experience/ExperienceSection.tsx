@@ -20,7 +20,7 @@ export const ExperienceSection: React.FC = () => {
               </span>
             </div>
             <h4 className="text-2xl sm:text-4xl font-extrabold font-display text-white uppercase">
-              OpenLedger — Twitter &amp; Technical Researcher
+              OpenLedger · Twitter &amp; Technical Researcher
             </h4>
             <p className="text-[#C75B32] text-xs sm:text-sm font-mono">
               Web3 Research / AI Data Pipelines / Protocol Strategy
@@ -73,7 +73,7 @@ export const ExperienceSection: React.FC = () => {
               </span>
             </div>
             <h4 className="text-2xl sm:text-4xl font-extrabold font-display text-white uppercase">
-              Uniswap Foundation — Hook Incubator
+              Uniswap Foundation · Hook Incubator
             </h4>
             <p className="text-[#C75B32] text-xs sm:text-sm font-mono">
               DeFi / Uniswap v4 Architecture / Smart Contracts
@@ -126,7 +126,7 @@ export const ExperienceSection: React.FC = () => {
               </span>
             </div>
             <h4 className="text-2xl sm:text-4xl font-extrabold font-display text-white uppercase">
-              Vodafone Idea Foundation — Blockchain Engineering
+              Vodafone Idea Foundation · Blockchain Engineering
             </h4>
             <p className="text-[#C75B32] text-xs sm:text-sm font-mono">
               Distributed Systems / Enterprise Ledger / Smart Contracts
@@ -179,7 +179,7 @@ export const ExperienceSection: React.FC = () => {
               </span>
             </div>
             <h4 className="text-2xl sm:text-4xl font-extrabold font-display text-white uppercase">
-              FAMS Private Limited — SAP Basis System Analyst
+              FAMS Private Limited · SAP Basis System Analyst
             </h4>
             <p className="text-[#C75B32] text-xs sm:text-sm font-mono">
               Enterprise Infrastructure / Database Performance Tuning

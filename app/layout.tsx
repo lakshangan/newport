@@ -23,7 +23,7 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://lakshan-dev.vercel.app'),
-  title: 'Lakshan Ganesan — Full Stack Developer (AI & Blockchain)',
+  title: 'Lakshan Ganesan | Full Stack Developer (AI & Blockchain)',
   description:
     'Portfolio of Lakshan Ganesan. Full Stack Developer engineering scalable web applications, artificial intelligence systems, and blockchain protocols.',
   icons: {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Lakshan Ganesan' }],
   openGraph: {
-    title: 'Lakshan Ganesan — Full Stack Developer (AI & Blockchain)',
+    title: 'Lakshan Ganesan | Full Stack Developer (AI & Blockchain)',
     description:
       'Portfolio of Lakshan Ganesan. Full Stack Developer engineering scalable web applications, AI systems, and blockchain protocols.',
     url: 'https://lakshan-dev.vercel.app',
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Lakshan Ganesan — Full Stack Developer (AI & Blockchain)',
+    title: 'Lakshan Ganesan | Full Stack Developer (AI & Blockchain)',
     description:
       'Portfolio of Lakshan Ganesan. Full Stack Developer engineering scalable web applications, AI systems, and blockchain protocols.',
     creator: '@lakshangan',

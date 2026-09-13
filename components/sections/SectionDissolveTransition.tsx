@@ -35,9 +35,9 @@ export const SectionDissolveTransition: React.FC = () => {
 
         {/* Bottom Marker */}
         <div className="text-[10px] sm:text-xs font-mono text-white/60 flex justify-between items-center pointer-events-auto">
-          <span>01 — ABOUT THE BUILDER</span>
+          <span>01 // ABOUT THE BUILDER</span>
           <span className="animate-bounce">KEEP SCROLLING TO DISSOLVE ↓</span>
-          <span>02 — MILESTONES</span>
+          <span>02 // MILESTONES</span>
         </div>
       </ScrollDissolveReveal>
     </section>

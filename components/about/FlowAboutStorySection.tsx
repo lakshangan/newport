@@ -235,12 +235,12 @@ export const FlowAboutStorySection: React.FC = () => {
   return (
     <div className="w-full relative block" aria-label="About the Builder Story Scroll">
       {/* ========================================================================= */}
-      {/* SLIDE 01: 01 — WHO I AM: CRAFTSMANSHIP & TECH STACK (INTRO1 RENAISSANCE ARTWORK) */}
+      {/* SLIDE 01: 01 // WHO I AM: CRAFTSMANSHIP & TECH STACK (INTRO1 RENAISSANCE ARTWORK) */}
       {/* ========================================================================= */}
       <section
         id="about"
-        aria-label="01 — Who I am"
-        className="relative min-h-screen w-full overflow-hidden flex flex-col justify-center px-6 sm:px-10 lg:px-16 pt-24 sm:pt-28 pb-10 sm:pb-14"
+        aria-label="01 // Who I am"
+        className="relative min-h-screen w-full overflow-hidden flex flex-col justify-center px-4 sm:px-10 lg:px-16 pt-20 sm:pt-28 pb-8 sm:pb-14"
         style={{ backgroundColor: '#EADFC9', color: '#1A130F' }}
       >
         {/* Renaissance Artwork Background Image */}
@@ -256,13 +256,13 @@ export const FlowAboutStorySection: React.FC = () => {
         </div>
 
         {/* Content Container (Balanced vertical layout centered in open parchment area) */}
-        <div className="relative z-10 max-w-5xl mx-auto w-full flex flex-col justify-center space-y-5 sm:space-y-6 md:space-y-7">
+        <div className="relative z-10 max-w-5xl mx-auto w-full flex flex-col justify-center space-y-4 sm:space-y-6 md:space-y-7">
           {/* Top Header Badge & One-Line Display Title */}
           <div className="space-y-2 sm:space-y-3 text-left">
             <div className="flex items-center gap-3">
               <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#1A130F]/10 border border-[#8C4B18]/40 text-xs font-mono text-[#8C4B18] font-bold tracking-[0.2em] uppercase backdrop-blur-sm shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#8C4B18] animate-pulse" />
-                <span>01 — WHO I AM // LAKSHAN G.</span>
+                <span>01 // WHO I AM // LAKSHAN G.</span>
               </div>
               <span className="hidden sm:inline-block text-[10px] font-mono tracking-widest text-[#733610]/60 uppercase">
                 [ ARCHITECTURE &amp; CRAFT ]
@@ -365,119 +365,119 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="recognition"
-            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
+            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-0 pb-16 sm:pb-20 md:pb-0 overflow-y-auto md:overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows - Warm Studio Golden Hour */}
             <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[150px] pointer-events-none z-1" />
             <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[160px] pointer-events-none z-1" />
 
-            <div className="max-w-7xl mx-auto w-full space-y-5 sm:space-y-6 relative z-10 my-auto">
+            <div className="max-w-7xl mx-auto w-full space-y-3.5 sm:space-y-5 md:space-y-6 relative z-10 my-auto">
               {/* Header */}
-              <div className="space-y-2 border-b border-[#D4BC98]/25 pb-4 text-left">
-                <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/35 text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-xl shadow-lg">
+              <div className="space-y-1.5 sm:space-y-2 border-b border-[#D4BC98]/25 pb-3 sm:pb-4 text-left">
+                <div className="inline-flex items-center space-x-2 px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/35 text-[10px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-xl shadow-lg">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
                   <span>02 // LEADERSHIP &amp; ACCOLADES</span>
                 </div>
-                <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                   PROVEN ON NATIONAL &amp; GLOBAL STAGES
                 </h2>
-                <p className="text-xs sm:text-sm font-medium text-[#FFFDF9]/95 max-w-2xl bg-[#18120D]/50 backdrop-blur-xl p-3 rounded-xl border border-[#D4BC98]/25 shadow-lg leading-relaxed">
+                <p className="text-xs sm:text-sm font-medium text-[#FFFDF9]/95 max-w-2xl bg-[#18120D]/50 backdrop-blur-xl p-2.5 sm:p-3 rounded-xl border border-[#D4BC98]/25 shadow-lg leading-relaxed line-clamp-2 sm:line-clamp-none">
                   Combining competitive hackathon execution, decentralized protocol research, and campus community leadership with unwavering discipline.
                 </p>
               </div>
 
               {/* Natural Editorial Grid: 2 Headline Breakthroughs + 3 Distinct Pillars */}
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {/* Row 1: Two Major Headline Breakthroughs */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
                   {/* Card 1: 1st Place Track Winner NIT Calicut */}
-                  <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.14)_inset] transition-all duration-300 group hover:-translate-y-0.5 relative overflow-hidden flex flex-col justify-between">
+                  <div className="p-4 sm:p-5 md:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.14)_inset] transition-all duration-300 group hover:-translate-y-0.5 relative overflow-hidden flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
+                      <div className="flex items-center justify-between gap-2 mb-2 sm:mb-3">
+                        <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
                           <Trophy className="w-3.5 h-3.5 text-[#E88053]" /> 1ST PLACE TRACK WINNER
                         </span>
-                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#E88053]/20 border border-[#E88053]/40 text-[#FFA266] font-semibold">
+                        <span className="text-[9px] sm:text-[10px] font-mono px-2 sm:px-2.5 py-0.5 rounded-full bg-[#E88053]/20 border border-[#E88053]/40 text-[#FFA266] font-semibold">
                           NIT CALICUT
                         </span>
                       </div>
-                      <h3 className="text-lg sm:text-xl font-bold font-sans text-[#FFFDF9] mb-2 group-hover:text-[#FFA266] transition-colors drop-shadow-sm">
+                      <h3 className="text-base sm:text-xl font-bold font-sans text-[#FFFDF9] mb-1.5 sm:mb-2 group-hover:text-[#FFA266] transition-colors drop-shadow-sm">
                         Build On Chain @ NIT Calicut
                       </h3>
-                      <p className="text-xs sm:text-sm text-[#F5EBD9] font-sans leading-relaxed mb-4">
+                      <p className="text-xs sm:text-sm text-[#F5EBD9] font-sans leading-relaxed mb-3 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                         Architected an audited on-chain tokenization protocol and automated liquidity vault under a grueling 36-hour hackathon marathon, placing 1st against top national university engineering teams.
                       </p>
                     </div>
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#D4BC98]/20 font-mono text-[10px]">
-                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">Solidity</span>
-                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">EVM Smart Contracts</span>
-                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">DeFi Vaults</span>
+                    <div className="flex flex-wrap gap-1.5 pt-2.5 sm:pt-3 border-t border-[#D4BC98]/20 font-mono text-[9px] sm:text-[10px]">
+                      <span className="px-2 sm:px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">Solidity</span>
+                      <span className="px-2 sm:px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">EVM Smart Contracts</span>
+                      <span className="px-2 sm:px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">DeFi Vaults</span>
                     </div>
                   </div>
 
                   {/* Card 2: Smart India Hackathon Finalist */}
-                  <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.14)_inset] transition-all duration-300 group hover:-translate-y-0.5 relative overflow-hidden flex flex-col justify-between">
+                  <div className="p-4 sm:p-5 md:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.14)_inset] transition-all duration-300 group hover:-translate-y-0.5 relative overflow-hidden flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#FFFDF9] uppercase tracking-wider">
+                      <div className="flex items-center justify-between gap-2 mb-2 sm:mb-3">
+                        <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono font-bold text-[#FFFDF9] uppercase tracking-wider">
                           <Globe className="w-3.5 h-3.5 text-[#E88053]" /> NATIONAL STAGE FINALIST
                         </span>
-                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#D4BC98]/20 border border-[#D4BC98]/40 text-[#FFFDF9] font-semibold">
+                        <span className="text-[9px] sm:text-[10px] font-mono px-2 sm:px-2.5 py-0.5 rounded-full bg-[#D4BC98]/20 border border-[#D4BC98]/40 text-[#FFFDF9] font-semibold">
                           GOVT. OF INDIA
                         </span>
                       </div>
-                      <h3 className="text-lg sm:text-xl font-bold font-sans text-[#FFFDF9] mb-2 group-hover:text-[#FFA266] transition-colors drop-shadow-sm">
+                      <h3 className="text-base sm:text-xl font-bold font-sans text-[#FFFDF9] mb-1.5 sm:mb-2 group-hover:text-[#FFA266] transition-colors drop-shadow-sm">
                         Smart India Hackathon
                       </h3>
-                      <p className="text-xs sm:text-sm text-[#F5EBD9] font-sans leading-relaxed mb-4">
+                      <p className="text-xs sm:text-sm text-[#F5EBD9] font-sans leading-relaxed mb-3 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                         Selected among tens of thousands of nationwide applicants in India’s premier government hackathon, engineering software solutions addressing national public infrastructure challenges.
                       </p>
                     </div>
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#D4BC98]/20 font-mono text-[10px]">
-                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">National Finalist</span>
-                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">Full-Stack Systems</span>
-                      <span className="px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">Public Infrastructure</span>
+                    <div className="flex flex-wrap gap-1.5 pt-2.5 sm:pt-3 border-t border-[#D4BC98]/20 font-mono text-[9px] sm:text-[10px]">
+                      <span className="px-2 sm:px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">National Finalist</span>
+                      <span className="px-2 sm:px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">Full-Stack Systems</span>
+                      <span className="px-2 sm:px-2.5 py-0.5 rounded bg-[#251A13]/80 border border-[#D4BC98]/30 text-[#F2E5D0]">Public Infrastructure</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Row 2: Three Distinct Pillars */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4 md:gap-5">
                   {/* Card 3: Campus Tech Lead */}
-                  <div className="p-4 sm:p-5 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#FFA266]/60 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5">
-                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider mb-2">
+                  <div className="p-3.5 sm:p-4 md:p-5 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#FFA266]/60 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider mb-1.5 sm:mb-2">
                       <Award className="w-3.5 h-3.5 text-[#E88053]" /> LEADERSHIP
                     </div>
-                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5 group-hover:text-[#FFA266] transition-colors">
+                    <h4 className="text-xs sm:text-base font-bold font-sans text-[#FFFDF9] mb-1 sm:mb-1.5 group-hover:text-[#FFA266] transition-colors">
                       Tech Hub Lead &amp; Campus Ambassador
                     </h4>
-                    <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-3 sm:line-clamp-none">
                       Leading hands-on Web3, AI, and developer workshops for 200+ students, mentoring junior builders, and driving university technical initiatives.
                     </p>
                   </div>
 
                   {/* Card 4: Uniswap & OpenLedger */}
-                  <div className="p-4 sm:p-5 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#FFA266]/60 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5">
-                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider mb-2">
+                  <div className="p-3.5 sm:p-4 md:p-5 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#FFA266]/60 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider mb-1.5 sm:mb-2">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#E88053]" /> RESEARCH
                     </div>
-                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5 group-hover:text-[#FFA266] transition-colors">
+                    <h4 className="text-xs sm:text-base font-bold font-sans text-[#FFFDF9] mb-1 sm:mb-1.5 group-hover:text-[#FFA266] transition-colors">
                       Uniswap v4 &amp; OpenLedger
                     </h4>
-                    <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-3 sm:line-clamp-none">
                       Selected for the Uniswap v4 Hook Incubator cohort and collaborating on decentralized AI data pipelines and automated liquidity research.
                     </p>
                   </div>
 
                   {/* Card 5: International Silambam */}
-                  <div className="p-4 sm:p-5 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#FFA266]/60 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5">
-                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider mb-2">
+                  <div className="p-3.5 sm:p-4 md:p-5 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#FFA266]/60 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider mb-1.5 sm:mb-2">
                       <Monitor className="w-3.5 h-3.5 text-[#E88053]" /> DISCIPLINE
                     </div>
-                    <h4 className="text-sm sm:text-base font-bold font-sans text-[#FFFDF9] mb-1.5 group-hover:text-[#FFA266] transition-colors">
+                    <h4 className="text-xs sm:text-base font-bold font-sans text-[#FFFDF9] mb-1 sm:mb-1.5 group-hover:text-[#FFA266] transition-colors">
                       International Silambam Medalist
                     </h4>
-                    <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-3 sm:line-clamp-none">
                       Bronze Medalist at the International Silambam Championship. Physical mastery, precise execution, and discipline that directly shape my engineering stamina.
                     </p>
                   </div>
@@ -492,7 +492,7 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="showcase"
-            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 pt-20 sm:pt-24 pb-16 sm:pb-20 overflow-hidden bg-transparent"
+            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 overflow-y-auto md:overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
             <div className="absolute top-1/4 left-1/3 w-[550px] h-[450px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
@@ -500,9 +500,9 @@ export const FlowAboutStorySection: React.FC = () => {
 
             <div className="space-y-3 sm:space-y-3.5 my-auto max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center">
               {/* Header - Cleanly positioned below floating nav bar */}
-              <div className="flex items-end justify-between gap-3 border-b border-[#D4BC98]/25 pb-2.5">
+              <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-2 sm:gap-3 border-b border-[#D4BC98]/25 pb-2 sm:pb-2.5">
                 <div className="space-y-1">
-                  <div className="inline-flex items-center space-x-2 px-3 py-0.5 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/30 text-[10px] sm:text-[11px] font-mono text-[#FFA266] tracking-wider uppercase backdrop-blur-xl shadow-sm">
+                  <div className="inline-flex items-center space-x-2 px-2.5 sm:px-3 py-0.5 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/30 text-[9px] sm:text-[11px] font-mono text-[#FFA266] tracking-wider uppercase backdrop-blur-xl shadow-sm">
                     <Sparkles className="w-3 h-3 text-[#E88053]" />
                     <span>03 // LATEST DEPLOYMENTS</span>
                   </div>
@@ -515,7 +515,7 @@ export const FlowAboutStorySection: React.FC = () => {
                   href="https://github.com/lakshangan"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#18120D]/80 hover:bg-[#241710] border border-[#D4BC98]/35 hover:border-[#FFA266] backdrop-blur-xl shadow-[0_10px_25px_rgba(0,0,0,0.4),0_1px_0_rgba(255,255,255,0.14)_inset] hover:shadow-[0_15px_30px_rgba(232,128,83,0.3)] transition-all duration-300 hover:-translate-y-0.5 shrink-0 overflow-hidden"
+                  className="group relative inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#18120D]/80 hover:bg-[#241710] border border-[#D4BC98]/35 hover:border-[#FFA266] backdrop-blur-xl shadow-[0_10px_25px_rgba(0,0,0,0.4),0_1px_0_rgba(255,255,255,0.14)_inset] hover:shadow-[0_15px_30px_rgba(232,128,83,0.3)] transition-all duration-300 hover:-translate-y-0.5 shrink-0 overflow-hidden text-xs"
                   title="View all projects on GitHub"
                 >
                   {/* Subtle animated light sweep on hover */}
@@ -649,24 +649,24 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="metrics"
-            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
+            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-0 pb-16 sm:pb-20 md:pb-0 overflow-y-auto md:overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
             <div className="absolute top-1/3 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
             <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[150px] pointer-events-none z-1" />
 
-            <div className="max-w-7xl mx-auto w-full space-y-5 sm:space-y-6 relative z-10 my-auto">
+            <div className="max-w-7xl mx-auto w-full space-y-3.5 sm:space-y-5 md:space-y-6 relative z-10 my-auto">
               {/* Header */}
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#D4BC98]/25 pb-4 text-left">
-                <div className="space-y-2">
-                  <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/35 text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-xl shadow-lg">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2.5 sm:gap-3 border-b border-[#D4BC98]/25 pb-3 sm:pb-4 text-left">
+                <div className="space-y-1 sm:space-y-2">
+                  <div className="inline-flex items-center space-x-2 px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/35 text-[10px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-xl shadow-lg">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
                     <span>04 // THE BUILDER’S TRACK RECORD</span>
                   </div>
-                  <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                  <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     ENGINEERING VELOCITY &amp; REAL IMPACT
                   </h2>
-                  <p className="text-xs sm:text-sm font-medium text-[#FFFDF9]/95 max-w-xl bg-[#18120D]/50 backdrop-blur-xl p-3 rounded-xl border border-[#D4BC98]/25 shadow-lg leading-relaxed">
+                  <p className="text-xs sm:text-sm font-medium text-[#FFFDF9]/95 max-w-xl bg-[#18120D]/50 backdrop-blur-xl p-2.5 sm:p-3 rounded-xl border border-[#D4BC98]/25 shadow-lg leading-relaxed line-clamp-2 sm:line-clamp-none">
                     Real output over artificial metrics. A track record built through competitive hackathon marathons, production deployments, and peer developer mentorship.
                   </p>
                 </div>
@@ -674,111 +674,111 @@ export const FlowAboutStorySection: React.FC = () => {
                 <button
                   type="button"
                   onClick={scrollToCompetitiveMilestones}
-                  className="self-start sm:self-end inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#18120D]/80 hover:bg-[#221811] border border-[#D4BC98]/35 hover:border-[#E88053]/70 text-xs font-mono text-[#F5EBD9] hover:text-[#FFFDF9] transition-all shadow-lg group cursor-pointer backdrop-blur-xl shrink-0"
+                  className="self-start sm:self-end inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#18120D]/80 hover:bg-[#221811] border border-[#D4BC98]/35 hover:border-[#E88053]/70 text-xs font-mono text-[#F5EBD9] hover:text-[#FFFDF9] transition-all shadow-lg group cursor-pointer backdrop-blur-xl shrink-0"
                 >
                   <span>Explore Milestones</span>
                   <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform text-[#FFA266]" />
                 </button>
               </div>
 
-              {/* 4 Clean Authentic Impact Pillars */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+              {/* 4 Clean Authentic Impact Pillars - 2x2 on Mobile, 4-col on Desktop */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-5">
                 {/* Pillar 1: Hackathons */}
-                <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
-                  <div className="space-y-3">
+                <div className="p-3 sm:p-5 lg:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-xl sm:rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                  <div className="space-y-2 sm:space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
+                      <span className="text-2xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
                         <CounterNumber value="25+" />
                       </span>
-                      <span className="p-2 rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
-                        <Trophy className="w-4 h-4" />
+                      <span className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
+                        <Trophy className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       </span>
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
+                    <div className="space-y-0.5 sm:space-y-1">
+                      <h3 className="text-xs sm:text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
                         Competitive Marathons
                       </h3>
-                      <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
+                      <p className="text-[10px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-2 sm:line-clamp-none">
                         Thriving under 24-to-36 hour sprint constraints to build production-grade prototypes, APIs, and working smart contracts from scratch.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/20 font-mono text-[10px] text-[#FFA266] font-semibold">
+                  <div className="pt-2 mt-2 sm:pt-3 sm:mt-4 border-t border-[#D4BC98]/20 font-mono text-[8px] sm:text-[10px] text-[#FFA266] font-semibold truncate">
                     36H MARATHON SPRINTS
                   </div>
                 </div>
 
                 {/* Pillar 2: Podium Placements */}
-                <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
-                  <div className="space-y-3">
+                <div className="p-3 sm:p-5 lg:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-xl sm:rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                  <div className="space-y-2 sm:space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
+                      <span className="text-2xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
                         <CounterNumber value="20+" />
                       </span>
-                      <span className="p-2 rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
-                        <Award className="w-4 h-4" />
+                      <span className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
+                        <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       </span>
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
-                        Podium &amp; Finalist Finishes
+                    <div className="space-y-0.5 sm:space-y-1">
+                      <h3 className="text-xs sm:text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
+                        Podium Finishes
                       </h3>
-                      <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
+                      <p className="text-[10px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-2 sm:line-clamp-none">
                         Recognized across premier national platforms including 1st Place Track at NIT Calicut and finalist entry in Smart India Hackathon.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/20 font-mono text-[10px] text-[#FFA266] font-semibold">
+                  <div className="pt-2 mt-2 sm:pt-3 sm:mt-4 border-t border-[#D4BC98]/20 font-mono text-[8px] sm:text-[10px] text-[#FFA266] font-semibold truncate">
                     NATIONAL RECOGNITION
                   </div>
                 </div>
 
                 {/* Pillar 3: Deployed Systems */}
-                <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
-                  <div className="space-y-3">
+                <div className="p-3 sm:p-5 lg:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-xl sm:rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                  <div className="space-y-2 sm:space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
+                      <span className="text-2xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
                         <CounterNumber value="15+" />
                       </span>
-                      <span className="p-2 rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
-                        <Rocket className="w-4 h-4" />
+                      <span className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
+                        <Rocket className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       </span>
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
-                        Applications Shipped
+                    <div className="space-y-0.5 sm:space-y-1">
+                      <h3 className="text-xs sm:text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
+                        Shipped Systems
                       </h3>
-                      <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
+                      <p className="text-[10px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-2 sm:line-clamp-none">
                         Full-stack corporate platforms, AI provenance engines, EVM liquidity vaults, and open-source cryptographic security packages.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/20 font-mono text-[10px] text-[#FFA266] font-semibold">
+                  <div className="pt-2 mt-2 sm:pt-3 sm:mt-4 border-t border-[#D4BC98]/20 font-mono text-[8px] sm:text-[10px] text-[#FFA266] font-semibold truncate">
                     LIVE IN PRODUCTION
                   </div>
                 </div>
 
                 {/* Pillar 4: Community Mentorship */}
-                <div className="p-5 sm:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
-                  <div className="space-y-3">
+                <div className="p-3 sm:p-5 lg:p-6 bg-[#18120D]/60 hover:bg-[#221811]/75 border border-[#D4BC98]/30 hover:border-[#E88053]/70 rounded-xl sm:rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.35),0_1px_0_rgba(255,255,255,0.12)_inset] transition-all duration-300 group hover:-translate-y-0.5 flex flex-col justify-between">
+                  <div className="space-y-2 sm:space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
+                      <span className="text-2xl sm:text-4xl font-display font-bold text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
                         <CounterNumber value="200+" />
                       </span>
-                      <span className="p-2 rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
-                        <Globe className="w-4 h-4" />
+                      <span className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-[#281A12]/80 border border-[#E88053]/40 text-[#FFA266] shadow-[0_0_15px_rgba(232,128,83,0.2)]">
+                        <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       </span>
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
-                        Developers Mentored
+                    <div className="space-y-0.5 sm:space-y-1">
+                      <h3 className="text-xs sm:text-sm font-bold font-sans text-[#FFFDF9] tracking-tight">
+                        Mentored Peers
                       </h3>
-                      <p className="text-xs text-[#F5EBD9] font-sans leading-relaxed">
+                      <p className="text-[10px] sm:text-xs text-[#F5EBD9] font-sans leading-relaxed line-clamp-2 sm:line-clamp-none">
                         Serving as Campus Ambassador to organize technical workshops, lead peer study circles in Web3 and AI, and inspire future builders.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-3 mt-4 border-t border-[#D4BC98]/20 font-mono text-[10px] text-[#FFA266] font-semibold">
+                  <div className="pt-2 mt-2 sm:pt-3 sm:mt-4 border-t border-[#D4BC98]/20 font-mono text-[8px] sm:text-[10px] text-[#FFA266] font-semibold truncate">
                     COMMUNITY LEADERSHIP
                   </div>
                 </div>
@@ -788,12 +788,12 @@ export const FlowAboutStorySection: React.FC = () => {
         </div>
 
         {/* Centered Apple-Style Dotted Status Bar */}
-        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none select-none">
+        <div className="absolute bottom-3 sm:bottom-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none select-none">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-[#18120D]/75 hover:bg-[#221811]/90 border border-[#D4BC98]/35 backdrop-blur-2xl shadow-[0_12px_32px_rgba(0,0,0,0.4),0_1px_0_rgba(255,255,255,0.15)_inset] transition-all"
+            className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-full bg-[#18120D]/75 hover:bg-[#221811]/90 border border-[#D4BC98]/35 backdrop-blur-2xl shadow-[0_12px_32px_rgba(0,0,0,0.4),0_1px_0_rgba(255,255,255,0.15)_inset] transition-all"
           >
             {[0, 1, 2].map((idx) => {
               const isActive = activeSlide === idx;

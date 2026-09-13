@@ -187,7 +187,7 @@ export const AchievementsShowcaseSection: React.FC = () => {
                   INTL SILAMBAM MEDALIST
                 </h3>
                 <p className="text-xs sm:text-sm text-[#27272a] font-sans font-semibold max-w-xs mx-auto leading-relaxed">
-                  Bronze Medalist at the International Silambam Championship—combining physical mastery with digital precision.
+                  Bronze Medalist at the International Silambam Championship, combining physical mastery with digital precision.
                 </p>
               </div>
             </motion.div>
