@@ -487,33 +487,35 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
 
           {/* ========================================================================= */}
+          {/* ========================================================================= */}
           {/* PANEL 2 (SLIDE 03): CREATIVE SHOWCASE */}
           {/* ========================================================================= */}
           <div
             id="showcase"
-            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 overflow-hidden bg-transparent"
+            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 pt-20 sm:pt-24 pb-16 sm:pb-20 overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
             <div className="absolute top-1/4 left-1/3 w-[550px] h-[450px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
             <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[150px] pointer-events-none z-1" />
 
-            <div className="space-y-4 sm:space-y-5 my-auto max-w-7xl mx-auto w-full relative z-10">
-              {/* Header */}
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-[#D4BC98]/25 pb-3">
-                <div className="space-y-1.5">
-                  <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/35 text-xs font-mono text-[#FFA266] tracking-wider uppercase backdrop-blur-xl shadow-lg">
-                    <Sparkles className="w-3.5 h-3.5 text-[#E88053]" />
+            <div className="space-y-3 sm:space-y-3.5 my-auto max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center">
+              {/* Header - Cleanly positioned below floating nav bar */}
+              <div className="flex items-end justify-between gap-3 border-b border-[#D4BC98]/25 pb-2.5">
+                <div className="space-y-1">
+                  <div className="inline-flex items-center space-x-2 px-3 py-0.5 rounded-full bg-[#18120D]/80 border border-[#D4BC98]/30 text-[10px] sm:text-[11px] font-mono text-[#FFA266] tracking-wider uppercase backdrop-blur-xl shadow-sm">
+                    <Sparkles className="w-3 h-3 text-[#E88053]" />
                     <span>03 // LATEST DEPLOYMENTS</span>
                   </div>
-                  <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#FFFDF9] leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                  <h2 className="font-display text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-[#FFFDF9] leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     CREATIVE <span className="text-[#FFA266] drop-shadow-[0_0_25px_rgba(232,128,83,0.5)]">SHOWCASE</span>
                   </h2>
                 </div>
+
                 <a
                   href="https://github.com/lakshangan"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#18120D]/80 hover:bg-[#241710] border border-[#D4BC98]/35 hover:border-[#FFA266] backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.5),0_1px_0_rgba(255,255,255,0.14)_inset] hover:shadow-[0_15px_35px_rgba(232,128,83,0.35)] transition-all duration-300 hover:-translate-y-0.5 shrink-0 overflow-hidden"
+                  className="group relative inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#18120D]/80 hover:bg-[#241710] border border-[#D4BC98]/35 hover:border-[#FFA266] backdrop-blur-xl shadow-[0_10px_25px_rgba(0,0,0,0.4),0_1px_0_rgba(255,255,255,0.14)_inset] hover:shadow-[0_15px_30px_rgba(232,128,83,0.3)] transition-all duration-300 hover:-translate-y-0.5 shrink-0 overflow-hidden"
                   title="View all projects on GitHub"
                 >
                   {/* Subtle animated light sweep on hover */}
@@ -521,7 +523,7 @@ export const FlowAboutStorySection: React.FC = () => {
 
                   {/* GitHub Brand Icon */}
                   <svg
-                    className="w-4 h-4 fill-current text-[#FFA266] group-hover:scale-110 transition-transform duration-300"
+                    className="w-3.5 h-3.5 fill-current text-[#FFA266] group-hover:scale-110 transition-transform duration-300"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
@@ -532,39 +534,39 @@ export const FlowAboutStorySection: React.FC = () => {
                     />
                   </svg>
 
-                  <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#FFFDF9] group-hover:text-[#FFA266] transition-colors">
                     See All Projects
                   </span>
 
-                  <span className="w-6 h-6 rounded-full bg-[#FFA266]/15 border border-[#FFA266]/30 flex items-center justify-center text-[#FFA266] group-hover:bg-[#E88053] group-hover:text-white group-hover:translate-x-0.5 transition-all text-xs font-bold">
+                  <span className="w-5 h-5 rounded-full bg-[#FFA266]/15 border border-[#FFA266]/30 flex items-center justify-center text-[#FFA266] group-hover:bg-[#E88053] group-hover:text-white group-hover:translate-x-0.5 transition-all text-[10px] font-bold">
                     ↗
                   </span>
                 </a>
               </div>
 
-              {/* 6 Clean Architectural Project Cards - Spacious Reference Design */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              {/* 6 Clean Architectural Project Cards - Proportional & Breathable */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4 lg:gap-4.5">
                 {SHOWCASE_CARDS.map((card) => (
                   <div
                     key={card.id}
-                    className="rounded-2xl border border-[#D4BC98]/25 bg-[#16110D]/80 hover:bg-[#1E1610]/95 backdrop-blur-2xl overflow-hidden shadow-2xl hover:border-[#FFA266]/70 transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_25px_50px_rgba(232,128,83,0.25)]"
+                    className="rounded-2xl border border-[#D4BC98]/25 bg-[#16110D]/80 hover:bg-[#1E1610]/95 backdrop-blur-2xl overflow-hidden shadow-2xl hover:border-[#FFA266]/70 transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(232,128,83,0.22)]"
                   >
                     {/* macOS Browser Window Header */}
-                    <div className="px-3.5 py-2.5 bg-[#1A120B]/90 border-b border-[#D4BC98]/20 flex items-center justify-between backdrop-blur-md">
+                    <div className="px-3.5 py-2 bg-[#1A120B]/90 border-b border-[#D4BC98]/20 flex items-center justify-between backdrop-blur-md">
                       {/* macOS Window Traffic Lights */}
                       <div className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
+                        <span className="w-2 h-2 rounded-full bg-[#FF5F56]" />
+                        <span className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
+                        <span className="w-2 h-2 rounded-full bg-[#27C93F]" />
                       </div>
 
                       {/* Centered Minimal Domain Pill */}
-                      <div className="px-3 py-0.5 rounded-full bg-black/60 border border-[#D4BC98]/20 text-[10px] font-mono text-[#EADFC9]/75 truncate max-w-[160px] shadow-inner">
+                      <div className="px-2.5 py-0.5 rounded-full bg-black/60 border border-[#D4BC98]/20 text-[9px] font-mono text-[#EADFC9]/75 truncate max-w-[150px] shadow-inner">
                         {card.domain}
                       </div>
 
                       {/* Header Actions */}
-                      <div className="flex items-center gap-2 font-mono text-[11px]">
+                      <div className="flex items-center gap-2 font-mono text-[10px]">
                         {card.githubUrl && (
                           <a
                             href={card.githubUrl}
@@ -588,45 +590,53 @@ export const FlowAboutStorySection: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Live Preview Screen Container - Full Website Preview with Generous Spacing */}
-                    <div className="relative w-full h-[185px] sm:h-[205px] bg-black overflow-hidden group/screen">
-                      <iframe
-                        src={card.url}
-                        title={card.title}
-                        className="w-full h-full border-none pointer-events-none transform group-hover/screen:scale-105 transition-transform duration-500 bg-white"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#140E0A]/40 via-transparent to-transparent opacity-30 pointer-events-none" />
+                    {/* Scaled Desktop Viewport - No Zoom, Real Miniature Desktop Preview */}
+                    <div className="relative w-full h-[120px] sm:h-[135px] lg:h-[142px] bg-[#0A0806] overflow-hidden group/screen">
+                      <div
+                        className="w-[1200px] h-[600px] origin-top-left pointer-events-none select-none"
+                        style={{
+                          transform: 'scale(0.28)',
+                          transformOrigin: '0 0',
+                          width: '1200px',
+                          height: '600px',
+                        }}
+                      >
+                        <iframe
+                          src={card.url}
+                          title={card.title}
+                          className="w-full h-full border-none bg-white"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#140E0A]/40 via-transparent to-transparent opacity-20 pointer-events-none" />
 
                       <a
                         href={card.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="absolute bottom-3 right-3 px-3 py-1 bg-black/85 hover:bg-[#E88053] hover:text-white border border-white/20 rounded-md font-mono text-[11px] font-bold text-white transition-all flex items-center gap-1 shadow-lg opacity-0 group-hover/screen:opacity-100 duration-200 z-10"
+                        className="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-black/85 hover:bg-[#E88053] hover:text-white border border-white/20 rounded-md font-mono text-[10px] font-bold text-white transition-all flex items-center gap-1 shadow-lg opacity-0 group-hover/screen:opacity-100 duration-200 z-10"
                       >
                         Launch ↗
                       </a>
                     </div>
 
-                    {/* Card Body - Airy, Breathable, No Clutter */}
-                    <div className="p-4 sm:p-5 space-y-2 bg-[#140E0A]/60 flex-1 flex flex-col justify-between">
-                      <div className="space-y-1.5">
-                        <h3 className="font-sans text-base sm:text-lg font-bold text-white group-hover:text-[#FFA266] transition-colors flex items-center justify-between">
-                          <span>{card.title}</span>
-                          <a
-                            href={card.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[#D4BC98]/50 hover:text-white transition-colors"
-                            title="Open Project"
-                          >
-                            <ExternalLink className="w-3.5 h-3.5" />
-                          </a>
-                        </h3>
-                        <p className="font-sans text-xs sm:text-[13px] text-[#F5EBD9]/85 font-medium leading-relaxed line-clamp-2">
-                          {card.description}
-                        </p>
-                      </div>
+                    {/* Card Body - Airy, Breathable, Well-Proportioned */}
+                    <div className="p-3 sm:p-3.5 space-y-1 bg-[#140E0A]/60 flex-1 flex flex-col justify-center">
+                      <h3 className="font-sans text-sm sm:text-base font-bold text-white group-hover:text-[#FFA266] transition-colors flex items-center justify-between">
+                        <span>{card.title}</span>
+                        <a
+                          href={card.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#D4BC98]/50 hover:text-white transition-colors"
+                          title="Open Project"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      </h3>
+                      <p className="font-sans text-[11px] sm:text-xs text-[#F5EBD9]/85 font-medium leading-relaxed line-clamp-2">
+                        {card.description}
+                      </p>
                     </div>
                   </div>
                 ))}
