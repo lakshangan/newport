@@ -53,9 +53,9 @@ export const PORTFOLIO_DATA = {
     email: 'lakshanganesan05@gmail.com',
     phone: '+91 94862 23523',
     github: 'https://github.com/lakshangan',
-    linkedin: 'https://www.linkedin.com/in/lakshan-ganesan23317524b/',
-    twitter: 'https://x.com/lakshangan',
-    instagram: 'https://instagram.com/lakshangan_',
+    linkedin: 'https://www.linkedin.com/in/lakshan-ganesan-23317524b/',
+    twitter: 'https://x.com/lakahan_g',
+    instagram: 'https://www.instagram.com/lakshanganesan/?hl=en',
     bioHeadline: 'FULL-STACK DEVELOPER BUILDING WITH AI & BLOCKCHAIN.',
     bioBody:
       'Building scalable full-stack web applications integrated with artificial intelligence and blockchain technology. I design intuitive frontends, robust backend systems, smart contract protocols, and intelligent AI features.',
