@@ -10,7 +10,6 @@ import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
 import { TextRevealByWord } from '@/components/ui/text-reveal';
 import ScrollAnimation from '@/components/ui/you-can-scroll';
-import { PortalTransitionSection } from '@/components/sections/PortalTransitionSection';
 import { FlowAboutStorySection } from '@/components/about/FlowAboutStorySection';
 import { AchievementsShowcaseSection } from '@/components/sections/AchievementsShowcaseSection';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
@@ -78,10 +77,7 @@ export default function Home() {
       {/* Section 01: Creative Passion & Engineering (I Love To Code / Build / Learn / Ship) */}
       <ScrollAnimation />
 
-      {/* Transition Layer: BUILD Zoom Camera revealing Section 02 */}
-      <PortalTransitionSection />
-
-      {/* Flow Art Story Scroll Showcase */}
+      {/* Flow Art Story Scroll Showcase (with integrated live BUILD camera zoom transition) */}
       <FlowAboutStorySection />
 
       {/* Floating Milestone Showcase (25+ Hackathons, 20+ Finalists, Intl Silambam Bronze) */}

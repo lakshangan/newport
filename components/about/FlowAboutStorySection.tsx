@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useId } from 'react';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
@@ -244,6 +244,12 @@ export const FlowAboutStorySection: React.FC = () => {
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
   const horizontalBgRef = useRef<HTMLDivElement>(null);
+  const portalOverlayRef = useRef<HTMLDivElement>(null);
+  const maskGroupRef = useRef<SVGGElement>(null);
+  const strokeGroupRef = useRef<SVGGElement>(null);
+  const portalBadgeRef = useRef<HTMLDivElement>(null);
+  const rawId = useId();
+  const maskId = `build-portal-${rawId.replace(/[^a-zA-Z0-9]/g, '')}`;
   const [activeSlide, setActiveSlide] = useState(0);
 
   const scrollToCompetitiveMilestones = () => {
@@ -262,7 +268,12 @@ export const FlowAboutStorySection: React.FC = () => {
     if (st) {
       const start = st.start;
       const end = st.end;
-      const targetProgress = targetIndex === 1 ? 0.42 * 0.82 : 0.78 * 0.82;
+      const targetProgress =
+        targetIndex === 0
+          ? 0.24
+          : targetIndex === 1
+          ? 0.28 + 0.33 * 0.60
+          : 0.28 + 0.75 * 0.60;
       const targetScroll = start + targetProgress * (end - start);
       window.scrollTo({ top: targetScroll, behavior: 'smooth' });
     } else {
@@ -282,8 +293,9 @@ export const FlowAboutStorySection: React.FC = () => {
     const totalPanels = panels.length;
     if (totalPanels <= 1) return;
 
-    // Total scroll duration: horizontal movement + 600px resting buffer on panel 3
-    const totalDistance = window.innerWidth * (totalPanels - 1) + 600;
+    // Total scroll duration: zoom phase (1.2vh) + horizontal movement + 600px resting buffer on panel 3
+    const zoomDistance = window.innerHeight * 1.2;
+    const totalDistance = window.innerWidth * (totalPanels - 1) + zoomDistance + 600;
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -297,28 +309,85 @@ export const FlowAboutStorySection: React.FC = () => {
         invalidateOnRefresh: true,
         anticipatePin: 1,
         onUpdate: (self) => {
-          const moveProgress = Math.min(1, self.progress / 0.82);
-          const index = Math.min(
-            totalPanels - 1,
-            Math.floor(moveProgress * totalPanels)
-          );
-          setActiveSlide(index);
+          if (self.progress < 0.24) {
+            setActiveSlide(0);
+          } else {
+            const moveProgress = Math.min(1, Math.max(0, (self.progress - 0.28) / 0.60));
+            const index = Math.min(
+              totalPanels - 1,
+              Math.floor(moveProgress * totalPanels)
+            );
+            setActiveSlide(index);
+          }
         },
       },
     });
 
-    // Horizontal shift of the continuous track containing panels
+    // Phase 1: BUILD Zoom Portal (0.00 -> 0.24)
+    // Centers on letter 'U' in BUILD and zooms directly into live Section 02
+    if (maskGroupRef.current && strokeGroupRef.current) {
+      gsap.set([maskGroupRef.current, strokeGroupRef.current], {
+        transformOrigin: "38% 50%",
+      });
+
+      tl.to(
+        [maskGroupRef.current, strokeGroupRef.current],
+        {
+          scale: 48,
+          ease: "power2.inOut",
+          duration: 0.24,
+        },
+        0
+      );
+    }
+
+    if (strokeGroupRef.current) {
+      tl.to(
+        strokeGroupRef.current,
+        {
+          opacity: 0,
+          ease: "power1.out",
+          duration: 0.08,
+        },
+        0
+      );
+    }
+
+    if (portalBadgeRef.current) {
+      tl.to(
+        portalBadgeRef.current,
+        {
+          opacity: 0,
+          ease: "power1.out",
+          duration: 0.08,
+        },
+        0
+      );
+    }
+
+    if (portalOverlayRef.current) {
+      tl.to(
+        portalOverlayRef.current,
+        {
+          opacity: 0,
+          ease: "power1.in",
+          duration: 0.05,
+        },
+        0.19
+      );
+    }
+
+    // Phase 2: Horizontal shift of panels (0.28 -> 0.88)
     tl.to(
       track,
       {
         x: () => -(window.innerWidth * (totalPanels - 1)),
         ease: 'none',
-        duration: 0.82,
+        duration: 0.60,
       },
-      0
+      0.28
     );
 
-    // Panoramic shift of the unzoomed background image across its native aspect ratio
     if (bg) {
       tl.to(
         bg,
@@ -328,14 +397,14 @@ export const FlowAboutStorySection: React.FC = () => {
             return -maxScroll;
           },
           ease: 'none',
-          duration: 0.82,
+          duration: 0.60,
         },
-        0
+        0.28
       );
     }
 
-    // Comfortable resting pause on the final panel before unpinning
-    tl.to({}, { duration: 0.18 });
+    // Phase 3: Resting buffer on Panel 3 before unpinning (0.88 -> 1.00)
+    tl.to({}, { duration: 0.12 });
 
     ScrollTrigger.refresh();
 
@@ -758,6 +827,85 @@ export const FlowAboutStorySection: React.FC = () => {
               );
             })}
           </motion.div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* INTEGRATED BUILD ZOOM CAMERA PORTAL OVERLAY */}
+        {/* Directly frames the live Section 02 workspace underneath with NO duplicate screens */}
+        {/* ========================================================================= */}
+        <div
+          ref={portalOverlayRef}
+          className="absolute inset-0 z-40 pointer-events-none overflow-hidden select-none"
+        >
+          <svg
+            className="absolute inset-0 w-full h-full"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <mask id={maskId} maskUnits="userSpaceOnUse" x="-10000" y="-10000" width="30000" height="30000">
+                {/* Opaque white background keeps the dark cover solid */}
+                <rect x="-10000" y="-10000" width="30000" height="30000" fill="#ffffff" />
+                {/* Transparent black text cuts out the letters of BUILD */}
+                <g ref={maskGroupRef}>
+                  <text
+                    x="50%"
+                    y="50%"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fill="#000000"
+                    fontFamily='"Arial Black", Impact, "Trebuchet MS", sans-serif'
+                    fontWeight="900"
+                    fontSize="clamp(60px, 16vw, 190px)"
+                    letterSpacing="0.04em"
+                  >
+                    BUILD
+                  </text>
+                </g>
+              </mask>
+            </defs>
+
+            {/* Dark obsidian cover that has the transparent BUILD cutout window */}
+            <rect
+              x="0"
+              y="0"
+              width="100%"
+              height="100%"
+              fill="#080808"
+              mask={`url(#${maskId})`}
+            />
+
+            {/* Glowing amber contour stroke outlining the cutout letters */}
+            <g ref={strokeGroupRef}>
+              <text
+                x="50%"
+                y="50%"
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill="none"
+                stroke="#FFA266"
+                strokeWidth="1.5"
+                fontFamily='"Arial Black", Impact, "Trebuchet MS", sans-serif'
+                fontWeight="900"
+                fontSize="clamp(60px, 16vw, 190px)"
+                letterSpacing="0.04em"
+                opacity="0.8"
+              >
+                BUILD
+              </text>
+            </g>
+          </svg>
+
+          {/* Minimalist Top Transition Badge & Scroll Indicator */}
+          <div ref={portalBadgeRef} className="absolute top-8 sm:top-12 left-0 right-0 px-6 sm:px-12 flex justify-between items-center pointer-events-none z-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/70 border border-[#D4BC98]/25 text-[10px] sm:text-xs font-mono text-[#FFA266] uppercase tracking-widest backdrop-blur-md shadow-lg">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
+              <span>// 01.5 TRANSITION</span>
+            </div>
+            <div className="hidden sm:inline-flex items-center gap-2 text-[11px] font-mono text-white/50 tracking-wider">
+              <span>SCROLL TO ENTER SECTION 02</span>
+              <span className="text-[#FFA266]">↓</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
