@@ -10,6 +10,7 @@ import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
 import { TextRevealByWord } from '@/components/ui/text-reveal';
 import ScrollAnimation from '@/components/ui/you-can-scroll';
+import { PortalTransitionSection } from '@/components/sections/PortalTransitionSection';
 import { FlowAboutStorySection } from '@/components/about/FlowAboutStorySection';
 import { AchievementsShowcaseSection } from '@/components/sections/AchievementsShowcaseSection';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
@@ -76,6 +77,9 @@ export default function Home() {
 
       {/* GSAP ScrollTrigger Word Dimmer Timeline */}
       <ScrollAnimation />
+
+      {/* Glyph Portal Camera-Through-Type Transition */}
+      <PortalTransitionSection />
 
       {/* Flow Art Story Scroll Showcase */}
       <FlowAboutStorySection />
