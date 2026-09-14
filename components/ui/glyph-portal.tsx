@@ -23,7 +23,9 @@ export type GlyphPortalProps = {
   focusChar?: string;
   /** Hover, tap, or use arrow keys to choose a letter before scrolling. */
   interactive?: boolean;
-  /** Decorative, inert, mounted once. Fill its parent with an image, video, or canvas. */
+  /** Layer 1: Base surface of the first section (e.g. video, ambient gradients). */
+  layer1?: ReactNode;
+  /** Layer 2: Inside the letters and revealed on zoom (e.g. upcoming section). */
   background?: ReactNode;
   /** Optional foreground composition for the opening frame, above the clipped scene. */
   front?: ReactNode;
@@ -32,6 +34,7 @@ export type GlyphPortalProps = {
   fontFamily?: string;
   fontWeight?: number;
   annotations?: boolean;
+  strokeOutline?: boolean;
   className?: string;
   style?: GlyphPortalStyle;
   /** Called once per rendered scroll frame. */
@@ -102,11 +105,13 @@ export default function GlyphPortal({
   word = "BUILD",
   focusChar = "U",
   interactive = true,
+  layer1,
   background,
   front,
   scrollLength = 1.8,
   fontWeight = 900,
   annotations = true,
+  strokeOutline = false,
   className,
   style,
   onProgress,
@@ -115,6 +120,7 @@ export default function GlyphPortal({
   const clipId = `${uid}-clip`;
   const containerRef = useRef<HTMLElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
+  const layer1Ref = useRef<HTMLDivElement>(null);
   const progressRef = useRef(onProgress);
 
   useIsomorphicLayoutEffect(() => {
@@ -267,6 +273,24 @@ export default function GlyphPortal({
         marks.style.opacity = String(1 - smooth(0.02, 0.25, p));
       }
 
+      const strokeWrap = pin.querySelector<SVGGElement>("[data-gp-stroke-wrap]");
+      const strokeEl = pin.querySelector<SVGTextElement>("[data-gp-stroke]");
+      if (strokeWrap && strokeEl) {
+        strokeWrap.setAttribute("transform", `scale(${scale}) rotate(${roll})`);
+        strokeEl.setAttribute(
+          "transform",
+          `translate(${Math.cos(radians) * dx + Math.sin(radians) * dy - cx} ${
+            -Math.sin(radians) * dx + Math.cos(radians) * dy - cy
+          })`
+        );
+        strokeWrap.style.opacity = String(0.7 * (1 - smooth(0.03, 0.25, p)));
+      }
+
+      const layer1El = layer1Ref.current;
+      if (layer1El) {
+        layer1El.style.opacity = String(1 - smooth(0.72, 0.96, p));
+      }
+
       choosing = interactive && p < 0.05;
       choices.inert = !choosing;
       container.dataset.gpChoosing = String(choosing);
@@ -322,7 +346,7 @@ export default function GlyphPortal({
 
     // Pin with GSAP ScrollTrigger so the section stays firmly held on screen
     // until the zoom is 100% complete, eliminating blank space & auto-scroll glitches
-    const scrollDistance = window.innerHeight * (length - 1);
+    const scrollDistance = Math.max(window.innerHeight * 1.3, window.innerHeight * (length - 0.2));
 
     const st = ScrollTrigger.create({
       id: `portal-pin-${uid}`,
@@ -386,12 +410,13 @@ export default function GlyphPortal({
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        ${q} [data-gp-pin]{position:relative;height:100vh;height:100svh;width:100%;overflow:hidden;isolation:isolate;}
-        ${q} [data-gp-field]{position:absolute;inset:0;background:var(--gp-field, #080808);opacity:0;pointer-events:none;}
+        ${q} [data-gp-pin]{position:relative;height:100vh;height:100svh;width:100%;overflow:hidden;isolation:isolate;background:var(--gp-paper, #080808);}
+        ${q} [data-gp-layer1]{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:1;}
+        ${q} [data-gp-field]{position:absolute;inset:0;background:var(--gp-field, #080808);opacity:0;pointer-events:none;z-index:2;}
         ${q}[data-gp-ready] [data-gp-field]{opacity:1;}
-        ${q} [data-gp-art]{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;}
+        ${q} [data-gp-art]{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3;}
         ${q} [data-gp-marks]{fill:none;stroke:var(--gp-ink, #FFA266);opacity:.6;}
-        ${q} [data-gp-choices]{position:absolute;inset:0;visibility:hidden;pointer-events:none;}
+        ${q} [data-gp-choices]{position:absolute;inset:0;visibility:hidden;pointer-events:none;z-index:4;}
         ${q}[data-gp-choosing=true] [data-gp-choices]{visibility:visible;}
         ${q} [data-gp-letter]{box-sizing:border-box;position:absolute;border:0;padding:0;margin:0;background:transparent;cursor:pointer;pointer-events:auto;touch-action:pan-y;}
         ${q} [data-gp-letter]:focus-visible{outline:2px solid var(--gp-ink, #FFA266);outline-offset:5px;}
@@ -403,6 +428,13 @@ export default function GlyphPortal({
 
       {/* Camera Chamber pinned by GSAP ScrollTrigger */}
       <div ref={pinRef} data-gp-pin>
+        {/* Layer 1: Base surface / First Section */}
+        {layer1 && (
+          <div ref={layer1Ref} data-gp-layer1 aria-hidden="true">
+            {layer1}
+          </div>
+        )}
+
         {/* The Field revealed inside the letters and taking over on zoom */}
         <div data-gp-field aria-hidden="true">
           {background}
@@ -429,6 +461,28 @@ export default function GlyphPortal({
               </text>
             </clipPath>
           </defs>
+          {strokeOutline && (
+            <g data-gp-stroke-wrap>
+              <text
+                data-gp-stroke
+                x="0"
+                y="0"
+                style={{
+                  fontFamily: SOLID_FONT,
+                  fontWeight: weight,
+                  fontSize: 100,
+                  fontKerning: "none",
+                  fontVariantLigatures: "none",
+                  letterSpacing: 0,
+                  fill: "none",
+                  stroke: "var(--gp-ink, #FFA266)",
+                  strokeWidth: "1.2px",
+                }}
+              >
+                {text}
+              </text>
+            </g>
+          )}
           {annotations && (
             <g data-gp-marks>
               <path />

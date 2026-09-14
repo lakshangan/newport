@@ -1,152 +1,82 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
+import Image from "next/image";
 import GlyphPortal from "@/components/ui/glyph-portal";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
 
 /**
- * Cybernetic Particle Wave Canvas Field
- * Tailored for Lakshan's portfolio palette: Deep obsidian base with
- * radiant amber (#C75B32, #FFA266) & electric cyan telemetry waves.
+ * Layer 1: First Section Base Surface
+ * Continuous with the atmospheric video background and glowing warm lighting
+ * of the "I LOVE TO BUILD" creative engineering sequence.
  */
-function PortalCanvasField() {
-  const ref = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) return;
-    const context = canvas.getContext("2d");
-    if (!context) return;
-
-    const motion = matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0;
-    let visible = false;
-    let width = 1;
-    let height = 1;
-
-    const draw = (time: number) => {
-      frame = 0;
-      const t = motion.matches ? 0 : time / 6500;
-
-      // Dark obsidian background
-      context.fillStyle = "#080808";
-      context.fillRect(0, 0, width, height);
-
-      // Multi-layer ambient radiant glows (Warm Copper & Deep Cyan)
-      const glow1 = context.createRadialGradient(
-        width * 0.7,
-        height * 0.35,
-        0,
-        width * 0.55,
-        height * 0.45,
-        width * 0.75
-      );
-      glow1.addColorStop(0, "rgba(232, 128, 83, 0.45)");
-      glow1.addColorStop(0.4, "rgba(199, 91, 50, 0.22)");
-      glow1.addColorStop(1, "rgba(8, 8, 8, 0)");
-      context.fillStyle = glow1;
-      context.fillRect(0, 0, width, height);
-
-      const glow2 = context.createRadialGradient(
-        width * 0.25,
-        height * 0.75,
-        0,
-        width * 0.3,
-        height * 0.7,
-        width * 0.5
-      );
-      glow2.addColorStop(0, "rgba(92, 225, 230, 0.18)");
-      glow2.addColorStop(0.5, "rgba(20, 45, 60, 0.1)");
-      glow2.addColorStop(1, "rgba(8, 8, 8, 0)");
-      context.fillStyle = glow2;
-      context.fillRect(0, 0, width, height);
-
-      // Flowing Harmonic Vector Lines
-      const lineCount = 38;
-      for (let line = -4; line < lineCount; line++) {
-        context.beginPath();
-        for (let x = -10; x <= width + 10; x += 12) {
-          const u = x / width;
-          const bend =
-            Math.sin(u * 4.2 + t + line * 0.05) * height * 0.12 +
-            Math.cos(u * 7.5 - t * 0.8) * height * 0.045 +
-            Math.sin(u * 2 - t * 0.4) * height * 0.03;
-          const y = (line * height) / (lineCount - 6) + bend;
-          if (x === -10) context.moveTo(x, y);
-          else context.lineTo(x, y);
-        }
-
-        const isHighlight = line % 6 === 0;
-        const isCyan = line % 9 === 0;
-
-        if (isCyan) {
-          context.strokeStyle = "#5CE1E6";
-          context.globalAlpha = 0.35;
-          context.lineWidth = 1.2;
-        } else if (isHighlight) {
-          context.strokeStyle = "#FFA266";
-          context.globalAlpha = 0.45;
-          context.lineWidth = 1.4;
-        } else {
-          context.strokeStyle = "#C75B32";
-          context.globalAlpha = 0.18;
-          context.lineWidth = 0.75;
-        }
-
-        context.stroke();
-      }
-
-      // Subtle Cyber Matrix Noise Grid
-      context.globalAlpha = 1;
-      context.fillStyle = "rgba(8, 8, 8, 0.08)";
-      context.fillRect(0, 0, width, height);
-
-      if (visible && !motion.matches && !document.hidden) {
-        frame = requestAnimationFrame(draw);
-      }
-    };
-
-    const refresh = () => {
-      cancelAnimationFrame(frame);
-      const box = canvas.getBoundingClientRect();
-      width = box.width;
-      height = box.height;
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.round(width * ratio);
-      canvas.height = Math.round(height * ratio);
-      context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      draw(performance.now());
-    };
-
-    const resizeObserver = new ResizeObserver(refresh);
-    resizeObserver.observe(canvas);
-
-    const intersectionObserver = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      refresh();
-    });
-    intersectionObserver.observe(canvas);
-
-    motion.addEventListener("change", refresh);
-    document.addEventListener("visibilitychange", refresh);
-    refresh();
-
-    return () => {
-      cancelAnimationFrame(frame);
-      resizeObserver.disconnect();
-      intersectionObserver.disconnect();
-      motion.removeEventListener("change", refresh);
-      document.removeEventListener("visibilitychange", refresh);
-    };
-  }, []);
-
+function FirstSectionLayer() {
   return (
-    <canvas
-      ref={ref}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ width: "100%", height: "100%" }}
-    />
+    <div className="relative w-full h-full overflow-hidden bg-[#080808] select-none">
+      {/* Dynamic Ambient Video Background */}
+      <video
+        src="/images/grok-video-977e7e29-8a81-4998-a90a-b71e113b8fd3.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="w-full h-full object-cover filter brightness-105 contrast-100"
+      />
+
+      {/* Atmospheric Overlays identical to Section 1 */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/60 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/75 via-transparent to-[#080808]/50 pointer-events-none" />
+
+      {/* Ambient Volumetric Warm Glow */}
+      <div className="absolute top-1/3 right-1/4 w-[600px] h-[400px] bg-[#C75B32]/25 rounded-full blur-[160px] pointer-events-none" />
+    </div>
+  );
+}
+
+/**
+ * Layer 2: Upcoming Section Preview & Atmospheric Workspace
+ * Replicates the panoramic studio workspace and golden hour lighting
+ * of FlowAboutStorySection (02 // LEADERSHIP & ACCOLADES).
+ */
+function UpcomingSectionBackground() {
+  return (
+    <div className="relative w-full h-full overflow-hidden bg-[#0C0907] select-none">
+      {/* Continuous Panoramic Workspace Panorama */}
+      <Image
+        src="/images/horizontal-workspace.png"
+        alt="Creative Engineering Workspace Studio Panorama"
+        fill
+        priority
+        className="object-cover object-left md:object-center filter brightness-[1.05] contrast-[1.02] saturate-[1.08]"
+        sizes="100vw"
+      />
+
+      {/* Luminous warm ambient vignette identical to FlowAboutStorySection */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907]/60 via-transparent to-[#0C0907]/40 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(12,9,7,0.4)_100%)] pointer-events-none" />
+
+      {/* Warm Golden Hour Volumetric Glows */}
+      <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[#E88053]/25 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/20 rounded-full blur-[160px] pointer-events-none" />
+
+      {/* Section 02 Accolades Preview seen peering through the letters */}
+      <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-14 md:px-20 max-w-7xl mx-auto pointer-events-none">
+        <div className="space-y-2.5 sm:space-y-3 max-w-3xl my-auto text-left">
+          <div className="inline-flex items-center space-x-2 px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-[#18120D]/85 border border-[#D4BC98]/35 text-[10px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-xl shadow-lg w-fit">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
+            <span>02 // LEADERSHIP &amp; ACCOLADES</span>
+          </div>
+
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_2px_15px_rgba(0,0,0,0.7)] leading-[1.02]">
+            PROVEN ON NATIONAL &amp; GLOBAL STAGES
+          </h2>
+
+          <p className="text-xs sm:text-sm md:text-base font-medium text-[#FFFDF9]/90 max-w-2xl bg-[#18120D]/55 backdrop-blur-xl p-3 sm:p-4 rounded-xl border border-[#D4BC98]/25 shadow-lg leading-relaxed">
+            Combining competitive hackathon execution, decentralized protocol research, and campus community leadership with unwavering discipline.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -155,24 +85,28 @@ export function PortalTransitionSection() {
     <GlyphPortal
       word="BUILD"
       focusChar="U"
-      scrollLength={1.8}
-      interactive={true}
-      annotations={true}
+      scrollLength={2.2}
+      interactive={false}
+      strokeOutline={true}
+      annotations={false}
       style={{
         "--gp-paper": "#080808",
         "--gp-ink": "#FFA266",
-        "--gp-field": "#080808",
+        "--gp-field": "#0C0907",
         "--gp-foreground": "#FFFDF9",
       }}
-      background={<PortalCanvasField />}
+      layer1={<FirstSectionLayer />}
+      background={<UpcomingSectionBackground />}
       front={
-        <div className="absolute top-10 sm:top-14 left-0 right-0 px-6 sm:px-12 flex justify-between items-center pointer-events-none">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-[#D4BC98]/20 text-[10px] sm:text-xs font-mono text-[#FFA266] uppercase tracking-widest backdrop-blur-md">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
-            <span>// 01.5 TRANSITION</span>
-          </div>
-          <div className="hidden sm:block text-[11px] font-mono text-white/40 tracking-wider">
-            SCROLL THROUGH TYPE
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20">
+          <div className="text-center space-y-3 -translate-y-24 sm:-translate-y-28 md:-translate-y-32">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/60 border border-[#D4BC98]/30 text-[10px] sm:text-xs font-mono text-[#FFA266] uppercase tracking-widest backdrop-blur-md shadow-lg">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
+              <span>01 // PASSION &amp; CRAFT</span>
+            </div>
+            <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-mono font-bold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
+              I LOVE TO
+            </h3>
           </div>
         </div>
       }
