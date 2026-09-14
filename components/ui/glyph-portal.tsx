@@ -402,7 +402,9 @@ export default function GlyphPortal({
         ...style,
       } as CSSProperties}
     >
-      <style>{`
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         ${q} [data-gp-pin]{position:sticky;top:0;height:100vh;height:100svh;width:100%;overflow:hidden;isolation:isolate;}
         ${q} [data-gp-field]{position:absolute;inset:0;background:var(--gp-field, #080808);opacity:0;pointer-events:none;}
         ${q}[data-gp-ready] [data-gp-field]{opacity:1;}
@@ -413,8 +415,10 @@ export default function GlyphPortal({
         ${q} [data-gp-letter]{box-sizing:border-box;position:absolute;border:0;padding:0;margin:0;background:transparent;cursor:pointer;pointer-events:auto;touch-action:pan-y;}
         ${q} [data-gp-letter]:focus-visible{outline:2px solid var(--gp-ink, #FFA266);outline-offset:5px;}
         ${q} [data-gp-front]{position:absolute;inset:0;opacity:var(--gp-caption,1);pointer-events:none;z-index:20;}
-        ${q} [data-gp-caption]{position:absolute;inset:auto 0 6% 0;display:flex;align-items:center;justify-content:center;gap:0.75rem;font:11px/1.4 "JetBrains Mono",monospace;letter-spacing:0.15em;text-transform:uppercase;color:var(--gp-ink, #FFA266);opacity:var(--gp-caption,1);pointer-events:none;z-index:20;}
-      `}</style>
+        ${q} [data-gp-caption]{position:absolute;inset:auto 0 6% 0;display:flex;align-items:center;justify-content:center;gap:0.75rem;font:11px/1.4 monospace;letter-spacing:0.15em;text-transform:uppercase;color:var(--gp-ink, #FFA266);opacity:var(--gp-caption,1);pointer-events:none;z-index:20;}
+      `,
+        }}
+      />
 
       {/* Sticky Camera Chamber */}
       <div data-gp-pin>
