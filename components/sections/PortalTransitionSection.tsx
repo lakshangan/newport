@@ -5,43 +5,14 @@ import Image from "next/image";
 import GlyphPortal from "@/components/ui/glyph-portal";
 
 /**
- * Layer 1: First Section Base Surface
- * Continuous with the atmospheric video background and glowing warm lighting
- * of the "I LOVE TO BUILD" creative engineering sequence.
- */
-function FirstSectionLayer() {
-  return (
-    <div className="relative w-full h-full overflow-hidden bg-[#080808] select-none">
-      {/* Dynamic Ambient Video Background */}
-      <video
-        src="/images/grok-video-977e7e29-8a81-4998-a90a-b71e113b8fd3.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="w-full h-full object-cover filter brightness-105 contrast-100"
-      />
-
-      {/* Atmospheric Overlays identical to Section 1 */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/60 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/75 via-transparent to-[#080808]/50 pointer-events-none" />
-
-      {/* Ambient Volumetric Warm Glow */}
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[400px] bg-[#C75B32]/25 rounded-full blur-[160px] pointer-events-none" />
-    </div>
-  );
-}
-
-/**
- * Layer 2: Upcoming Section Preview & Atmospheric Workspace
- * Replicates the panoramic studio workspace and golden hour lighting
- * of FlowAboutStorySection (02 // LEADERSHIP & ACCOLADES).
+ * Layer 2: Upcoming Section Preview (FlowAboutStorySection - 02 Leadership & Accolades)
+ * Sits as the second layer revealed inside the letters of BUILD and expands
+ * to 100% full screen upon zoom completion.
  */
 function UpcomingSectionBackground() {
   return (
     <div className="relative w-full h-full overflow-hidden bg-[#0C0907] select-none">
-      {/* Continuous Panoramic Workspace Panorama */}
+      {/* Continuous Panoramic Studio Workspace Panorama */}
       <Image
         src="/images/horizontal-workspace.png"
         alt="Creative Engineering Workspace Studio Panorama"
@@ -59,7 +30,7 @@ function UpcomingSectionBackground() {
       <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[#E88053]/25 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/20 rounded-full blur-[160px] pointer-events-none" />
 
-      {/* Section 02 Accolades Preview seen peering through the letters */}
+      {/* Section 02 Accolades Header peering cleanly through the letters */}
       <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-14 md:px-20 max-w-7xl mx-auto pointer-events-none">
         <div className="space-y-2.5 sm:space-y-3 max-w-3xl my-auto text-left">
           <div className="inline-flex items-center space-x-2 px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-[#18120D]/85 border border-[#D4BC98]/35 text-[10px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-xl shadow-lg w-fit">
@@ -80,12 +51,30 @@ function UpcomingSectionBackground() {
   );
 }
 
+/**
+ * Layer 1: Clean Dark Transition Surface
+ * Deep obsidian black with warm amber atmosphere and subtle architectural grid.
+ * Keeps the transition layer clean, modern, and uncluttered.
+ */
+function TransitionSurface() {
+  return (
+    <div className="relative w-full h-full overflow-hidden bg-[#080808] select-none">
+      {/* Subtle Warm Amber Vignette and Depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(199,91,50,0.12)_0%,rgba(8,8,8,0.95)_70%)] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#E88053]/15 rounded-full blur-[180px] pointer-events-none" />
+
+      {/* Subtle architectural grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+    </div>
+  );
+}
+
 export function PortalTransitionSection() {
   return (
     <GlyphPortal
       word="BUILD"
       focusChar="U"
-      scrollLength={2.2}
+      scrollLength={2.0}
       interactive={false}
       strokeOutline={true}
       annotations={false}
@@ -95,18 +84,17 @@ export function PortalTransitionSection() {
         "--gp-field": "#0C0907",
         "--gp-foreground": "#FFFDF9",
       }}
-      layer1={<FirstSectionLayer />}
+      layer1={<TransitionSurface />}
       background={<UpcomingSectionBackground />}
       front={
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20">
-          <div className="text-center space-y-3 -translate-y-24 sm:-translate-y-28 md:-translate-y-32">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/60 border border-[#D4BC98]/30 text-[10px] sm:text-xs font-mono text-[#FFA266] uppercase tracking-widest backdrop-blur-md shadow-lg">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
-              <span>01 // PASSION &amp; CRAFT</span>
-            </div>
-            <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-mono font-bold uppercase tracking-tight text-[#FFFDF9] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
-              I LOVE TO
-            </h3>
+        <div className="absolute top-8 sm:top-12 left-0 right-0 px-6 sm:px-12 flex justify-between items-center pointer-events-none z-20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/60 border border-[#D4BC98]/25 text-[10px] sm:text-xs font-mono text-[#FFA266] uppercase tracking-widest backdrop-blur-md shadow-lg">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
+            <span>// 01.5 TRANSITION PORTAL</span>
+          </div>
+          <div className="hidden sm:inline-flex items-center gap-2 text-[11px] font-mono text-white/50 tracking-wider">
+            <span>SCROLL TO ENTER SECTION 02</span>
+            <span className="text-[#FFA266]">↓</span>
           </div>
         </div>
       }

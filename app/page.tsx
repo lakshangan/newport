@@ -9,6 +9,7 @@ import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/hero/HeroSection';
 import { TextRevealByWord } from '@/components/ui/text-reveal';
+import ScrollAnimation from '@/components/ui/you-can-scroll';
 import { PortalTransitionSection } from '@/components/sections/PortalTransitionSection';
 import { FlowAboutStorySection } from '@/components/about/FlowAboutStorySection';
 import { AchievementsShowcaseSection } from '@/components/sections/AchievementsShowcaseSection';
@@ -74,7 +75,10 @@ export default function Home() {
       {/* Fun & Relatable Word-by-Word Scroll Reveal Manifesto */}
       <TextRevealByWord text="<\ I build software, design systems, and turn ideas into products. I work across web, blockchain, AI, and interactive technology, constantly exploring new tools, solving complex problems. >" />
 
-      {/* Glyph Portal Camera-Through-Type Transition: Layer 1 (I Love to Build) into Layer 2 (Section 02 Accolades) */}
+      {/* Section 01: Creative Passion & Engineering (I Love To Code / Build / Learn / Ship) */}
+      <ScrollAnimation />
+
+      {/* Transition Layer: BUILD Zoom Camera revealing Section 02 */}
       <PortalTransitionSection />
 
       {/* Flow Art Story Scroll Showcase */}
