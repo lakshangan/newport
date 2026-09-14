@@ -50,12 +50,12 @@ export const ExperienceSection: React.FC = () => {
               MyGov India · Campus Ambassador
             </h4>
             <p className="text-[#C75B32] text-xs sm:text-sm font-mono">
-              Government of India / Civic Tech / Campus Leadership
+              Government of India/ Campus Leadership
             </p>
           </div>
 
           <p className="text-white/80 text-sm sm:text-base font-light leading-relaxed max-w-2xl">
-            Selected as College Campus Ambassador for MyGov (Ministry of Electronics &amp; IT, Government of India). Represented student initiatives, promoted citizen engagement with government digital platforms, and organized campus awareness drives.
+            Selected as College Campus Ambassador for MyGov(Government of India). Represented student initiatives, promoted citizen engagement with government digital platforms, and organized campus awareness drives.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
