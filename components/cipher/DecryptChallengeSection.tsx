@@ -114,7 +114,7 @@ function getTapAudioContext(): AudioContext | null {
     tapAudioCtxInstance = new AudioCtx();
   }
   if (tapAudioCtxInstance.state === 'suspended') {
-    tapAudioCtxInstance.resume().catch(() => {});
+    tapAudioCtxInstance.resume().catch(() => { });
   }
   return tapAudioCtxInstance;
 }
@@ -325,15 +325,6 @@ With the help of this decoding key and the parameters above, please derive the A
       <div className="max-w-3xl mx-auto px-4 sm:px-6 relative z-10 space-y-8">
         {/* Section Header - Casual & Engaging */}
         <div className="space-y-3 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-[#D4BC98]/20 text-[11px] font-mono text-[#FFA266] uppercase tracking-[0.2em] backdrop-blur-md shadow-sm">
-            <span
-              className={`w-1.5 h-1.5 rounded-full ${
-                status === 'success' ? 'bg-emerald-400' : 'bg-[#E88053] animate-ping'
-              }`}
-            />
-            <span>// DECRYPT_THIS</span>
-          </div>
-
           <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#FFFDF9] flex items-center justify-center flex-wrap gap-x-2.5">
             <span>IF YOU CRACK THIS,</span>{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFA266] via-[#E88053] to-[#FF7A45] drop-shadow-[0_0_30px_rgba(232,128,83,0.35)]">
@@ -366,14 +357,12 @@ With the help of this decoding key and the parameters above, please derive the A
             <div className="px-3 py-2 rounded-xl bg-black/50 border border-[#D4BC98]/15 space-y-0.5">
               <span className="text-[9px] text-[#F5EBD9]/50 block">STATUS</span>
               <span
-                className={`font-bold flex items-center gap-1.5 ${
-                  status === 'success' ? 'text-emerald-400' : 'text-[#FFA266]'
-                }`}
+                className={`font-bold flex items-center gap-1.5 ${status === 'success' ? 'text-emerald-400' : 'text-[#FFA266]'
+                  }`}
               >
                 <span
-                  className={`w-1.5 h-1.5 rounded-full ${
-                    status === 'success' ? 'bg-emerald-400' : 'bg-[#FFA266] animate-pulse'
-                  }`}
+                  className={`w-1.5 h-1.5 rounded-full ${status === 'success' ? 'bg-emerald-400' : 'bg-[#FFA266] animate-pulse'
+                    }`}
                 />
                 {status === 'success' ? 'DECRYPTED' : 'ENCRYPTED'}
               </span>
@@ -387,9 +376,8 @@ With the help of this decoding key and the parameters above, please derive the A
             <div className="px-3 py-2 rounded-xl bg-black/50 border border-[#D4BC98]/15 space-y-0.5">
               <span className="text-[9px] text-[#F5EBD9]/50 block">KEY</span>
               <span
-                className={`font-bold ${
-                  status === 'success' ? 'text-emerald-400' : 'text-[#F5EBD9]/70'
-                }`}
+                className={`font-bold ${status === 'success' ? 'text-emerald-400' : 'text-[#F5EBD9]/70'
+                  }`}
               >
                 {status === 'success' ? 'VERIFIED' : 'UNKNOWN'}
               </span>
@@ -436,11 +424,10 @@ With the help of this decoding key and the parameters above, please derive the A
 
             {/* Ciphertext / Revealed Text Block */}
             <div
-              className={`relative rounded-2xl bg-black/65 border p-4 sm:p-5 font-mono text-xs sm:text-sm break-all leading-relaxed select-all shadow-inner tracking-wider transition-colors duration-300 ${
-                status === 'success'
-                  ? 'border-emerald-500/40 text-emerald-300 bg-[#0c1611]/80'
-                  : 'border-[#D4BC98]/20 text-[#F5EBD9]'
-              }`}
+              className={`relative rounded-2xl bg-black/65 border p-4 sm:p-5 font-mono text-xs sm:text-sm break-all leading-relaxed select-all shadow-inner tracking-wider transition-colors duration-300 ${status === 'success'
+                ? 'border-emerald-500/40 text-emerald-300 bg-[#0c1611]/80'
+                : 'border-[#D4BC98]/20 text-[#F5EBD9]'
+                }`}
             >
               <span className="text-[#FFA266] select-none font-bold mr-2">&gt;</span>
               <span className={status === 'scrambling' ? 'text-[#FFA266]' : ''}>
@@ -592,11 +579,10 @@ With the help of this decoding key and the parameters above, please derive the A
                     setShowHint(!showHint);
                   }
                 }}
-                className={`inline-flex items-center gap-1.5 text-xs font-mono px-3.5 py-1.5 rounded-full border transition-all cursor-pointer self-start sm:self-auto shadow-sm active:scale-95 select-none ${
-                  hintUnlocked
-                    ? 'border-emerald-500/40 text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/15'
-                    : 'border-[#FFA266]/40 text-[#FFA266] bg-[#24170F]/90 hover:bg-[#2F1D13]'
-                }`}
+                className={`inline-flex items-center gap-1.5 text-xs font-mono px-3.5 py-1.5 rounded-full border transition-all cursor-pointer self-start sm:self-auto shadow-sm active:scale-95 select-none ${hintUnlocked
+                  ? 'border-emerald-500/40 text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/15'
+                  : 'border-[#FFA266]/40 text-[#FFA266] bg-[#24170F]/90 hover:bg-[#2F1D13]'
+                  }`}
               >
                 {hintUnlocked ? (
                   <>

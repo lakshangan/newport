@@ -196,19 +196,19 @@ export const PORTFOLIO_DATA = {
     {
       year: '2026',
       company: 'OpenLedger',
-      role: 'Twitter & Technical Researcher',
+      role: 'Technical Research Analyst',
       category: 'Full-Stack & Web3 Research',
       description:
-        'Leading technical research on Web3 protocols, AI data pipelines, DeFi ecosystems, and executing content strategy for official X operations.',
+        'Leading technical research on Web3 protocols, AI data pipelines, DeFi ecosystems, and executing content strategy for official X operations at OpenLedger.',
       isCurrent: true,
     },
     {
-      year: '2025',
-      company: 'Uniswap Foundation',
-      role: 'Uniswap Hook Incubator Cohort',
-      category: 'DeFi / Full-Stack & Smart Contracts',
+      year: '2024 – 2025',
+      company: 'MyGov India (MeitY)',
+      role: 'Campus Ambassador',
+      category: 'Government of India / Civic Tech',
       description:
-        'Selected for specialized program speedrunning Uniswap v4 architecture. Built custom liquidity hooks and dynamic fee modules.',
+        'Selected as College Campus Ambassador for MyGov under the Ministry of Electronics & IT, Government of India. Championed digital governance initiatives and campus awareness campaigns.',
     },
     {
       year: '2024',
@@ -219,8 +219,8 @@ export const PORTFOLIO_DATA = {
         '4-week intensive virtual internship exploring enterprise ledger architectures, smart contract security, and decentralized data storage.',
     },
     {
-      year: '2024',
-      company: 'FAMS Private Limited',
+      year: '2023',
+      company: 'FAMS Software Consultancy',
       role: 'SAP Basis System Analyst',
       category: 'Enterprise Infrastructure',
       description:
