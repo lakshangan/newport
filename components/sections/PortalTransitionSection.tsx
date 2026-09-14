@@ -191,31 +191,7 @@ export function PortalTransitionSection() {
             </div>
           </div>
         }
-      >
-        {/* Revealed Content inside the Glyph Chamber */}
-        <div className="max-w-4xl mx-auto space-y-6 text-left px-4 sm:px-6">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#18120D]/90 border border-[#FFA266]/35 text-[11px] font-mono text-[#FFA266] uppercase tracking-widest backdrop-blur-xl shadow-lg">
-            <span className="w-2 h-2 rounded-full bg-[#E88053] animate-ping" />
-            <span>PORTAL REVEAL // FROM CODE TO IMPACT</span>
-          </div>
-
-          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-[#FFFDF9] leading-[1.02]">
-            FROM PURE CODE TO{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFA266] via-[#E88053] to-[#FF7A45]">
-              GLOBAL STAGES
-            </span>
-          </h2>
-
-          <p className="text-[#E8E5DF]/80 text-sm sm:text-base md:text-lg max-w-2xl font-light leading-relaxed">
-            Every line of code is forged with discipline — evolving from late-night algorithms into competitive hackathon championships, enterprise systems, and campus developer leadership.
-          </p>
-
-          <div className="pt-2 flex items-center gap-3 text-xs font-mono text-[#FFA266] uppercase tracking-wider">
-            <span>DISCOVER ACCOLADES &amp; LEADERSHIP</span>
-            <span className="text-base animate-bounce">↓</span>
-          </div>
-        </div>
-      </GlyphPortal>
+      />
     </section>
   );
 }
