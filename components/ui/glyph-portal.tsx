@@ -2,9 +2,11 @@
 
 /**
  * Glyph Portal © 2026 Christian Katzmann. MIT.
- * Adapted & enhanced for smooth scroll camera through type.
+ * High-performance scroll-driven camera through type, pinned seamlessly with GSAP ScrollTrigger.
  */
 import React, { useId, useLayoutEffect, useEffect, useRef, type CSSProperties, type ReactNode } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
@@ -25,16 +27,14 @@ export type GlyphPortalProps = {
   background?: ReactNode;
   /** Optional foreground composition for the opening frame, above the clipped scene. */
   front?: ReactNode;
-  children?: ReactNode;
-  /** Scroll travel in visible container heights, clamped to 1–8. */
+  /** Scroll travel multiplier (e.g. 1.8 for 1.8 screen heights). */
   scrollLength?: number;
   fontFamily?: string;
   fontWeight?: number;
   annotations?: boolean;
-  enterLabel?: string;
   className?: string;
   style?: GlyphPortalStyle;
-  /** Called once per rendered scroll frame, never through React state. */
+  /** Called once per rendered scroll frame. */
   onProgress?: (progress: number) => void;
 };
 
@@ -84,7 +84,6 @@ function interior(context: CanvasRenderingContext2D, char: string, font: string)
   }
 
   if (size < 3) {
-    // Fallback disk in center of glyph box if raster scan is thin
     return {
       x: (width / 2 - pad - left) / 3,
       y: (height / 2 - pad - ascent) / 3,
@@ -92,7 +91,6 @@ function interior(context: CanvasRenderingContext2D, char: string, font: string)
     };
   }
 
-  // Scan at 3× SVG size. Inscribe a disk in the square, with room for raster disagreement.
   return {
     x: (bx + 1 - size / 2 - pad - left) / 3,
     y: (by + 1 - size / 2 - pad - ascent) / 3,
@@ -102,13 +100,11 @@ function interior(context: CanvasRenderingContext2D, char: string, font: string)
 
 export default function GlyphPortal({
   word = "BUILD",
-  focusChar,
+  focusChar = "U",
   interactive = true,
   background,
   front,
-  children,
-  scrollLength = 2.5,
-  fontFamily = SOLID_FONT,
+  scrollLength = 1.8,
   fontWeight = 900,
   annotations = true,
   className,
@@ -117,9 +113,13 @@ export default function GlyphPortal({
 }: GlyphPortalProps) {
   const uid = `gp-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
   const clipId = `${uid}-clip`;
-  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef(onProgress);
-  useIsomorphicLayoutEffect(() => { progressRef.current = onProgress; }, [onProgress]);
+
+  useIsomorphicLayoutEffect(() => {
+    progressRef.current = onProgress;
+  }, [onProgress]);
 
   const text = word.trim().normalize("NFC") || "BUILD";
   let characterOffset = 0;
@@ -129,32 +129,32 @@ export default function GlyphPortal({
     return { char, index };
   });
 
-  const length = Number.isFinite(scrollLength) ? clamp(scrollLength, 1.5, 6) : 2.5;
   const weight = Number.isFinite(fontWeight) ? clamp(fontWeight, 1, 1000) : 900;
+  const length = Number.isFinite(scrollLength) ? clamp(scrollLength, 1.2, 4) : 1.8;
   const q = `:where(#${uid})`;
 
   useIsomorphicLayoutEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const container = containerRef.current;
+    const pin = pinRef.current;
+    if (!container || !pin) return;
 
-    const pin = section.querySelector<HTMLElement>("[data-gp-pin]")!;
-    const field = section.querySelector<HTMLElement>("[data-gp-field]")!;
-    const art = section.querySelector<SVGSVGElement>("[data-gp-art]")!;
-    const clip = section.querySelector<SVGClipPathElement>(`#${clipId}`)!;
-    const glyph = section.querySelector<SVGTextElement>("[data-gp-glyph]")!;
-    const marks = section.querySelector<SVGGElement>("[data-gp-marks]");
-    const choices = section.querySelector<HTMLElement>("[data-gp-choices]")!;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const field = pin.querySelector<HTMLElement>("[data-gp-field]")!;
+    const art = pin.querySelector<SVGSVGElement>("[data-gp-art]")!;
+    const clip = pin.querySelector<SVGClipPathElement>(`#${clipId}`)!;
+    const glyph = pin.querySelector<SVGTextElement>("[data-gp-glyph]")!;
+    const marks = pin.querySelector<SVGGElement>("[data-gp-marks]");
+    const choices = pin.querySelector<HTMLElement>("[data-gp-choices]")!;
     const buttons = Array.from(choices.querySelectorAll<HTMLButtonElement>("button"));
+    const captionEl = pin.querySelector<HTMLElement>("[data-gp-caption]");
+    const frontEl = pin.querySelector<HTMLElement>("[data-gp-front]");
 
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d", { willReadFrequently: true });
-    let disposed = false;
-    let raf = 0;
-    let dirty = true;
-    let active = true;
     let ready = false;
 
-    let W = 1, H = 1, travel = 1, startScale = 1, endScale = 1;
+    let W = 1, H = 1, startScale = 1, endScale = 1;
     let center = { x: 0, y: 0 }, target: Ink | null = null;
     let lastProgress = -1;
     let candidates: Ink[] = [], letters: Letter[] = [];
@@ -202,7 +202,7 @@ export default function GlyphPortal({
         offset += char.length;
       }
 
-      // Default to the largest patch of ink, prioritizing central letters like 'U' or 'I'
+      // Default target: requested focus char (e.g. 'U'), or largest ink patch near center
       target =
         candidates.find((candidate) => candidate.index === requested) ??
         [...candidates].sort((a, b) => b.radius - a.radius || Math.abs(a.x - center.x) - Math.abs(b.x - center.x))[0] ??
@@ -213,9 +213,9 @@ export default function GlyphPortal({
 
     const select = (next: Ink | null) => {
       target = next;
-      endScale = target ? Math.max(startScale, Math.hypot(W, H) / (Math.max(6, target.radius) * 1.15)) : startScale * 40;
-      section.dataset.gpFocus = target ? Array.from(text.slice(target.index))[0] : "";
-      section.dataset.gpFocusIndex = String(target?.index ?? -1);
+      endScale = target ? Math.max(startScale, Math.hypot(W, H) / (Math.max(6, target.radius) * 1.15)) : startScale * 45;
+      container.dataset.gpFocus = target ? Array.from(text.slice(target.index))[0] : "";
+      container.dataset.gpFocusIndex = String(target?.index ?? -1);
 
       for (const button of buttons) {
         const selected = Number(button.dataset.gpLetter) === target?.index;
@@ -237,28 +237,21 @@ export default function GlyphPortal({
       }
     };
 
-    const calculateProgress = () => {
-      const rect = section.getBoundingClientRect();
-      const totalTravel = section.offsetHeight - window.innerHeight;
-      if (totalTravel <= 0) return 0;
-      return clamp(-rect.top / totalTravel, 0, 1);
-    };
-
     const paint = (progress: number) => {
       const p = clamp(progress, 0, 1);
       // Smooth cubic ease for cinematic camera glide into the glyph
-      const t = clamp(p / 0.85);
+      const t = clamp(p / 0.88);
       const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
       const scale = Math.exp(Math.log(startScale) + Math.log(endScale / startScale) * eased);
       const blend = endScale === startScale ? 0 : (1 / scale - 1 / startScale) / (1 / endScale - 1 / startScale);
       const cx = center.x + ((target?.x ?? center.x) - center.x) * blend;
       const cy = center.y + ((target?.y ?? center.y) - center.y) * blend;
-      const roll = -3 * smooth(0.05, 0.45, t) * (1 - smooth(0.65, 0.95, t));
+      const roll = -2.5 * smooth(0.05, 0.45, t) * (1 - smooth(0.65, 0.95, t));
 
       const radians = (roll * Math.PI) / 180;
       const dx = W / 2 / scale;
-      const dy = (H * 0.5 + H * 0.04 * eased) / scale;
+      const dy = (H * 0.5 + H * 0.03 * eased) / scale;
 
       clip.setAttribute("transform", `scale(${scale}) rotate(${roll})`);
       glyph.setAttribute(
@@ -269,21 +262,26 @@ export default function GlyphPortal({
       );
 
       if (marks) {
-        const transform = `translate(${W / 2} ${H * 0.5 + H * 0.04 * eased}) scale(${scale}) rotate(${roll}) translate(${-cx} ${-cy})`;
+        const transform = `translate(${W / 2} ${H * 0.5 + H * 0.03 * eased}) scale(${scale}) rotate(${roll}) translate(${-cx} ${-cy})`;
         marks.setAttribute("transform", transform);
-        marks.style.opacity = String(1 - smooth(0.02, 0.2, p));
+        marks.style.opacity = String(1 - smooth(0.02, 0.25, p));
       }
 
-      choosing = interactive && p < 0.06;
+      choosing = interactive && p < 0.05;
       choices.inert = !choosing;
-      section.dataset.gpChoosing = String(choosing);
+      container.dataset.gpChoosing = String(choosing);
 
       // Once camera is fully inside ink, release clipPath for seamless transition
       field.style.clipPath = t >= 0.98 ? "none" : `url(#${clipId})`;
 
-      section.style.setProperty("--gp-caption", String(1 - smooth(0.01, 0.2, p)));
-      section.style.setProperty("--gp-field-scale", String(1 + 0.15 * smooth(0, 0.85, p)));
-      section.dataset.gpProgress = p.toFixed(5);
+      if (captionEl) {
+        captionEl.style.opacity = String(1 - smooth(0.01, 0.2, p));
+      }
+      if (frontEl) {
+        frontEl.style.opacity = String(1 - smooth(0.01, 0.25, p));
+      }
+
+      container.dataset.gpProgress = p.toFixed(5);
 
       if (p !== lastProgress) {
         lastProgress = p;
@@ -292,12 +290,9 @@ export default function GlyphPortal({
     };
 
     const layout = () => {
-      if (!section.clientWidth) return;
       W = pin.clientWidth || window.innerWidth;
       H = window.innerHeight;
 
-      section.style.setProperty("--gp-height", `${H}px`);
-      travel = Math.max(1, H * (length - 1));
       art.setAttribute("viewBox", `0 0 ${W} ${H}`);
 
       ready = readInk();
@@ -319,85 +314,71 @@ export default function GlyphPortal({
         });
       }
 
-      section.dataset.gpReady = "true";
-      section.dataset.gpMotion = "on";
+      container.dataset.gpReady = "true";
     };
 
-    const frame = () => {
-      raf = 0;
-      if (disposed) return;
-      if (dirty) {
-        dirty = false;
-        layout();
-      }
-      if (ready) {
-        paint(calculateProgress());
-      }
-    };
+    layout();
+    paint(0);
 
-    const schedule = () => {
-      if (!raf && active) raf = requestAnimationFrame(frame);
-    };
+    // Pin with GSAP ScrollTrigger so the section stays firmly held on screen
+    // until the zoom is 100% complete, eliminating blank space & auto-scroll glitches
+    const scrollDistance = window.innerHeight * (length - 1);
 
-    const onScroll = () => schedule();
-    const resize = () => {
-      dirty = true;
-      schedule();
-    };
+    const st = ScrollTrigger.create({
+      id: `portal-pin-${uid}`,
+      trigger: container,
+      start: "top top",
+      end: () => `+=${scrollDistance}`,
+      pin: pin,
+      pinSpacing: true,
+      scrub: 0.5,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        paint(self.progress);
+      },
+    });
 
     const choose = (event: Event) => {
-      if (!choosing || calculateProgress() >= 0.05) return;
+      if (!choosing || st.progress >= 0.05) return;
       const button = (event.target as Element).closest<HTMLButtonElement>("[data-gp-letter]");
       const next = candidates.find((candidate) => candidate.index === Number(button?.dataset.gpLetter));
       if (!next || next === target) return;
       select(next);
-      paint(calculateProgress());
+      paint(st.progress);
     };
 
     choices.addEventListener("pointerover", choose);
     choices.addEventListener("click", choose);
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", resize);
+    const onResize = () => {
+      layout();
+      ScrollTrigger.refresh();
+      paint(st.progress);
+    };
 
-    const observer = new ResizeObserver(resize);
-    observer.observe(section);
-
-    const visibility = new IntersectionObserver(
-      ([entry]) => {
-        active = entry.isIntersecting;
-        if (active) schedule();
-      },
-      { rootMargin: "50% 0px" }
-    );
-    visibility.observe(section);
-
-    layout();
-    schedule();
+    window.addEventListener("resize", onResize);
 
     return () => {
-      disposed = true;
-      cancelAnimationFrame(raf);
-      observer.disconnect();
-      visibility.disconnect();
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", resize);
       choices.removeEventListener("pointerover", choose);
       choices.removeEventListener("click", choose);
+      window.removeEventListener("resize", onResize);
+      st.kill();
     };
-  }, [text, focusChar, interactive, weight, length, clipId]);
+  }, [text, focusChar, interactive, weight, length, clipId, uid]);
 
   return (
     <section
-      ref={sectionRef}
+      ref={containerRef}
       id={uid}
       className={className}
       aria-label={text}
       style={{
         position: "relative",
-        height: `${length * 100}vh`,
+        width: "100%",
         background: "var(--gp-paper, #080808)",
         color: "var(--gp-ink, #FFA266)",
+        overflow: "hidden",
         isolation: "isolate",
         ...style,
       } as CSSProperties}
@@ -405,7 +386,7 @@ export default function GlyphPortal({
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        ${q} [data-gp-pin]{position:sticky;top:0;height:100vh;height:100svh;width:100%;overflow:hidden;isolation:isolate;}
+        ${q} [data-gp-pin]{position:relative;height:100vh;height:100svh;width:100%;overflow:hidden;isolation:isolate;}
         ${q} [data-gp-field]{position:absolute;inset:0;background:var(--gp-field, #080808);opacity:0;pointer-events:none;}
         ${q}[data-gp-ready] [data-gp-field]{opacity:1;}
         ${q} [data-gp-art]{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;}
@@ -420,8 +401,8 @@ export default function GlyphPortal({
         }}
       />
 
-      {/* Sticky Camera Chamber */}
-      <div data-gp-pin>
+      {/* Camera Chamber pinned by GSAP ScrollTrigger */}
+      <div ref={pinRef} data-gp-pin>
         {/* The Field revealed inside the letters and taking over on zoom */}
         <div data-gp-field aria-hidden="true">
           {background}
@@ -476,7 +457,7 @@ export default function GlyphPortal({
         {/* Bottom Scroll Caption */}
         <div data-gp-caption>
           <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-ping" />
-          <span>Scroll down to enter &bull; Zoom through</span>
+          <span>Scroll to zoom through &bull; Enter Accolades</span>
           <span className="text-sm font-bold">↓</span>
         </div>
       </div>

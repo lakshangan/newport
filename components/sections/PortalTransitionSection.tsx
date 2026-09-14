@@ -151,48 +151,32 @@ function PortalCanvasField() {
 }
 
 export function PortalTransitionSection() {
-  useEffect(() => {
-    // Notify GSAP ScrollTrigger to recalculate once the portal mounts
-    const t = setTimeout(() => {
-      if (typeof window !== "undefined") {
-        gsap.registerPlugin(ScrollTrigger);
-        ScrollTrigger.refresh();
-      }
-    }, 500);
-
-    return () => clearTimeout(t);
-  }, []);
-
   return (
-    <section className="relative w-full bg-[#080808] z-20">
-      <GlyphPortal
-        word="BUILD"
-        scrollLength={2.2}
-        interactive={true}
-        annotations={true}
-        enterLabel="Enter Arena"
-        fontFamily='var(--font-display), "Bebas Neue", "Arial Black", sans-serif'
-        fontWeight={900}
-        style={{
-          "--gp-paper": "#080808",
-          "--gp-ink": "#FFA266",
-          "--gp-field": "#080808",
-          "--gp-foreground": "#FFFDF9",
-        }}
-        background={<PortalCanvasField />}
-        front={
-          <div className="absolute top-10 sm:top-14 left-0 right-0 px-6 sm:px-12 flex justify-between items-center pointer-events-none">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-[#D4BC98]/20 text-[10px] sm:text-xs font-mono text-[#FFA266] uppercase tracking-widest backdrop-blur-md">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
-              <span>// 01.5 TRANSITION</span>
-            </div>
-            <div className="hidden sm:block text-[11px] font-mono text-white/40 tracking-wider">
-              SCROLL THROUGH TYPE
-            </div>
+    <GlyphPortal
+      word="BUILD"
+      focusChar="U"
+      scrollLength={1.8}
+      interactive={true}
+      annotations={true}
+      style={{
+        "--gp-paper": "#080808",
+        "--gp-ink": "#FFA266",
+        "--gp-field": "#080808",
+        "--gp-foreground": "#FFFDF9",
+      }}
+      background={<PortalCanvasField />}
+      front={
+        <div className="absolute top-10 sm:top-14 left-0 right-0 px-6 sm:px-12 flex justify-between items-center pointer-events-none">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-[#D4BC98]/20 text-[10px] sm:text-xs font-mono text-[#FFA266] uppercase tracking-widest backdrop-blur-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
+            <span>// 01.5 TRANSITION</span>
           </div>
-        }
-      />
-    </section>
+          <div className="hidden sm:block text-[11px] font-mono text-white/40 tracking-wider">
+            SCROLL THROUGH TYPE
+          </div>
+        </div>
+      }
+    />
   );
 }
 
