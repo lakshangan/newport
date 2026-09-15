@@ -170,9 +170,9 @@ export function StaggeredGrid({
               <figure
                 key={`img-${i}`}
                 data-col={i % 7}
-                className="grid__item m-0 relative z-10 [perspective:800px] will-change-[transform,opacity] group cursor-pointer aspect-[3/4] w-full"
+                className="grid__item m-0 relative z-10 [perspective:800px] group cursor-pointer aspect-[3/4] w-full"
               >
-                <div className="grid__item-img w-full h-full [backface-visibility:hidden] will-change-transform rounded-xl overflow-hidden shadow-sm border border-zinc-800 bg-zinc-950 flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-105 group-hover:shadow-xl group-hover:border-[#C75B32]/60">
+                <div className="grid__item-img w-full h-full [backface-visibility:hidden] rounded-xl overflow-hidden shadow-sm border border-zinc-800 bg-zinc-950 flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-105 group-hover:shadow-xl group-hover:border-[#C75B32]/60">
                   <img
                     src={item.src}
                     alt={item.title || `Gallery shot ${i}`}

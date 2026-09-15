@@ -24,15 +24,15 @@ export default function Home() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Initialize Lenis Smooth Scroll with balanced cross-platform settings
+    // Initialize Lenis Smooth Scroll with high-performance linear interpolation (lerp)
     const isTouchOnly = window.matchMedia('(pointer: coarse) and (hover: none)').matches;
     const lenis = new Lenis({
-      duration: isTouchOnly ? 0.6 : 0.9,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: isTouchOnly ? 0.12 : 0.085,
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      touchMultiplier: 1.2,
       syncTouch: false,
+      autoRaf: false,
     });
 
     // Synchronize Lenis smooth scroll with GSAP ScrollTrigger ticker

@@ -43,7 +43,7 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
           start: "top top",
           end: () => `+=${Math.min(window.innerHeight * 1.4, 1400)}`,
           pinSpacing: true,
-          scrub: 0.5,
+          scrub: 0.2,
           anticipatePin: 1,
           fastScrollEnd: true,
           preventOverlaps: true,

@@ -306,7 +306,7 @@ export const FlowAboutStorySection: React.FC = () => {
         trigger: container,
         pin: true,
         pinSpacing: true,
-        scrub: 1,
+        scrub: 0.35,
         start: 'top top',
         end: () => `+=${getTotalDistance()}`,
         invalidateOnRefresh: true,
@@ -331,6 +331,7 @@ export const FlowAboutStorySection: React.FC = () => {
     if (maskGroupRef.current && strokeGroupRef.current) {
       gsap.set([maskGroupRef.current, strokeGroupRef.current], {
         transformOrigin: "38% 50%",
+        willChange: "transform",
       });
 
       tl.to(
@@ -685,34 +686,41 @@ export const FlowAboutStorySection: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Scaled Desktop Viewport - No Zoom, Real Miniature Desktop Preview */}
-                    <div className="relative w-full h-[120px] sm:h-[135px] lg:h-[142px] bg-[#0A0806] overflow-hidden group/screen">
-                      <div
-                        className="w-[1200px] h-[600px] origin-top-left pointer-events-none select-none"
-                        style={{
-                          transform: 'scale(0.28)',
-                          transformOrigin: '0 0',
-                          width: '1200px',
-                          height: '600px',
-                        }}
-                      >
-                        <iframe
-                          src={card.url}
-                          title={card.title}
-                          className="w-full h-full border-none bg-white"
-                          loading="lazy"
-                        />
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#140E0A]/40 via-transparent to-transparent opacity-20 pointer-events-none" />
+                    {/* High-Performance Architecture Viewport */}
+                    <div className="relative w-full h-[120px] sm:h-[135px] lg:h-[142px] bg-[#0A0806] overflow-hidden group/screen flex flex-col justify-between p-3.5 border-b border-[#D4BC98]/10">
+                      {/* Grid telemetry & ambient glow */}
+                      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:1.25rem_1.25rem] pointer-events-none opacity-40" />
+                      <div className="absolute top-0 right-0 w-36 h-36 bg-[#E88053]/10 rounded-full blur-2xl pointer-events-none group-hover/screen:bg-[#FFA266]/20 transition-all duration-500" />
 
-                      <a
-                        href={card.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-black/85 hover:bg-[#E88053] hover:text-white border border-white/20 rounded-md font-mono text-[10px] font-bold text-white transition-all flex items-center gap-1 shadow-lg opacity-0 group-hover/screen:opacity-100 duration-200 z-10"
-                      >
-                        Launch ↗
-                      </a>
+                      <div className="relative z-10 flex items-center justify-between">
+                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/60 border border-[#D4BC98]/20 font-mono text-[9px] text-[#FFA266] uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          <span>PRODUCTION</span>
+                        </span>
+                        <span className="font-mono text-[9px] text-[#F5EBD9]/40 tracking-wider">
+                          HTTPS // TLS
+                        </span>
+                      </div>
+
+                      <div className="relative z-10 flex items-end justify-between">
+                        <div className="space-y-0.5 max-w-[70%]">
+                          <span className="text-[9px] font-mono text-[#F5EBD9]/50 block uppercase tracking-widest">
+                            DEPLOYED DOMAIN
+                          </span>
+                          <span className="text-xs font-mono font-bold text-white group-hover/screen:text-[#FFA266] transition-colors truncate block">
+                            {card.domain}
+                          </span>
+                        </div>
+
+                        <a
+                          href={card.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1 bg-[#1A120B] hover:bg-[#E88053] hover:text-white border border-[#FFA266]/40 rounded-lg font-mono text-[10px] font-bold text-[#FFA266] transition-all flex items-center gap-1 shadow-lg active:scale-95 z-10 shrink-0"
+                        >
+                          Launch ↗
+                        </a>
+                      </div>
                     </div>
 
                     {/* Card Body - Airy, Breathable, Well-Proportioned */}
