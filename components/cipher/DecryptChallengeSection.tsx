@@ -194,6 +194,12 @@ export const DecryptChallengeSection: React.FC = () => {
   const [showAiPromptText, setShowAiPromptText] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
+  // Security Firewall Cooldown & Attempt Condition
+  const COOLDOWN_SECONDS = 150; // 2 minutes 30 seconds
+  const [timeLeft, setTimeLeft] = useState<number>(COOLDOWN_SECONDS);
+  const [attemptCount, setAttemptCount] = useState<number>(0);
+  const [showLockedMessage, setShowLockedMessage] = useState(false);
+
   const AI_SOLVER_PROMPT = `I am solving an interactive encrypted payload challenge on a developer's portfolio website.
 
 Here is the exact technical data and discovered contextual clues from the website:
@@ -222,9 +228,36 @@ With the help of this decoding key and the parameters above, please derive the A
 
   const scrambleIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Clean up scramble timer
+  // Initialize session timer and attempt tracking
   useEffect(() => {
+    let startTime = Date.now();
+    try {
+      const storedStart = sessionStorage.getItem('cipher_session_start');
+      if (storedStart) {
+        startTime = parseInt(storedStart, 10);
+      } else {
+        sessionStorage.setItem('cipher_session_start', String(startTime));
+      }
+
+      const storedAttempts = sessionStorage.getItem('cipher_attempts_count');
+      if (storedAttempts) {
+        setAttemptCount(parseInt(storedAttempts, 10));
+      }
+    } catch {
+      startTime = Date.now();
+    }
+
+    const timerInterval = setInterval(() => {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const remaining = Math.max(0, COOLDOWN_SECONDS - elapsed);
+      setTimeLeft(remaining);
+      if (remaining <= 0) {
+        clearInterval(timerInterval);
+      }
+    }, 1000);
+
     return () => {
+      clearInterval(timerInterval);
       if (scrambleIntervalRef.current) clearInterval(scrambleIntervalRef.current);
     };
   }, []);
@@ -294,7 +327,14 @@ With the help of this decoding key and the parameters above, please derive the A
       startScrambleAnimation(plaintext);
     } catch {
       setStatus('error');
-      setErrorMessage('Invalid key. Try looking deeper.');
+      setErrorMessage('Invalid key. Try looking deeper across the portfolio.');
+      setAttemptCount((prev) => {
+        const next = prev + 1;
+        try {
+          sessionStorage.setItem('cipher_attempts_count', String(next));
+        } catch {}
+        return next;
+      });
     }
   };
 
@@ -564,39 +604,78 @@ With the help of this decoding key and the parameters above, please derive the A
 
           {/* Hint & Security Override Protocol Area */}
           <div className="relative z-10 pt-2 border-t border-[#D4BC98]/15 space-y-3">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <p className="text-xs font-sans italic text-[#F5EBD9]/60">
-                &ldquo;Everything you need is already here.&rdquo;
-              </p>
+            {(() => {
+              const isHintEligible = timeLeft <= 0 || attemptCount >= 3;
+              const formatTime = (secs: number) => {
+                const m = Math.floor(secs / 60);
+                const s = secs % 60;
+                return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+              };
 
-              <button
-                type="button"
-                onClick={() => {
-                  if (!hintUnlocked) {
-                    setIsBypassing(!isBypassing);
-                    setShowHint(false);
-                  } else {
-                    setShowHint(!showHint);
-                  }
-                }}
-                className={`inline-flex items-center gap-1.5 text-xs font-mono px-3.5 py-1.5 rounded-full border transition-all cursor-pointer self-start sm:self-auto shadow-sm active:scale-95 select-none ${hintUnlocked
-                  ? 'border-emerald-500/40 text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/15'
-                  : 'border-[#FFA266]/40 text-[#FFA266] bg-[#24170F]/90 hover:bg-[#2F1D13]'
-                  }`}
-              >
-                {hintUnlocked ? (
-                  <>
-                    <Unlock className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>{showHint ? '[ Hide Clue Guide ]' : '[ Clue Guide Unlocked 🔓 ]'}</span>
-                  </>
-                ) : (
-                  <>
-                    <Zap className="w-3.5 h-3.5 text-[#FFA266] animate-pulse" />
-                    <span>{isBypassing ? '[ Close Bypass Terminal ]' : '[ Unlock Clue Guide ⚡ ]'}</span>
-                  </>
-                )}
-              </button>
-            </div>
+              return (
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <p className="text-xs font-sans italic text-[#F5EBD9]/60">
+                    &ldquo;Everything you need is already here.&rdquo;
+                  </p>
+
+                  <div className="flex flex-col items-start sm:items-end gap-1.5 self-start sm:self-auto">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (!isHintEligible) {
+                          setShowLockedMessage(true);
+                          setTimeout(() => setShowLockedMessage(false), 4500);
+                          return;
+                        }
+                        if (!hintUnlocked) {
+                          setIsBypassing(!isBypassing);
+                          setShowHint(false);
+                        } else {
+                          setShowHint(!showHint);
+                        }
+                      }}
+                      className={`inline-flex items-center gap-2 text-xs font-mono px-4 py-2 rounded-full border transition-all cursor-pointer shadow-sm active:scale-95 select-none ${
+                        !isHintEligible
+                          ? 'border-[#D4BC98]/20 text-[#F5EBD9]/45 bg-[#140E0A]/60 hover:border-[#FFA266]/40 hover:text-[#F5EBD9]/70'
+                          : hintUnlocked
+                          ? 'border-emerald-500/40 text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/15'
+                          : 'border-[#FFA266]/50 text-[#FFA266] bg-[#24170F]/90 hover:bg-[#2F1D13] shadow-[0_0_15px_rgba(232,128,83,0.3)] animate-pulse'
+                      }`}
+                    >
+                      {!isHintEligible ? (
+                        <>
+                          <Lock className="w-3.5 h-3.5 text-[#FFA266]/70" />
+                          <span>
+                            [ Hint Locked: {formatTime(timeLeft)} • {Math.max(0, 3 - attemptCount)} tries left ]
+                          </span>
+                        </>
+                      ) : hintUnlocked ? (
+                        <>
+                          <Unlock className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>{showHint ? '[ Hide Clue Guide ]' : '[ Clue Guide Unlocked 🔓 ]'}</span>
+                        </>
+                      ) : (
+                        <>
+                          <Zap className="w-3.5 h-3.5 text-[#FFA266]" />
+                          <span>{isBypassing ? '[ Close Bypass Terminal ]' : '[ Security Override Ready (Unlock Clue Guide ⚡) ]'}</span>
+                        </>
+                      )}
+                    </button>
+
+                    {!isHintEligible && showLockedMessage && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 4 }}
+                        className="text-[11px] font-mono text-[#FFA266] bg-[#140E0A] border border-[#FFA266]/30 px-3 py-1.5 rounded-lg text-left sm:text-right max-w-sm leading-relaxed shadow-xl"
+                      >
+                        🔒 Security Firewall Active: Explore the portfolio to hunt for the 3 keywords (Proof, Passion, Discipline). Make {Math.max(0, 3 - attemptCount)} more {3 - attemptCount === 1 ? 'attempt' : 'attempts'} or wait {formatTime(timeLeft)}!
+                      </motion.div>
+                    )}
+                  </div>
+                </div>
+              );
+            })()}
 
             {/* Kinetic 25-Tap Bypass Mini-Game (Before Unlocked) */}
             <AnimatePresence>
