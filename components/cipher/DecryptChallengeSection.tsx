@@ -669,7 +669,7 @@ With the help of this decoding key and the parameters above, please derive the A
                         exit={{ opacity: 0, y: 4 }}
                         className="text-[11px] font-mono text-[#FFA266] bg-[#140E0A] border border-[#FFA266]/30 px-3 py-1.5 rounded-lg text-left sm:text-right max-w-sm leading-relaxed shadow-xl"
                       >
-                        🔒 Security Firewall Active: Explore the portfolio to hunt for the 3 keywords (Proof, Passion, Discipline). Make {Math.max(0, 3 - attemptCount)} more {3 - attemptCount === 1 ? 'attempt' : 'attempts'} or wait {formatTime(timeLeft)}!
+                        Hey, no shortcuts yet! 😉 Explore the portfolio to track down the 3 hidden words. Give it {Math.max(0, 3 - attemptCount)} more {3 - attemptCount === 1 ? 'try' : 'tries'} or hang tight for {formatTime(timeLeft)}!
                       </motion.div>
                     )}
                   </div>
