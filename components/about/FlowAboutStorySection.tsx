@@ -295,10 +295,7 @@ export const FlowAboutStorySection: React.FC = () => {
 
     // Total scroll duration: zoom phase (1.2vh) + horizontal movement + 600px resting buffer on panel 3
     const zoomDistance = window.innerHeight * 1.2;
-    const getTotalDistance = () => {
-      const w = container.clientWidth || window.innerWidth;
-      return w * (totalPanels - 1) + zoomDistance + 600;
-    };
+    const totalDistance = window.innerWidth * (totalPanels - 1) + zoomDistance + 600;
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -306,9 +303,9 @@ export const FlowAboutStorySection: React.FC = () => {
         trigger: container,
         pin: true,
         pinSpacing: true,
-        scrub: 0.35,
+        scrub: 1,
         start: 'top top',
-        end: () => `+=${getTotalDistance()}`,
+        end: () => `+=${totalDistance}`,
         invalidateOnRefresh: true,
         anticipatePin: 1,
         onUpdate: (self) => {
@@ -331,7 +328,6 @@ export const FlowAboutStorySection: React.FC = () => {
     if (maskGroupRef.current && strokeGroupRef.current) {
       gsap.set([maskGroupRef.current, strokeGroupRef.current], {
         transformOrigin: "38% 50%",
-        willChange: "transform",
       });
 
       tl.to(
@@ -385,7 +381,7 @@ export const FlowAboutStorySection: React.FC = () => {
     tl.to(
       track,
       {
-        x: () => -((container.clientWidth || window.innerWidth) * (totalPanels - 1)),
+        x: () => -(window.innerWidth * (totalPanels - 1)),
         ease: 'none',
         duration: 0.60,
       },
@@ -397,8 +393,7 @@ export const FlowAboutStorySection: React.FC = () => {
         bg,
         {
           x: () => {
-            const w = container.clientWidth || window.innerWidth;
-            const maxScroll = Math.max(0, bg.offsetWidth - w);
+            const maxScroll = Math.max(0, bg.offsetWidth - window.innerWidth);
             return -maxScroll;
           },
           ease: 'none',
@@ -452,7 +447,7 @@ export const FlowAboutStorySection: React.FC = () => {
 
         <div
           ref={horizontalTrackRef}
-          className="flex flex-row w-[300%] h-full will-change-transform relative z-10"
+          className="flex flex-row w-[300vw] h-full will-change-transform relative z-10"
         >
 
           {/* ========================================================================= */}
@@ -460,7 +455,7 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="recognition"
-            className="horizontal-panel w-full min-w-full h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-0 pb-16 sm:pb-20 md:pb-0 overflow-y-auto bg-transparent"
+            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-0 pb-16 sm:pb-20 md:pb-0 overflow-y-auto md:overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows - Warm Studio Golden Hour */}
             <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[150px] pointer-events-none z-1" />
@@ -588,7 +583,7 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="showcase"
-            className="horizontal-panel w-full min-w-full h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 overflow-y-auto bg-transparent"
+            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 overflow-y-auto md:overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
             <div className="absolute top-1/4 left-1/3 w-[550px] h-[450px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
@@ -686,41 +681,34 @@ export const FlowAboutStorySection: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* High-Performance Architecture Viewport */}
-                    <div className="relative w-full h-[120px] sm:h-[135px] lg:h-[142px] bg-[#0A0806] overflow-hidden group/screen flex flex-col justify-between p-3.5 border-b border-[#D4BC98]/10">
-                      {/* Grid telemetry & ambient glow */}
-                      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:1.25rem_1.25rem] pointer-events-none opacity-40" />
-                      <div className="absolute top-0 right-0 w-36 h-36 bg-[#E88053]/10 rounded-full blur-2xl pointer-events-none group-hover/screen:bg-[#FFA266]/20 transition-all duration-500" />
-
-                      <div className="relative z-10 flex items-center justify-between">
-                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/60 border border-[#D4BC98]/20 font-mono text-[9px] text-[#FFA266] uppercase tracking-wider">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                          <span>PRODUCTION</span>
-                        </span>
-                        <span className="font-mono text-[9px] text-[#F5EBD9]/40 tracking-wider">
-                          HTTPS // TLS
-                        </span>
+                    {/* Scaled Desktop Viewport - No Zoom, Real Miniature Desktop Preview */}
+                    <div className="relative w-full h-[120px] sm:h-[135px] lg:h-[142px] bg-[#0A0806] overflow-hidden group/screen">
+                      <div
+                        className="w-[1200px] h-[600px] origin-top-left pointer-events-none select-none"
+                        style={{
+                          transform: 'scale(0.28)',
+                          transformOrigin: '0 0',
+                          width: '1200px',
+                          height: '600px',
+                        }}
+                      >
+                        <iframe
+                          src={card.url}
+                          title={card.title}
+                          className="w-full h-full border-none bg-white"
+                          loading="lazy"
+                        />
                       </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#140E0A]/40 via-transparent to-transparent opacity-20 pointer-events-none" />
 
-                      <div className="relative z-10 flex items-end justify-between">
-                        <div className="space-y-0.5 max-w-[70%]">
-                          <span className="text-[9px] font-mono text-[#F5EBD9]/50 block uppercase tracking-widest">
-                            DEPLOYED DOMAIN
-                          </span>
-                          <span className="text-xs font-mono font-bold text-white group-hover/screen:text-[#FFA266] transition-colors truncate block">
-                            {card.domain}
-                          </span>
-                        </div>
-
-                        <a
-                          href={card.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-3 py-1 bg-[#1A120B] hover:bg-[#E88053] hover:text-white border border-[#FFA266]/40 rounded-lg font-mono text-[10px] font-bold text-[#FFA266] transition-all flex items-center gap-1 shadow-lg active:scale-95 z-10 shrink-0"
-                        >
-                          Launch ↗
-                        </a>
-                      </div>
+                      <a
+                        href={card.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-black/85 hover:bg-[#E88053] hover:text-white border border-white/20 rounded-md font-mono text-[10px] font-bold text-white transition-all flex items-center gap-1 shadow-lg opacity-0 group-hover/screen:opacity-100 duration-200 z-10"
+                      >
+                        Launch ↗
+                      </a>
                     </div>
 
                     {/* Card Body - Airy, Breathable, Well-Proportioned */}
@@ -766,7 +754,7 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="technical-expertise"
-            className="horizontal-panel w-full min-w-full h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-0 pb-16 sm:pb-20 md:pb-0 overflow-y-auto bg-transparent"
+            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-0 pb-16 sm:pb-20 md:pb-0 overflow-y-auto md:overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
             <div className="absolute top-1/3 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
