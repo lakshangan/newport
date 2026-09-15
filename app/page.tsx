@@ -24,11 +24,15 @@ export default function Home() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Initialize Lenis Smooth Scroll
+    // Initialize Lenis Smooth Scroll with balanced cross-platform settings
+    const isTouchOnly = window.matchMedia('(pointer: coarse) and (hover: none)').matches;
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: isTouchOnly ? 0.6 : 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5,
+      syncTouch: false,
     });
 
     // Synchronize Lenis smooth scroll with GSAP ScrollTrigger ticker
@@ -45,10 +49,16 @@ export default function Home() {
     const timer = setTimeout(() => {
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
-    }, 400);
+    }, 500);
+
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('resize', handleResize);
 
     return () => {
       clearTimeout(timer);
+      window.removeEventListener('resize', handleResize);
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
     };

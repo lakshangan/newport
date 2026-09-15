@@ -161,7 +161,7 @@ export function StaggeredGrid({
       <section className="grid place-items-center w-full relative">
         <div
           ref={gridFullRef}
-          className="grid--full relative w-full my-[2vh] sm:my-[3vh] h-auto max-w-none p-2 sm:p-4 grid gap-1.5 sm:gap-3 lg:gap-4 grid-cols-7"
+          className="grid--full relative w-full my-[2vh] sm:my-[3vh] h-auto max-w-none p-2 sm:p-4 grid gap-1.5 sm:gap-3 lg:gap-4 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7"
         >
           <div className="grid-overlay absolute inset-0 z-[15] pointer-events-none opacity-0 bg-black/80 rounded-lg transition-opacity duration-500" />
           

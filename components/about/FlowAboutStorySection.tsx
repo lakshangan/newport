@@ -295,7 +295,10 @@ export const FlowAboutStorySection: React.FC = () => {
 
     // Total scroll duration: zoom phase (1.2vh) + horizontal movement + 600px resting buffer on panel 3
     const zoomDistance = window.innerHeight * 1.2;
-    const totalDistance = window.innerWidth * (totalPanels - 1) + zoomDistance + 600;
+    const getTotalDistance = () => {
+      const w = container.clientWidth || window.innerWidth;
+      return w * (totalPanels - 1) + zoomDistance + 600;
+    };
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -305,7 +308,7 @@ export const FlowAboutStorySection: React.FC = () => {
         pinSpacing: true,
         scrub: 1,
         start: 'top top',
-        end: () => `+=${totalDistance}`,
+        end: () => `+=${getTotalDistance()}`,
         invalidateOnRefresh: true,
         anticipatePin: 1,
         onUpdate: (self) => {
@@ -381,7 +384,7 @@ export const FlowAboutStorySection: React.FC = () => {
     tl.to(
       track,
       {
-        x: () => -(window.innerWidth * (totalPanels - 1)),
+        x: () => -((container.clientWidth || window.innerWidth) * (totalPanels - 1)),
         ease: 'none',
         duration: 0.60,
       },
@@ -393,7 +396,8 @@ export const FlowAboutStorySection: React.FC = () => {
         bg,
         {
           x: () => {
-            const maxScroll = Math.max(0, bg.offsetWidth - window.innerWidth);
+            const w = container.clientWidth || window.innerWidth;
+            const maxScroll = Math.max(0, bg.offsetWidth - w);
             return -maxScroll;
           },
           ease: 'none',
@@ -447,7 +451,7 @@ export const FlowAboutStorySection: React.FC = () => {
 
         <div
           ref={horizontalTrackRef}
-          className="flex flex-row w-[300vw] h-full will-change-transform relative z-10"
+          className="flex flex-row w-[300%] h-full will-change-transform relative z-10"
         >
 
           {/* ========================================================================= */}
@@ -455,7 +459,7 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="recognition"
-            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-0 pb-16 sm:pb-20 md:pb-0 overflow-y-auto md:overflow-hidden bg-transparent"
+            className="horizontal-panel w-full min-w-full h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-0 pb-16 sm:pb-20 md:pb-0 overflow-y-auto bg-transparent"
           >
             {/* Ambient Volumetric Glows - Warm Studio Golden Hour */}
             <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[150px] pointer-events-none z-1" />
@@ -583,7 +587,7 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="showcase"
-            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 overflow-y-auto md:overflow-hidden bg-transparent"
+            className="horizontal-panel w-full min-w-full h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 overflow-y-auto bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
             <div className="absolute top-1/4 left-1/3 w-[550px] h-[450px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
@@ -754,7 +758,7 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="technical-expertise"
-            className="horizontal-panel w-screen h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-0 pb-16 sm:pb-20 md:pb-0 overflow-y-auto md:overflow-hidden bg-transparent"
+            className="horizontal-panel w-full min-w-full h-screen shrink-0 relative z-10 flex flex-col justify-start md:justify-center px-4 sm:px-12 lg:px-16 pt-16 sm:pt-20 md:pt-0 pb-16 sm:pb-20 md:pb-0 overflow-y-auto bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
             <div className="absolute top-1/3 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />

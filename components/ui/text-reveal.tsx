@@ -41,7 +41,7 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
           trigger: container,
           pin: true,
           start: "top top",
-          end: "+=2200",
+          end: () => `+=${Math.min(window.innerHeight * 1.4, 1400)}`,
           pinSpacing: true,
           scrub: 0.5,
           anticipatePin: 1,

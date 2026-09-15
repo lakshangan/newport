@@ -138,14 +138,14 @@ export const Navbar: React.FC = () => {
             <a href="#about" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
               ABOUT
             </a>
-            <a href="#work" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
+            <a href="#showcase" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
               PROJECTS
             </a>
             <a href="#experience" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
               EXPERIENCE
             </a>
-            <a href="#playground" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
-              EXPERIMENTS
+            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C75B32]">
+              CONTACT
             </a>
           </div>
 

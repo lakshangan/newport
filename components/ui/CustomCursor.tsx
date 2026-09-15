@@ -115,12 +115,12 @@ export function SmoothCursor({
   });
 
   useEffect(() => {
-    // Detect touch / coarse pointer devices
-    if (
-      'ontouchstart' in window ||
-      navigator.maxTouchPoints > 0 ||
-      window.matchMedia('(pointer: coarse)').matches
-    ) {
+    // Detect pure touch devices vs fine-pointer mouse/trackpad devices
+    // Touchscreen Windows laptops have maxTouchPoints > 0 but primary pointer: fine (mouse/trackpad)
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    const isTouchOnly = window.matchMedia('(pointer: coarse) and (hover: none)').matches;
+
+    if (isTouchOnly || (!hasFinePointer && window.matchMedia('(hover: none)').matches)) {
       setIsTouchDevice(true);
       return;
     }

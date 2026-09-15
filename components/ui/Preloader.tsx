@@ -155,6 +155,7 @@ export const Preloader: React.FC = () => {
   const [showSubtitle, setShowSubtitle] = useState(false);
   const [dissolveVal, setDissolveVal] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const [webGlAvailable, setWebGlAvailable] = useState(true);
 
   useEffect(() => {
     setIsMounted(true);
@@ -163,6 +164,14 @@ export const Preloader: React.FC = () => {
     window.scrollTo(0, 0);
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
+
+    // Safety fallback: Unconditionally unlock scroll after 3.2 seconds max
+    // even if WebGL fails, halts, or runs in a background tab
+    const safetyTimeoutId = setTimeout(() => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      setIsFinished(true);
+    }, 3200);
 
     let frameId: number;
     let exitTimeoutId: NodeJS.Timeout;
@@ -240,6 +249,7 @@ export const Preloader: React.FC = () => {
 
     return () => {
       cancelAnimationFrame(frameId);
+      clearTimeout(safetyTimeoutId);
       if (exitTimeoutId) clearTimeout(exitTimeoutId);
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
@@ -258,11 +268,15 @@ export const Preloader: React.FC = () => {
       }}
     >
       {/* ScrollDissolveReveal WebGL Sobel Edge Dissolve Shader Canvas */}
-      {isMounted && (
+      {isMounted && webGlAvailable && (
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Canvas
             gl={{ alpha: true, antialias: true }}
             style={{ width: '100%', height: '100%' }}
+            onCreated={({ gl }) => {
+              if (!gl) setWebGlAvailable(false);
+            }}
+            onError={() => setWebGlAvailable(false)}
           >
             <OrthographicCamera
               makeDefault
