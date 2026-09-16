@@ -329,22 +329,32 @@ export const MobilePortfolio: React.FC = () => {
           </div>
 
           {/* Action CTAs */}
-          <div className="flex items-center gap-3 pt-1">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1">
             <a
               href="/Lakshan_Resume copy.pdf"
               download="Lakshan_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2.5 rounded-full bg-white text-black font-mono font-semibold text-xs tracking-wider uppercase hover:bg-[#C75B32] hover:text-white transition-all shadow-lg active:scale-95"
+              className="px-4 py-2 rounded-full bg-white text-black font-mono font-semibold text-xs tracking-wider uppercase hover:bg-[#C75B32] hover:text-white transition-all shadow-lg active:scale-95"
             >
               Resume
             </a>
             <a
               href="#contact"
-              className="px-5 py-2.5 rounded-full bg-white/5 border border-white/15 text-white font-mono text-xs tracking-wider uppercase hover:bg-white/10 transition-all active:scale-95"
+              className="px-4 py-2 rounded-full bg-white/5 border border-white/15 text-white font-mono text-xs tracking-wider uppercase hover:bg-white/10 transition-all active:scale-95"
             >
               Get in Touch
             </a>
+            <button
+              type="button"
+              onClick={handleCopyDesktopLink}
+              className="px-3.5 py-2 rounded-full bg-gradient-to-r from-white/[0.07] to-white/[0.03] border border-white/15 hover:border-[#C75B32]/60 text-white font-mono text-xs tracking-wider flex items-center gap-1.5 transition-all active:scale-95 group shadow-sm"
+              title="Copy link to explore the 3D Desktop edition"
+            >
+              <Monitor className="w-3 h-3 text-[#C75B32]" />
+              <span className="text-[11px]">{linkCopied ? 'Copied!' : 'Desktop 3D'}</span>
+              <ArrowUpRight className="w-3 h-3 text-white/40 group-hover:text-[#FFA266] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </button>
           </div>
 
           {/* Minimal Bottom Scroll Indicator */}
@@ -593,83 +603,25 @@ export const MobilePortfolio: React.FC = () => {
       ────────────────────────────────────────────────────────────────────────── */}
       <section id="gallery" className="py-16 px-4 sm:px-6 border-t border-white/10 bg-[#080808] overflow-hidden">
         <div className="max-w-md mx-auto space-y-8">
-          {/* Section Marker Header identical to Desktop */}
-          <div className="space-y-2 border-b border-white/15 pb-6">
-            <div className="text-xs font-mono tracking-widest text-[#C75B32]">
-              // 04 PROOF OF WORK &amp; COMMUNITY
-            </div>
-            <h2 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-white">
-              PROOF OF WORK
-            </h2>
-            <p className="text-xs text-white/60 font-light leading-relaxed">
-              A visual archive of national hackathons, stage wins, demo days, tech delegations, and classroom mentoring across my journey.
-            </p>
-          </div>
-
-          {/* ───────────── PROMINENT DESKTOP EXPERIENCE INVITATION CARD ───────────── */}
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#1A100B] via-[#120B07] to-[#0A0808] border border-[#C75B32]/60 p-5 sm:p-6 shadow-2xl space-y-4">
-            {/* Ambient Background Glow */}
-            <div className="absolute -top-12 -right-12 w-44 h-44 bg-[#C75B32]/25 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-12 -left-12 w-40 h-40 bg-[#E88053]/15 rounded-full blur-2xl pointer-events-none" />
-
-            {/* Badge */}
+          {/* Section Marker Header */}
+          <div className="space-y-3 border-b border-white/15 pb-6">
             <div className="flex items-center justify-between">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C75B32]/20 border border-[#C75B32]/50 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
-                <Monitor className="w-3.5 h-3.5 animate-pulse text-[#FFA266]" />
-                <span>FULL 3D &amp; MOTION DESKTOP EDITION</span>
+              <div className="text-xs font-mono tracking-widest text-[#C75B32]">
+                // 04 PROOF OF WORK &amp; COMMUNITY
               </div>
               <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
-                PC / MAC
+                21 ARCHIVED
               </span>
             </div>
 
-            {/* Headline */}
-            <div className="space-y-2">
-              <h3 className="font-serif text-2xl text-white font-bold leading-tight">
-                View on Desktop for the Full 3D &amp; Animation Experience
-              </h3>
-              <p className="text-white/75 text-xs leading-relaxed text-justify">
-                You are currently viewing the lightweight mobile version. To experience the complete portfolio — including <span className="text-white font-medium">cinematic GSAP scroll animations</span>, <span className="text-white font-medium">7-column staggered parallax</span>, <span className="text-white font-medium">real-time 3D studio environments</span>, and the <span className="text-white font-medium">cryptographic cipher game</span> — visit this website on a desktop or laptop.
+            <div>
+              <h2 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-white leading-none">
+                PROOF OF WORK
+              </h2>
+              <p className="text-xs text-white/60 font-light leading-relaxed mt-1.5">
+                A visual archive of national hackathons, stage wins, demo days, and builder summits. Tap any photo to expand.
               </p>
             </div>
-
-            {/* Action Buttons */}
-            <div className="pt-2 space-y-2.5">
-              <button
-                type="button"
-                onClick={handleCopyDesktopLink}
-                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#C75B32] via-[#E06D43] to-[#C75B32] hover:brightness-110 text-white text-xs font-mono font-bold uppercase tracking-wider transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-2 select-none"
-              >
-                {linkCopied ? (
-                  <>
-                    <Check className="w-4 h-4 text-white" />
-                    <span>Link Copied! Open on your PC</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4 text-white" />
-                    <span>Copy Link for Desktop</span>
-                  </>
-                )}
-              </button>
-
-              <div className="flex items-center justify-center gap-2 text-[10px] font-mono text-white/40">
-                <span>Direct URL:</span>
-                <span className="text-[#FFA266] font-medium select-all">
-                  lakshan-dev.vercel.app
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Desktop Center Display Headline on Mobile */}
-          <div className="text-center pt-2">
-            <h3 className="font-display text-3xl sm:text-4xl font-black uppercase text-white tracking-tight">
-              COMMUNITY ARCHIVE
-            </h3>
-            <p className="text-[10px] font-mono text-white/50 tracking-wider uppercase mt-1">
-              TAP ANY PHOTO TO EXPAND • 18 CAPTURED MOMENTS
-            </p>
           </div>
 
           {/* 3-Column Staggered Waterfall Grid (Desktop StaggeredGrid adapted for Mobile) */}
@@ -751,6 +703,21 @@ export const MobilePortfolio: React.FC = () => {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Sleek, Non-Distracting Desktop Experience CTA Pill */}
+          <div className="pt-2 flex justify-center">
+            <button
+              type="button"
+              onClick={handleCopyDesktopLink}
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-zinc-900/90 hover:bg-[#C75B32]/10 border border-white/10 hover:border-[#C75B32]/40 text-white/80 hover:text-white font-mono text-xs transition-all active:scale-95 group shadow-sm"
+            >
+              <Monitor className="w-3.5 h-3.5 text-[#C75B32]" />
+              <span className="text-[11px] tracking-wide">
+                {linkCopied ? 'Desktop Link Copied ✓' : 'Experience in 3D on Desktop'}
+              </span>
+              <ArrowUpRight className="w-3 h-3 text-white/40 group-hover:text-[#FFA266] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </button>
           </div>
 
           {/* Section Footer */}
