@@ -24,21 +24,21 @@ import {
 import { FaGithub, FaLinkedin, FaXTwitter, FaInstagram } from 'react-icons/fa6';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 
-// Authentic hackathons, summits & builder moments from desktop
-const MOBILE_GALLERY = [
+// Authentic desktop Proof of Work items
+const DESKTOP_STAGGERED_PHOTOS = [
   {
     src: '/images/IMG_8920.JPG',
     title: 'NIT Calicut National Stage',
     event: "Kerala's Largest Web3 Hackathon",
-    tag: '1ST PLACE TRACK WIN',
+    tag: '1ST PLACE TRACK',
     location: 'NIT Calicut',
   },
   {
     src: '/images/sihprize.JPG',
-    title: 'Smart India Hackathon Finals',
-    event: 'National Innovation Initiative',
-    tag: 'SIH FINALIST',
-    location: 'Ministry of Education',
+    title: 'Smart India Hackathon Prize',
+    event: 'National Innovation Winner',
+    tag: 'NATIONAL WINNER',
+    location: 'New Delhi',
   },
   {
     src: '/images/IMG_0400.jpeg',
@@ -49,31 +49,73 @@ const MOBILE_GALLERY = [
   },
   {
     src: '/images/IMG_8355.jpeg',
-    title: 'Tech Hub Workshop & Keynote',
-    event: 'Web3 & AI Developer Mentoring',
-    tag: 'SPEAKER // LEAD',
-    location: 'Campus Tech Hub',
+    title: 'Uniswap Hook Incubator',
+    event: 'Accepted Developer Cohort',
+    tag: 'DEFI INCUBATOR',
+    location: 'Tech Hub',
+  },
+  {
+    src: '/images/router protocol.jpg',
+    title: 'Router Protocol Demo Day',
+    event: 'Hackathon Partner Demo Day',
+    tag: 'DEMO DAY',
+    location: 'Bengaluru',
+  },
+  {
+    src: '/images/delhisih.jpg',
+    title: 'Smart India Hackathon Delhi',
+    event: 'National Finals // Hardware & AI',
+    tag: 'SIH FINALS',
+    location: 'New Delhi',
+  },
+  {
+    src: '/guestLecture.png',
+    title: 'Guest Lecture & Technical Talk',
+    event: 'Keynote Speaker // Academic Invite',
+    tag: 'KEYNOTE',
+    location: 'Auditorium',
+  },
+  {
+    src: '/images/delhi sid.JPG',
+    title: 'Delhi Tech Delegation',
+    event: 'Summit & Networking',
+    tag: 'DELEGATION',
+    location: 'New Delhi',
   },
   {
     src: '/images/IMG_0397.jpeg',
     title: 'Midnight Hackathon Sprint',
-    event: 'Code, Chaos & High-Tempo Builds',
-    tag: 'BUILD MARATHON',
+    event: 'Red Bull & Code Chaos',
+    tag: 'HACKATHON',
     location: 'Bengaluru',
   },
   {
     src: '/images/IMG_0399.jpeg',
-    title: 'Technical Keynote & Live Demo',
-    event: 'Smart Contract Architecture Talk',
-    tag: 'KEYNOTE',
+    title: 'Technical Keynote & Architecture',
+    event: 'Live Demo & Presentation',
+    tag: 'LIVE DEMO',
     location: 'Auditorium',
+  },
+  {
+    src: '/images/IMG_9072.jpeg',
+    title: 'Formal Tech Delegation',
+    event: 'Honors & Recognition',
+    tag: 'HONORS',
+    location: 'State Stage',
+  },
+  {
+    src: '/images/IMG_0398.jpeg',
+    title: 'Hackathon Builder Squad',
+    event: 'Team Collaboration // Stage',
+    tag: 'BUILD SQUAD',
+    location: 'Hackathon',
   },
   {
     src: '/images/metamaskcommunitymeet.png',
     title: 'MetaMask Community Meet',
     event: 'Consensys & Ethereum Ecosystem',
-    tag: 'COMMUNITY',
-    location: 'Dev Meetup',
+    tag: 'DEV MEET',
+    location: 'Consensys',
   },
   {
     src: '/images/binancemeetup.png',
@@ -81,6 +123,34 @@ const MOBILE_GALLERY = [
     event: 'Web3 Builders & Ecosystem',
     tag: 'COMMUNITY',
     location: 'Summit',
+  },
+  {
+    src: '/images/Businesspitch.png',
+    title: 'Startup & Business Pitch',
+    event: 'Venture & Demo Day',
+    tag: 'VENTURE',
+    location: 'Demo Day',
+  },
+  {
+    src: '/images/Rtalks.png',
+    title: 'R Talks Keynote Session',
+    event: 'Community & Tech Talks',
+    tag: 'COMMUNITY',
+    location: 'Tech Hub',
+  },
+  {
+    src: '/images/buildonchainNITkerala.png',
+    title: 'Build On-Chain NIT Kerala',
+    event: 'Web3 Hackathon // NIT',
+    tag: 'WEB3 HACK',
+    location: 'NIT Calicut',
+  },
+  {
+    src: '/images/web3class.png',
+    title: 'Web3 & Smart Contract Class',
+    event: 'Hands-on Developer Lab',
+    tag: 'DEV LAB',
+    location: 'Classroom',
   },
 ];
 
@@ -106,7 +176,7 @@ export const MobilePortfolio: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
-  const [activePhoto, setActivePhoto] = useState<typeof MOBILE_GALLERY[0] | null>(null);
+  const [activePhoto, setActivePhoto] = useState<typeof DESKTOP_STAGGERED_PHOTOS[0] | null>(null);
 
   const handleCopyDesktopLink = () => {
     if (typeof window !== 'undefined') {
@@ -189,18 +259,18 @@ export const MobilePortfolio: React.FC = () => {
         {/* Clear & Visible Portrait Image Centered on Face */}
         <div className="absolute inset-0 z-0 flex items-start justify-center pointer-events-none select-none overflow-hidden">
           <div 
-            className="relative h-[80vh] w-full"
+            className="relative h-[85vh] w-full"
             style={{
-              maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 95%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 95%)',
+              maskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 98%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 98%)',
             }}
           >
             <Image
-              src="/herosection.png"
+              src="/images/hero_portrait.jpg"
               alt="Lakshan Ganesan"
               fill
               priority
-              className="object-cover object-[28%_12%] filter grayscale contrast-115 brightness-100"
+              className="object-cover object-[50%_15%] filter contrast-105 brightness-100"
             />
           </div>
           {/* Deep dark gradient scrim for bottom text readability */}
@@ -519,29 +589,34 @@ export const MobilePortfolio: React.FC = () => {
       </section>
 
       {/* ──────────────────────────────────────────────────────────────────────────
-          5.5 PROOF OF WORK / PHOTO GALLERY & DESKTOP EDITION CALLOUT
+          5.5 PROOF OF WORK / STAGGERED GRID & DESKTOP EDITION CALLOUT
       ────────────────────────────────────────────────────────────────────────── */}
-      <section id="gallery" className="py-16 px-5 border-t border-white/10 bg-[#08080a]">
+      <section id="gallery" className="py-16 px-4 sm:px-6 border-t border-white/10 bg-[#080808] overflow-hidden">
         <div className="max-w-md mx-auto space-y-8">
-          {/* Section Marker */}
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-[#C75B32]" />
-            <h2 className="text-xs font-mono font-semibold text-white/60 uppercase tracking-widest">
-              Proof of Work &amp; Moments
+          {/* Section Marker Header identical to Desktop */}
+          <div className="space-y-2 border-b border-white/15 pb-6">
+            <div className="text-xs font-mono tracking-widest text-[#C75B32]">
+              // 04 PROOF OF WORK &amp; COMMUNITY
+            </div>
+            <h2 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-white">
+              PROOF OF WORK
             </h2>
+            <p className="text-xs text-white/60 font-light leading-relaxed">
+              A visual archive of national hackathons, stage wins, demo days, tech delegations, and classroom mentoring across my journey.
+            </p>
           </div>
 
           {/* ───────────── PROMINENT DESKTOP EXPERIENCE INVITATION CARD ───────────── */}
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#18110D] via-[#120B07] to-[#08080a] border border-[#C75B32]/50 p-6 shadow-2xl space-y-4">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#1A100B] via-[#120B07] to-[#0A0808] border border-[#C75B32]/60 p-5 sm:p-6 shadow-2xl space-y-4">
             {/* Ambient Background Glow */}
-            <div className="absolute -top-12 -right-12 w-44 h-44 bg-[#C75B32]/20 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-12 -left-12 w-40 h-40 bg-[#E88053]/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -top-12 -right-12 w-44 h-44 bg-[#C75B32]/25 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-12 -left-12 w-40 h-40 bg-[#E88053]/15 rounded-full blur-2xl pointer-events-none" />
 
             {/* Badge */}
             <div className="flex items-center justify-between">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C75B32]/20 border border-[#C75B32]/40 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C75B32]/20 border border-[#C75B32]/50 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
                 <Monitor className="w-3.5 h-3.5 animate-pulse text-[#FFA266]" />
-                <span>3D &amp; MOTION DESKTOP EDITION</span>
+                <span>FULL 3D &amp; MOTION DESKTOP EDITION</span>
               </div>
               <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
                 PC / MAC
@@ -554,7 +629,7 @@ export const MobilePortfolio: React.FC = () => {
                 View on Desktop for the Full 3D &amp; Animation Experience
               </h3>
               <p className="text-white/75 text-xs leading-relaxed text-justify">
-                You are currently experiencing the fast, minimal mobile version. To explore the full portfolio — including <span className="text-white font-medium">immersive 3D studio environments</span>, <span className="text-white font-medium">cinematic GSAP scroll reveals</span>, the <span className="text-white font-medium">interactive cryptographic cipher game</span>, and spatial animations — visit this website on your desktop or laptop.
+                You are currently viewing the lightweight mobile version. To experience the complete portfolio — including <span className="text-white font-medium">cinematic GSAP scroll animations</span>, <span className="text-white font-medium">7-column staggered parallax</span>, <span className="text-white font-medium">real-time 3D studio environments</span>, and the <span className="text-white font-medium">cryptographic cipher game</span> — visit this website on a desktop or laptop.
               </p>
             </div>
 
@@ -580,63 +655,110 @@ export const MobilePortfolio: React.FC = () => {
 
               <div className="flex items-center justify-center gap-2 text-[10px] font-mono text-white/40">
                 <span>Direct URL:</span>
-                <span className="text-[#FFA266]/90 font-medium select-all">
+                <span className="text-[#FFA266] font-medium select-all">
                   lakshan-dev.vercel.app
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Section Title for Photos */}
-          <div className="space-y-1.5 pt-2">
-            <h3 className="font-serif text-2xl text-white font-normal leading-snug">
-              Captured in the <span className="italic text-[#E88053]">trenches</span>.
+          {/* Desktop Center Display Headline on Mobile */}
+          <div className="text-center pt-2">
+            <h3 className="font-display text-3xl sm:text-4xl font-black uppercase text-white tracking-tight">
+              COMMUNITY ARCHIVE
             </h3>
-            <p className="text-white/60 text-xs font-mono">
-              National hackathons, demo days, speaker stages &amp; builder summits. Tap any photo to view.
+            <p className="text-[10px] font-mono text-white/50 tracking-wider uppercase mt-1">
+              TAP ANY PHOTO TO EXPAND • 18 CAPTURED MOMENTS
             </p>
           </div>
 
-          {/* 2-Column Responsive Photo Grid */}
-          <div className="grid grid-cols-2 gap-3">
-            {MOBILE_GALLERY.map((item, idx) => (
-              <div
-                key={idx}
-                onClick={() => setActivePhoto(item)}
-                className="group relative rounded-xl overflow-hidden bg-white/[0.03] border border-white/10 hover:border-[#C75B32]/50 transition-all duration-300 active:scale-95 cursor-pointer flex flex-col"
-              >
-                {/* Photo Container */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/40">
-                  <Image
+          {/* 3-Column Staggered Waterfall Grid (Desktop StaggeredGrid adapted for Mobile) */}
+          <div className="grid grid-cols-3 gap-2 sm:gap-2.5 items-start">
+            {/* Column 1 */}
+            <div className="flex flex-col gap-2 sm:gap-2.5">
+              {DESKTOP_STAGGERED_PHOTOS.filter((_, i) => i % 3 === 0).map((item, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => setActivePhoto(item)}
+                  className="group relative aspect-[3/4] w-full rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer shadow-sm active:scale-95 transition-all duration-300 hover:border-[#C75B32]"
+                >
+                  <img
                     src={item.src}
                     alt={item.title}
-                    fill
-                    sizes="(max-width: 768px) 50vw, 300px"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-105"
+                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                    loading="lazy"
                   />
-                  {/* Subtle Gradient Scrim at bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-
-                  {/* Tag Badge */}
-                  <div className="absolute top-2 left-2">
-                    <span className="px-1.5 py-0.5 text-[8px] font-mono font-bold rounded bg-black/70 backdrop-blur-md border border-white/15 text-[#FFA266] uppercase tracking-wider">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-2 z-10 pointer-events-none">
+                    <span className="text-[10px] font-mono font-bold text-white tracking-tight line-clamp-2 leading-tight">
+                      {item.title}
+                    </span>
+                    <span className="text-[8px] font-mono text-[#E88053] font-semibold tracking-wider uppercase truncate mt-0.5">
                       {item.tag}
                     </span>
                   </div>
                 </div>
+              ))}
+            </div>
 
-                {/* Caption Bar */}
-                <div className="p-2.5 bg-[#0D0D10] space-y-0.5 flex-1 flex flex-col justify-between">
-                  <h4 className="text-[11px] font-bold text-white line-clamp-1 group-hover:text-[#FFA266] transition-colors leading-tight">
-                    {item.title}
-                  </h4>
-                  <div className="flex items-center justify-between text-[9px] font-mono text-white/50">
-                    <span className="truncate max-w-[90px]">{item.location}</span>
-                    <span className="text-[#C75B32] font-semibold">VIEW ↗</span>
+            {/* Column 2 (Offset by pt-7 for authentic staggered rhythm) */}
+            <div className="flex flex-col gap-2 sm:gap-2.5 pt-7">
+              {DESKTOP_STAGGERED_PHOTOS.filter((_, i) => i % 3 === 1).map((item, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => setActivePhoto(item)}
+                  className="group relative aspect-[3/4] w-full rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer shadow-sm active:scale-95 transition-all duration-300 hover:border-[#C75B32]"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-2 z-10 pointer-events-none">
+                    <span className="text-[10px] font-mono font-bold text-white tracking-tight line-clamp-2 leading-tight">
+                      {item.title}
+                    </span>
+                    <span className="text-[8px] font-mono text-[#E88053] font-semibold tracking-wider uppercase truncate mt-0.5">
+                      {item.tag}
+                    </span>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Column 3 (Offset by pt-3.5 for 3-way vertical wave rhythm) */}
+            <div className="flex flex-col gap-2 sm:gap-2.5 pt-3.5">
+              {DESKTOP_STAGGERED_PHOTOS.filter((_, i) => i % 3 === 2).map((item, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => setActivePhoto(item)}
+                  className="group relative aspect-[3/4] w-full rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer shadow-sm active:scale-95 transition-all duration-300 hover:border-[#C75B32]"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-2 z-10 pointer-events-none">
+                    <span className="text-[10px] font-mono font-bold text-white tracking-tight line-clamp-2 leading-tight">
+                      {item.title}
+                    </span>
+                    <span className="text-[8px] font-mono text-[#E88053] font-semibold tracking-wider uppercase truncate mt-0.5">
+                      {item.tag}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Section Footer */}
+          <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-white/50">
+            <span>LAKSHAN GANESAN // 2026</span>
+            <a href="#experience" className="text-[#E88053] hover:text-white transition-colors">
+              EXPERIENCE JOURNEY ↓
+            </a>
           </div>
         </div>
       </section>
