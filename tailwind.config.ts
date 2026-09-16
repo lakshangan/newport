@@ -25,6 +25,7 @@ const config: Config = {
         display: ['var(--font-display)', 'Bebas Neue', 'sans-serif'],
         sans: ['var(--font-sans)', 'Inter', 'sans-serif'],
         mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
+        serif: ['var(--font-serif)', 'Playfair Display', 'Georgia', 'serif'],
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

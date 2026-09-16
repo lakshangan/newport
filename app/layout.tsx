@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Bebas_Neue, Inter, JetBrains_Mono } from 'next/font/google';
+import { Bebas_Neue, Inter, JetBrains_Mono, Playfair_Display } from 'next/font/google';
 import './globals.css';
 
 const bebas = Bebas_Neue({
@@ -18,6 +18,12 @@ const inter = Inter({
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif',
   display: 'swap',
 });
 
@@ -77,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bebas.variable} ${inter.variable} ${jetbrains.variable}`}>
+    <html lang="en" className={`${bebas.variable} ${inter.variable} ${jetbrains.variable} ${playfair.variable}`}>
       <body className="bg-[#050505] text-[#f5f5f7] antialiased selection:bg-[#C75B32] selection:text-white font-sans">
         {/* Subtle Film Grain Noise Overlay */}
         <div className="grain-overlay" />

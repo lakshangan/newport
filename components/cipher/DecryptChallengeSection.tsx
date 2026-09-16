@@ -102,80 +102,6 @@ async function attemptWebCryptoDecrypt(rawKeyInput: string): Promise<string> {
   return new TextDecoder().decode(decryptedBuffer);
 }
 
-// Global audio helper for kinetic tap interaction
-let tapAudioCtxInstance: AudioContext | null = null;
-function getTapAudioContext(): AudioContext | null {
-  if (typeof window === 'undefined') return null;
-  const AudioCtx =
-    window.AudioContext ||
-    (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-  if (!AudioCtx) return null;
-  if (!tapAudioCtxInstance) {
-    tapAudioCtxInstance = new AudioCtx();
-  }
-  if (tapAudioCtxInstance.state === 'suspended') {
-    tapAudioCtxInstance.resume().catch(() => { });
-  }
-  return tapAudioCtxInstance;
-}
-
-// Escalating pitch pip for each tap (320Hz up to 1100Hz)
-function playTapAscend(currentTap: number, maxTaps: number) {
-  try {
-    const ctx = getTapAudioContext();
-    if (!ctx || ctx.state !== 'running') return;
-    const now = ctx.currentTime;
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-
-    const freq = 320 + (currentTap / maxTaps) * 780;
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(freq, now);
-    osc.frequency.exponentialRampToValueAtTime(freq * 1.06, now + 0.05);
-
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.linearRampToValueAtTime(0.06, now + 0.008);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
-
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start(now);
-    osc.stop(now + 0.065);
-  } catch {
-    // Ignore audio failures silently
-  }
-}
-
-// Triumph fanfare on reaching 25 taps (C5, E5, G5, C6 arpeggio)
-function playUnlockFanfare() {
-  try {
-    const ctx = getTapAudioContext();
-    if (!ctx || ctx.state !== 'running') return;
-    const notes = [523.25, 659.25, 783.99, 1046.5];
-    const startTime = ctx.currentTime;
-
-    notes.forEach((freq, idx) => {
-      const noteTime = startTime + idx * 0.07;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, noteTime);
-
-      gain.gain.setValueAtTime(0.0001, noteTime);
-      gain.gain.linearRampToValueAtTime(0.08, noteTime + 0.01);
-      gain.gain.exponentialRampToValueAtTime(0.0001, noteTime + 0.16);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(noteTime);
-      osc.stop(noteTime + 0.18);
-    });
-  } catch {
-    // Ignore audio failures silently
-  }
-}
-
 const SCRAMBLE_CHARS = '0123456789ABCDEF!@#$%&*<>[]{}~';
 
 export const DecryptChallengeSection: React.FC = () => {
@@ -186,18 +112,13 @@ export const DecryptChallengeSection: React.FC = () => {
   const [scrambleDisplay, setScrambleDisplay] = useState(CIPHERTEXT_B64);
   const [copied, setCopied] = useState(false);
   const [showHint, setShowHint] = useState(false);
-  const [hintUnlocked, setHintUnlocked] = useState(false);
-  const [isBypassing, setIsBypassing] = useState(false);
-  const [tapCount, setTapCount] = useState(0);
-  const REQUIRED_TAPS = 25;
   const [copiedAiPrompt, setCopiedAiPrompt] = useState(false);
   const [showAiPromptText, setShowAiPromptText] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Security Firewall Cooldown & Attempt Condition
-  const COOLDOWN_SECONDS = 150; // 2 minutes 30 seconds
+  // 5 Minutes (300 seconds) required stay on website before revealing hint
+  const COOLDOWN_SECONDS = 300;
   const [timeLeft, setTimeLeft] = useState<number>(COOLDOWN_SECONDS);
-  const [attemptCount, setAttemptCount] = useState<number>(0);
   const [showLockedMessage, setShowLockedMessage] = useState(false);
 
   const AI_SOLVER_PROMPT = `I am solving an interactive encrypted payload challenge on a developer's portfolio website.
@@ -228,29 +149,31 @@ With the help of this decoding key and the parameters above, please derive the A
 
   const scrambleIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Initialize session timer and attempt tracking
+  // Initialize session timer for time spent on the website
   useEffect(() => {
     let startTime = Date.now();
     try {
-      const storedStart = sessionStorage.getItem('cipher_session_start');
+      const storedStart = sessionStorage.getItem('portfolio_stay_start') || sessionStorage.getItem('cipher_session_start');
       if (storedStart) {
         startTime = parseInt(storedStart, 10);
       } else {
+        sessionStorage.setItem('portfolio_stay_start', String(startTime));
         sessionStorage.setItem('cipher_session_start', String(startTime));
-      }
-
-      const storedAttempts = sessionStorage.getItem('cipher_attempts_count');
-      if (storedAttempts) {
-        setAttemptCount(parseInt(storedAttempts, 10));
       }
     } catch {
       startTime = Date.now();
     }
 
-    const timerInterval = setInterval(() => {
+    const updateTimer = () => {
       const elapsed = Math.floor((Date.now() - startTime) / 1000);
       const remaining = Math.max(0, COOLDOWN_SECONDS - elapsed);
       setTimeLeft(remaining);
+      return remaining;
+    };
+
+    updateTimer();
+    const timerInterval = setInterval(() => {
+      const remaining = updateTimer();
       if (remaining <= 0) {
         clearInterval(timerInterval);
       }
@@ -328,13 +251,6 @@ With the help of this decoding key and the parameters above, please derive the A
     } catch {
       setStatus('error');
       setErrorMessage('Invalid key. Try looking deeper across the portfolio.');
-      setAttemptCount((prev) => {
-        const next = prev + 1;
-        try {
-          sessionStorage.setItem('cipher_attempts_count', String(next));
-        } catch {}
-        return next;
-      });
     }
   };
 
@@ -602,10 +518,10 @@ With the help of this decoding key and the parameters above, please derive the A
             )}
           </div>
 
-          {/* Hint & Security Override Protocol Area */}
+          {/* Hint Area (Reveals after 5 minutes on the website) */}
           <div className="relative z-10 pt-2 border-t border-[#D4BC98]/15 space-y-3">
             {(() => {
-              const isHintEligible = timeLeft <= 0 || attemptCount >= 3;
+              const isHintEligible = timeLeft <= 0;
               const formatTime = (secs: number) => {
                 const m = Math.floor(secs / 60);
                 const s = secs % 60;
@@ -627,17 +543,12 @@ With the help of this decoding key and the parameters above, please derive the A
                           setTimeout(() => setShowLockedMessage(false), 4500);
                           return;
                         }
-                        if (!hintUnlocked) {
-                          setIsBypassing(!isBypassing);
-                          setShowHint(false);
-                        } else {
-                          setShowHint(!showHint);
-                        }
+                        setShowHint(!showHint);
                       }}
                       className={`inline-flex items-center gap-2 text-xs font-mono px-4 py-2 rounded-full border transition-all cursor-pointer shadow-sm active:scale-95 select-none ${
                         !isHintEligible
                           ? 'border-[#D4BC98]/20 text-[#F5EBD9]/45 bg-[#140E0A]/60 hover:border-[#FFA266]/40 hover:text-[#F5EBD9]/70'
-                          : hintUnlocked
+                          : showHint
                           ? 'border-emerald-500/40 text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/15'
                           : 'border-[#FFA266]/50 text-[#FFA266] bg-[#24170F]/90 hover:bg-[#2F1D13] shadow-[0_0_15px_rgba(232,128,83,0.3)] animate-pulse'
                       }`}
@@ -646,18 +557,13 @@ With the help of this decoding key and the parameters above, please derive the A
                         <>
                           <Lock className="w-3.5 h-3.5 text-[#FFA266]/70" />
                           <span>
-                            [ Hint Locked: {formatTime(timeLeft)} • {Math.max(0, 3 - attemptCount)} tries left ]
+                            [ Hint Unlocks in {formatTime(timeLeft)} ]
                           </span>
-                        </>
-                      ) : hintUnlocked ? (
-                        <>
-                          <Unlock className="w-3.5 h-3.5 text-emerald-400" />
-                          <span>{showHint ? '[ Hide Clue Guide ]' : '[ Clue Guide Unlocked 🔓 ]'}</span>
                         </>
                       ) : (
                         <>
-                          <Zap className="w-3.5 h-3.5 text-[#FFA266]" />
-                          <span>{isBypassing ? '[ Close Bypass Terminal ]' : '[ Security Override Ready (Unlock Clue Guide ⚡) ]'}</span>
+                          <Unlock className={`w-3.5 h-3.5 ${showHint ? 'text-emerald-400' : 'text-[#FFA266]'}`} />
+                          <span>{showHint ? '[ Hide Clue Guide ]' : '[ View Clue Guide 🔓 ]'}</span>
                         </>
                       )}
                     </button>
@@ -669,7 +575,7 @@ With the help of this decoding key and the parameters above, please derive the A
                         exit={{ opacity: 0, y: 4 }}
                         className="text-[11px] font-mono text-[#FFA266] bg-[#140E0A] border border-[#FFA266]/30 px-3 py-1.5 rounded-lg text-left sm:text-right max-w-sm leading-relaxed shadow-xl"
                       >
-                        Hey, no shortcuts yet! 😉 Explore the portfolio to track down the 3 hidden words. Give it {Math.max(0, 3 - attemptCount)} more {3 - attemptCount === 1 ? 'try' : 'tries'} or hang tight for {formatTime(timeLeft)}!
+                        Hey, no shortcuts yet! 😉 Explore the portfolio to track down the 3 hidden words. The clue guide unlocks after you&apos;ve spent 5 minutes on the site (hang tight for {formatTime(timeLeft)})!
                       </motion.div>
                     )}
                   </div>
@@ -677,87 +583,9 @@ With the help of this decoding key and the parameters above, please derive the A
               );
             })()}
 
-            {/* Kinetic 25-Tap Bypass Mini-Game (Before Unlocked) */}
+            {/* Clue Guide (Revealed after 5 minutes) */}
             <AnimatePresence>
-              {isBypassing && !hintUnlocked && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="rounded-2xl bg-black/80 border border-[#E88053]/40 p-5 text-center space-y-4 shadow-[0_15px_35px_rgba(232,128,83,0.12)] overflow-hidden"
-                >
-                  <div className="space-y-1">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#24170F] border border-[#FFA266]/30 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-widest">
-                      <Zap className="w-3.5 h-3.5 animate-pulse" />
-                      <span>KINETIC FIREWALL BYPASS PROTOCOL</span>
-                    </div>
-                    <h3 className="font-display text-lg sm:text-xl font-black uppercase text-white tracking-wide">
-                      HINT VAULT IS ENCRYPTED
-                    </h3>
-                    <p className="text-xs text-[#F5EBD9]/70 font-sans max-w-md mx-auto leading-relaxed">
-                      Hints aren&apos;t free! Rapid-tap the capacitor to generate kinetic energy and override the firewall.
-                    </p>
-                  </div>
-
-                  {/* Dynamic Progress Gauge */}
-                  <div className="max-w-md mx-auto space-y-2">
-                    <div className="flex items-center justify-between text-xs font-mono">
-                      <span className="text-[#FFA266] font-bold">
-                        {tapCount === 0 && 'STATUS: CAPACITOR IDLE [0%]'}
-                        {tapCount > 0 &&
-                          tapCount < 10 &&
-                          `STATUS: INJECTING POWER [${Math.round((tapCount / REQUIRED_TAPS) * 100)}%]`}
-                        {tapCount >= 10 &&
-                          tapCount < 20 &&
-                          `STATUS: OVERCLOCKING CORE! [${Math.round((tapCount / REQUIRED_TAPS) * 100)}%]`}
-                        {tapCount >= 20 &&
-                          `STATUS: SYSTEM OVERLOAD IMMINENT! [${Math.round((tapCount / REQUIRED_TAPS) * 100)}%]`}
-                      </span>
-                      <span className="text-white font-bold">
-                        {tapCount} / {REQUIRED_TAPS} TAPS
-                      </span>
-                    </div>
-
-                    <div className="h-3.5 w-full rounded-full bg-white/10 overflow-hidden p-0.5 border border-[#D4BC98]/20">
-                      <motion.div
-                        className="h-full rounded-full bg-gradient-to-r from-[#E88053] via-[#FFA266] to-[#FF7A45] shadow-[0_0_14px_rgba(255,162,102,0.85)]"
-                        style={{ width: `${(tapCount / REQUIRED_TAPS) * 100}%` }}
-                        transition={{ type: 'spring', damping: 20, stiffness: 200 }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Tactile 25-Tap Arcade Button */}
-                  <div className="pt-1">
-                    <motion.button
-                      type="button"
-                      onClick={() => {
-                        const nextCount = tapCount + 1;
-                        setTapCount(nextCount);
-                        playTapAscend(nextCount, REQUIRED_TAPS);
-
-                        if (nextCount >= REQUIRED_TAPS) {
-                          playUnlockFanfare();
-                          setHintUnlocked(true);
-                          setIsBypassing(false);
-                          setShowHint(true);
-                        }
-                      }}
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.92 }}
-                      className="relative px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-[#E88053] via-[#FF7A45] to-[#C75B32] hover:from-[#FFA266] hover:to-[#E88053] text-white font-mono text-xs sm:text-sm font-black tracking-wider uppercase transition-all shadow-[0_10px_25px_rgba(232,128,83,0.4)] active:shadow-none cursor-pointer inline-flex items-center gap-2.5 border border-white/20 select-none"
-                    >
-                      <Zap className="w-4 h-4 fill-white animate-bounce" />
-                      <span>TAP RAPIDLY! ({REQUIRED_TAPS - tapCount} TAPS LEFT)</span>
-                    </motion.button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Unlocked Clue Guide (Only After 25 Taps) */}
-            <AnimatePresence>
-              {showHint && hintUnlocked && (
+              {showHint && timeLeft <= 0 && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
@@ -767,7 +595,7 @@ With the help of this decoding key and the parameters above, please derive the A
                   <div className="flex items-center justify-between border-b border-[#D4BC98]/15 pb-2">
                     <div className="text-emerald-400 font-bold text-[11px] tracking-wider uppercase flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5" />
-                      <span>// FIREWALL OVERRIDDEN &bull; CLUE GUIDE UNLOCKED</span>
+                      <span>// 5-MINUTE EXPLORATION COMPLETE &bull; CLUE GUIDE UNLOCKED</span>
                     </div>
                     <span className="text-[10px] text-[#F5EBD9]/50 font-mono hidden sm:inline">
                       [ORDER: PROJECT &rarr; HACKATHONS &rarr; MARTIAL ART]

@@ -19,10 +19,26 @@ import { ContactSection } from '@/components/contact/ContactSection';
 import { Footer } from '@/components/footer/Footer';
 
 import { Preloader } from '@/components/ui/Preloader';
+import { MobilePortfolio } from '@/components/mobile/MobilePortfolio';
 
 export default function Home() {
   useEffect(() => {
+    // Only initialize desktop Lenis smooth scroll and ScrollTrigger if desktop viewport
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      return;
+    }
+
     gsap.registerPlugin(ScrollTrigger);
+
+    // Record arrival timestamp for the 5-minute hint reveal timer
+    try {
+      if (!sessionStorage.getItem('portfolio_stay_start')) {
+        sessionStorage.setItem('portfolio_stay_start', String(Date.now()));
+      }
+    } catch {
+      // Ignore storage error
+    }
 
     // Initialize Lenis Smooth Scroll with high-performance linear interpolation (lerp)
     const isTouchOnly = window.matchMedia('(pointer: coarse) and (hover: none)').matches;
@@ -66,47 +82,61 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen bg-[#080808] text-[#E8E5DF] overflow-x-clip">
-      {/* Developer Terminal Preloader */}
-      <Preloader />
+      {/* ──────────────────────────────────────────────────────────────────────────
+          1. DEDICATED MINIMAL MOBILE VIEW (Visible strictly on screens < 768px)
+          Inspired by pareekshithpalat.vercel.app with our custom theme & brand
+      ────────────────────────────────────────────────────────────────────────── */}
+      <div className="block md:hidden">
+        <MobilePortfolio />
+      </div>
 
-      {/* Subtle Developer Background Ambient Elements */}
-      <DeveloperDecorations />
+      {/* ──────────────────────────────────────────────────────────────────────────
+          2. FULL FEATURED DESKTOP VIEW (Visible strictly on screens >= 768px)
+          Preserves 100% of all existing 3D scenes, GSAP animations & layout
+      ────────────────────────────────────────────────────────────────────────── */}
+      <div className="hidden md:block">
+        {/* Developer Terminal Preloader */}
+        <Preloader />
 
-      {/* Custom Subtle Dot Cursor */}
-      <CustomCursor />
+        {/* Subtle Developer Background Ambient Elements */}
+        <DeveloperDecorations />
 
-      {/* Modern Cylinder Floating Navigation */}
-      <Navbar />
+        {/* Custom Subtle Dot Cursor */}
+        <CustomCursor />
 
-      {/* Full-Screen Hero Section */}
-      <HeroSection />
+        {/* Modern Cylinder Floating Navigation */}
+        <Navbar />
 
-      {/* Fun & Relatable Word-by-Word Scroll Reveal Manifesto */}
-      <TextRevealByWord text="<\ I build software, design systems, and turn ideas into products. I work across web, blockchain, AI, and interactive technology, constantly exploring new tools, solving complex problems. >" />
+        {/* Full-Screen Hero Section */}
+        <HeroSection />
 
-      {/* Section 01: Creative Passion & Engineering (I Love To Code / Build / Learn / Ship) */}
-      <ScrollAnimation />
+        {/* Fun & Relatable Word-by-Word Scroll Reveal Manifesto */}
+        <TextRevealByWord text="<\ I build software, design systems, and turn ideas into products. I work across web, blockchain, AI, and interactive technology, constantly exploring new tools, solving complex problems. >" />
 
-      {/* Flow Art Story Scroll Showcase (with integrated live BUILD camera zoom transition) */}
-      <FlowAboutStorySection />
+        {/* Section 01: Creative Passion & Engineering (I Love To Code / Build / Learn / Ship) */}
+        <ScrollAnimation />
 
-      {/* Floating Milestone Showcase (25+ Hackathons, 20+ Finalists, Intl Silambam Bronze) */}
-      <AchievementsShowcaseSection />
+        {/* Flow Art Story Scroll Showcase (with integrated live BUILD camera zoom transition) */}
+        <FlowAboutStorySection />
 
-      {/* Professional Experience Timeline */}
-      <ExperienceSection />
+        {/* Floating Milestone Showcase (25+ Hackathons, 20+ Finalists, Intl Silambam Bronze) */}
+        <AchievementsShowcaseSection />
 
-      {/* Proof of Work & Community Staggered Grid */}
-      <TechTicker />
+        {/* Professional Experience Timeline */}
+        <ExperienceSection />
 
-      {/* Interactive Cryptographic Decrypt Challenge */}
-      <DecryptChallengeSection />
+        {/* Proof of Work & Community Staggered Grid */}
+        <TechTicker />
 
-      {/* Dramatic Contact CTA */}
-      <ContactSection />
+        {/* Interactive Cryptographic Decrypt Challenge */}
+        <DecryptChallengeSection />
 
-      {/* Minimal Footer */}
-      <Footer />
+        {/* Dramatic Contact CTA */}
+        <ContactSection />
+
+        {/* Minimal Footer */}
+        <Footer />
+      </div>
     </main>
   );
 }
