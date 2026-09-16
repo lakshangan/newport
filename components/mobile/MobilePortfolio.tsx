@@ -14,10 +14,75 @@ import {
   Sparkles,
   Trophy,
   Terminal,
-  Code2
+  Code2,
+  Monitor,
+  Copy,
+  Check,
+  X,
+  Layers
 } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaXTwitter, FaInstagram } from 'react-icons/fa6';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
+
+// Authentic hackathons, summits & builder moments from desktop
+const MOBILE_GALLERY = [
+  {
+    src: '/images/IMG_8920.JPG',
+    title: 'NIT Calicut National Stage',
+    event: "Kerala's Largest Web3 Hackathon",
+    tag: '1ST PLACE TRACK WIN',
+    location: 'NIT Calicut',
+  },
+  {
+    src: '/images/sihprize.JPG',
+    title: 'Smart India Hackathon Finals',
+    event: 'National Innovation Initiative',
+    tag: 'SIH FINALIST',
+    location: 'Ministry of Education',
+  },
+  {
+    src: '/images/IMG_0400.jpeg',
+    title: 'Beyond Abstraction Demo Day',
+    event: 'Router Protocol x Pivot Demo Day',
+    tag: 'VENTURE PITCH',
+    location: 'Bengaluru',
+  },
+  {
+    src: '/images/IMG_8355.jpeg',
+    title: 'Tech Hub Workshop & Keynote',
+    event: 'Web3 & AI Developer Mentoring',
+    tag: 'SPEAKER // LEAD',
+    location: 'Campus Tech Hub',
+  },
+  {
+    src: '/images/IMG_0397.jpeg',
+    title: 'Midnight Hackathon Sprint',
+    event: 'Code, Chaos & High-Tempo Builds',
+    tag: 'BUILD MARATHON',
+    location: 'Bengaluru',
+  },
+  {
+    src: '/images/IMG_0399.jpeg',
+    title: 'Technical Keynote & Live Demo',
+    event: 'Smart Contract Architecture Talk',
+    tag: 'KEYNOTE',
+    location: 'Auditorium',
+  },
+  {
+    src: '/images/metamaskcommunitymeet.png',
+    title: 'MetaMask Community Meet',
+    event: 'Consensys & Ethereum Ecosystem',
+    tag: 'COMMUNITY',
+    location: 'Dev Meetup',
+  },
+  {
+    src: '/images/binancemeetup.png',
+    title: 'Binance Community Summit',
+    event: 'Web3 Builders & Ecosystem',
+    tag: 'COMMUNITY',
+    location: 'Summit',
+  },
+];
 
 // Multilingual greeting cycle inspired by pareekshithpalat.vercel.app
 const GREETINGS = [
@@ -40,6 +105,17 @@ export const MobilePortfolio: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const [activePhoto, setActivePhoto] = useState<typeof MOBILE_GALLERY[0] | null>(null);
+
+  const handleCopyDesktopLink = () => {
+    if (typeof window !== 'undefined') {
+      const url = window.location.origin || 'https://lakshan-dev.vercel.app';
+      navigator.clipboard.writeText(url);
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 2500);
+    }
+  };
 
   // Cycle multilingual greeting every 2.4s
   useEffect(() => {
@@ -86,9 +162,10 @@ export const MobilePortfolio: React.FC = () => {
           <span>LAKSHAN G</span>
         </a>
 
-        <nav className="flex items-center gap-4 text-[11px] font-mono uppercase tracking-wider text-white/60">
+        <nav className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-wider text-white/60">
           <a href="#about" className="hover:text-white transition-colors">About</a>
           <a href="#work" className="hover:text-white transition-colors">Work</a>
+          <a href="#gallery" className="hover:text-white transition-colors">Gallery</a>
           <a href="#experience" className="hover:text-white transition-colors">Journey</a>
           <a 
             href="#contact" 
@@ -440,6 +517,186 @@ export const MobilePortfolio: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* ──────────────────────────────────────────────────────────────────────────
+          5.5 PROOF OF WORK / PHOTO GALLERY & DESKTOP EDITION CALLOUT
+      ────────────────────────────────────────────────────────────────────────── */}
+      <section id="gallery" className="py-16 px-5 border-t border-white/10 bg-[#08080a]">
+        <div className="max-w-md mx-auto space-y-8">
+          {/* Section Marker */}
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-[#C75B32]" />
+            <h2 className="text-xs font-mono font-semibold text-white/60 uppercase tracking-widest">
+              Proof of Work &amp; Moments
+            </h2>
+          </div>
+
+          {/* ───────────── PROMINENT DESKTOP EXPERIENCE INVITATION CARD ───────────── */}
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#18110D] via-[#120B07] to-[#08080a] border border-[#C75B32]/50 p-6 shadow-2xl space-y-4">
+            {/* Ambient Background Glow */}
+            <div className="absolute -top-12 -right-12 w-44 h-44 bg-[#C75B32]/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-12 -left-12 w-40 h-40 bg-[#E88053]/10 rounded-full blur-2xl pointer-events-none" />
+
+            {/* Badge */}
+            <div className="flex items-center justify-between">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C75B32]/20 border border-[#C75B32]/40 text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
+                <Monitor className="w-3.5 h-3.5 animate-pulse text-[#FFA266]" />
+                <span>3D &amp; MOTION DESKTOP EDITION</span>
+              </div>
+              <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
+                PC / MAC
+              </span>
+            </div>
+
+            {/* Headline */}
+            <div className="space-y-2">
+              <h3 className="font-serif text-2xl text-white font-bold leading-tight">
+                View on Desktop for the Full 3D &amp; Animation Experience
+              </h3>
+              <p className="text-white/75 text-xs leading-relaxed text-justify">
+                You are currently experiencing the fast, minimal mobile version. To explore the full portfolio — including <span className="text-white font-medium">immersive 3D studio environments</span>, <span className="text-white font-medium">cinematic GSAP scroll reveals</span>, the <span className="text-white font-medium">interactive cryptographic cipher game</span>, and spatial animations — visit this website on your desktop or laptop.
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="pt-2 space-y-2.5">
+              <button
+                type="button"
+                onClick={handleCopyDesktopLink}
+                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#C75B32] via-[#E06D43] to-[#C75B32] hover:brightness-110 text-white text-xs font-mono font-bold uppercase tracking-wider transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-2 select-none"
+              >
+                {linkCopied ? (
+                  <>
+                    <Check className="w-4 h-4 text-white" />
+                    <span>Link Copied! Open on your PC</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4 text-white" />
+                    <span>Copy Link for Desktop</span>
+                  </>
+                )}
+              </button>
+
+              <div className="flex items-center justify-center gap-2 text-[10px] font-mono text-white/40">
+                <span>Direct URL:</span>
+                <span className="text-[#FFA266]/90 font-medium select-all">
+                  lakshan-dev.vercel.app
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Section Title for Photos */}
+          <div className="space-y-1.5 pt-2">
+            <h3 className="font-serif text-2xl text-white font-normal leading-snug">
+              Captured in the <span className="italic text-[#E88053]">trenches</span>.
+            </h3>
+            <p className="text-white/60 text-xs font-mono">
+              National hackathons, demo days, speaker stages &amp; builder summits. Tap any photo to view.
+            </p>
+          </div>
+
+          {/* 2-Column Responsive Photo Grid */}
+          <div className="grid grid-cols-2 gap-3">
+            {MOBILE_GALLERY.map((item, idx) => (
+              <div
+                key={idx}
+                onClick={() => setActivePhoto(item)}
+                className="group relative rounded-xl overflow-hidden bg-white/[0.03] border border-white/10 hover:border-[#C75B32]/50 transition-all duration-300 active:scale-95 cursor-pointer flex flex-col"
+              >
+                {/* Photo Container */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/40">
+                  <Image
+                    src={item.src}
+                    alt={item.title}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 300px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-105"
+                  />
+                  {/* Subtle Gradient Scrim at bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+
+                  {/* Tag Badge */}
+                  <div className="absolute top-2 left-2">
+                    <span className="px-1.5 py-0.5 text-[8px] font-mono font-bold rounded bg-black/70 backdrop-blur-md border border-white/15 text-[#FFA266] uppercase tracking-wider">
+                      {item.tag}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Caption Bar */}
+                <div className="p-2.5 bg-[#0D0D10] space-y-0.5 flex-1 flex flex-col justify-between">
+                  <h4 className="text-[11px] font-bold text-white line-clamp-1 group-hover:text-[#FFA266] transition-colors leading-tight">
+                    {item.title}
+                  </h4>
+                  <div className="flex items-center justify-between text-[9px] font-mono text-white/50">
+                    <span className="truncate max-w-[90px]">{item.location}</span>
+                    <span className="text-[#C75B32] font-semibold">VIEW ↗</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Lightbox Modal for Photo Preview */}
+      <AnimatePresence>
+        {activePhoto && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActivePhoto(null)}
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-5"
+          >
+            <motion.div
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-sm w-full bg-[#111115] border border-white/20 rounded-2xl overflow-hidden shadow-2xl"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setActivePhoto(null)}
+                className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-black/60 text-white hover:bg-white/20 transition-colors"
+                aria-label="Close Preview"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              {/* Modal Image */}
+              <div className="relative aspect-[4/3] w-full bg-black">
+                <Image
+                  src={activePhoto.src}
+                  alt={activePhoto.title}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+
+              {/* Modal Details */}
+              <div className="p-4 space-y-1 bg-[#0E0E12]">
+                <div className="inline-block px-2 py-0.5 text-[9px] font-mono font-bold rounded bg-[#C75B32]/20 text-[#FFA266] border border-[#C75B32]/30 uppercase tracking-wider mb-1">
+                  {activePhoto.tag}
+                </div>
+                <h4 className="font-serif text-lg font-bold text-white leading-tight">
+                  {activePhoto.title}
+                </h4>
+                <p className="text-xs text-white/70">
+                  {activePhoto.event}
+                </p>
+                <div className="pt-2 flex items-center justify-between text-[10px] font-mono text-white/40 border-t border-white/10 mt-2">
+                  <span>LOCATION: {activePhoto.location}</span>
+                  <span className="text-[#C75B32]">ARCHIVE // 2026</span>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ──────────────────────────────────────────────────────────────────────────
           6. MY JOURNEY / EXPERIENCE TIMELINE (Vertical Left Timeline)
