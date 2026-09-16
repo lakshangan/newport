@@ -102,20 +102,20 @@ export const MobilePortfolio: React.FC = () => {
       {/* ──────────────────────────────────────────────────────────────────────────
           2. MINIMAL HERO SECTION (Multilingual blur-in + Portrait fade + Italic quote)
       ────────────────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[92vh] flex flex-col justify-between items-center text-center px-5 pt-28 pb-8 overflow-hidden">
+      <section className="relative min-h-[100svh] flex flex-col justify-end items-center text-center px-5 pt-20 pb-6 overflow-hidden">
         {/* Subtle Ambient Blurred Radial Orbs */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-[#C75B32]/15 rounded-full blur-3xl" />
           <div className="absolute bottom-1/3 right-0 w-64 h-64 bg-white/[0.03] rounded-full blur-3xl" />
         </div>
 
-        {/* Subtle Silhouette Background Image Fading to Black at Bottom */}
-        <div className="absolute inset-0 z-0 flex items-end justify-center pointer-events-none select-none overflow-hidden opacity-35">
+        {/* Clear & Visible Portrait Image Centered on Face */}
+        <div className="absolute inset-0 z-0 flex items-start justify-center pointer-events-none select-none overflow-hidden">
           <div 
-            className="relative h-[85vh] w-full"
+            className="relative h-[80vh] w-full"
             style={{
-              maskImage: 'linear-gradient(to bottom, black 10%, black 50%, transparent 95%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, black 10%, black 50%, transparent 95%)',
+              maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 95%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 95%)',
             }}
           >
             <Image
@@ -123,30 +123,32 @@ export const MobilePortfolio: React.FC = () => {
               alt="Lakshan Ganesan"
               fill
               priority
-              className="object-cover object-bottom filter grayscale contrast-125 brightness-90"
+              className="object-cover object-[28%_12%] filter grayscale contrast-115 brightness-100"
             />
           </div>
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#08080a] to-transparent" />
+          {/* Deep dark gradient scrim for bottom text readability */}
+          <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-[#08080a] via-[#08080a]/90 to-transparent" />
         </div>
 
-        {/* Top Tagline / Category Badge */}
-        <div className="relative z-10 pt-4">
-          <p className="text-[#C75B32] font-mono font-semibold tracking-[0.22em] uppercase text-[10px] sm:text-xs">
-            FULL STACK DEVELOPER • AI &amp; BLOCKCHAIN
-          </p>
-        </div>
+        {/* Text Positioned Down so Face has Full Space Above */}
+        <div className="relative z-10 w-full max-w-sm mx-auto flex flex-col items-center justify-end space-y-3 pb-2">
+          {/* Top Tagline / Category Badge */}
+          <div>
+            <p className="text-[#C75B32] font-mono font-semibold tracking-[0.22em] uppercase text-[10px] sm:text-xs">
+              FULL STACK DEVELOPER • AI &amp; BLOCKCHAIN
+            </p>
+          </div>
 
-        {/* Multilingual Center Animated Heading */}
-        <div className="relative z-10 w-full my-auto py-6 flex flex-col items-center justify-center">
-          <div className="h-28 sm:h-36 flex items-center justify-center relative w-full">
+          {/* Multilingual Animated Heading */}
+          <div className="h-16 sm:h-20 flex items-center justify-center relative w-full">
             <AnimatePresence mode="wait">
               <motion.h1
                 key={GREETINGS[greetingIndex]}
-                initial={{ y: 20, opacity: 0, filter: 'blur(10px)' }}
+                initial={{ y: 15, opacity: 0, filter: 'blur(8px)' }}
                 animate={{ y: 0, opacity: 0.95, filter: 'blur(0px)' }}
-                exit={{ y: -20, opacity: 0, filter: 'blur(10px)' }}
+                exit={{ y: -15, opacity: 0, filter: 'blur(8px)' }}
                 transition={{ duration: 0.45, ease: 'easeOut' }}
-                className="text-[17vw] sm:text-[14vw] font-bold text-white tracking-tighter leading-none absolute w-full text-center select-none"
+                className="text-[13vw] sm:text-5xl font-bold text-white tracking-tighter leading-none absolute w-full text-center select-none"
               >
                 {GREETINGS[greetingIndex]}
               </motion.h1>
@@ -156,11 +158,11 @@ export const MobilePortfolio: React.FC = () => {
             <AnimatePresence mode="wait">
               <motion.h1
                 key={`${GREETINGS[greetingIndex]}-glow`}
-                initial={{ y: 20, opacity: 0, filter: 'blur(12px)' }}
+                initial={{ y: 15, opacity: 0, filter: 'blur(10px)' }}
                 animate={{ y: 0, opacity: 0.25, filter: 'blur(6px)' }}
-                exit={{ y: -20, opacity: 0, filter: 'blur(12px)' }}
+                exit={{ y: -15, opacity: 0, filter: 'blur(10px)' }}
                 transition={{ duration: 0.45, ease: 'easeOut' }}
-                className="text-[17vw] sm:text-[14vw] font-bold text-[#C75B32] tracking-tighter leading-none absolute pointer-events-none w-full text-center select-none"
+                className="text-[13vw] sm:text-5xl font-bold text-[#C75B32] tracking-tighter leading-none absolute pointer-events-none w-full text-center select-none"
               >
                 {GREETINGS[greetingIndex]}
               </motion.h1>
@@ -168,19 +170,19 @@ export const MobilePortfolio: React.FC = () => {
           </div>
 
           {/* Minimal Italic Motto flanked by subtle hairline lines */}
-          <div className="flex items-center gap-3 mt-4 max-w-xs mx-auto">
-            <div className="h-px w-8 bg-white/40 flex-shrink-0" />
-            <p className="text-white/80 text-xs sm:text-sm font-serif italic tracking-wide leading-relaxed">
-              designing &amp; engineering <br />
-              <span className="text-white font-medium not-italic font-mono text-[11px] tracking-wider text-[#E88053]">
-                intelligent systems
+          <div className="flex items-center gap-3 max-w-xs mx-auto">
+            <div className="h-px w-6 bg-white/40 flex-shrink-0" />
+            <p className="text-white/80 text-xs font-serif italic tracking-wide leading-relaxed text-center">
+              architecting &amp; engineering <br />
+              <span className="text-white font-medium not-italic font-mono text-[10px] tracking-wider text-[#E88053] uppercase">
+                full stack systems
               </span>
             </p>
-            <div className="h-px w-8 bg-white/40 flex-shrink-0" />
+            <div className="h-px w-6 bg-white/40 flex-shrink-0" />
           </div>
 
           {/* Action CTAs */}
-          <div className="flex items-center gap-3 mt-7">
+          <div className="flex items-center gap-3 pt-1">
             <a
               href="/Lakshan_Resume copy.pdf"
               download="Lakshan_Resume.pdf"
@@ -197,14 +199,14 @@ export const MobilePortfolio: React.FC = () => {
               Get in Touch
             </a>
           </div>
-        </div>
 
-        {/* Minimal Bottom Scroll Indicator */}
-        <div className="relative z-10 flex flex-col items-center gap-2 pt-2">
-          <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/40">
-            Scroll
-          </span>
-          <span className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent" />
+          {/* Minimal Bottom Scroll Indicator */}
+          <div className="flex flex-col items-center gap-1.5 pt-2">
+            <span className="text-[9px] font-mono uppercase tracking-[0.25em] text-white/40">
+              Scroll
+            </span>
+            <span className="w-px h-8 bg-gradient-to-b from-white/30 to-transparent" />
+          </div>
         </div>
       </section>
 
