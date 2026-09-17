@@ -307,7 +307,7 @@ export const MobilePortfolio: React.FC = () => {
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.1] text-[11px] text-white/70 hover:text-white transition-all active:scale-95 shadow-sm"
           >
             <AppleDisplayIcon className="w-3.5 h-3.5 text-white/80" />
-            <span>{linkCopied ? 'Desktop Link Copied ✓' : '3D Edition on Desktop'}</span>
+            <span>{linkCopied ? 'Desktop Link Copied ✓' : 'See the alternate design on desktop'}</span>
             <ArrowUpRight className="w-3 h-3 text-white/40" />
           </button>
         </motion.div>
