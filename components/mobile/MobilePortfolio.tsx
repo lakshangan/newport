@@ -322,21 +322,21 @@ export const MobilePortfolio: React.FC = () => {
           <div className="absolute bottom-1/4 right-0 w-60 h-60 bg-white/[0.02] rounded-full blur-[90px]" />
         </div>
 
-        {/* Cinematic Portrait Image with Natural Gradient Mask */}
+        {/* Cinematic Portrait Background with Natural Gradient Mask */}
         <div className="absolute inset-0 z-0 flex items-start justify-center pointer-events-none select-none overflow-hidden">
           <div 
-            className="relative h-[82vh] w-full max-w-md mx-auto"
+            className="relative h-[85vh] w-full max-w-md mx-auto"
             style={{
-              maskImage: 'linear-gradient(to bottom, black 0%, black 58%, transparent 95%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 58%, transparent 95%)',
+              maskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 98%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 98%)',
             }}
           >
             <Image
-              src="/images/hero_portrait.jpg"
+              src="/images/mobherosection.png"
               alt="Lakshan Ganesan"
               fill
               priority
-              className="object-cover object-[50%_15%] filter contrast-[1.04] brightness-100"
+              className="object-cover object-[50%_12%] filter contrast-[1.04] brightness-100"
             />
           </div>
           {/* Deep dark gradient scrim for bottom text readability */}
