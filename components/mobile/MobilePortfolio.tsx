@@ -350,14 +350,6 @@ export const MobilePortfolio: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 w-full max-w-md mx-auto flex flex-col items-center text-center space-y-4"
         >
-          {/* Status Capsule */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.1] backdrop-blur-md">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="text-[10px] font-mono font-medium tracking-wide text-white/80">
-              Available for new projects
-            </span>
-          </div>
-
           {/* Hero Name & Title */}
           <div className="space-y-1">
             <h1 className="text-[11.5vw] xs:text-5xl font-extrabold tracking-tight text-white leading-[1.05]">
