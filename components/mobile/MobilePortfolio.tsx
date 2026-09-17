@@ -1,31 +1,77 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowUpRight, 
-  ExternalLink, 
   Mail, 
-  Send, 
-  CheckCircle2, 
-  ArrowUp,
-  Award,
-  Sparkles,
-  Trophy,
-  Terminal,
-  Code2,
-  Monitor,
-  Copy,
-  Check,
-  X,
-  Layers
+  Copy, 
+  Check, 
+  X, 
+  ArrowUp
 } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaXTwitter, FaInstagram } from 'react-icons/fa6';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 
-// Authentic desktop Proof of Work items
-const DESKTOP_STAGGERED_PHOTOS = [
+// Custom Monochromatic Apple-Grade Vector SVGs
+const AppleDisplayIcon: React.FC<{ className?: string }> = ({ className = 'w-3.5 h-3.5' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="3" width="20" height="14" rx="2" />
+    <path d="M8 21h8" />
+    <path d="M12 17v4" />
+    <line x1="7" y1="7" x2="7.01" y2="7" strokeWidth="2.5" />
+  </svg>
+);
+
+const SilambamMedalIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="14" r="7" />
+    <circle cx="12" cy="14" r="4.5" strokeDasharray="2 2" />
+    <path d="M12 11.5L12.7 13.2L14.5 13.5L13.2 14.7L13.5 16.5L12 15.6L10.5 16.5L10.8 14.7L9.5 13.5L11.3 13.2L12 11.5Z" fill="currentColor" fillOpacity="0.25" />
+    <path d="M8 3L10.2 7.5M16 3L13.8 7.5" />
+    <path d="M5.5 3H10.5M13.5 3H18.5" />
+  </svg>
+);
+
+const GovtSealIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2L3 6.5V11.5C3 17.1 6.8 22.3 12 23.5C17.2 22.3 21 17.1 21 11.5V6.5L12 2Z" />
+    <path d="M8.5 12L10.8 14.3L15.5 9.6" />
+  </svg>
+);
+
+const HackathonTrophyIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 4H18V9C18 12.3 15.3 15 12 15C8.7 15 6 12.3 6 9V4Z" />
+    <path d="M6 6H3.5C2.7 6 2 6.7 2 7.5C2 9.4 3.6 11 5.5 11H6" />
+    <path d="M18 6H20.5C21.3 6 22 6.7 22 7.5C22 9.4 20.4 11 18.5 11H18" />
+    <path d="M12 15V19M8 21H16" />
+  </svg>
+);
+
+const WinnerStarIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2.5L14.7 8.5L21.2 9.1L16.3 13.5L17.8 19.9L12 16.5L6.2 19.9L7.7 13.5L2.8 9.1L9.3 8.5L12 2.5Z" fill="currentColor" fillOpacity="0.2" />
+  </svg>
+);
+
+const SihEmblemIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="16" rx="3" />
+    <path d="M7 8H17M7 12H13M7 16H10" />
+  </svg>
+);
+
+const TechLeadIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2.5" y="4" width="19" height="16" rx="3" />
+    <path d="M6.5 9.5L10 12L6.5 14.5M12.5 15H17" />
+  </svg>
+);
+
+// Curated authentic visual proof of work
+const CURATED_PROOF_PHOTOS = [
   {
     src: '/images/IMG_8920.JPG',
     title: 'NIT Calicut National Stage',
@@ -39,6 +85,13 @@ const DESKTOP_STAGGERED_PHOTOS = [
     event: 'National Innovation Winner',
     tag: 'NATIONAL WINNER',
     location: 'New Delhi',
+  },
+  {
+    src: '/campus ambassador certificate.png',
+    title: 'MyGov Campus Ambassador Certificate',
+    event: 'Ministry of Electronics & IT (MeitY)',
+    tag: 'GOVT OF INDIA',
+    location: 'National Leadership',
   },
   {
     src: '/images/IMG_0400.jpeg',
@@ -55,163 +108,71 @@ const DESKTOP_STAGGERED_PHOTOS = [
     location: 'Tech Hub',
   },
   {
+    src: '/images/delhisih.jpg',
+    title: 'Smart India Hackathon Finals',
+    event: 'National Hardware & AI Finals',
+    tag: 'SIH FINALS',
+    location: 'New Delhi',
+  },
+  {
+    src: '/images/buildonchainNITkerala.png',
+    title: 'Build On-Chain NIT Kerala',
+    event: 'Web3 Hackathon Champion',
+    tag: 'HACKATHON WIN',
+    location: 'NIT Calicut',
+  },
+  {
     src: '/images/router protocol.jpg',
     title: 'Router Protocol Demo Day',
     event: 'Hackathon Partner Demo Day',
     tag: 'DEMO DAY',
     location: 'Bengaluru',
   },
-  {
-    src: '/images/delhisih.jpg',
-    title: 'Smart India Hackathon Delhi',
-    event: 'National Finals // Hardware & AI',
-    tag: 'SIH FINALS',
-    location: 'New Delhi',
-  },
-  {
-    src: '/guestLecture.png',
-    title: 'Guest Lecture & Technical Talk',
-    event: 'Keynote Speaker // Academic Invite',
-    tag: 'KEYNOTE',
-    location: 'Auditorium',
-  },
-  {
-    src: '/images/delhi sid.JPG',
-    title: 'Delhi Tech Delegation',
-    event: 'Summit & Networking',
-    tag: 'DELEGATION',
-    location: 'New Delhi',
-  },
-  {
-    src: '/images/IMG_0397.jpeg',
-    title: 'Midnight Hackathon Sprint',
-    event: 'Red Bull & Code Chaos',
-    tag: 'HACKATHON',
-    location: 'Bengaluru',
-  },
-  {
-    src: '/images/IMG_0399.jpeg',
-    title: 'Technical Keynote & Architecture',
-    event: 'Live Demo & Presentation',
-    tag: 'LIVE DEMO',
-    location: 'Auditorium',
-  },
-  {
-    src: '/images/IMG_9072.jpeg',
-    title: 'Formal Tech Delegation',
-    event: 'Honors & Recognition',
-    tag: 'HONORS',
-    location: 'State Stage',
-  },
-  {
-    src: '/images/IMG_0398.jpeg',
-    title: 'Hackathon Builder Squad',
-    event: 'Team Collaboration // Stage',
-    tag: 'BUILD SQUAD',
-    location: 'Hackathon',
-  },
-  {
-    src: '/images/metamaskcommunitymeet.png',
-    title: 'MetaMask Community Meet',
-    event: 'Consensys & Ethereum Ecosystem',
-    tag: 'DEV MEET',
-    location: 'Consensys',
-  },
-  {
-    src: '/images/binancemeetup.png',
-    title: 'Binance Community Summit',
-    event: 'Web3 Builders & Ecosystem',
-    tag: 'COMMUNITY',
-    location: 'Summit',
-  },
-  {
-    src: '/images/Businesspitch.png',
-    title: 'Startup & Business Pitch',
-    event: 'Venture & Demo Day',
-    tag: 'VENTURE',
-    location: 'Demo Day',
-  },
-  {
-    src: '/images/Rtalks.png',
-    title: 'R Talks Keynote Session',
-    event: 'Community & Tech Talks',
-    tag: 'COMMUNITY',
-    location: 'Tech Hub',
-  },
-  {
-    src: '/images/buildonchainNITkerala.png',
-    title: 'Build On-Chain NIT Kerala',
-    event: 'Web3 Hackathon // NIT',
-    tag: 'WEB3 HACK',
-    location: 'NIT Calicut',
-  },
-  {
-    src: '/images/web3class.png',
-    title: 'Web3 & Smart Contract Class',
-    event: 'Hands-on Developer Lab',
-    tag: 'DEV LAB',
-    location: 'Classroom',
-  },
 ];
 
-// Multilingual greeting cycle inspired by pareekshithpalat.vercel.app
-const GREETINGS = [
-  'Hello',
-  'வணக்கம்',
-  'नमस्ते',
-  'Bonjour',
-  'Hola',
-  'Ciao',
-  'こんにちは',
-  'Hallo',
-];
+type ProjectCategory = 'ALL' | 'WEB3' | 'AI & WEB';
 
 export const MobilePortfolio: React.FC = () => {
-  const [greetingIndex, setGreetingIndex] = useState(0);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>('ALL');
+  const [activePhoto, setActivePhoto] = useState<typeof CURATED_PROOF_PHOTOS[0] | null>(null);
+  const [emailCopied, setEmailCopied] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
-  const [activePhoto, setActivePhoto] = useState<typeof DESKTOP_STAGGERED_PHOTOS[0] | null>(null);
+
+  // Filter projects by clean categories
+  const filteredProjects = PORTFOLIO_DATA.projects.filter((p) => {
+    if (selectedCategory === 'ALL') return true;
+    if (selectedCategory === 'WEB3') {
+      return (
+        p.category.toLowerCase().includes('defi') ||
+        p.category.toLowerCase().includes('smart contract') ||
+        p.technologies.some((t) => ['Solidity', 'Ethereum', 'Thirdweb', 'Hardhat'].includes(t))
+      );
+    }
+    if (selectedCategory === 'AI & WEB') {
+      return (
+        p.category.toLowerCase().includes('ai') ||
+        p.category.toLowerCase().includes('web') ||
+        p.technologies.some((t) => ['LLMs', 'Generative AI', 'Python', 'Next.js', 'React'].includes(t))
+      );
+    }
+    return true;
+  });
+
+  const handleCopyEmail = () => {
+    if (typeof window !== 'undefined') {
+      navigator.clipboard.writeText(PORTFOLIO_DATA.personal.email);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2200);
+    }
+  };
 
   const handleCopyDesktopLink = () => {
     if (typeof window !== 'undefined') {
       const url = window.location.origin || 'https://lakshan-dev.vercel.app';
       navigator.clipboard.writeText(url);
       setLinkCopied(true);
-      setTimeout(() => setLinkCopied(false), 2500);
+      setTimeout(() => setLinkCopied(false), 2200);
     }
-  };
-
-  // Cycle multilingual greeting every 2.4s
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setGreetingIndex((prev) => (prev + 1) % GREETINGS.length);
-    }, 2400);
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
-    setIsSubmitting(true);
-
-    // Construct mailto link as reliable zero-config mobile delivery
-    const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    window.location.href = `mailto:${PORTFOLIO_DATA.personal.email}?subject=${subject}&body=${body}`;
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-    }, 800);
   };
 
   const scrollToTop = () => {
@@ -219,50 +180,70 @@ export const MobilePortfolio: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#08080a] text-[#f5f5f7] overflow-x-hidden font-sans selection:bg-[#C75B32] selection:text-white">
+    <div className="min-h-screen bg-[#050507] text-[#f5f5f7] overflow-x-hidden font-sans selection:bg-white/20 selection:text-white pb-16">
       {/* ──────────────────────────────────────────────────────────────────────────
-          1. MINIMAL FLOATING TOP BAR
+          1. FLOATING APPLE DYNAMIC PILL HEADER
       ────────────────────────────────────────────────────────────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-5 py-3.5 bg-[#08080a]/85 backdrop-blur-lg border-b border-white/5 flex items-center justify-between">
-        <a 
-          href="#" 
-          className="text-sm font-bold tracking-tight text-white flex items-center gap-1.5"
-        >
-          <span className="w-2 h-2 rounded-full bg-[#C75B32] animate-pulse" />
-          <span>LAKSHAN G</span>
-        </a>
-
-        <nav className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-wider text-white/60">
-          <a href="#about" className="hover:text-white transition-colors">About</a>
-          <a href="#work" className="hover:text-white transition-colors">Work</a>
-          <a href="#gallery" className="hover:text-white transition-colors">Gallery</a>
-          <a href="#experience" className="hover:text-white transition-colors">Journey</a>
-          <a 
-            href="#contact" 
-            className="px-2.5 py-1 rounded-full bg-white/10 text-white border border-white/10 hover:bg-[#C75B32] hover:border-[#C75B32] transition-colors"
-          >
-            Contact
+      <header className="fixed top-3 inset-x-3 max-w-md mx-auto z-50">
+        <nav className="h-12 px-3.5 rounded-full bg-black/75 backdrop-blur-2xl border border-white/[0.12] flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
+          {/* Identity & Status */}
+          <a href="#" className="flex items-center gap-2 group">
+            <div className="w-6 h-6 rounded-full bg-white/[0.1] border border-white/15 flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+              LG
+            </div>
+            <div className="flex items-center gap-1.5 text-[11px] font-medium tracking-tight text-white/90">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="font-semibold">Lakshan</span>
+            </div>
           </a>
+
+          {/* Quick Jump Pills */}
+          <div className="flex items-center gap-1 text-[11px] font-medium">
+            <a 
+              href="#about" 
+              className="px-2.5 py-1 rounded-full text-white/70 hover:text-white hover:bg-white/10 active:scale-95 transition-all"
+            >
+              About
+            </a>
+            <a 
+              href="#achievements" 
+              className="px-2.5 py-1 rounded-full text-white/70 hover:text-white hover:bg-white/10 active:scale-95 transition-all"
+            >
+              Honors
+            </a>
+            <a 
+              href="#work" 
+              className="px-2.5 py-1 rounded-full text-white/70 hover:text-white hover:bg-white/10 active:scale-95 transition-all"
+            >
+              Work
+            </a>
+            <a 
+              href="#contact" 
+              className="ml-1 px-3 py-1 rounded-full bg-white text-black font-semibold text-[11px] hover:bg-white/90 active:scale-95 transition-all shadow-sm"
+            >
+              Contact
+            </a>
+          </div>
         </nav>
       </header>
 
       {/* ──────────────────────────────────────────────────────────────────────────
-          2. MINIMAL HERO SECTION (Multilingual blur-in + Portrait fade + Italic quote)
+          2. APPLE KEYNOTE HERO
       ────────────────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[100svh] flex flex-col justify-end items-center text-center px-5 pt-20 pb-6 overflow-hidden">
-        {/* Subtle Ambient Blurred Radial Orbs */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-[#C75B32]/15 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/3 right-0 w-64 h-64 bg-white/[0.03] rounded-full blur-3xl" />
+      <section className="relative min-h-[92svh] flex flex-col justify-end px-5 pt-20 pb-6 overflow-hidden">
+        {/* Subtle Pure Monochromatic Ambient Lighting */}
+        <div className="absolute inset-0 pointer-events-none select-none">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-white/[0.03] rounded-full blur-[100px]" />
+          <div className="absolute bottom-1/4 right-0 w-60 h-60 bg-white/[0.02] rounded-full blur-[90px]" />
         </div>
 
-        {/* Clear & Visible Portrait Image Centered on Face */}
+        {/* Cinematic Portrait Image with Natural Gradient Mask */}
         <div className="absolute inset-0 z-0 flex items-start justify-center pointer-events-none select-none overflow-hidden">
           <div 
-            className="relative h-[85vh] w-full"
+            className="relative h-[82vh] w-full max-w-md mx-auto"
             style={{
-              maskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 98%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 98%)',
+              maskImage: 'linear-gradient(to bottom, black 0%, black 58%, transparent 95%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 58%, transparent 95%)',
             }}
           >
             <Image
@@ -270,467 +251,479 @@ export const MobilePortfolio: React.FC = () => {
               alt="Lakshan Ganesan"
               fill
               priority
-              className="object-cover object-[50%_15%] filter contrast-105 brightness-100"
+              className="object-cover object-[50%_15%] filter contrast-[1.04] brightness-100"
             />
           </div>
           {/* Deep dark gradient scrim for bottom text readability */}
-          <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-[#08080a] via-[#08080a]/90 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-[#050507] via-[#050507]/90 to-transparent" />
         </div>
 
-        {/* Text Positioned Down so Face has Full Space Above */}
-        <div className="relative z-10 w-full max-w-sm mx-auto flex flex-col items-center justify-end space-y-3 pb-2">
-          {/* Top Tagline / Category Badge */}
-          <div>
-            <p className="text-[#C75B32] font-mono font-semibold tracking-[0.22em] uppercase text-[10px] sm:text-xs">
-              FULL STACK DEVELOPER • AI &amp; BLOCKCHAIN
+        {/* Hero Content with Smooth Entrance */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 w-full max-w-md mx-auto flex flex-col items-center text-center space-y-4"
+        >
+          {/* Status Capsule */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.1] backdrop-blur-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="text-[10px] font-mono font-medium tracking-wide text-white/80">
+              Available for new projects
+            </span>
+          </div>
+
+          {/* Hero Name & Title */}
+          <div className="space-y-1">
+            <h1 className="text-[11.5vw] xs:text-5xl font-extrabold tracking-tight text-white leading-[1.05]">
+              Lakshan Ganesan
+            </h1>
+            <p className="text-sm font-medium text-white/70 tracking-tight">
+              Full-Stack Developer <span className="text-white/30">•</span> Web3 &amp; AI Builder
             </p>
           </div>
 
-          {/* Multilingual Animated Heading */}
-          <div className="h-16 sm:h-20 flex items-center justify-center relative w-full">
-            <AnimatePresence mode="wait">
-              <motion.h1
-                key={GREETINGS[greetingIndex]}
-                initial={{ y: 15, opacity: 0, filter: 'blur(8px)' }}
-                animate={{ y: 0, opacity: 0.95, filter: 'blur(0px)' }}
-                exit={{ y: -15, opacity: 0, filter: 'blur(8px)' }}
-                transition={{ duration: 0.45, ease: 'easeOut' }}
-                className="text-[13vw] sm:text-5xl font-bold text-white tracking-tighter leading-none absolute w-full text-center select-none"
-              >
-                {GREETINGS[greetingIndex]}
-              </motion.h1>
-            </AnimatePresence>
+          {/* Clean, Simple & Casual Bio */}
+          <p className="text-xs text-white/60 leading-relaxed max-w-xs mx-auto font-normal">
+            I build fast web apps, smart contracts, and AI tools with a focus on clean design and smooth user experience.
+          </p>
 
-            {/* Faint ambient glow clone behind */}
-            <AnimatePresence mode="wait">
-              <motion.h1
-                key={`${GREETINGS[greetingIndex]}-glow`}
-                initial={{ y: 15, opacity: 0, filter: 'blur(10px)' }}
-                animate={{ y: 0, opacity: 0.25, filter: 'blur(6px)' }}
-                exit={{ y: -15, opacity: 0, filter: 'blur(10px)' }}
-                transition={{ duration: 0.45, ease: 'easeOut' }}
-                className="text-[13vw] sm:text-5xl font-bold text-[#C75B32] tracking-tighter leading-none absolute pointer-events-none w-full text-center select-none"
-              >
-                {GREETINGS[greetingIndex]}
-              </motion.h1>
-            </AnimatePresence>
-          </div>
-
-          {/* Minimal Italic Motto flanked by subtle hairline lines */}
-          <div className="flex items-center gap-3 max-w-xs mx-auto">
-            <div className="h-px w-6 bg-white/40 flex-shrink-0" />
-            <p className="text-white/80 text-xs font-serif italic tracking-wide leading-relaxed text-center">
-              architecting &amp; engineering <br />
-              <span className="text-white font-medium not-italic font-mono text-[10px] tracking-wider text-[#E88053] uppercase">
-                full stack systems
-              </span>
-            </p>
-            <div className="h-px w-6 bg-white/40 flex-shrink-0" />
-          </div>
-
-          {/* Action CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1">
+          {/* Primary Action Buttons */}
+          <div className="flex items-center justify-center gap-2.5 pt-1 w-full max-w-xs">
+            <a
+              href="#contact"
+              className="flex-1 py-2.5 px-4 rounded-full bg-white text-black font-semibold text-xs tracking-tight hover:bg-white/90 active:scale-95 transition-all text-center shadow-lg"
+            >
+              Get in Touch
+            </a>
             <a
               href="/Lakshan_Resume copy.pdf"
               download="Lakshan_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-full bg-white text-black font-mono font-semibold text-xs tracking-wider uppercase hover:bg-[#C75B32] hover:text-white transition-all shadow-lg active:scale-95"
+              className="flex-1 py-2.5 px-4 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/[0.12] text-white font-medium text-xs tracking-tight active:scale-95 transition-all flex items-center justify-center gap-1.5 text-center"
             >
-              Resume
+              <span>Resume</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-white/70" />
             </a>
-            <a
-              href="#contact"
-              className="px-4 py-2 rounded-full bg-white/5 border border-white/15 text-white font-mono text-xs tracking-wider uppercase hover:bg-white/10 transition-all active:scale-95"
-            >
-              Get in Touch
-            </a>
-            <button
-              type="button"
-              onClick={handleCopyDesktopLink}
-              className="px-3.5 py-2 rounded-full bg-gradient-to-r from-white/[0.07] to-white/[0.03] border border-white/15 hover:border-[#C75B32]/60 text-white font-mono text-xs tracking-wider flex items-center gap-1.5 transition-all active:scale-95 group shadow-sm"
-              title="Copy link to explore the 3D Desktop edition"
-            >
-              <Monitor className="w-3 h-3 text-[#C75B32]" />
-              <span className="text-[11px]">{linkCopied ? 'Copied!' : 'Desktop 3D'}</span>
-              <ArrowUpRight className="w-3 h-3 text-white/40 group-hover:text-[#FFA266] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </button>
           </div>
 
-          {/* Minimal Bottom Scroll Indicator */}
-          <div className="flex flex-col items-center gap-1.5 pt-2">
-            <span className="text-[9px] font-mono uppercase tracking-[0.25em] text-white/40">
-              Scroll
-            </span>
-            <span className="w-px h-8 bg-gradient-to-b from-white/30 to-transparent" />
-          </div>
-        </div>
+          {/* Monochromatic Apple Display Vector Button */}
+          <button
+            type="button"
+            onClick={handleCopyDesktopLink}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.1] text-[11px] text-white/70 hover:text-white transition-all active:scale-95 shadow-sm"
+          >
+            <AppleDisplayIcon className="w-3.5 h-3.5 text-white/80" />
+            <span>{linkCopied ? 'Desktop Link Copied ✓' : '3D Edition on Desktop'}</span>
+            <ArrowUpRight className="w-3 h-3 text-white/40" />
+          </button>
+        </motion.div>
       </section>
 
       {/* ──────────────────────────────────────────────────────────────────────────
-          3. ABOUT ME SECTION (Editorial Typography)
+          2.5 APPLE-STYLE ABOUT SECTION (Casual & Natural Tone, No Numbers)
       ────────────────────────────────────────────────────────────────────────── */}
-      <section id="about" className="py-16 px-5 border-t border-white/10 bg-[#08080a]">
-        <div className="max-w-md mx-auto space-y-6">
-          {/* Section Marker */}
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-[#C75B32]" />
-            <h2 className="text-xs font-mono font-semibold text-white/60 uppercase tracking-widest">
-              About Me
-            </h2>
-          </div>
+      <motion.section 
+        id="about" 
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="px-4 py-8 max-w-md mx-auto space-y-4"
+      >
+        {/* Section Header */}
+        <div className="flex items-center gap-2 text-white/40">
+          <span className="h-px w-5 bg-white/20" />
+          <h2 className="text-xs font-mono font-medium uppercase tracking-wider">
+            About Me
+          </h2>
+        </div>
 
-          {/* Display Headline */}
-          <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal leading-snug">
-            Bridging scalable engineering with <span className="italic text-[#E88053]">intelligent</span> &amp; decentralized systems.
+        {/* Natural, Simple Statement */}
+        <div className="space-y-2.5">
+          <h3 className="text-2xl xs:text-3xl font-bold tracking-tight text-white leading-snug">
+            Building with focus. <br />
+            <span className="text-white/60">
+              From the sports arena to writing code.
+            </span>
           </h3>
 
-          {/* Editorial Paragraphs */}
-          <div className="space-y-4 text-white/80 text-sm leading-relaxed text-justify">
-            <p>
-              I’m a full-stack engineer and Web3/AI builder with a relentless focus on creating resilient, user-centered digital products. I work comfortably across the entire spectrum — from designing fluid, responsive interfaces to architecting mission-critical smart contracts and backend pipelines.
-            </p>
-            <p>
-              My core engineering focus centers on artificial intelligence, large language models, and decentralized ledger protocols. I turn complex ideas into practical implementations — whether deploying autonomous AI agents, designing fractional real estate protocols, or verifying cryptographic content provenance.
-            </p>
-            <p>
-              Beyond the code, I thrive in high-tempo collaborative environments: competing across 25+ hackathons, securing national finalist titles at Smart India Hackathon and NIT Calicut, and spearheading developer initiatives as College Tech Hub Lead.
-            </p>
-          </div>
-
-          {/* Quick Stats Summary */}
-          <div className="pt-4 grid grid-cols-3 gap-3 border-t border-white/10">
-            <div>
-              <div className="text-xl font-bold text-white font-mono">25+</div>
-              <div className="text-[10px] font-mono text-white/50 tracking-wider uppercase">Hackathons</div>
-            </div>
-            <div>
-              <div className="text-xl font-bold text-white font-mono">20+</div>
-              <div className="text-[10px] font-mono text-white/50 tracking-wider uppercase">Finalists</div>
-            </div>
-            <div>
-              <div className="text-xl font-bold text-[#E88053] font-mono">01</div>
-              <div className="text-[10px] font-mono text-white/50 tracking-wider uppercase">NIT Track Win</div>
-            </div>
-          </div>
+          <p className="text-xs text-white/70 leading-relaxed font-normal">
+            I love building clean, reliable software that feels great to use. As an International Silambam bronze medalist, sports taught me consistency, discipline, and patience — things I rely on every day when engineering web systems and smart contracts.
+          </p>
         </div>
-      </section>
 
-      {/* ──────────────────────────────────────────────────────────────────────────
-          4. TECHNICAL EXPERTISE SECTION (Minimal Slashed Lists)
-      ────────────────────────────────────────────────────────────────────────── */}
-      <section id="skills" className="py-16 px-5 border-t border-white/10 bg-[#08080a]">
-        <div className="max-w-md mx-auto space-y-6">
-          {/* Section Marker */}
-          <div className="flex items-center gap-3 mb-8">
-            <span className="h-px w-8 bg-[#C75B32]" />
-            <h2 className="text-xs font-mono font-semibold text-white/60 uppercase tracking-widest">
-              Technical Expertise
-            </h2>
-          </div>
-
-          <div className="divide-y divide-white/10">
-            {/* Category 1 */}
-            <div className="py-6 space-y-2">
-              <h3 className="text-xl font-bold text-white tracking-tight">Full Stack Web</h3>
-              <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-sm text-white/70 font-mono">
-                <span>React</span>
-                <span className="text-white/20">/</span>
-                <span>Next.js</span>
-                <span className="text-white/20">/</span>
-                <span>TypeScript</span>
-                <span className="text-white/20">/</span>
-                <span>Tailwind CSS</span>
-                <span className="text-white/20">/</span>
-                <span>Node.js</span>
-                <span className="text-white/20">/</span>
-                <span>PostgreSQL</span>
-              </div>
-            </div>
-
-            {/* Category 2 */}
-            <div className="py-6 space-y-2">
-              <h3 className="text-xl font-bold text-white tracking-tight">AI &amp; Machine Learning</h3>
-              <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-sm text-white/70 font-mono">
-                <span>LLMs</span>
-                <span className="text-white/20">/</span>
-                <span>Python</span>
-                <span className="text-white/20">/</span>
-                <span>LangChain</span>
-                <span className="text-white/20">/</span>
-                <span>RAG Pipelines</span>
-                <span className="text-white/20">/</span>
-                <span>OpenCV</span>
-                <span className="text-white/20">/</span>
-                <span>C2PA Metadata</span>
-              </div>
-            </div>
-
-            {/* Category 3 */}
-            <div className="py-6 space-y-2">
-              <h3 className="text-xl font-bold text-white tracking-tight">Blockchain &amp; Web3</h3>
-              <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-sm text-white/70 font-mono">
-                <span>Solidity</span>
-                <span className="text-white/20">/</span>
-                <span>Ethereum</span>
-                <span className="text-white/20">/</span>
-                <span>Hardhat</span>
-                <span className="text-white/20">/</span>
-                <span>Smart Contracts</span>
-                <span className="text-white/20">/</span>
-                <span>EVM Protocols</span>
-                <span className="text-white/20">/</span>
-                <span>Thirdweb</span>
-              </div>
-            </div>
-
-            {/* Category 4 */}
-            <div className="py-6 space-y-2">
-              <h3 className="text-xl font-bold text-white tracking-tight">Systems &amp; Architecture</h3>
-              <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-sm text-white/70 font-mono">
-                <span>Docker</span>
-                <span className="text-white/20">/</span>
-                <span>Kafka</span>
-                <span className="text-white/20">/</span>
-                <span>Microservices</span>
-                <span className="text-white/20">/</span>
-                <span>CI/CD</span>
-                <span className="text-white/20">/</span>
-                <span>REST APIs</span>
-                <span className="text-white/20">/</span>
-                <span>Git</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ──────────────────────────────────────────────────────────────────────────
-          5. MY PROJECTS SECTION (Minimalist Cards with Code & Live Demo Links)
-      ────────────────────────────────────────────────────────────────────────── */}
-      <section id="work" className="py-16 px-5 border-t border-white/10 bg-[#08080a]">
-        <div className="max-w-md mx-auto space-y-6">
-          {/* Section Marker */}
-          <div className="flex items-center gap-3 mb-8">
-            <span className="h-px w-8 bg-[#C75B32]" />
-            <h2 className="text-xs font-mono font-semibold text-white/60 uppercase tracking-widest">
-              My Projects
-            </h2>
-          </div>
-
-          <div className="space-y-5">
-            {PORTFOLIO_DATA.projects.map((project, idx) => (
-              <div
-                key={project.id || idx}
-                className="group p-6 rounded-2xl bg-white/[0.025] border border-white/10 hover:border-white/25 transition-all duration-300 relative overflow-hidden"
-              >
-                {/* Top Number & Category */}
-                <div className="flex items-center justify-between text-[10px] font-mono text-white/50 uppercase tracking-wider mb-3">
-                  <span>{project.number || `0${idx + 1}`}</span>
-                  <span className="text-[#C75B32] font-semibold">{project.category}</span>
-                </div>
-
-                {/* Project Title */}
-                <h3 className="text-xl font-bold text-white mb-2 leading-tight tracking-tight">
-                  {project.title}
-                </h3>
-
-                {/* Project Description */}
-                <p className="text-white/70 text-xs leading-relaxed mb-5">
-                  {project.description}
-                </p>
-
-                {/* Tech Pills */}
-                <div className="flex flex-wrap gap-1.5 mb-6">
-                  {project.technologies.slice(0, 4).map((tech, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="px-2.5 py-0.5 text-[10px] font-mono text-white/70 bg-white/5 rounded-md border border-white/5"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Action Buttons: Code & Live Demo */}
-                <div className="grid grid-cols-2 gap-3 pt-2">
-                  {project.githubUrl ? (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-white text-xs font-mono font-semibold tracking-wide transition-colors"
-                    >
-                      <FaGithub className="w-3.5 h-3.5" />
-                      <span>Code</span>
-                    </a>
-                  ) : (
-                    <button
-                      disabled
-                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-white/[0.02] border border-white/5 text-white/30 text-xs font-mono cursor-not-allowed"
-                    >
-                      <span>Private</span>
-                    </button>
-                  )}
-
-                  {project.demoUrl ? (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-[#C75B32]/15 border border-[#C75B32]/30 hover:bg-[#C75B32]/30 text-white text-xs font-mono font-semibold tracking-wide transition-all"
-                    >
-                      <span>Demo</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
-                  ) : (
-                    <button
-                      disabled
-                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-white/[0.02] border border-white/5 text-white/30 text-xs font-mono cursor-not-allowed"
-                    >
-                      <span>Demo</span>
-                    </button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ──────────────────────────────────────────────────────────────────────────
-          5.5 PROOF OF WORK / STAGGERED GRID & DESKTOP EDITION CALLOUT
-      ────────────────────────────────────────────────────────────────────────── */}
-      <section id="gallery" className="py-16 px-4 sm:px-6 border-t border-white/10 bg-[#080808] overflow-hidden">
-        <div className="max-w-md mx-auto space-y-8">
-          {/* Section Marker Header */}
-          <div className="space-y-3 border-b border-white/15 pb-6">
-            <div className="flex items-center justify-between">
-              <div className="text-xs font-mono tracking-widest text-[#C75B32]">
-                // 04 PROOF OF WORK &amp; COMMUNITY
-              </div>
-              <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
-                21 ARCHIVED
+        {/* Clean Focus Areas (No Numbers) */}
+        <div className="rounded-3xl bg-white/[0.03] border border-white/[0.08] divide-y divide-white/[0.06] overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)]">
+          <div className="p-3.5 flex items-center justify-between">
+            <div>
+              <span className="text-xs font-semibold text-white block">
+                Full Stack Web
+              </span>
+              <span className="text-[11px] text-white/50">
+                Responsive apps, clean UI, scalable backends
               </span>
             </div>
+            <span className="text-[10px] font-mono text-white/60 bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.06]">
+              React • Next.js • Node
+            </span>
+          </div>
 
+          <div className="p-3.5 flex items-center justify-between">
             <div>
-              <h2 className="font-display text-4xl sm:text-5xl font-black uppercase tracking-tight text-white leading-none">
-                PROOF OF WORK
-              </h2>
-              <p className="text-xs text-white/60 font-light leading-relaxed mt-1.5">
-                A visual archive of national hackathons, stage wins, demo days, and builder summits. Tap any photo to expand.
+              <span className="text-xs font-semibold text-white block">
+                AI &amp; Smart Tools
+              </span>
+              <span className="text-[11px] text-white/50">
+                Context-aware chat, automation, and RAG pipelines
+              </span>
+            </div>
+            <span className="text-[10px] font-mono text-white/60 bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.06]">
+              LLMs • Python • LangChain
+            </span>
+          </div>
+
+          <div className="p-3.5 flex items-center justify-between">
+            <div>
+              <span className="text-xs font-semibold text-white block">
+                Web3 &amp; Protocols
+              </span>
+              <span className="text-[11px] text-white/50">
+                Smart contracts, DeFi logic, and EVM testing
+              </span>
+            </div>
+            <span className="text-[10px] font-mono text-white/60 bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.06]">
+              Solidity • Hardhat • DeFi
+            </span>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* ──────────────────────────────────────────────────────────────────────────
+          3. KEYNOTE BENTO HONORS & ACHIEVEMENTS (No "06 Featured" or Card Numbers)
+      ────────────────────────────────────────────────────────────────────────── */}
+      <motion.section 
+        id="achievements" 
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="px-4 py-8 max-w-md mx-auto space-y-4"
+      >
+        <div>
+          <h2 className="text-xs font-mono font-medium uppercase tracking-wider text-white/40">
+            Key Milestones
+          </h2>
+          <p className="text-lg font-bold text-white tracking-tight mt-0.5">
+            Honors &amp; Leadership
+          </p>
+        </div>
+
+        {/* 6-Card Apple Bento Grid */}
+        <div className="grid grid-cols-2 gap-2.5">
+          {/* Card 1: Silambam Bronze Medalist */}
+          <motion.div 
+            whileHover={{ y: -2 }}
+            className="p-4 rounded-3xl bg-white/[0.03] border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] flex flex-col justify-between space-y-3"
+          >
+            <div className="flex items-center justify-between">
+              <div className="w-8 h-8 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/80">
+                <SilambamMedalIcon className="w-4 h-4" />
+              </div>
+              <span className="text-[8px] font-mono px-2 py-0.5 rounded-full bg-white/[0.06] text-white/70 font-semibold tracking-wider uppercase border border-white/[0.08]">
+                BRONZE
+              </span>
+            </div>
+            <div>
+              <div className="text-xl font-extrabold text-white tracking-tight leading-tight">
+                Intl Silambam
+              </div>
+              <div className="text-[11px] font-medium text-white/70 leading-tight mt-0.5">
+                Bronze Medalist
+              </div>
+              <p className="text-[10px] text-white/40 leading-relaxed mt-1.5">
+                Won bronze at the International Championship.
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* 3-Column Staggered Waterfall Grid (Desktop StaggeredGrid adapted for Mobile) */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-2.5 items-start">
-            {/* Column 1 */}
-            <div className="flex flex-col gap-2 sm:gap-2.5">
-              {DESKTOP_STAGGERED_PHOTOS.filter((_, i) => i % 3 === 0).map((item, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => setActivePhoto(item)}
-                  className="group relative aspect-[3/4] w-full rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer shadow-sm active:scale-95 transition-all duration-300 hover:border-[#C75B32]"
-                >
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-2 z-10 pointer-events-none">
-                    <span className="text-[10px] font-mono font-bold text-white tracking-tight line-clamp-2 leading-tight">
-                      {item.title}
-                    </span>
-                    <span className="text-[8px] font-mono text-[#E88053] font-semibold tracking-wider uppercase truncate mt-0.5">
-                      {item.tag}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Column 2 (Offset by pt-7 for authentic staggered rhythm) */}
-            <div className="flex flex-col gap-2 sm:gap-2.5 pt-7">
-              {DESKTOP_STAGGERED_PHOTOS.filter((_, i) => i % 3 === 1).map((item, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => setActivePhoto(item)}
-                  className="group relative aspect-[3/4] w-full rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer shadow-sm active:scale-95 transition-all duration-300 hover:border-[#C75B32]"
-                >
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-2 z-10 pointer-events-none">
-                    <span className="text-[10px] font-mono font-bold text-white tracking-tight line-clamp-2 leading-tight">
-                      {item.title}
-                    </span>
-                    <span className="text-[8px] font-mono text-[#E88053] font-semibold tracking-wider uppercase truncate mt-0.5">
-                      {item.tag}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Column 3 (Offset by pt-3.5 for 3-way vertical wave rhythm) */}
-            <div className="flex flex-col gap-2 sm:gap-2.5 pt-3.5">
-              {DESKTOP_STAGGERED_PHOTOS.filter((_, i) => i % 3 === 2).map((item, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => setActivePhoto(item)}
-                  className="group relative aspect-[3/4] w-full rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer shadow-sm active:scale-95 transition-all duration-300 hover:border-[#C75B32]"
-                >
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-2 z-10 pointer-events-none">
-                    <span className="text-[10px] font-mono font-bold text-white tracking-tight line-clamp-2 leading-tight">
-                      {item.title}
-                    </span>
-                    <span className="text-[8px] font-mono text-[#E88053] font-semibold tracking-wider uppercase truncate mt-0.5">
-                      {item.tag}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Sleek, Non-Distracting Desktop Experience CTA Pill */}
-          <div className="pt-2 flex justify-center">
-            <button
-              type="button"
-              onClick={handleCopyDesktopLink}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-zinc-900/90 hover:bg-[#C75B32]/10 border border-white/10 hover:border-[#C75B32]/40 text-white/80 hover:text-white font-mono text-xs transition-all active:scale-95 group shadow-sm"
-            >
-              <Monitor className="w-3.5 h-3.5 text-[#C75B32]" />
-              <span className="text-[11px] tracking-wide">
-                {linkCopied ? 'Desktop Link Copied ✓' : 'Experience in 3D on Desktop'}
+          {/* Card 2: MyGov Campus Ambassador - MeitY */}
+          <motion.div 
+            whileHover={{ y: -2 }}
+            onClick={() => setActivePhoto(CURATED_PROOF_PHOTOS[2])}
+            className="p-4 rounded-3xl bg-white/[0.03] border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] flex flex-col justify-between space-y-3 cursor-pointer active:scale-95 transition-all hover:border-white/20"
+          >
+            <div className="flex items-center justify-between">
+              <div className="w-8 h-8 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/80">
+                <GovtSealIcon className="w-4 h-4" />
+              </div>
+              <span className="text-[8px] font-mono px-2 py-0.5 rounded-full bg-white/[0.06] text-white/70 font-semibold tracking-wider uppercase border border-white/[0.08]">
+                GOVT OF INDIA
               </span>
-              <ArrowUpRight className="w-3 h-3 text-white/40 group-hover:text-[#FFA266] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </button>
-          </div>
+            </div>
+            <div>
+              <div className="text-xl font-extrabold text-white tracking-tight leading-tight">
+                Campus Amb.
+              </div>
+              <div className="text-[11px] font-medium text-white/70 leading-tight mt-0.5">
+                MyGov India • MeitY
+              </div>
+              <div className="flex items-center gap-1 text-[10px] text-white/50 font-mono mt-1.5">
+                <span>View Certificate</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </div>
+            </div>
+          </motion.div>
 
-          {/* Section Footer */}
-          <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-white/50">
-            <span>LAKSHAN GANESAN // 2026</span>
-            <a href="#experience" className="text-[#E88053] hover:text-white transition-colors">
-              EXPERIENCE JOURNEY ↓
-            </a>
+          {/* Card 3: Hackathons */}
+          <motion.div 
+            whileHover={{ y: -2 }}
+            className="p-4 rounded-3xl bg-white/[0.03] border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] flex flex-col justify-between space-y-3"
+          >
+            <div className="w-8 h-8 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/80">
+              <HackathonTrophyIcon className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-2xl font-extrabold text-white tracking-tight font-mono">25+</div>
+              <div className="text-[11px] font-medium text-white/70 leading-tight mt-0.5">
+                Hackathons Competed
+              </div>
+              <p className="text-[10px] text-white/40 mt-1">20+ Top Tier Finalist Finishes</p>
+            </div>
+          </motion.div>
+
+          {/* Card 4: NIT Calicut Track Win */}
+          <motion.div 
+            whileHover={{ y: -2 }}
+            className="p-4 rounded-3xl bg-white/[0.03] border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] flex flex-col justify-between space-y-3"
+          >
+            <div className="w-8 h-8 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/80">
+              <WinnerStarIcon className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-2xl font-extrabold text-white tracking-tight font-mono">Track #1</div>
+              <div className="text-[11px] font-medium text-white/70 leading-tight mt-0.5">
+                NIT Calicut Winner
+              </div>
+              <p className="text-[10px] text-white/40 mt-1">Build On-Chain Web3 Trophy</p>
+            </div>
+          </motion.div>
+
+          {/* Card 5: Smart India Hackathon */}
+          <motion.div 
+            whileHover={{ y: -2 }}
+            className="p-4 rounded-3xl bg-white/[0.03] border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] flex flex-col justify-between space-y-3"
+          >
+            <div className="w-8 h-8 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/80">
+              <SihEmblemIcon className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-2xl font-extrabold text-white tracking-tight font-mono">National</div>
+              <div className="text-[11px] font-medium text-white/70 leading-tight mt-0.5">
+                SIH Finals Winner
+              </div>
+              <p className="text-[10px] text-white/40 mt-1">Ministry of Education AI Stage</p>
+            </div>
+          </motion.div>
+
+          {/* Card 6: Campus Tech Hub Lead */}
+          <motion.div 
+            whileHover={{ y: -2 }}
+            className="p-4 rounded-3xl bg-white/[0.03] border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] flex flex-col justify-between space-y-3"
+          >
+            <div className="w-8 h-8 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/80">
+              <TechLeadIcon className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-2xl font-extrabold text-white tracking-tight font-mono">Lead</div>
+              <div className="text-[11px] font-medium text-white/70 leading-tight mt-0.5">
+                Campus Tech Hub
+              </div>
+              <p className="text-[10px] text-white/40 mt-1">Leading Web3 &amp; AI Workshops</p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Minimal Discipline Philosophy Bento */}
+        <div className="p-4 rounded-3xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-white/40 font-semibold">
+              Core Philosophy
+            </div>
+            <p className="text-xs text-white/70 leading-relaxed font-normal">
+              Code should be clean, fast, and helpful. No buzzwords, no unnecessary complexity.
+            </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Lightbox Modal for Photo Preview */}
+      {/* ──────────────────────────────────────────────────────────────────────────
+          4. SELECTED WORK (No "06 Items" or Project Numbers)
+      ────────────────────────────────────────────────────────────────────────── */}
+      <motion.section 
+        id="work" 
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="px-4 py-8 max-w-md mx-auto space-y-5"
+      >
+        {/* Section Header (No numbers) */}
+        <div>
+          <h2 className="text-xs font-mono font-medium uppercase tracking-wider text-white/40">
+            Selected Work
+          </h2>
+          <p className="text-lg font-bold text-white tracking-tight mt-0.5">
+            Things I&apos;ve Built
+          </p>
+        </div>
+
+        {/* Apple Segmented Control Filter */}
+        <div className="p-1 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-between">
+          {(['ALL', 'WEB3', 'AI & WEB'] as ProjectCategory[]).map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`flex-1 py-1.5 text-[11px] font-medium rounded-full transition-all text-center ${
+                selectedCategory === cat
+                  ? 'bg-white text-black font-semibold shadow-sm'
+                  : 'text-white/60 hover:text-white'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Project Cards (No Card Numbers) */}
+        <div className="space-y-4">
+          {filteredProjects.map((project, idx) => (
+            <motion.div
+              key={project.id || idx}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: idx * 0.08 }}
+              className="rounded-3xl bg-white/[0.03] border border-white/[0.08] p-5 space-y-3.5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] hover:border-white/[0.18] transition-all"
+            >
+              {/* Category Pill (No Numbers) */}
+              <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider">
+                <span className="px-2 py-0.5 rounded-full bg-white/[0.05] text-white/70 border border-white/[0.06] font-semibold">
+                  {project.category}
+                </span>
+              </div>
+
+              {/* Title & Concise Casual Tagline */}
+              <div className="space-y-1">
+                <h3 className="text-lg font-bold text-white tracking-tight">
+                  {project.title}
+                </h3>
+                <p className="text-xs text-white/70 leading-relaxed font-normal">
+                  {project.tagline || project.description}
+                </p>
+              </div>
+
+              {/* Clean Tech Pills */}
+              <div className="flex flex-wrap gap-1.5 pt-0.5">
+                {project.technologies.slice(0, 4).map((tech, tIdx) => (
+                  <span
+                    key={tIdx}
+                    className="px-2 py-0.5 text-[10px] font-mono text-white/60 bg-white/[0.04] rounded-md border border-white/[0.04]"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-2 flex items-center gap-2">
+                {project.demoUrl && (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-2 px-3 rounded-full bg-white text-black font-semibold text-xs tracking-tight flex items-center justify-center gap-1 hover:bg-white/90 active:scale-95 transition-all shadow-sm"
+                  >
+                    <span>Live Demo</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-2 px-3 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.1] text-white font-medium text-xs tracking-tight flex items-center justify-center gap-1.5 active:scale-95 transition-all"
+                  >
+                    <FaGithub className="w-3.5 h-3.5" />
+                    <span>Source</span>
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* ──────────────────────────────────────────────────────────────────────────
+          5. ANIMATED PROOF OF WORK (Dynamic Reveal, Better Motion & Cards)
+      ────────────────────────────────────────────────────────────────────────── */}
+      <motion.section 
+        id="proof" 
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="px-4 py-8 max-w-md mx-auto space-y-4"
+      >
+        <div>
+          <h2 className="text-xs font-mono font-medium uppercase tracking-wider text-white/40">
+            Proof of Work
+          </h2>
+          <p className="text-lg font-bold text-white tracking-tight mt-0.5">
+            Stage Wins &amp; Highlights
+          </p>
+        </div>
+
+        {/* 2-Column Staggered Animated Grid with Smooth Card Reveals */}
+        <div className="grid grid-cols-2 gap-2.5">
+          {CURATED_PROOF_PHOTOS.map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 16, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: '-20px' }}
+              transition={{ duration: 0.45, delay: idx * 0.06, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -4, scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => setActivePhoto(item)}
+              className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-950 border border-white/[0.08] hover:border-white/25 cursor-pointer shadow-md transition-all duration-300"
+            >
+              <Image
+                src={item.src}
+                alt={item.title}
+                fill
+                sizes="(max-width: 768px) 50vw, 200px"
+                className="object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-transparent flex flex-col justify-end p-2.5 z-10 pointer-events-none">
+                <span className="text-[11px] font-bold text-white tracking-tight leading-tight line-clamp-1 group-hover:text-white/90">
+                  {item.title}
+                </span>
+                <span className="text-[8px] font-mono text-white/70 font-semibold tracking-wider uppercase truncate mt-0.5">
+                  {item.tag}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        <p className="text-center text-[10px] font-mono text-white/40 pt-1">
+          Tap any card to view full certificate or event details
+        </p>
+      </motion.section>
+
+      {/* Lightbox Modal for Photo Details */}
       <AnimatePresence>
         {activePhoto && (
           <motion.div
@@ -738,19 +731,20 @@ export const MobilePortfolio: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActivePhoto(null)}
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-5"
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-2xl flex items-center justify-center p-4"
           >
             <motion.div
-              initial={{ scale: 0.92, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.92, opacity: 0 }}
+              initial={{ scale: 0.94, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.94, opacity: 0, y: 15 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-sm w-full bg-[#111115] border border-white/20 rounded-2xl overflow-hidden shadow-2xl"
+              className="relative max-w-sm w-full bg-[#111115] border border-white/[0.15] rounded-3xl overflow-hidden shadow-2xl space-y-0"
             >
               {/* Close Button */}
               <button
                 onClick={() => setActivePhoto(null)}
-                className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-black/60 text-white hover:bg-white/20 transition-colors"
+                className="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/60 text-white hover:bg-white/20 active:scale-90 transition-all backdrop-blur-md"
                 aria-label="Close Preview"
               >
                 <X className="w-4 h-4" />
@@ -766,20 +760,20 @@ export const MobilePortfolio: React.FC = () => {
                 />
               </div>
 
-              {/* Modal Details */}
-              <div className="p-4 space-y-1 bg-[#0E0E12]">
-                <div className="inline-block px-2 py-0.5 text-[9px] font-mono font-bold rounded bg-[#C75B32]/20 text-[#FFA266] border border-[#C75B32]/30 uppercase tracking-wider mb-1">
+              {/* Modal Metadata */}
+              <div className="p-4 space-y-1.5 bg-[#0E0E12]">
+                <div className="inline-block px-2 py-0.5 text-[9px] font-mono font-bold rounded-full bg-white/[0.08] text-white/80 border border-white/[0.12] uppercase tracking-wider">
                   {activePhoto.tag}
                 </div>
-                <h4 className="font-serif text-lg font-bold text-white leading-tight">
+                <h4 className="text-base font-bold text-white leading-tight">
                   {activePhoto.title}
                 </h4>
-                <p className="text-xs text-white/70">
+                <p className="text-xs text-white/60">
                   {activePhoto.event}
                 </p>
-                <div className="pt-2 flex items-center justify-between text-[10px] font-mono text-white/40 border-t border-white/10 mt-2">
+                <div className="pt-2 flex items-center justify-between text-[10px] font-mono text-white/40 border-t border-white/[0.08] mt-2">
                   <span>LOCATION: {activePhoto.location}</span>
-                  <span className="text-[#C75B32]">ARCHIVE // 2026</span>
+                  <span className="text-white/70">VERIFIED CREDENTIAL</span>
                 </div>
               </div>
             </motion.div>
@@ -788,244 +782,209 @@ export const MobilePortfolio: React.FC = () => {
       </AnimatePresence>
 
       {/* ──────────────────────────────────────────────────────────────────────────
-          6. MY JOURNEY / EXPERIENCE TIMELINE (Vertical Left Timeline)
+          6. CAREER & JOURNEY
       ────────────────────────────────────────────────────────────────────────── */}
-      <section id="experience" className="py-16 px-5 border-t border-white/10 bg-[#08080a]">
-        <div className="max-w-md mx-auto space-y-6">
-          {/* Section Marker */}
-          <div className="flex items-center gap-3 mb-8">
-            <span className="h-px w-8 bg-[#C75B32]" />
-            <h2 className="text-xs font-mono font-semibold text-white/60 uppercase tracking-widest">
-              My Journey
-            </h2>
-          </div>
+      <motion.section 
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="px-4 py-8 max-w-md mx-auto space-y-4"
+      >
+        <div>
+          <h2 className="text-xs font-mono font-medium uppercase tracking-wider text-white/40">
+            Journey
+          </h2>
+          <p className="text-lg font-bold text-white tracking-tight mt-0.5">
+            Experience &amp; Roles
+          </p>
+        </div>
 
-          {/* Vertical Timeline */}
-          <div className="relative border-l border-white/15 pl-6 ml-2 space-y-10">
-            {PORTFOLIO_DATA.experience.map((exp, idx) => (
-              <div key={idx} className="relative group">
-                {/* Node Bullet */}
-                <div className="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-[#08080a] border-2 border-[#C75B32] group-hover:scale-125 transition-transform" />
-
-                {/* Period Badge */}
-                <span className="text-[11px] font-mono text-[#E88053] tracking-widest uppercase block mb-1">
-                  {exp.year}
-                </span>
-
-                {/* Role in Serif Font */}
-                <h3 className="font-serif text-xl font-bold text-white leading-tight">
+        {/* iOS Settings-style Grouped Container */}
+        <div className="rounded-3xl bg-white/[0.03] border border-white/[0.08] divide-y divide-white/[0.06] overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)]">
+          {PORTFOLIO_DATA.experience.map((exp, idx) => {
+            const isCampusAmbassador = exp.company.toLowerCase().includes('mygov');
+            return (
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: idx * 0.06 }}
+                className="p-4 space-y-2 hover:bg-white/[0.02] transition-colors"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono text-white/50 font-semibold">
+                    {exp.year}
+                  </span>
+                  {exp.isCurrent ? (
+                    <span className="px-2 py-0.5 text-[9px] font-mono rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-medium">
+                      Current
+                    </span>
+                  ) : isCampusAmbassador ? (
+                    <span className="px-2 py-0.5 text-[9px] font-mono rounded-full bg-white/[0.06] text-white/70 border border-white/[0.08] font-medium">
+                      Govt of India
+                    </span>
+                  ) : null}
+                </div>
+                <h3 className="text-sm font-bold text-white tracking-tight">
                   {exp.role}
                 </h3>
-
-                {/* Company Name */}
-                <p className="text-white/60 text-xs font-medium mb-3">
+                <div className="text-xs text-white/50 font-medium">
                   {exp.company}
-                </p>
-
-                {/* Description */}
-                <p className="text-white/70 text-xs leading-relaxed text-justify">
+                </div>
+                <p className="text-xs text-white/60 leading-relaxed pt-0.5">
                   {exp.description}
                 </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ──────────────────────────────────────────────────────────────────────────
-          7. RECOGNITION & MILESTONES (Clean Stat Badges)
-      ────────────────────────────────────────────────────────────────────────── */}
-      <section className="py-16 px-5 border-t border-white/10 bg-[#08080a]">
-        <div className="max-w-md mx-auto space-y-6">
-          {/* Section Marker */}
-          <div className="flex items-center gap-3 mb-6">
-            <span className="h-px w-8 bg-[#C75B32]" />
-            <h2 className="text-xs font-mono font-semibold text-white/60 uppercase tracking-widest">
-              Key Milestones
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 gap-3">
-            {PORTFOLIO_DATA.achievements.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-4 rounded-xl bg-white/[0.02] border border-white/5 flex items-start gap-4"
-              >
-                <div className="text-lg font-mono font-bold text-[#E88053] flex-shrink-0 pt-0.5">
-                  {item.stat}
-                </div>
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">
-                      {item.label}
-                    </h4>
-                    {item.tag && (
-                      <span className="px-1.5 py-0.5 text-[9px] font-mono rounded bg-[#C75B32]/20 text-[#E88053] border border-[#C75B32]/30">
-                        {item.tag}
-                      </span>
-                    )}
+                {/* If Campus Ambassador, provide sleek interactive certificate card preview */}
+                {isCampusAmbassador && (
+                  <div 
+                    onClick={() => setActivePhoto(CURATED_PROOF_PHOTOS[2])}
+                    className="mt-3 p-2.5 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-3 cursor-pointer hover:border-white/20 active:scale-[0.98] transition-all"
+                  >
+                    <div className="relative w-14 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-black border border-white/10">
+                      <Image
+                        src="/campus ambassador certificate.png"
+                        alt="MyGov Campus Ambassador Certificate"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[11px] font-bold text-white truncate">
+                        Official MeitY Certificate
+                      </div>
+                      <div className="text-[10px] text-white/50 flex items-center gap-1 font-mono">
+                        <span>Tap to view certificate</span>
+                        <ArrowUpRight className="w-2.5 h-2.5" />
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-white/60 leading-relaxed">
-                    {item.detail}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
-      </section>
+      </motion.section>
 
       {/* ──────────────────────────────────────────────────────────────────────────
-          8. CONTACT SECTION ("Let's start a project together")
+          7. APPLE-STYLE ACTION CARD (Frictionless Contact)
       ────────────────────────────────────────────────────────────────────────── */}
-      <section id="contact" className="py-16 px-5 border-t border-white/10 bg-[#08080a]">
-        <div className="max-w-md mx-auto space-y-8">
-          {/* Section Marker */}
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-[#C75B32]" />
-            <h2 className="text-xs font-mono font-semibold text-white/60 uppercase tracking-widest">
-              Contact
-            </h2>
+      <motion.section 
+        id="contact" 
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="px-4 py-8 max-w-md mx-auto"
+      >
+        <div className="rounded-3xl bg-gradient-to-b from-white/[0.05] to-white/[0.02] border border-white/[0.1] p-6 space-y-5 shadow-xl text-center">
+          <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mx-auto text-white">
+            <Mail className="w-5 h-5" />
           </div>
 
-          {/* Editorial Headline from Reference Site */}
-          <div className="space-y-3">
-            <h2 className="font-serif text-5xl sm:text-6xl leading-[0.95] text-white">
-              Let&apos;s start <br />
-              a <span className="italic text-white/90">project</span> <br />
-              together.
+          <div className="space-y-1.5">
+            <h2 className="text-2xl font-extrabold text-white tracking-tight">
+              Let&apos;s build together.
             </h2>
-            <p className="font-serif text-xl sm:text-2xl italic text-white/60 flex items-center gap-2">
-              <span>or just say Hello :)</span>
-              <ArrowUpRight className="w-5 h-5 text-[#E88053]" />
+            <p className="text-xs text-white/60 leading-relaxed max-w-xs mx-auto">
+              I&apos;m always open to talking about new projects, engineering roles, or interesting ideas.
             </p>
           </div>
 
-          {/* Social Icons */}
-          <div className="flex items-center gap-5 pt-2">
+          {/* Interactive Tap-to-Copy Email Capsule */}
+          <button
+            type="button"
+            onClick={handleCopyEmail}
+            className="w-full py-3 px-4 rounded-2xl bg-black/60 border border-white/[0.12] hover:border-white/30 text-white flex items-center justify-between group active:scale-[0.98] transition-all"
+          >
+            <div className="flex items-center gap-2 text-left truncate">
+              <Mail className="w-4 h-4 text-white/70 flex-shrink-0" />
+              <span className="text-xs font-mono truncate">{PORTFOLIO_DATA.personal.email}</span>
+            </div>
+            <div className="flex items-center gap-1 text-[11px] font-mono text-white/70 flex-shrink-0 ml-2">
+              {emailCopied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-emerald-400">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100" />
+                  <span className="hidden xs:inline text-white/60">Copy</span>
+                </>
+              )}
+            </div>
+          </button>
+
+          {/* Direct Send Email Button */}
+          <a
+            href={`mailto:${PORTFOLIO_DATA.personal.email}?subject=Hello%20from%20Portfolio`}
+            className="w-full py-3 px-4 rounded-full bg-white text-black font-semibold text-xs tracking-tight flex items-center justify-center gap-2 hover:bg-white/90 active:scale-95 transition-all shadow-lg"
+          >
+            <span>Send an Email</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
+
+          {/* Social Icons Bar */}
+          <div className="pt-2 flex items-center justify-center gap-3">
             <a
               href={PORTFOLIO_DATA.personal.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors"
+              className="w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/70 hover:text-white hover:bg-white/[0.12] transition-all"
               aria-label="GitHub"
             >
-              <FaGithub className="w-5 h-5" />
+              <FaGithub className="w-4 h-4" />
             </a>
             <a
               href={PORTFOLIO_DATA.personal.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors"
+              className="w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/70 hover:text-white hover:bg-white/[0.12] transition-all"
               aria-label="LinkedIn"
             >
-              <FaLinkedin className="w-5 h-5" />
+              <FaLinkedin className="w-4 h-4" />
             </a>
             <a
               href={PORTFOLIO_DATA.personal.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors"
+              className="w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/70 hover:text-white hover:bg-white/[0.12] transition-all"
               aria-label="X / Twitter"
             >
-              <FaXTwitter className="w-5 h-5" />
+              <FaXTwitter className="w-4 h-4" />
             </a>
             <a
               href={PORTFOLIO_DATA.personal.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors"
+              className="w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/70 hover:text-white hover:bg-white/[0.12] transition-all"
               aria-label="Instagram"
             >
-              <FaInstagram className="w-5 h-5" />
-            </a>
-            <a
-              href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-              className="text-white/50 hover:text-white transition-colors"
-              aria-label="Email"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
-          </div>
-
-          {/* Minimal Form */}
-          <form onSubmit={handleContactSubmit} className="space-y-4 pt-4">
-            <div>
-              <input
-                type="text"
-                placeholder="Your Name"
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full bg-transparent border border-white/20 focus:border-[#C75B32] px-4 py-3 text-sm text-white placeholder:text-white/30 rounded-lg outline-none transition-colors"
-              />
-            </div>
-            <div>
-              <input
-                type="email"
-                placeholder="Email Address"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full bg-transparent border border-white/20 focus:border-[#C75B32] px-4 py-3 text-sm text-white placeholder:text-white/30 rounded-lg outline-none transition-colors"
-              />
-            </div>
-            <div>
-              <textarea
-                rows={4}
-                placeholder="Your Message..."
-                required
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full bg-transparent border border-white/20 focus:border-[#C75B32] px-4 py-3 text-sm text-white placeholder:text-white/30 rounded-lg outline-none resize-none transition-colors"
-              />
-            </div>
-
-            {submitted ? (
-              <div className="p-3 rounded-lg bg-[#C75B32]/20 border border-[#C75B32]/40 text-[#E88053] text-xs font-mono flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Redirecting to your mail client... Thanks for reaching out!</span>
-              </div>
-            ) : (
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-3.5 bg-white text-black font-mono font-bold uppercase tracking-widest text-xs rounded-lg hover:bg-[#C75B32] hover:text-white transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
-              >
-                <span>{isSubmitting ? 'Opening Mail...' : 'Send Message'}</span>
-                <Send className="w-3.5 h-3.5" />
-              </button>
-            )}
-          </form>
-
-          {/* Direct Email Card */}
-          <div className="pt-2 text-center">
-            <a
-              href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-              className="text-xs font-mono text-white/50 hover:text-[#E88053] transition-colors"
-            >
-              Direct: {PORTFOLIO_DATA.personal.email}
+              <FaInstagram className="w-4 h-4" />
             </a>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ──────────────────────────────────────────────────────────────────────────
-          9. MINIMAL MOBILE FOOTER
+          8. MINIMAL FOOTER
       ────────────────────────────────────────────────────────────────────────── */}
-      <footer className="py-8 px-5 border-t border-white/5 bg-[#050505] text-center text-xs font-mono text-white/40 space-y-3">
-        <div className="flex items-center justify-between max-w-md mx-auto">
+      <footer className="pt-6 px-4 max-w-md mx-auto text-center space-y-3">
+        <div className="flex items-center justify-between text-[11px] font-mono text-white/40">
           <span>© 2026 LAKSHAN GANESAN</span>
           <button
             onClick={scrollToTop}
             className="flex items-center gap-1 text-white/60 hover:text-white transition-colors"
           >
-            <span>TOP</span>
+            <span>BACK TO TOP</span>
             <ArrowUp className="w-3 h-3" />
           </button>
         </div>
-        <p className="text-[10px] text-white/30">
-          Coimbatore, India • Available for select projects
+        <p className="text-[10px] font-mono text-white/30">
+          Crafted with Next.js &amp; TypeScript
         </p>
       </footer>
     </div>

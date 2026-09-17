@@ -83,14 +83,14 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
     <div
       ref={containerRef}
       className={cn(
-        "relative z-10 w-full h-screen flex items-center justify-center bg-[#080808] select-none px-6 sm:px-12",
+        "relative z-10 w-full min-h-screen h-screen flex items-center justify-center bg-[#080808] select-none px-4 sm:px-8 lg:px-12 pt-20 sm:pt-24 pb-12 sm:pb-16 overflow-hidden",
         className
       )}
     >
-      <div className="max-w-5xl mx-auto text-center">
-        <p className="flex flex-wrap items-center justify-center text-center font-mono font-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-relaxed tracking-tight select-none">
+      <div className="max-w-4xl xl:max-w-5xl mx-auto text-center w-full my-auto">
+        <p className="flex flex-wrap items-center justify-center text-center font-mono font-bold text-xl sm:text-3xl md:text-4xl lg:text-5xl leading-snug sm:leading-normal md:leading-relaxed tracking-tight select-none">
           {words.map((word, i) => (
-            <span key={i} className="relative mx-1.5 sm:mx-2.5 my-1.5 inline-block">
+            <span key={i} className="relative mx-1 sm:mx-2 my-0.5 sm:my-1 inline-block">
               {/* Dim underlying ghost word */}
               <span className="absolute inset-0 text-white/15 select-none pointer-events-none">
                 {word}
