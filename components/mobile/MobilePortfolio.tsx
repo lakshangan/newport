@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { 
   ArrowUpRight, 
   Mail, 
@@ -130,6 +130,91 @@ const CURATED_PROOF_PHOTOS = [
   },
 ];
 
+/* ──────────────────────────────────────────────────────────────────────────
+   MOBILE WORD-BY-WORD TEXT REVEAL COMPONENT
+────────────────────────────────────────────────────────────────────────── */
+const MobileWordItem: React.FC<{
+  word: string;
+  progress: any;
+  range: [number, number];
+}> = ({ word, progress, range }) => {
+  const opacity = useTransform(progress, range, [0.15, 1]);
+  const color = useTransform(progress, range, [
+    'rgba(255, 255, 255, 0.15)',
+    '#ffffff',
+  ]);
+  const textShadow = useTransform(progress, range, [
+    '0 0 0px rgba(255,255,255,0)',
+    '0 0 16px rgba(255,255,255,0.6)',
+  ]);
+
+  return (
+    <span className="relative mx-1 my-0.5 inline-block">
+      {/* Dim base ghost word for layout & background */}
+      <span className="absolute inset-0 text-white/15 select-none pointer-events-none">
+        {word}
+      </span>
+      {/* Animated illuminated word */}
+      <motion.span
+        style={{ opacity, color, textShadow }}
+        className="relative transition-none"
+      >
+        {word}
+      </motion.span>
+    </span>
+  );
+};
+
+const MobileWordReveal: React.FC<{ text: string }> = ({ text }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
+
+  const words = text.split(' ');
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative h-[160vh] w-full bg-[#050507] select-none"
+    >
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center px-5 overflow-hidden">
+        {/* Subtle developer ambient glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/[0.025] rounded-full blur-[90px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-sm mx-auto text-center">
+          <p className="flex flex-wrap items-center justify-center font-mono font-bold text-lg xs:text-xl leading-relaxed tracking-tight select-none">
+            {words.map((word, i) => {
+              const start = i / words.length;
+              const end = Math.min(1, start + 1.2 / words.length);
+              return (
+                <MobileWordItem
+                  key={i}
+                  word={word}
+                  progress={scrollYProgress}
+                  range={[start, end]}
+                />
+              );
+            })}
+          </p>
+
+          {/* Minimal scroll prompt */}
+          <motion.div
+            style={{
+              opacity: useTransform(scrollYProgress, [0, 0.25], [0.5, 0]),
+            }}
+            className="mt-6 flex items-center justify-center gap-1.5 text-[10px] font-mono tracking-widest text-white/40 uppercase"
+          >
+            <span>Scroll to read</span>
+            <span className="animate-bounce">↓</span>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 type ProjectCategory = 'ALL' | 'WEB3' | 'AI & WEB';
 
 export const MobilePortfolio: React.FC = () => {
@@ -186,15 +271,15 @@ export const MobilePortfolio: React.FC = () => {
       ────────────────────────────────────────────────────────────────────────── */}
       <header className="fixed top-3 inset-x-3 max-w-md mx-auto z-50">
         <nav className="h-12 px-3.5 rounded-full bg-black/75 backdrop-blur-2xl border border-white/[0.12] flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
-          {/* Identity & Status */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-6 h-6 rounded-full bg-white/[0.1] border border-white/15 flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
-              LG
-            </div>
-            <div className="flex items-center gap-1.5 text-[11px] font-medium tracking-tight text-white/90">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="font-semibold">Lakshan</span>
-            </div>
+          {/* Identity Wordmark */}
+          <a 
+            href="#" 
+            className="group pl-1.5 py-1 flex items-center transition-transform active:scale-95"
+            aria-label="Lakshan - Home"
+          >
+            <span className="text-[13.5px] font-semibold tracking-tight bg-gradient-to-r from-white via-white/95 to-white/80 bg-clip-text text-transparent group-hover:to-white transition-all">
+              Lakshan
+            </span>
           </a>
 
           {/* Quick Jump Pills */}
@@ -320,6 +405,11 @@ export const MobilePortfolio: React.FC = () => {
           </button>
         </motion.div>
       </section>
+
+      {/* ──────────────────────────────────────────────────────────────────────────
+          2.2 WORD-BY-WORD SCROLL REVEAL MANIFESTO
+      ────────────────────────────────────────────────────────────────────────── */}
+      <MobileWordReveal text="<\ I build software, design systems, and turn ideas into products. I work across web, blockchain, AI, and interactive technology, constantly exploring new tools, solving complex problems. >" />
 
       {/* ──────────────────────────────────────────────────────────────────────────
           2.5 APPLE-STYLE ABOUT SECTION (Casual & Natural Tone, No Numbers)
