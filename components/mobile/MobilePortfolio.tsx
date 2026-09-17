@@ -337,14 +337,14 @@ export const MobilePortfolio: React.FC = () => {
         {/* Natural, Simple Statement */}
         <div className="space-y-2.5">
           <h3 className="text-2xl xs:text-3xl font-bold tracking-tight text-white leading-snug">
-            Building with focus. <br />
+            I turn ideas into products. <br />
             <span className="text-white/60">
-              From the sports arena to writing code.
+              Fast, thoughtful, and built to scale.
             </span>
           </h3>
 
           <p className="text-xs text-white/70 leading-relaxed font-normal">
-            I love building clean, reliable software that feels great to use. As an International Silambam bronze medalist, sports taught me consistency, discipline, and patience — things I rely on every day when engineering web systems and smart contracts.
+            Whether it’s designing slick web apps, training AI models, or building on-chain systems — I love solving hard problems and shipping things people actually enjoy using.
           </p>
         </div>
 
