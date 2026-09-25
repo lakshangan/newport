@@ -272,7 +272,7 @@ With the help of this decoding key and the parameters above, please derive the A
   return (
     <section
       id="decrypt-this"
-      className="relative py-24 sm:py-32 bg-[#060505] border-t border-white/[0.08] overflow-hidden select-none"
+      className="relative pt-28 pb-24 sm:pt-36 sm:pb-32 bg-[#060505] border-t border-white/[0.08] overflow-hidden select-none scroll-mt-24"
     >
       {/* ========================================================================= */}
       {/* VISIONOS CHROMATIC REFRACTION BACKLIGHTS (Diffuses through frosted glass) */}
@@ -331,28 +331,6 @@ With the help of this decoding key and the parameters above, please derive the A
               background: `radial-gradient(420px circle at ${mousePos.x}px ${mousePos.y}px, rgba(251, 191, 36, 0.12), transparent 75%)`,
             }}
           />
-
-          {/* ========================================================================= */}
-          {/* MACOS WINDOW TOP BAR WITH TRAFFIC LIGHTS CAPSULE */}
-          {/* ========================================================================= */}
-          <div className="relative z-10 flex items-center justify-between pb-3.5 border-b border-white/[0.08]">
-            <div className="flex items-center gap-3">
-              {/* Exact macOS Traffic Light Glass Capsule from User Screenshot */}
-              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/[0.07] border border-white/[0.18] shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl">
-                <span className="w-3 h-3 rounded-full bg-[#FF5F56] shadow-[0_0_8px_rgba(255,95,86,0.85)] inline-block" />
-                <span className="w-3 h-3 rounded-full bg-[#FFBD2E] shadow-[0_0_8px_rgba(255,189,46,0.85)] inline-block" />
-                <span className="w-3 h-3 rounded-full bg-[#27C93F] shadow-[0_0_8px_rgba(39,201,63,0.85)] inline-block" />
-              </div>
-              <span className="font-mono text-xs text-neutral-300 font-medium tracking-wide hidden sm:inline">
-                terminal — crypt-challenge
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2 font-mono text-[10px] text-neutral-400 uppercase tracking-widest px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08]">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-              <span>LIVE REPL</span>
-            </div>
-          </div>
 
           {/* Telemetry Status Bar - Cut VisionOS Glass Capsules */}
           <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-[11px]">
@@ -416,24 +394,19 @@ With the help of this decoding key and the parameters above, please derive the A
             </div>
           </div>
 
-          {/* Encrypted Payload Window - macOS Frosted Window Aesthetics */}
+          {/* Encrypted Payload Window */}
           <div className="relative z-10 space-y-2.5">
             <div className="flex items-center justify-between">
-              {/* Terminal Window Header with macOS Traffic Lights Pill & Glass Label */}
-              <div className="flex items-center gap-3">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/[0.07] border border-white/[0.18] shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] shadow-[0_0_8px_rgba(255,95,86,0.85)] inline-block" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] shadow-[0_0_8px_rgba(255,189,46,0.85)] inline-block" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] shadow-[0_0_8px_rgba(39,201,63,0.85)] inline-block" />
-                </div>
-                <div className="flex items-center gap-1.5 font-mono text-xs text-neutral-200 font-medium pl-0.5">
+              {/* Payload Header with Glass Lock Badge */}
+              <div className="flex items-center gap-2 font-mono text-xs text-neutral-200 font-semibold">
+                <span className="p-1.5 rounded-lg bg-white/[0.06] border border-white/[0.12] text-amber-400 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
                   {status === 'success' ? (
                     <Unlock className="w-3.5 h-3.5 text-emerald-400" />
                   ) : (
-                    <Lock className="w-3.5 h-3.5 text-amber-400" />
+                    <Lock className="w-3.5 h-3.5" />
                   )}
-                  <span className="tracking-wide">ENCRYPTED_PAYLOAD.BIN</span>
-                </div>
+                </span>
+                <span className="tracking-wide text-neutral-300">[ ENCRYPTED PAYLOAD ]</span>
               </div>
 
               {/* Copy Button - VisionOS Frosted Pill */}
