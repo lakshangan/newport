@@ -14,33 +14,42 @@ export const Navbar: React.FC = () => {
     e.preventDefault();
     setMobileMenuOpen(false);
 
+    const smoothScrollTo = (target: number | HTMLElement) => {
+      if (typeof window !== 'undefined' && (window as any).__lenis) {
+        (window as any).__lenis.scrollTo(target, { duration: 1.0 });
+      } else if (typeof target === 'number') {
+        window.scrollTo({ top: target, behavior: 'smooth' });
+      } else {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
     if (targetId === 'showcase') {
       const st = ScrollTrigger.getById('about-horizontal');
       if (st) {
-        // Slide 1 (Creative Showcase) sits exactly at progress = (1 / 2) * 0.85 = 0.425
-        const targetScroll = st.start + 0.425 * (st.end - st.start);
-        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        const targetScroll = st.start + 0.5 * (st.end - st.start);
+        smoothScrollTo(targetScroll);
         return;
       }
       const el = document.getElementById('showcase');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (el) smoothScrollTo(el);
       return;
     }
 
     if (targetId === 'about') {
       const st = ScrollTrigger.getById('about-horizontal');
       if (st) {
-        window.scrollTo({ top: st.start, behavior: 'smooth' });
+        smoothScrollTo(st.start);
         return;
       }
       const el = document.getElementById('about');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (el) smoothScrollTo(el);
       return;
     }
 
     const targetEl = document.getElementById(targetId);
     if (targetEl) {
-      targetEl.scrollIntoView({ behavior: 'smooth' });
+      smoothScrollTo(targetEl);
     }
   };
 

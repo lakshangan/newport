@@ -296,7 +296,11 @@ export const FlowAboutStorySection: React.FC = () => {
   const scrollToCompetitiveMilestones = () => {
     const el = document.getElementById('competitive-milestones');
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      if (typeof window !== 'undefined' && (window as any).__lenis) {
+        (window as any).__lenis.scrollTo(el, { duration: 1.0 });
+      } else {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -311,7 +315,11 @@ export const FlowAboutStorySection: React.FC = () => {
       const end = st.end;
       const targetProgress = (targetIndex / 2) * 0.85;
       const targetScroll = start + targetProgress * (end - start);
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      if (typeof window !== 'undefined' && (window as any).__lenis) {
+        (window as any).__lenis.scrollTo(targetScroll, { duration: 0.85 });
+      } else {
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      }
     } else {
       if (targetIndex >= 3) {
         scrollToCompetitiveMilestones();
@@ -329,9 +337,11 @@ export const FlowAboutStorySection: React.FC = () => {
     const totalPanels = panels.length;
     if (totalPanels <= 1) return;
 
-    // Total scroll duration: horizontal movement + 600px resting buffer on panel 3
+    // Total scroll duration: calibrated for smooth, effortless wheel travel (avoids 4400px sluggish drag)
     const getPanelWidth = () => container.offsetWidth || window.innerWidth;
-    const totalDistance = getPanelWidth() * (totalPanels - 1) + 600;
+    const totalDistance = Math.round(
+      Math.min(getPanelWidth() * 0.95, 1350) * (totalPanels - 1) + 400
+    );
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -339,11 +349,14 @@ export const FlowAboutStorySection: React.FC = () => {
         trigger: container,
         pin: true,
         pinSpacing: true,
-        scrub: 1,
+        // scrub: 0.35 pairs flawlessly with Lenis (lerp: 0.085) with zero sluggish input delay
+        scrub: 0.35,
         start: 'top top',
         end: () => `+=${totalDistance}`,
         invalidateOnRefresh: true,
         anticipatePin: 1,
+        fastScrollEnd: true,
+        preventOverlaps: true,
         onUpdate: (self) => {
           const moveProgress = Math.min(1, self.progress / 0.85);
           const index = Math.min(
@@ -362,6 +375,7 @@ export const FlowAboutStorySection: React.FC = () => {
         x: () => -(getPanelWidth() * (totalPanels - 1)),
         ease: 'none',
         duration: 0.85,
+        force3D: true,
       },
       0
     );
@@ -377,6 +391,7 @@ export const FlowAboutStorySection: React.FC = () => {
           },
           ease: 'none',
           duration: 0.85,
+          force3D: true,
         },
         0
       );
@@ -402,12 +417,14 @@ export const FlowAboutStorySection: React.FC = () => {
         id="about"
         ref={horizontalContainerRef}
         className="relative w-full h-screen overflow-hidden bg-[#0C0907] select-none scroll-mt-6"
+        style={{ transform: 'translate3d(0,0,0)' }}
       >
         {/* Continuous Panoramic Studio & Engineering Workspace Background */}
         {/* Sized with natural 2048:768 aspect ratio (266.67vh) so the full height is visible with ZERO zoom */}
         <div
           ref={horizontalBgRef}
           className="absolute inset-y-0 left-0 h-full w-[266.67vh] min-w-full pointer-events-none select-none z-0 overflow-hidden will-change-transform"
+          style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
         >
           <div className="relative w-full h-full">
             <Image
@@ -427,6 +444,7 @@ export const FlowAboutStorySection: React.FC = () => {
         <div
           ref={horizontalTrackRef}
           className="flex flex-row w-[300%] h-full will-change-transform relative z-10"
+          style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
         >
 
           {/* ========================================================================= */}
@@ -675,14 +693,18 @@ export const FlowAboutStorySection: React.FC = () => {
                     </div>
 
                     {/* Scaled Desktop Viewport */}
-                    <div className="relative w-full h-[85px] sm:h-[95px] lg:h-[105px] xl:h-[125px] bg-[#0A0806] overflow-hidden group/screen">
+                    <div
+                      className="relative w-full h-[85px] sm:h-[95px] lg:h-[105px] xl:h-[125px] bg-[#0A0806] overflow-hidden group/screen"
+                      style={{ contain: 'paint layout', transform: 'translate3d(0,0,0)' }}
+                    >
                       <div
                         className="w-[1200px] h-[600px] origin-top-left pointer-events-none select-none"
                         style={{
-                          transform: 'scale(0.24)',
+                          transform: 'scale(0.24) translate3d(0,0,0)',
                           transformOrigin: '0 0',
                           width: '1200px',
                           height: '600px',
+                          contain: 'strict',
                         }}
                       >
                         <iframe

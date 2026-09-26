@@ -28,6 +28,7 @@
     "tweakpane": "^4.0.5"
   },
   "devDependencies": {
+    "@next/swc-darwin-arm64": "^14.2.23",
     "@types/imagesloaded": "^4.1.7",
     "@types/node": "^20.17.17",
     "@types/react": "^18.3.18",

@@ -51,6 +51,8 @@ export default function Home() {
       autoRaf: false,
     });
 
+    (window as any).__lenis = lenis;
+
     // Synchronize Lenis smooth scroll with GSAP ScrollTrigger ticker
     lenis.on('scroll', ScrollTrigger.update);
 
@@ -76,6 +78,7 @@ export default function Home() {
       clearTimeout(timer);
       window.removeEventListener('resize', handleResize);
       gsap.ticker.remove(updateLenis);
+      delete (window as any).__lenis;
       lenis.destroy();
     };
   }, []);
