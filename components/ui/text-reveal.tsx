@@ -46,7 +46,6 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
           scrub: 0.2,
           anticipatePin: 1,
           fastScrollEnd: true,
-          preventOverlaps: true,
         },
       });
 

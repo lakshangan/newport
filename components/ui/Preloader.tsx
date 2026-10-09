@@ -171,6 +171,9 @@ export const Preloader: React.FC = () => {
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
       setIsFinished(true);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('portfolio-loaded'));
+      }
     }, 3200);
 
     let frameId: number;
@@ -237,6 +240,9 @@ export const Preloader: React.FC = () => {
               document.documentElement.style.overflow = '';
               document.body.style.overflow = '';
               setIsFinished(true);
+              if (typeof window !== 'undefined') {
+                window.dispatchEvent(new CustomEvent('portfolio-loaded'));
+              }
             }
           };
 

@@ -63,19 +63,36 @@ export default function Home() {
     gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
 
-    // Refresh ScrollTrigger once DOM layout finishes initializing
-    const timer = setTimeout(() => {
+    const refreshScrollMetrics = () => {
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
-    }, 500);
+      if ((window as any).__lenis) {
+        (window as any).__lenis.resize();
+      }
+    };
+
+    // Staggered refreshes to catch DOM readiness and Preloader completion
+    const t1 = setTimeout(refreshScrollMetrics, 500);
+    const t2 = setTimeout(refreshScrollMetrics, 1200);
+    const t3 = setTimeout(refreshScrollMetrics, 2200);
+    const t4 = setTimeout(refreshScrollMetrics, 3400);
+
+    const handlePortfolioLoaded = () => {
+      refreshScrollMetrics();
+    };
+    window.addEventListener('portfolio-loaded', handlePortfolioLoaded);
 
     const handleResize = () => {
-      ScrollTrigger.refresh();
+      refreshScrollMetrics();
     };
     window.addEventListener('resize', handleResize);
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      window.removeEventListener('portfolio-loaded', handlePortfolioLoaded);
       window.removeEventListener('resize', handleResize);
       gsap.ticker.remove(updateLenis);
       delete (window as any).__lenis;

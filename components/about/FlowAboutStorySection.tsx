@@ -234,49 +234,49 @@ const TechExpertiseCard: React.FC<{ tech: TechExpertiseDomain }> = ({ tech }) =>
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="relative p-4 sm:p-4.5 lg:p-5 bg-[#0C0907]/85 hover:bg-[#140F0A]/95 border border-white/[0.12] hover:border-[#FFA266]/70 rounded-3xl backdrop-blur-3xl shadow-[0_24px_50px_rgba(0,0,0,0.55),inset_0_1px_0_0_rgba(255,255,255,0.14)] hover:shadow-[0_25px_50px_rgba(232,128,83,0.2)] transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between overflow-hidden text-left"
+      className="relative p-3 sm:p-3.5 xl:p-4.5 bg-[#0C0907]/85 hover:bg-[#140F0A]/95 border border-white/[0.12] hover:border-[#FFA266]/70 rounded-2xl xl:rounded-3xl backdrop-blur-3xl shadow-[0_24px_50px_rgba(0,0,0,0.55),inset_0_1px_0_0_rgba(255,255,255,0.14)] hover:shadow-[0_25px_50px_rgba(232,128,83,0.2)] transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between overflow-hidden text-left"
     >
       {/* Subtle Dynamic Cursor Spotlight */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+        className="pointer-events-none absolute -inset-px rounded-2xl xl:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
         style={{
           background: `radial-gradient(280px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 128, 83, 0.16), transparent 80%)`,
         }}
       />
 
-      <div className="space-y-2 sm:space-y-2.5 relative z-10">
+      <div className="space-y-1.5 sm:space-y-2 relative z-10">
         {/* Header: Index number + Glass Icon */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 sm:gap-2">
-            <span className="font-mono text-[11px] sm:text-xs font-bold text-[#FFA266]">
+            <span className="font-mono text-[10px] sm:text-xs font-bold text-[#FFA266]">
               {tech.num}
             </span>
-            <span className="text-white/20 font-mono text-[11px] sm:text-xs">//</span>
+            <span className="text-white/20 font-mono text-[10px] sm:text-xs">//</span>
             <span className="font-mono text-[9px] sm:text-[10px] text-white/70 uppercase tracking-wider font-semibold">
               {tech.category}
             </span>
           </div>
-          <span className="p-1.5 sm:p-2 rounded-xl bg-white/[0.06] border border-white/[0.12] text-[#FFA266] group-hover:border-[#FFA266]/50 group-hover:bg-[#E88053] group-hover:text-white transition-all duration-300 shadow-sm">
-            <IconComponent className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          <span className="p-1 sm:p-1.5 rounded-lg xl:rounded-xl bg-white/[0.06] border border-white/[0.12] text-[#FFA266] group-hover:border-[#FFA266]/50 group-hover:bg-[#E88053] group-hover:text-white transition-all duration-300 shadow-sm">
+            <IconComponent className="w-3.5 h-3.5 xl:w-4 xl:h-4" />
           </span>
         </div>
 
         {/* Title & Description */}
-        <div className="space-y-1">
-          <h3 className="text-sm sm:text-base lg:text-lg font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
+        <div className="space-y-0.5 sm:space-y-1">
+          <h3 className="text-xs sm:text-sm xl:text-base font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
             {tech.title}
           </h3>
-          <p className="text-[11px] sm:text-xs text-white/75 font-sans leading-relaxed line-clamp-2 sm:line-clamp-3">
+          <p className="text-[10px] sm:text-[11px] xl:text-xs text-white/75 font-sans leading-relaxed line-clamp-2 xl:line-clamp-3">
             {tech.description}
           </p>
         </div>
 
         {/* Clean Tech Pills */}
-        <div className="flex flex-wrap gap-1 sm:gap-1.5 pt-1">
+        <div className="flex flex-wrap gap-1 pt-0.5 sm:pt-1">
           {tech.skills.map((skill) => (
             <span
               key={skill}
-              className="px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-[9px] sm:text-[10px] font-mono text-white/80 group-hover:border-white/20 transition-colors"
+              className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-[8.5px] sm:text-[9.5px] font-mono text-white/80 group-hover:border-white/20 transition-colors"
             >
               {skill}
             </span>
@@ -356,7 +356,6 @@ export const FlowAboutStorySection: React.FC = () => {
         invalidateOnRefresh: true,
         anticipatePin: 1,
         fastScrollEnd: true,
-        preventOverlaps: true,
         onUpdate: (self) => {
           const moveProgress = Math.min(1, self.progress / 0.85);
           const index = Math.min(
@@ -417,7 +416,6 @@ export const FlowAboutStorySection: React.FC = () => {
         id="about"
         ref={horizontalContainerRef}
         className="relative w-full h-screen overflow-hidden bg-[#0C0907] select-none scroll-mt-6"
-        style={{ transform: 'translate3d(0,0,0)' }}
       >
         {/* Continuous Panoramic Studio & Engineering Workspace Background */}
         {/* Sized with natural 2048:768 aspect ratio (266.67vh) so the full height is visible with ZERO zoom */}
@@ -452,133 +450,133 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="recognition"
-            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-20 sm:pt-22 md:pt-24 pb-14 sm:pb-16 overflow-hidden bg-transparent"
+            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-18 xl:pt-22 pb-16 sm:pb-18 xl:pb-20 overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows - Warm Studio Golden Hour */}
             <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[150px] pointer-events-none z-1" />
             <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[160px] pointer-events-none z-1" />
 
-            <div className="max-w-7xl mx-auto w-full space-y-3 sm:space-y-4 lg:space-y-4.5 relative z-10 my-auto">
+            <div className="max-w-7xl mx-auto w-full space-y-2.5 sm:space-y-3.5 lg:space-y-4 relative z-10 my-auto">
               {/* Apple Keynote Eyebrow & Headline */}
-              <div className="space-y-1.5 sm:space-y-2 border-b border-white/[0.1] pb-2.5 sm:pb-3 text-left">
-                <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-white/[0.06] border border-white/[0.12] text-[10px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]">
+              <div className="space-y-1 sm:space-y-1.5 border-b border-white/[0.1] pb-2 sm:pb-2.5 text-left">
+                <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.12] text-[9.5px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
                   <span>02 // LEADERSHIP &amp; ACCOLADES</span>
                 </div>
-                <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
+                <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-[34px] xl:text-[38px] font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
                   PROVEN ON NATIONAL &amp; GLOBAL STAGES
                 </h2>
-                <p className="text-xs sm:text-sm md:text-[14px] text-white/80 font-sans leading-relaxed max-w-2xl font-normal">
+                <p className="text-[11px] sm:text-xs md:text-[13px] xl:text-sm text-white/80 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2">
                   Combining competitive hackathon execution, decentralized protocol research, and campus community leadership with unwavering discipline.
                 </p>
               </div>
 
               {/* Apple Keynote Bento Grid: 2 Headline Breakthroughs + 3 Distinct Pillars */}
-              <div className="space-y-2.5 sm:space-y-3 lg:space-y-3.5">
+              <div className="space-y-2 sm:space-y-2.5 lg:space-y-3">
                 {/* Row 1: Two Major Headline Breakthroughs */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3 lg:gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-2.5 lg:gap-3.5">
                   {/* Card 1: 1st Place Track Winner NIT Calicut */}
-                  <AppleSpotlightCard className="p-3.5 sm:p-4 lg:p-5 rounded-3xl hover:-translate-y-1">
-                    <div className="space-y-2 sm:space-y-2.5">
+                  <AppleSpotlightCard className="p-3 sm:p-3.5 xl:p-4.5 rounded-2xl xl:rounded-3xl hover:-translate-y-1">
+                    <div className="space-y-1.5 sm:space-y-2">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#E88053]/15 border border-[#E88053]/30 shadow-sm">
-                          <Trophy className="w-3.5 h-3.5 text-[#E88053]" /> 1ST PLACE TRACK WINNER
+                        <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#E88053]/15 border border-[#E88053]/30 shadow-sm">
+                          <Trophy className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#E88053]" /> 1ST PLACE TRACK WINNER
                         </span>
-                        <span className="text-[9px] sm:text-[10px] font-mono px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/90 font-semibold tracking-wider">
+                        <span className="text-[9px] sm:text-[9.5px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/90 font-semibold tracking-wider">
                           NIT CALICUT
                         </span>
                       </div>
-                      <h3 className="text-sm sm:text-base lg:text-lg font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight drop-shadow-sm">
+                      <h3 className="text-xs sm:text-sm xl:text-base font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight drop-shadow-sm">
                         Build On Chain @ NIT Calicut
                       </h3>
-                      <p className="text-[11px] sm:text-xs text-white/75 font-sans leading-relaxed line-clamp-2 sm:line-clamp-3">
+                      <p className="text-[10px] sm:text-[11px] xl:text-xs text-white/75 font-sans leading-relaxed line-clamp-2 xl:line-clamp-3">
                         Architected an audited on-chain tokenization protocol and automated liquidity vault under a grueling 36-hour hackathon marathon, placing 1st against top national university engineering teams.
                       </p>
                     </div>
-                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/[0.08] font-mono text-[9px] sm:text-[10px] mt-2.5">
-                      <span className="px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">Solidity</span>
-                      <span className="px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">EVM Smart Contracts</span>
-                      <span className="px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">DeFi Vaults</span>
+                    <div className="flex flex-wrap gap-1.5 pt-1.5 border-t border-white/[0.08] font-mono text-[8.5px] sm:text-[9.5px] mt-1.5 xl:mt-2">
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">Solidity</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">EVM Smart Contracts</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">DeFi Vaults</span>
                     </div>
                   </AppleSpotlightCard>
 
                   {/* Card 2: Smart India Hackathon Finalist */}
-                  <AppleSpotlightCard className="p-3.5 sm:p-4 lg:p-5 rounded-3xl hover:-translate-y-1">
-                    <div className="space-y-2 sm:space-y-2.5">
+                  <AppleSpotlightCard className="p-3 sm:p-3.5 xl:p-4.5 rounded-2xl xl:rounded-3xl hover:-translate-y-1">
+                    <div className="space-y-1.5 sm:space-y-2">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[10px] font-mono font-bold text-white uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/[0.08] border border-white/[0.15] shadow-sm">
-                          <Globe className="w-3.5 h-3.5 text-[#FFA266]" /> NATIONAL STAGE FINALIST
+                        <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[9.5px] font-mono font-bold text-white uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/[0.08] border border-white/[0.15] shadow-sm">
+                          <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFA266]" /> NATIONAL STAGE FINALIST
                         </span>
-                        <span className="text-[9px] sm:text-[10px] font-mono px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/90 font-semibold tracking-wider">
+                        <span className="text-[9px] sm:text-[9.5px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/90 font-semibold tracking-wider">
                           GOVT. OF INDIA
                         </span>
                       </div>
-                      <h3 className="text-sm sm:text-base lg:text-lg font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight drop-shadow-sm">
+                      <h3 className="text-xs sm:text-sm xl:text-base font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight drop-shadow-sm">
                         Smart India Hackathon
                       </h3>
-                      <p className="text-[11px] sm:text-xs text-white/75 font-sans leading-relaxed line-clamp-2 sm:line-clamp-3">
+                      <p className="text-[10px] sm:text-[11px] xl:text-xs text-white/75 font-sans leading-relaxed line-clamp-2 xl:line-clamp-3">
                         Selected among tens of thousands of nationwide applicants in India’s premier government hackathon, engineering software solutions addressing national public infrastructure challenges.
                       </p>
                     </div>
-                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/[0.08] font-mono text-[9px] sm:text-[10px] mt-2.5">
-                      <span className="px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">National Finalist</span>
-                      <span className="px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">Full-Stack Systems</span>
-                      <span className="px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">Public Infrastructure</span>
+                    <div className="flex flex-wrap gap-1.5 pt-1.5 border-t border-white/[0.08] font-mono text-[8.5px] sm:text-[9.5px] mt-1.5 xl:mt-2">
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">National Finalist</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">Full-Stack Systems</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">Public Infrastructure</span>
                     </div>
                   </AppleSpotlightCard>
                 </div>
 
                 {/* Row 2: Three Distinct Pillars */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 lg:gap-3.5">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5 lg:gap-3">
                   {/* Card 3: Campus Tech Lead */}
-                  <AppleSpotlightCard className="p-3 sm:p-3.5 lg:p-4 rounded-2xl hover:-translate-y-1">
-                    <div className="space-y-1.5">
+                  <AppleSpotlightCard className="p-2.5 sm:p-3 xl:p-3.5 rounded-xl xl:rounded-2xl hover:-translate-y-1">
+                    <div className="space-y-1">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
-                          <Award className="w-3.5 h-3.5 text-[#E88053]" /> LEADERSHIP
+                        <div className="flex items-center gap-1.5 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
+                          <Award className="w-3 h-3 text-[#E88053]" /> LEADERSHIP
                         </div>
                         <span className="w-1.5 h-1.5 rounded-full bg-[#E88053]/50" />
                       </div>
-                      <h4 className="text-xs sm:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
+                      <h4 className="text-[11px] sm:text-xs xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
                         Tech Hub Lead &amp; Campus Ambassador
                       </h4>
-                      <p className="text-[10px] sm:text-[11px] text-white/70 font-sans leading-relaxed line-clamp-2 sm:line-clamp-3">
+                      <p className="text-[9.5px] sm:text-[10px] xl:text-[11px] text-white/70 font-sans leading-relaxed line-clamp-2 xl:line-clamp-3">
                         Leading hands-on Web3, AI, and developer workshops for 200+ students, mentoring junior builders, and driving university technical initiatives.
                       </p>
                     </div>
                   </AppleSpotlightCard>
 
                   {/* Card 4: Uniswap & OpenLedger */}
-                  <AppleSpotlightCard className="p-3 sm:p-3.5 lg:p-4 rounded-2xl hover:-translate-y-1">
-                    <div className="space-y-1.5">
+                  <AppleSpotlightCard className="p-2.5 sm:p-3 xl:p-3.5 rounded-xl xl:rounded-2xl hover:-translate-y-1">
+                    <div className="space-y-1">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
-                          <ShieldCheck className="w-3.5 h-3.5 text-[#E88053]" /> RESEARCH
+                        <div className="flex items-center gap-1.5 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
+                          <ShieldCheck className="w-3 h-3 text-[#E88053]" /> RESEARCH
                         </div>
                         <span className="w-1.5 h-1.5 rounded-full bg-[#E88053]/50" />
                       </div>
-                      <h4 className="text-xs sm:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
+                      <h4 className="text-[11px] sm:text-xs xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
                         Uniswap v4 &amp; OpenLedger
                       </h4>
-                      <p className="text-[10px] sm:text-[11px] text-white/70 font-sans leading-relaxed line-clamp-2 sm:line-clamp-3">
+                      <p className="text-[9.5px] sm:text-[10px] xl:text-[11px] text-white/70 font-sans leading-relaxed line-clamp-2 xl:line-clamp-3">
                         Selected for the Uniswap v4 Hook Incubator cohort and collaborating on decentralized AI data pipelines and automated liquidity research.
                       </p>
                     </div>
                   </AppleSpotlightCard>
 
                   {/* Card 5: International Silambam */}
-                  <AppleSpotlightCard className="p-3 sm:p-3.5 lg:p-4 rounded-2xl hover:-translate-y-1">
-                    <div className="space-y-1.5">
+                  <AppleSpotlightCard className="p-2.5 sm:p-3 xl:p-3.5 rounded-xl xl:rounded-2xl hover:-translate-y-1">
+                    <div className="space-y-1">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
-                          <Monitor className="w-3.5 h-3.5 text-[#E88053]" /> <HiddenClueWord word="DISCIPLINE" clueIndex={2} />
+                        <div className="flex items-center gap-1.5 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
+                          <Monitor className="w-3 h-3 text-[#E88053]" /> <HiddenClueWord word="DISCIPLINE" clueIndex={2} />
                         </div>
                         <span className="w-1.5 h-1.5 rounded-full bg-[#E88053]/50" />
                       </div>
-                      <h4 className="text-xs sm:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
+                      <h4 className="text-[11px] sm:text-xs xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
                         International Silambam Medalist
                       </h4>
-                      <p className="text-[10px] sm:text-[11px] text-white/70 font-sans leading-relaxed line-clamp-2 sm:line-clamp-3">
+                      <p className="text-[9.5px] sm:text-[10px] xl:text-[11px] text-white/70 font-sans leading-relaxed line-clamp-2 xl:line-clamp-3">
                         Bronze Medalist at the International Silambam Championship. Physical mastery, precise execution, and{' '}
                         <HiddenClueWord word="discipline" clueIndex={2} /> that directly shape my engineering stamina.
                       </p>
@@ -592,23 +590,26 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           {/* PANEL 2 (SLIDE 03): CREATIVE SHOWCASE */}
           {/* ========================================================================= */}
+          {/* ========================================================================= */}
+          {/* PANEL 2 (SLIDE 03): CREATIVE SHOWCASE */}
+          {/* ========================================================================= */}
           <div
             id="showcase"
-            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-20 sm:pt-22 md:pt-24 pb-14 sm:pb-16 overflow-hidden bg-transparent"
+            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-18 xl:pt-22 pb-16 sm:pb-18 xl:pb-20 overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
             <div className="absolute top-1/4 left-1/3 w-[550px] h-[450px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
             <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[150px] pointer-events-none z-1" />
 
-            <div className="space-y-2.5 sm:space-y-3 lg:space-y-3.5 my-auto max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center">
+            <div className="space-y-2 sm:space-y-2.5 lg:space-y-3 my-auto max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center">
               {/* Header - Apple Keynote Eyebrow & Headline */}
-              <div className="flex flex-row items-center justify-between gap-2 sm:gap-3 border-b border-white/[0.1] pb-2.5 sm:pb-3 text-left">
+              <div className="flex flex-row items-center justify-between gap-2 sm:gap-3 border-b border-white/[0.1] pb-2 sm:pb-2.5 text-left">
                 <div className="space-y-1 sm:space-y-1.5">
-                  <div className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-white/[0.06] border border-white/[0.12] text-[10px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.12] text-[9.5px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]">
                     <Sparkles className="w-3.5 h-3.5 text-[#E88053]" />
                     <span>03 // LATEST DEPLOYMENTS</span>
                   </div>
-                  <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
+                  <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-[34px] xl:text-[38px] font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
                     CREATIVE <span className="text-[#FFA266] drop-shadow-[0_0_25px_rgba(232,128,83,0.5)]">SHOWCASE</span>
                   </h2>
                 </div>
@@ -617,7 +618,7 @@ export const FlowAboutStorySection: React.FC = () => {
                   href="https://github.com/lakshangan"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.14] hover:border-[#FFA266] backdrop-blur-2xl shadow-lg transition-all duration-300 hover:-translate-y-0.5 shrink-0 overflow-hidden text-xs font-mono text-white"
+                  className="group relative inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.14] hover:border-[#FFA266] backdrop-blur-2xl shadow-lg transition-all duration-300 hover:-translate-y-0.5 shrink-0 overflow-hidden text-[11px] sm:text-xs font-mono text-white"
                   title="View all projects on GitHub"
                 >
                   {/* Subtle animated light sweep on hover */}
@@ -647,28 +648,28 @@ export const FlowAboutStorySection: React.FC = () => {
               </div>
 
               {/* 6 Clean Architectural Project Cards - Proportional & Breathable */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 lg:gap-3.5">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5 lg:gap-3">
                 {SHOWCASE_CARDS.map((card) => (
                   <div
                     key={card.id}
                     className="rounded-2xl border border-white/[0.12] hover:border-[#FFA266]/70 bg-[#0C0907]/85 hover:bg-[#140F0A]/95 backdrop-blur-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.55),inset_0_1px_0_0_rgba(255,255,255,0.14)] hover:shadow-[0_25px_50px_rgba(232,128,83,0.2)] transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1"
                   >
                     {/* macOS Sequoia Glass Window Header */}
-                    <div className="px-3 py-1.5 sm:py-2 bg-black/60 border-b border-white/[0.1] flex items-center justify-between backdrop-blur-md">
+                    <div className="px-2.5 py-1 sm:py-1.5 bg-black/60 border-b border-white/[0.1] flex items-center justify-between backdrop-blur-md">
                       {/* macOS Window Traffic Lights */}
                       <div className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] shadow-sm" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] shadow-sm" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] shadow-sm" />
+                        <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FF5F56] shadow-sm" />
+                        <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FFBD2E] shadow-sm" />
+                        <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#27C93F] shadow-sm" />
                       </div>
 
                       {/* Centered Minimal Domain Pill */}
-                      <div className="px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.08] text-[9px] font-mono text-white/70 truncate max-w-[140px]">
+                      <div className="px-2 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.08] text-[8.5px] sm:text-[9px] font-mono text-white/70 truncate max-w-[130px]">
                         {card.domain}
                       </div>
 
                       {/* Header Actions */}
-                      <div className="flex items-center gap-2 font-mono text-[10px]">
+                      <div className="flex items-center gap-2 font-mono text-[9px] sm:text-[10px]">
                         {card.githubUrl && (
                           <a
                             href={card.githubUrl}
@@ -694,7 +695,7 @@ export const FlowAboutStorySection: React.FC = () => {
 
                     {/* Scaled Desktop Viewport */}
                     <div
-                      className="relative w-full h-[85px] sm:h-[95px] lg:h-[105px] xl:h-[125px] bg-[#0A0806] overflow-hidden group/screen"
+                      className="relative w-full h-[75px] sm:h-[82px] md:h-[90px] xl:h-[105px] 2xl:h-[120px] bg-[#0A0806] overflow-hidden group/screen"
                       style={{ contain: 'paint layout', transform: 'translate3d(0,0,0)' }}
                     >
                       <div
@@ -720,15 +721,15 @@ export const FlowAboutStorySection: React.FC = () => {
                         href={card.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="absolute bottom-2 right-2 px-2.5 py-1 bg-black/85 hover:bg-[#E88053] hover:text-white border border-white/20 rounded-lg font-mono text-[9px] font-bold text-white transition-all flex items-center gap-1 shadow-lg opacity-0 group-hover/screen:opacity-100 duration-200 z-10"
+                        className="absolute bottom-1.5 right-1.5 px-2 py-0.5 bg-black/85 hover:bg-[#E88053] hover:text-white border border-white/20 rounded-md font-mono text-[8.5px] font-bold text-white transition-all flex items-center gap-1 shadow-lg opacity-0 group-hover/screen:opacity-100 duration-200 z-10"
                       >
                         Launch ↗
                       </a>
                     </div>
 
                     {/* Card Body */}
-                    <div className="p-2.5 sm:p-3 space-y-1 bg-transparent flex-1 flex flex-col justify-center">
-                      <h3 className="font-sans text-xs sm:text-sm font-bold text-white group-hover:text-[#FFA266] transition-colors flex items-center justify-between">
+                    <div className="p-2 sm:p-2.5 space-y-0.5 bg-transparent flex-1 flex flex-col justify-center">
+                      <h3 className="font-sans text-xs xl:text-sm font-bold text-white group-hover:text-[#FFA266] transition-colors flex items-center justify-between">
                         <span>
                           {card.id === 'genproof' ? (
                             <>
@@ -745,10 +746,10 @@ export const FlowAboutStorySection: React.FC = () => {
                           className="text-white/40 hover:text-white transition-colors"
                           title="Open Project"
                         >
-                          <ExternalLink className="w-3.5 h-3.5" />
+                          <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                         </a>
                       </h3>
-                      <p className="font-sans text-[10px] sm:text-[11px] text-white/75 font-normal leading-relaxed line-clamp-2">
+                      <p className="font-sans text-[9.5px] sm:text-[10px] xl:text-[11px] text-white/75 font-normal leading-snug line-clamp-2">
                         {card.id === 'genproof' ? (
                           <>
                             Cryptographic <HiddenClueWord word="proof" clueIndex={0} /> verification engine implementing C2PA open standards to detect and verify synthetic AI media.
@@ -769,24 +770,24 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ========================================================================= */}
           <div
             id="technical-expertise"
-            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-20 sm:pt-22 md:pt-24 pb-14 sm:pb-16 overflow-hidden bg-transparent"
+            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-18 xl:pt-22 pb-16 sm:pb-18 xl:pb-20 overflow-hidden bg-transparent"
           >
             {/* Ambient Volumetric Glows */}
             <div className="absolute top-1/3 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
             <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[150px] pointer-events-none z-1" />
 
-            <div className="max-w-7xl mx-auto w-full space-y-3 sm:space-y-4 lg:space-y-4.5 relative z-10 my-auto">
+            <div className="max-w-7xl mx-auto w-full space-y-2.5 sm:space-y-3.5 lg:space-y-4 relative z-10 my-auto">
               {/* Header */}
-              <div className="flex flex-row items-center justify-between gap-2.5 sm:gap-3 border-b border-white/[0.1] pb-2.5 sm:pb-3 text-left">
+              <div className="flex flex-row items-center justify-between gap-2.5 sm:gap-3 border-b border-white/[0.1] pb-2 sm:pb-2.5 text-left">
                 <div className="space-y-1 sm:space-y-1.5">
-                  <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-white/[0.06] border border-white/[0.12] text-[10px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]">
+                  <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.12] text-[9.5px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
                     <span>04 // CORE ARCHITECTURAL CAPABILITIES</span>
                   </div>
-                  <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
+                  <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-[34px] xl:text-[38px] font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
                     TECHNICAL <span className="text-[#FFA266] drop-shadow-[0_0_25px_rgba(232,128,83,0.5)]">EXPERTISE</span>
                   </h2>
-                  <p className="text-xs sm:text-sm md:text-[14px] text-white/80 font-sans leading-relaxed max-w-xl font-normal">
+                  <p className="text-[11px] sm:text-xs md:text-[13px] xl:text-sm text-white/80 font-sans leading-relaxed max-w-xl font-normal line-clamp-2">
                     Deconstructing complex engineering challenges into resilient full-stack systems, audited EVM protocols, autonomous AI agents, and high-performance WebGL graphics.
                   </p>
                 </div>
@@ -794,7 +795,7 @@ export const FlowAboutStorySection: React.FC = () => {
                 <button
                   type="button"
                   onClick={scrollToCompetitiveMilestones}
-                  className="self-center inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.14] hover:border-[#FFA266] text-xs font-mono text-white transition-all shadow-lg group cursor-pointer backdrop-blur-2xl shrink-0"
+                  className="self-center inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.14] hover:border-[#FFA266] text-[11px] sm:text-xs font-mono text-white transition-all shadow-lg group cursor-pointer backdrop-blur-2xl shrink-0"
                 >
                   <span>Explore Milestones</span>
                   <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform text-[#FFA266]" />
@@ -802,7 +803,7 @@ export const FlowAboutStorySection: React.FC = () => {
               </div>
 
               {/* 4 Clean Minimal Technical Expertise Cards - 2x2 on Mobile, 4-col on Desktop */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 lg:gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5 lg:gap-3 xl:gap-4">
                 {TECHNICAL_EXPERTISE.map((tech) => (
                   <TechExpertiseCard key={tech.id} tech={tech} />
                 ))}
@@ -812,12 +813,12 @@ export const FlowAboutStorySection: React.FC = () => {
         </div>
 
         {/* Apple Dynamic Island Floating Navigation Capsule */}
-        <div className="absolute bottom-3 sm:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none select-none">
+        <div className="absolute bottom-2.5 sm:bottom-3 lg:bottom-4 left-1/2 -translate-x-1/2 z-30 pointer-events-none select-none">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-auto flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full bg-[#0E0C0A]/85 hover:bg-[#15110E]/95 border border-white/[0.14] backdrop-blur-3xl shadow-[0_16px_40px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.15)] transition-all"
+            className="pointer-events-auto flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full bg-[#0E0C0A]/90 hover:bg-[#15110E]/95 border border-white/[0.14] backdrop-blur-3xl shadow-[0_12px_32px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.15)] transition-all"
           >
             {[
               { id: 0, label: 'Accolades' },
