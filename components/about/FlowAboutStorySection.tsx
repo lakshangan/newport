@@ -78,6 +78,14 @@ interface ShowcaseCard {
 
 const SHOWCASE_CARDS: ShowcaseCard[] = [
   {
+    id: 'mochi',
+    title: 'Mochi Desktop Companion',
+    domain: 'mochidesktoppet.vercel.app',
+    url: 'https://mochidesktoppet.vercel.app/',
+    githubUrl: 'https://github.com/lakshangan/mochi',
+    description: 'An interactive cross-platform desktop pet with 3D orb physics, app-context awareness, focus timers, and a glowing LED matrix face.',
+  },
+  {
     id: 'jayam',
     title: 'Jayam Fashion Institute',
     domain: 'jayamwebsite.vercel.app',
@@ -116,14 +124,6 @@ const SHOWCASE_CARDS: ShowcaseCard[] = [
     url: 'https://gen-proof-ai.vercel.app/',
     githubUrl: 'https://github.com/lakshangan',
     description: 'Cryptographic provenance verification engine implementing C2PA open standards to detect and verify synthetic AI media.',
-  },
-  {
-    id: 'internocto',
-    title: 'InternOcTO',
-    domain: 'internocto-portfolio.vercel.app',
-    url: 'https://internocto-portfolio.vercel.app',
-    githubUrl: 'https://github.com/lakshangan',
-    description: "The official chaotic portfolio for OpenLedger's octopus mascot. Pure mayhem, interactive 3D motion, and fluid physics.",
   },
 ];
 

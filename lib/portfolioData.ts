@@ -71,8 +71,28 @@ export const PORTFOLIO_DATA = {
 
   projects: [
     {
-      id: 'jayam-website',
+      id: 'mochi-desktop-pet',
       number: '01',
+      title: 'MOCHI DESKTOP PET',
+      tagline: 'Interactive desktop companion with app awareness & 3D physics.',
+      description:
+        'A cross-platform desktop application built with Electron, React, and Three.js. Features active app awareness, focus timers, notes, and a glowing LED face matrix.',
+      technologies: ['Electron', 'React', 'Three.js', 'TypeScript', 'Node.js'],
+      category: 'Desktop App & 3D',
+      sceneType: 'landvault',
+      problem:
+        'Developers and creators often feel isolated during long work sessions and struggle with screen fatigue and timer burnout.',
+      concept:
+        'Build a lightweight, ambient desktop pet that floats above windows, responds to active work context and typing without compromising privacy.',
+      solution:
+        'Engineered an offline-first desktop companion with real-time cursor tracking, 3D orb physics, Pomodoro focus flows, and zero telemetry.',
+      myRole: 'Full-Stack & Desktop Developer',
+      githubUrl: 'https://github.com/lakshangan/mochi',
+      demoUrl: 'https://mochidesktoppet.vercel.app/',
+    },
+    {
+      id: 'jayam-website',
+      number: '02',
       title: 'JAYAM WEBSITE',
       tagline: 'Full-stack corporate platform & bespoke web application.',
       description:
@@ -92,7 +112,7 @@ export const PORTFOLIO_DATA = {
     },
     {
       id: 'land-vault',
-      number: '02',
+      number: '03',
       title: 'LAND VAULT V2',
       tagline: 'Tokenizing real estate for decentralized finance.',
       description:
@@ -112,7 +132,7 @@ export const PORTFOLIO_DATA = {
     },
     {
       id: 'nuna-organic',
-      number: '03',
+      number: '04',
       title: 'NUNA NATURAL HAVEN',
       tagline: 'Bespoke organic product showcase & event platform.',
       description:
@@ -132,7 +152,7 @@ export const PORTFOLIO_DATA = {
     },
     {
       id: 'medtech-ai',
-      number: '04',
+      number: '05',
       title: 'MEDIOCTO AI',
       tagline: 'Intelligent AI mental health support companion.',
       description:
@@ -152,7 +172,7 @@ export const PORTFOLIO_DATA = {
     },
     {
       id: 'genproof-ai',
-      number: '05',
+      number: '06',
       title: 'GENPROOF.AI',
       tagline: 'Content provenance and C2PA verification.',
       description:
@@ -172,7 +192,7 @@ export const PORTFOLIO_DATA = {
     },
     {
       id: 'steganography-cli',
-      number: '06',
+      number: '07',
       title: 'STEGANOGRAPHY CLI',
       tagline: 'Experimental hidden-information security tooling.',
       description:
@@ -274,19 +294,19 @@ export const PORTFOLIO_DATA = {
   playground: [
     {
       number: '01',
+      title: 'MOCHI DESKTOP PET',
+      category: 'Electron / 3D Desktop Pet',
+      description: 'Interactive desktop companion with real-time 3D physics, active window awareness, Pomodoro timers, and LED bead matrix.',
+      tech: ['Electron', 'React', 'Three.js', 'TypeScript'],
+      demoUrl: 'https://mochidesktoppet.vercel.app/',
+    },
+    {
+      number: '02',
       title: 'SBK BIRTHDAY 3D',
       category: 'Three.js / Audio-Visual',
       description: 'Interactive 3D audio-visual particle system with spatial audio triggers and custom shaders.',
       tech: ['Three.js', 'Web Audio API', 'GSAP'],
       demoUrl: 'https://sbk-hd.vercel.app',
-    },
-    {
-      number: '02',
-      title: 'INTERNOCTO',
-      category: 'React / Creative Chaos',
-      description: "The official chaotic portfolio for OpenLedger's octopus mascot. High-energy motion & meme-tech.",
-      tech: ['React', 'Framer Motion', 'Tailwind'],
-      demoUrl: 'https://internocto-portfolio.vercel.app',
     },
     {
       number: '03',
