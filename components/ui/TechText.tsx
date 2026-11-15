@@ -1038,3 +1038,4 @@ export const TechText: React.FC<TechTextProps> = ({
 };
 
 export default TechText;
+
