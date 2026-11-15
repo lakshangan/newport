@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import TechText from '@/components/ui/TechText';
 import { GLYPH_SETS, TransmissionEngine, type GlyphSet } from './TransmissionEngine';
 import './transmission.css';
 
@@ -197,8 +198,8 @@ export default function TransmissionHero() {
       if (!reduced) {
         gsap
           .timeline({ defaults: { ease: 'expo.out' }, delay: 0.3 })
-          .from('.tx-name-panel', { opacity: 0, x: 30, duration: 1.2 }, 0.2)
-          .from('.tx-bio-panel', { opacity: 0, y: 24, duration: 1.2 }, 0.4)
+          .from('.tx-name-panel-left', { opacity: 0, y: 30, duration: 1.2 }, 0.2)
+          .from('.tx-bio-panel', { opacity: 0, y: 30, duration: 1.2 }, 0.35)
           .from('.tx-dock button, .tx-hint__in', { opacity: 0, duration: 1.2, stagger: 0.08 }, 0.5);
       }
 
@@ -218,7 +219,7 @@ export default function TransmissionHero() {
       const tl = gsap.timeline({ paused: true, defaults: { ease: 'none' } });
       tl.to(story, { p: 1, duration: 1, onUpdate: () => apply(story.p) }, 0)
         .to('.tx-hint', { opacity: 0, duration: 0.05 }, 0)
-        .to('.tx-name-panel, .tx-bio-panel', { opacity: 0, y: -24, duration: 0.22, stagger: 0.04 }, 0.2)
+        .to('.tx-name-panel-left, .tx-bio-panel', { opacity: 0, y: -24, duration: 0.22, stagger: 0.04 }, 0.2)
         .to('.tx-dock', { opacity: 0, duration: 0.08 }, 0.8)
         .fromTo(
           '.tx-final',
@@ -277,42 +278,60 @@ export default function TransmissionHero() {
         <div ref={stageRef} className="tx-stage">
           <canvas ref={canvasRef} className="tx-canvas" aria-hidden="true" />
 
-          {/* Developer Name (Right Position) */}
-          <div className="tx-name-panel" aria-label="Lakshan Ganesan">
+          {/* Left Down: Developer Name with React Bits TechText wordmark */}
+          <div className="tx-name-panel-left" aria-label="Lakshan Ganesan">
             <div className="tx-name-kicker">
-              <span className="tx-dot-pulse" aria-hidden="true" />
-              <span>FULL STACK DEVELOPER</span>
+              <span className="tx-beacon-dot" aria-hidden="true" />
+              <span>FULL STACK DEVELOPER • AI &amp; WEB3</span>
             </div>
-            <h1 className="tx-name-title">
-              LAKSHAN G<em>.</em>
-            </h1>
-            <p className="tx-name-sub">AI &amp; BLOCKCHAIN ARCHITECT</p>
+            <div className="tx-techtext-container">
+              <TechText
+                text="LAKSHAN G"
+                fontWeight={700}
+                fontSize={78}
+                letterSpacing={0.03}
+                align="left"
+                reveal="letter"
+                dashLength={4}
+                dashGap={2}
+                specks={16}
+                intro="none"
+                clickKick={true}
+                draggable={true}
+                guides={false}
+                color="#F5F5F7"
+                accentColor="#FFA266"
+                className="font-display"
+              />
+            </div>
+            <div className="tx-name-meta">
+              <span>LKG // 001</span>
+              <span className="tx-sep">/</span>
+              <span>SYSTEM OPERATIONAL</span>
+            </div>
           </div>
 
-          {/* Impactful Short Bio (Right Down Side) */}
+          {/* Right Down: Impactful Architectural Bio (No generic green dot / AI box) */}
           <div className="tx-bio-panel" role="region" aria-label="About summary">
-            <div className="tx-bio-kicker">
-              <span>// ABOUT</span>
-              <span className="w-1 h-1 rounded-full bg-[#FFA266]" aria-hidden="true" />
+            <div className="tx-bio-header">
+              <span className="tx-bio-tag">// FOCUS &amp; CRAFT</span>
+              <span className="tx-bio-edition">2026</span>
             </div>
             <p className="tx-bio-text">
-              Engineering scalable web applications, intelligent AI systems, and blockchain protocols at the edge of code and craft.
+              Architecting scalable web applications, autonomous AI agents, and decentralized protocols at the edge of code and intelligence.
             </p>
-            <div className="tx-bio-meta">
-              <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
-              </span>
-              <span>AVAILABLE FOR SELECT ROLES · 2026</span>
+            <div className="tx-bio-telemetry">
+              <span>COIMBATORE &amp; BENGALURU, IN</span>
+              <span className="tx-bio-pulse" aria-hidden="true">●</span>
             </div>
           </div>
 
-          {/* Hint */}
+          {/* Center Scroll Hint */}
           <div className="tx-hint" aria-hidden="true">
             <span className="tx-hint__in">Scroll to tune in</span>
           </div>
 
-          {/* Glyph set dock */}
+          {/* Center Glyph Set Dock */}
           <div className="tx-dock" role="radiogroup" aria-label="Glyph set" hidden={status !== 'ready'}>
             {SETS.map((s) => (
               <button
@@ -328,14 +347,38 @@ export default function TransmissionHero() {
             ))}
           </div>
 
-          {/* Finale - appears at end of scroll */}
+          {/* Finale - appears at end of scroll (Website Fonts & Tailored Content) */}
           <div className="tx-final">
-            <p className="tx-final__kicker">Signal decoded · 100%</p>
-            <h2 className="tx-final__title">Decoded.</h2>
-            <p className="tx-final__body">What you saw as text was always the builder.</p>
-            <button type="button" className="tx-final__btn" onClick={replay}>
-              Replay transmission <span aria-hidden="true">↑</span>
-            </button>
+            <div className="tx-final__kicker">
+              <span className="tx-final__pulse" aria-hidden="true" />
+              <span>SIGNAL DECODED // SYSTEM 100% OPERATIONAL</span>
+            </div>
+            <h2 className="tx-final__title">
+              LAKSHAN GANESAN<em>.</em>
+            </h2>
+            <p className="tx-final__body">
+              Engineering high-scale web platforms, intelligent AI agents, and blockchain protocols with precision and craft.
+            </p>
+            <div className="tx-final__actions">
+              <a
+                href="#about"
+                className="tx-final__btn tx-final__btn--primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const about = document.getElementById('about');
+                  if (about) {
+                    const lenis = (window as any).__lenis;
+                    if (lenis) lenis.scrollTo(about, { duration: 1.2 });
+                    else about.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                EXPLORE WORK ↓
+              </a>
+              <button type="button" className="tx-final__btn tx-final__btn--secondary" onClick={replay}>
+                REPLAY SIGNAL ↑
+              </button>
+            </div>
           </div>
 
           {status === 'loading' && (

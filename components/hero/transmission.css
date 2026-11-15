@@ -170,10 +170,11 @@
 }
 
 .tx-hint {
+  position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, 0);
-  margin-top: min(34vh, 320px);
+  transform: translateX(-50%);
+  bottom: clamp(74px, 8.5vw, 92px);
+  z-index: 10;
   pointer-events: none;
 }
 
@@ -194,29 +195,34 @@
 }
 
 .tx-dock {
-  left: clamp(24px, 4vw, 56px);
-  bottom: clamp(28px, 4vw, 56px);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(24px, 3.5vw, 40px);
+  z-index: 20;
   display: flex;
   gap: 2px;
   padding: 3px;
   border: 1px solid var(--tx-rule);
   border-radius: 999px;
-  background: rgba(10, 11, 9, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(10, 11, 9, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /* =========================================================================
-   Developer Name & Impactful Bio Panels (Portfolio Typography)
+   Left-Down Developer Name Panel with TechText (React Bits)
    ========================================================================= */
 
-.tx-name-panel {
+.tx-name-panel-left {
   position: absolute;
-  top: clamp(96px, 14vh, 140px);
-  right: clamp(24px, 4vw, 56px);
-  z-index: 10;
-  text-align: right;
-  pointer-events: none;
+  bottom: clamp(32px, 5.5vw, 64px);
+  left: clamp(24px, 4vw, 56px);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: auto;
 }
 
 .tx-name-kicker {
@@ -228,10 +234,10 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--tx-accent);
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 }
 
-.tx-name-kicker .tx-dot-pulse {
+.tx-beacon-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -240,45 +246,48 @@
   animation: tx-blink 1.8s ease-in-out infinite;
 }
 
-.tx-name-title {
-  margin: 0;
-  font-family: var(--font-display), 'Bebas Neue', sans-serif;
-  font-size: clamp(48px, 6vw, 80px);
-  line-height: 0.92;
-  letter-spacing: 0.04em;
-  color: #f5f5f7;
-  text-shadow: 0 0 35px rgba(255, 162, 102, 0.15);
+.tx-techtext-container {
+  width: clamp(280px, 32vw, 420px);
+  height: clamp(75px, 8.5vw, 100px);
+  position: relative;
+  margin-left: -4px;
 }
 
-.tx-name-title em {
-  font-style: normal;
-  color: var(--tx-accent);
-}
-
-.tx-name-sub {
-  margin: 6px 0 0;
+.tx-name-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
   font-family: var(--font-mono), monospace;
-  font-size: 11px;
-  letter-spacing: 0.16em;
+  font-size: 10px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--tx-soft);
 }
 
+.tx-name-meta .tx-sep {
+  color: rgba(233, 230, 216, 0.25);
+}
+
+/* =========================================================================
+   Right-Down Impactful Bio Panel (Refined Architectural Aesthetic, No Green Dot)
+   ========================================================================= */
+
 .tx-bio-panel {
   position: absolute;
-  bottom: clamp(28px, 4vw, 56px);
+  bottom: clamp(32px, 5.5vw, 64px);
   right: clamp(24px, 4vw, 56px);
   max-width: min(340px, 85vw);
-  z-index: 10;
+  z-index: 15;
   text-align: right;
   pointer-events: auto;
   padding: 16px 20px;
-  border-radius: 16px;
-  background: rgba(12, 13, 11, 0.7);
-  border: 1px solid rgba(255, 162, 102, 0.18);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+  border-radius: 14px;
+  background: rgba(10, 11, 10, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
   transition: border-color 0.3s ease;
 }
 
@@ -286,17 +295,21 @@
   border-color: rgba(255, 162, 102, 0.35);
 }
 
-.tx-bio-kicker {
+.tx-bio-header {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 6px;
+  gap: 8px;
   font-family: var(--font-mono), monospace;
   font-size: 10px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--tx-accent);
   margin-bottom: 8px;
+}
+
+.tx-bio-edition {
+  color: rgba(233, 230, 216, 0.4);
 }
 
 .tx-bio-text {
@@ -308,18 +321,24 @@
   font-weight: 400;
 }
 
-.tx-bio-meta {
+.tx-bio-telemetry {
   margin-top: 10px;
   padding-top: 8px;
-  border-top: 1px solid rgba(233, 230, 216, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
   font-family: var(--font-mono), monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.1em;
-  color: rgba(233, 230, 216, 0.55);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: rgba(233, 230, 216, 0.45);
+}
+
+.tx-bio-pulse {
+  color: var(--tx-accent);
+  font-size: 8px;
+  animation: tx-blink 2s ease-in-out infinite;
 }
 
 .tx-dock button {
@@ -351,60 +370,110 @@
   outline-offset: 2px;
 }
 
+/* =========================================================================
+   Finale Panel (Consistent Signature Site Fonts & Content)
+   ========================================================================= */
+
 .tx-final {
   inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: clamp(22px, 4vw, 64px);
+  padding: clamp(28px, 5vw, 72px);
   opacity: 0;
   pointer-events: none;
-  background: linear-gradient(to top, rgba(8, 9, 7, 0.8), transparent 50%);
+  background: linear-gradient(to top, rgba(8, 9, 7, 0.9), transparent 55%);
 }
 
 .tx-final__kicker {
-  margin: 0 0 14px;
-  font: 500 10.5px/1 var(--tx-mono);
-  letter-spacing: 0.18em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font: 500 11px/1 var(--font-mono), monospace;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--tx-accent);
 }
 
+.tx-final__pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tx-accent);
+  box-shadow: 0 0 10px var(--tx-accent);
+  animation: tx-blink 1.6s steps(2) infinite;
+}
+
 .tx-final__title {
   margin: 0;
-  font-family: var(--tx-serif);
+  font-family: var(--font-display), 'Bebas Neue', sans-serif;
   font-weight: 400;
-  font-size: clamp(72px, 15vw, 260px);
-  line-height: 0.82;
-  letter-spacing: -0.045em;
+  font-size: clamp(56px, 10vw, 150px);
+  line-height: 0.9;
+  letter-spacing: 0.03em;
+  color: #f5f5f7;
+  text-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+}
+
+.tx-final__title em {
+  font-style: normal;
+  color: var(--tx-accent);
 }
 
 .tx-final__body {
-  margin: 18px 0 22px;
-  font-size: 14px;
-  color: var(--tx-soft);
+  margin: 14px 0 24px;
+  font-family: var(--font-sans), 'Inter', sans-serif;
+  font-size: clamp(13px, 1.3vw, 16px);
+  line-height: 1.65;
+  color: rgba(233, 230, 216, 0.82);
+  max-width: 580px;
+}
+
+.tx-final__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .tx-final__btn {
-  align-self: flex-start;
   appearance: none;
-  border: 1px solid rgba(233, 230, 216, 0.4);
-  background: transparent;
-  color: var(--tx-ink);
-  font: 500 11px/1 var(--tx-mono);
-  letter-spacing: 0.14em;
+  font: 500 11px/1 var(--font-mono), monospace;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 13px 18px;
+  padding: 13px 22px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.tx-final__btn:hover {
+.tx-final__btn--primary {
+  background: #f5f5f7;
+  color: #080808;
+  border: 1px solid #f5f5f7;
+  font-weight: 700;
+}
+
+.tx-final__btn--primary:hover {
   background: var(--tx-accent);
   border-color: var(--tx-accent);
-  color: #0a0b09;
-  font-weight: 700;
+  color: #080808;
+  box-shadow: 0 0 20px rgba(255, 162, 102, 0.4);
+}
+
+.tx-final__btn--secondary {
+  background: transparent;
+  color: var(--tx-ink);
+  border: 1px solid rgba(233, 230, 216, 0.3);
+}
+
+.tx-final__btn--secondary:hover {
+  border-color: var(--tx-accent);
+  color: var(--tx-accent);
 }
 
 .tx-final__btn:focus-visible {
