@@ -1,15 +1,16 @@
-/* Transmission — Quantum Core rendered as live text */
+/* Transmission — Lakshan Ganesan Live Typographic Matrix */
 @import '@fontsource/instrument-serif/400.css';
 @import '@fontsource/instrument-serif/400-italic.css';
 @import '@fontsource-variable/inter';
 @import '@fontsource/ibm-plex-mono/500.css';
 
 :root {
-  --tx-bg: #0a0b09;
+  --tx-bg: #080808;
   --tx-ink: #e9e6d8;
-  --tx-soft: rgba(233, 230, 216, 0.55);
-  --tx-dim: rgba(233, 230, 216, 0.32);
-  --tx-lime: #d6f06b;
+  --tx-soft: rgba(233, 230, 216, 0.6);
+  --tx-dim: rgba(233, 230, 216, 0.35);
+  --tx-accent: #FFA266;
+  --tx-orange: #E88053;
   --tx-rule: rgba(233, 230, 216, 0.14);
   --tx-serif: 'Instrument Serif', 'Times New Roman', serif;
   --tx-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
@@ -88,7 +89,7 @@
   font-size: 15px;
   letter-spacing: 0.02em;
   text-transform: none;
-  color: var(--tx-lime);
+  color: var(--tx-accent);
 }
 
 .tx-top__r {
@@ -103,8 +104,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--tx-lime);
-  box-shadow: 0 0 10px var(--tx-lime);
+  background: var(--tx-accent);
+  box-shadow: 0 0 10px var(--tx-accent);
   animation: tx-blink 1.6s steps(2) infinite;
 }
 
@@ -151,7 +152,7 @@
 }
 
 .tx-head em {
-  color: var(--tx-lime);
+  color: var(--tx-accent);
 }
 
 .tx-aside {
@@ -200,7 +201,7 @@
   padding: 3px;
   border: 1px solid var(--tx-rule);
   border-radius: 999px;
-  background: rgba(10, 11, 9, 0.6);
+  background: rgba(10, 11, 9, 0.7);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -224,12 +225,13 @@
 }
 
 .tx-dock button.is-active {
-  background: var(--tx-lime);
-  color: #10120c;
+  background: var(--tx-accent);
+  color: #0a0b09;
+  font-weight: 700;
 }
 
 .tx-dock button:focus-visible {
-  outline: 1px solid var(--tx-lime);
+  outline: 1px solid var(--tx-accent);
   outline-offset: 2px;
 }
 
@@ -241,7 +243,7 @@
   padding: clamp(22px, 4vw, 64px);
   opacity: 0;
   pointer-events: none;
-  background: linear-gradient(to top, rgba(8, 9, 7, 0.75), transparent 50%);
+  background: linear-gradient(to top, rgba(8, 9, 7, 0.8), transparent 50%);
 }
 
 .tx-final__kicker {
@@ -249,7 +251,7 @@
   font: 500 10.5px/1 var(--tx-mono);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--tx-lime);
+  color: var(--tx-accent);
 }
 
 .tx-final__title {
@@ -283,13 +285,14 @@
 }
 
 .tx-final__btn:hover {
-  background: var(--tx-lime);
-  border-color: var(--tx-lime);
-  color: #10120c;
+  background: var(--tx-accent);
+  border-color: var(--tx-accent);
+  color: #0a0b09;
+  font-weight: 700;
 }
 
 .tx-final__btn:focus-visible {
-  outline: 1px solid var(--tx-lime);
+  outline: 1px solid var(--tx-accent);
   outline-offset: 3px;
 }
 

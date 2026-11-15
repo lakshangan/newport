@@ -147,7 +147,7 @@ export default function TransmissionHero() {
     const release = (e: PointerEvent) => {
       if (!down) return;
       const p = local(e);
-      if (down.moved < 8) engineRef.current?.pulseAt(p.x, p.y); // click pulse
+      if (down.moved < 8) engineRef.current?.pulseAt(p.x, p.y);
       down = null;
       if (e.pointerType !== 'mouse') engineRef.current?.setPointer(p.x, p.y, false);
     };
@@ -307,12 +307,12 @@ export default function TransmissionHero() {
 
   return (
     <main className="tx-root" data-status={status}>
-      <section ref={trackRef} className="tx-track" aria-label="Transmission — Quantum Core rendered as live text">
+      <section ref={trackRef} className="tx-track" aria-label="Transmission — Lakshan Ganesan rendered as live code">
         <div ref={stageRef} className="tx-stage">
           <canvas ref={canvasRef} className="tx-canvas" aria-hidden="true" />
 
           <header className="tx-top">
-            <span>Signal/Core</span>
+            <span>Signal/Lakshan</span>
             <span className="tx-top__c">
               Transmission <em>№ 001</em>
             </span>
@@ -325,7 +325,7 @@ export default function TransmissionHero() {
 
           <h1 className="tx-head">
             <span className="ln">
-              <span className="li">Every system</span>
+              <span className="li">Every developer</span>
             </span>
             <span className="ln">
               <span className="li">
@@ -336,7 +336,7 @@ export default function TransmissionHero() {
 
           <div className="tx-aside">
             <p className="tx-aside__in">
-              A quantum core, grown from mathematics and rendered as text, live, sixty times a second.{' '}
+              Lakshan Ganesan, rendered as live code and text, sixty times a second.{' '}
               {status === 'failed'
                 ? 'This browser can’t run WebGL, so the signal is off air.'
                 : isTouch
@@ -368,7 +368,7 @@ export default function TransmissionHero() {
           <div className="tx-final">
             <p className="tx-final__kicker">Signal decoded · 100%</p>
             <h2 className="tx-final__title">Decoded.</h2>
-            <p className="tx-final__body">What you saw as text was always an architecture.</p>
+            <p className="tx-final__body">What you saw as text was always the builder.</p>
             <button type="button" className="tx-final__btn" onClick={replay}>
               Replay transmission <span aria-hidden="true">↑</span>
             </button>

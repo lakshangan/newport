@@ -6,3 +6,4 @@ import TransmissionHero from '@/components/hero/TransmissionHero';
 export default function TransmissionPage() {
   return <TransmissionHero />;
 }
+
