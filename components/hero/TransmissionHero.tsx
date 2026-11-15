@@ -37,14 +37,11 @@ export default function TransmissionHero() {
   const engineRef = useRef<TransmissionEngine | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const stRef = useRef<ScrollTrigger | null>(null);
-  const logRef = useRef<HTMLPreElement>(null);
-  const statRef = useRef<HTMLSpanElement>(null);
   const progressRef = useRef(0);
   const reduced = usePrefersReducedMotion();
 
   const [status, setStatus] = useState<'loading' | 'ready' | 'failed'>('loading');
   const [glyphs, setGlyphs] = useState<GlyphSet>('ascii');
-  const [isTouch] = useState(() => typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches);
 
   /* ------------------------------------------------------------ engine */
   useEffect(() => {
@@ -200,9 +197,7 @@ export default function TransmissionHero() {
       if (!reduced) {
         gsap
           .timeline({ defaults: { ease: 'expo.out' }, delay: 0.3 })
-          .from('.tx-top > *', { opacity: 0, y: -8, duration: 1, stagger: 0.08 })
-          .from('.tx-head .li', { yPercent: 110, duration: 1.6, stagger: 0.1 }, 0.2)
-          .from('.tx-aside__in, .tx-dock button, .tx-hint__in', { opacity: 0, duration: 1.2, stagger: 0.08 }, 0.7);
+          .from('.tx-dock button, .tx-hint__in', { opacity: 0, duration: 1.2, stagger: 0.08 });
       }
 
       const story = { p: 0 };
@@ -221,8 +216,7 @@ export default function TransmissionHero() {
       const tl = gsap.timeline({ paused: true, defaults: { ease: 'none' } });
       tl.to(story, { p: 1, duration: 1, onUpdate: () => apply(story.p) }, 0)
         .to('.tx-hint', { opacity: 0, duration: 0.05 }, 0)
-        .to('.tx-head, .tx-aside', { opacity: 0, y: -24, duration: 0.1, stagger: 0.02 }, 0.2)
-        .to('.tx-log, .tx-dock', { opacity: 0, duration: 0.08 }, 0.8)
+        .to('.tx-dock', { opacity: 0, duration: 0.08 }, 0.8)
         .fromTo(
           '.tx-final',
           { opacity: 0, y: 30, pointerEvents: 'none' },
@@ -267,37 +261,6 @@ export default function TransmissionHero() {
     });
   }, [status]);
 
-  /* ------------------------------------ live log: real numbers from the engine */
-  useEffect(() => {
-    if (status !== 'ready') return;
-    const lines: string[] = [];
-    const t0 = performance.now();
-    const id = setInterval(
-      () => {
-        const eng = engineRef.current;
-        if (!eng) return;
-        const s = eng.state;
-        const secs = ((performance.now() - t0) / 1000).toFixed(2).padStart(6, '0');
-        const yaw = ((((s.yaw * 180) / Math.PI) % 360) + 360) % 360;
-        const pick = Math.floor(performance.now() / 180) % 4;
-        const line =
-          pick === 0
-            ? `> t+${secs}  cell ${s.cell.toFixed(1)}px  bloom ${s.bloom.toFixed(2)}`
-            : pick === 1
-              ? `> t+${secs}  yaw ${yaw.toFixed(0).padStart(3, '0')}°  pitch ${((s.pitch * 180) / Math.PI).toFixed(0)}°`
-              : pick === 2
-                ? `> t+${secs}  march ${(eng.stats.scale * 100).toFixed(0)}%  ${eng.stats.fps} fps`
-                : `> t+${secs}  decode ${(s.decode * 100).toFixed(0).padStart(3, '0')}%  lens ${s.lensR ? 'open' : 'idle'}`;
-        lines.push(line);
-        if (lines.length > 14) lines.shift();
-        if (logRef.current) logRef.current.textContent = lines.join('\n');
-        if (statRef.current) statRef.current.textContent = `${s.cell.toFixed(0)}px · ${eng.stats.fps} fps`;
-      },
-      reduced ? 1000 : 180,
-    );
-    return () => clearInterval(id);
-  }, [status, reduced]);
-
   const replay = () => {
     const st = stRef.current;
     if (!st) return;
@@ -311,40 +274,7 @@ export default function TransmissionHero() {
         <div ref={stageRef} className="tx-stage">
           <canvas ref={canvasRef} className="tx-canvas" aria-hidden="true" />
 
-          <header className="tx-top">
-            <span>Signal/Lakshan</span>
-            <span className="tx-top__c">
-              Transmission <em>№ 001</em>
-            </span>
-            <span className="tx-top__r">
-              <i className="tx-dot" aria-hidden="true" /> Live · <span ref={statRef}>—</span>
-            </span>
-          </header>
-
-          <pre ref={logRef} className="tx-log" aria-hidden="true" />
-
-          <h1 className="tx-head">
-            <span className="ln">
-              <span className="li">Every developer</span>
-            </span>
-            <span className="ln">
-              <span className="li">
-                <em>is a signal.</em>
-              </span>
-            </span>
-          </h1>
-
-          <div className="tx-aside">
-            <p className="tx-aside__in">
-              Lakshan Ganesan, rendered as live code and text, sixty times a second.{' '}
-              {status === 'failed'
-                ? 'This browser can’t run WebGL, so the signal is off air.'
-                : isTouch
-                  ? 'Touch and hold to decode. Drag to turn it. Tap to pulse.'
-                  : 'Move to decode. Drag to turn it. Click to pulse.'}
-            </p>
-          </div>
-
+          {/* Hint */}
           <div className="tx-hint" aria-hidden="true">
             <span className="tx-hint__in">Scroll to tune in</span>
           </div>
@@ -365,6 +295,7 @@ export default function TransmissionHero() {
             ))}
           </div>
 
+          {/* Finale - appears at end of scroll */}
           <div className="tx-final">
             <p className="tx-final__kicker">Signal decoded · 100%</p>
             <h2 className="tx-final__title">Decoded.</h2>

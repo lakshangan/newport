@@ -62,12 +62,12 @@ void main() {
 
   if (screenAspect > imgAspect) {
     // Widescreen viewport: scale based on height
-    imgUv.y = -(uv.y / scale) + 0.5;
+    imgUv.y = (uv.y / scale) + 0.5;
     imgUv.x = (uv.x / (scale * imgAspect)) + 0.5;
   } else {
     // Mobile / vertical viewport: scale based on width
     imgUv.x = (uv.x / scale) + 0.5;
-    imgUv.y = -(uv.y * imgAspect / scale) + 0.5;
+    imgUv.y = (uv.y * imgAspect / scale) + 0.5;
   }
 
   // Holographic wave displacement on click pulse
