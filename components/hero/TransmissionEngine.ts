@@ -53,21 +53,21 @@ void main() {
   uv.x += yawAngle * 0.35;
   uv.y -= pitchAngle * 0.35;
 
-  // Aspect ratio fitting (portrait mode)
+  // Aspect ratio fitting (landscape widescreen format)
   float imgAspect = uImageRes.x / uImageRes.y;
   float screenAspect = uRes.x / uRes.y;
   
-  float scale = 0.98 + 0.18 * uBloom;
+  float scale = 0.96 + 0.16 * uBloom;
   vec2 imgUv;
 
   if (screenAspect > imgAspect) {
-    // Widescreen viewport: scale based on height
+    // Widescreen viewport: screen is wider than image (scale based on height)
     imgUv.y = (uv.y / scale) + 0.5;
     imgUv.x = (uv.x / (scale * imgAspect)) + 0.5;
   } else {
-    // Mobile / vertical viewport: scale based on width
-    imgUv.x = (uv.x / scale) + 0.5;
-    imgUv.y = (uv.y * imgAspect / scale) + 0.5;
+    // Narrower viewport: screen is taller than image (scale based on width)
+    imgUv.x = (uv.x / (scale * screenAspect)) + 0.5;
+    imgUv.y = (uv.y * imgAspect / (scale * screenAspect)) + 0.5;
   }
 
   // Holographic wave displacement on click pulse
@@ -77,10 +77,10 @@ void main() {
   }
 
   // Edge falloff mask
-  float mask = smoothstep(0.0, 0.08, imgUv.x) * smoothstep(1.0, 0.92, imgUv.x) *
-               smoothstep(0.0, 0.08, imgUv.y) * smoothstep(1.0, 0.92, imgUv.y);
+  float mask = smoothstep(0.0, 0.05, imgUv.x) * smoothstep(1.0, 0.95, imgUv.x) *
+               smoothstep(0.0, 0.05, imgUv.y) * smoothstep(1.0, 0.95, imgUv.y);
 
-  vec3 col = vec3(0.01, 0.01, 0.01);
+  vec3 col = vec3(0.008, 0.008, 0.008);
 
   if (imgUv.x >= 0.0 && imgUv.x <= 1.0 && imgUv.y >= 0.0 && imgUv.y <= 1.0) {
     vec3 tex = texture2D(uImage, imgUv).rgb;
@@ -89,20 +89,21 @@ void main() {
     float lum = dot(tex, vec3(0.299, 0.587, 0.114));
     
     // Bloom lifts the shadows and boosts highlight illumination
-    lum = mix(pow(lum, 1.2) * 0.85, pow(lum, 0.85) * 1.25, uBloom);
+    lum = mix(pow(lum, 1.15) * 0.9, pow(lum, 0.85) * 1.3, uBloom);
     
     // Warm amber rim glow at silhouette edges
-    vec3 amberRim = vec3(0.98, 0.62, 0.35) * pow(lum, 2.5) * 0.35;
+    vec3 amberRim = vec3(0.98, 0.62, 0.35) * pow(lum, 2.2) * 0.35;
     
-    col = vec3(lum) + amberRim;
+    // Blend luminance with subtle warm tones from original image labels
+    col = mix(vec3(lum), tex, 0.45) + amberRim;
     col *= mask;
   }
 
   // Subtle ambient background backlight in warm portfolio tone
-  col += vec3(0.98, 0.55, 0.28) * (1.0 - length(uv)) * 0.035;
+  col += vec3(0.98, 0.55, 0.28) * (1.0 - length(uv)) * 0.028;
 
   // Fine film grain
-  col += (hash21(frag + fract(uTime)) - 0.5) * 0.012;
+  col += (hash21(frag + fract(uTime)) - 0.5) * 0.01;
   
   gl_FragColor = vec4(col, 1.0);
 }`;
@@ -236,12 +237,15 @@ export class TransmissionEngine {
       depthBuffer: false,
     });
 
-    // Load Lakshan's portrait texture
+    // Load Lakshan's widescreen hero portrait texture
     const textureLoader = new THREE.TextureLoader();
-    this.portraitTexture = textureLoader.load('/images/lakshan-portrait.png', (tex) => {
+    this.portraitTexture = textureLoader.load('/images/lakshan-hero-wide.png', (tex) => {
       tex.minFilter = THREE.LinearFilter;
       tex.magFilter = THREE.LinearFilter;
       tex.generateMipmaps = false;
+      if (tex.image && tex.image.width && tex.image.height) {
+        this.sceneMat.uniforms.uImageRes.value.set(tex.image.width, tex.image.height);
+      }
       this.sceneMat.uniforms.uImage.value = tex;
       this.dirty = true;
     });
@@ -252,7 +256,7 @@ export class TransmissionEngine {
       uniforms: {
         uImage: { value: this.portraitTexture },
         uRes: { value: new THREE.Vector2(2, 2) },
-        uImageRes: { value: new THREE.Vector2(576, 1024) },
+        uImageRes: { value: new THREE.Vector2(1024, 576) },
         uTime: { value: 0 },
         uBloom: { value: 0.3 },
         uYaw: { value: 0 },
