@@ -280,10 +280,7 @@ export default function TransmissionHero() {
 
           {/* Left Down: Developer Name with React Bits TechText wordmark */}
           <div className="tx-name-panel-left" aria-label="Lakshan Ganesan">
-            <div className="tx-name-kicker">
-              <span className="tx-beacon-dot" aria-hidden="true" />
-              <span>FULL STACK DEVELOPER • AI &amp; WEB3</span>
-            </div>
+
             <div className="tx-techtext-container">
               <TechText
                 text="LAKSHAN G"
@@ -305,25 +302,17 @@ export default function TransmissionHero() {
               />
             </div>
             <div className="tx-name-meta">
-              <span>LKG // 001</span>
-              <span className="tx-sep">/</span>
-              <span>SYSTEM OPERATIONAL</span>
+              <span>FULL STACK DEVELOPER • AI &amp; WEB3</span>
+
             </div>
           </div>
 
           {/* Right Down: Impactful Architectural Bio (No generic green dot / AI box) */}
           <div className="tx-bio-panel" role="region" aria-label="About summary">
-            <div className="tx-bio-header">
-              <span className="tx-bio-tag">// FOCUS &amp; CRAFT</span>
-              <span className="tx-bio-edition">2026</span>
-            </div>
+
             <p className="tx-bio-text">
               Architecting scalable web applications, autonomous AI agents, and decentralized protocols at the edge of code and intelligence.
             </p>
-            <div className="tx-bio-telemetry">
-              <span>COIMBATORE &amp; BENGALURU, IN</span>
-              <span className="tx-bio-pulse" aria-hidden="true">●</span>
-            </div>
           </div>
 
           {/* Center Scroll Hint */}
@@ -349,12 +338,9 @@ export default function TransmissionHero() {
 
           {/* Finale - appears at end of scroll (Website Fonts & Tailored Content) */}
           <div className="tx-final">
-            <div className="tx-final__kicker">
-              <span className="tx-final__pulse" aria-hidden="true" />
-              <span>SIGNAL DECODED // SYSTEM 100% OPERATIONAL</span>
-            </div>
+
             <h2 className="tx-final__title">
-              LAKSHAN GANESAN<em>.</em>
+              LAKSHAN G<em>.</em>
             </h2>
             <p className="tx-final__body">
               Engineering high-scale web platforms, intelligent AI agents, and blockchain protocols with precision and craft.
