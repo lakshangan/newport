@@ -197,7 +197,9 @@ export default function TransmissionHero() {
       if (!reduced) {
         gsap
           .timeline({ defaults: { ease: 'expo.out' }, delay: 0.3 })
-          .from('.tx-dock button, .tx-hint__in', { opacity: 0, duration: 1.2, stagger: 0.08 });
+          .from('.tx-name-panel', { opacity: 0, x: 30, duration: 1.2 }, 0.2)
+          .from('.tx-bio-panel', { opacity: 0, y: 24, duration: 1.2 }, 0.4)
+          .from('.tx-dock button, .tx-hint__in', { opacity: 0, duration: 1.2, stagger: 0.08 }, 0.5);
       }
 
       const story = { p: 0 };
@@ -216,6 +218,7 @@ export default function TransmissionHero() {
       const tl = gsap.timeline({ paused: true, defaults: { ease: 'none' } });
       tl.to(story, { p: 1, duration: 1, onUpdate: () => apply(story.p) }, 0)
         .to('.tx-hint', { opacity: 0, duration: 0.05 }, 0)
+        .to('.tx-name-panel, .tx-bio-panel', { opacity: 0, y: -24, duration: 0.22, stagger: 0.04 }, 0.2)
         .to('.tx-dock', { opacity: 0, duration: 0.08 }, 0.8)
         .fromTo(
           '.tx-final',
@@ -273,6 +276,36 @@ export default function TransmissionHero() {
       <section ref={trackRef} className="tx-track" aria-label="Transmission — Lakshan Ganesan rendered as live code">
         <div ref={stageRef} className="tx-stage">
           <canvas ref={canvasRef} className="tx-canvas" aria-hidden="true" />
+
+          {/* Developer Name (Right Position) */}
+          <div className="tx-name-panel" aria-label="Lakshan Ganesan">
+            <div className="tx-name-kicker">
+              <span className="tx-dot-pulse" aria-hidden="true" />
+              <span>FULL STACK DEVELOPER</span>
+            </div>
+            <h1 className="tx-name-title">
+              LAKSHAN G<em>.</em>
+            </h1>
+            <p className="tx-name-sub">AI &amp; BLOCKCHAIN ARCHITECT</p>
+          </div>
+
+          {/* Impactful Short Bio (Right Down Side) */}
+          <div className="tx-bio-panel" role="region" aria-label="About summary">
+            <div className="tx-bio-kicker">
+              <span>// ABOUT</span>
+              <span className="w-1 h-1 rounded-full bg-[#FFA266]" aria-hidden="true" />
+            </div>
+            <p className="tx-bio-text">
+              Engineering scalable web applications, intelligent AI systems, and blockchain protocols at the edge of code and craft.
+            </p>
+            <div className="tx-bio-meta">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              </span>
+              <span>AVAILABLE FOR SELECT ROLES · 2026</span>
+            </div>
+          </div>
 
           {/* Hint */}
           <div className="tx-hint" aria-hidden="true">

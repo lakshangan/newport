@@ -26,7 +26,7 @@
 
 .tx-track {
   position: relative;
-  height: 420vh;
+  height: 240vh;
 }
 
 .tx-stage {
@@ -194,8 +194,8 @@
 }
 
 .tx-dock {
-  right: clamp(16px, 2.4vw, 32px);
-  bottom: clamp(24px, 4vw, 56px);
+  left: clamp(24px, 4vw, 56px);
+  bottom: clamp(28px, 4vw, 56px);
   display: flex;
   gap: 2px;
   padding: 3px;
@@ -204,6 +204,122 @@
   background: rgba(10, 11, 9, 0.7);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+/* =========================================================================
+   Developer Name & Impactful Bio Panels (Portfolio Typography)
+   ========================================================================= */
+
+.tx-name-panel {
+  position: absolute;
+  top: clamp(96px, 14vh, 140px);
+  right: clamp(24px, 4vw, 56px);
+  z-index: 10;
+  text-align: right;
+  pointer-events: none;
+}
+
+.tx-name-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--tx-accent);
+  margin-bottom: 6px;
+}
+
+.tx-name-kicker .tx-dot-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tx-accent);
+  box-shadow: 0 0 10px var(--tx-accent);
+  animation: tx-blink 1.8s ease-in-out infinite;
+}
+
+.tx-name-title {
+  margin: 0;
+  font-family: var(--font-display), 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 0.92;
+  letter-spacing: 0.04em;
+  color: #f5f5f7;
+  text-shadow: 0 0 35px rgba(255, 162, 102, 0.15);
+}
+
+.tx-name-title em {
+  font-style: normal;
+  color: var(--tx-accent);
+}
+
+.tx-name-sub {
+  margin: 6px 0 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--tx-soft);
+}
+
+.tx-bio-panel {
+  position: absolute;
+  bottom: clamp(28px, 4vw, 56px);
+  right: clamp(24px, 4vw, 56px);
+  max-width: min(340px, 85vw);
+  z-index: 10;
+  text-align: right;
+  pointer-events: auto;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: rgba(12, 13, 11, 0.7);
+  border: 1px solid rgba(255, 162, 102, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.3s ease;
+}
+
+.tx-bio-panel:hover {
+  border-color: rgba(255, 162, 102, 0.35);
+}
+
+.tx-bio-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--tx-accent);
+  margin-bottom: 8px;
+}
+
+.tx-bio-text {
+  margin: 0;
+  font-family: var(--font-sans), 'Inter', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(233, 230, 216, 0.88);
+  font-weight: 400;
+}
+
+.tx-bio-meta {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(233, 230, 216, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: rgba(233, 230, 216, 0.55);
 }
 
 .tx-dock button {
