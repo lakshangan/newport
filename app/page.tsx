@@ -20,6 +20,7 @@ import { Footer } from '@/components/footer/Footer';
 
 import { Preloader } from '@/components/ui/Preloader';
 import { MobilePortfolio } from '@/components/mobile/MobilePortfolio';
+import { ClickSpark } from '@/components/ui/ClickSpark';
 
 export default function Home() {
   useEffect(() => {
@@ -124,47 +125,55 @@ export default function Home() {
           Preserves 100% of all existing 3D scenes, GSAP animations & layout
       ────────────────────────────────────────────────────────────────────────── */}
       <div className="hidden md:block">
-        {/* Developer Terminal Preloader */}
-        <Preloader />
+        <ClickSpark
+          sparkColor={['#FFA266', '#E88053', '#FFFFFF', '#C75B32']}
+          sparkSize={10}
+          sparkRadius={26}
+          sparkCount={7}
+          duration={400}
+        >
+          {/* Developer Terminal Preloader */}
+          <Preloader />
 
-        {/* Subtle Developer Background Ambient Elements */}
-        <DeveloperDecorations />
+          {/* Subtle Developer Background Ambient Elements */}
+          <DeveloperDecorations />
 
-        {/* Custom Subtle Dot Cursor */}
-        <CustomCursor />
+          {/* Custom Subtle Dot Cursor */}
+          <CustomCursor />
 
-        {/* Modern Cylinder Floating Navigation */}
-        <Navbar />
+          {/* Modern Cylinder Floating Navigation */}
+          <Navbar />
 
-        {/* Full-Screen Hero Section */}
-        <HeroSection />
+          {/* Full-Screen Hero Section */}
+          <HeroSection />
 
-        {/* Fun & Relatable Word-by-Word Scroll Reveal Manifesto */}
-        <TextRevealByWord text="<\ I build software, design systems, and turn ideas into products. I work across web, blockchain, AI, and interactive technology, constantly exploring new tools, solving complex problems. >" />
+          {/* Fun & Relatable Word-by-Word Scroll Reveal Manifesto */}
+          <TextRevealByWord text="<\ I build software, design systems, and turn ideas into products. I work across web, blockchain, AI, and interactive technology, constantly exploring new tools, solving complex problems. >" />
 
-        {/* Section 01: Creative Passion & Engineering (I Love To Code / Build / Learn / Ship) */}
-        <ScrollAnimation />
+          {/* Section 01: Creative Passion & Engineering (I Love To Code / Build / Learn / Ship) */}
+          <ScrollAnimation />
 
-        {/* Flow Art Story Scroll Showcase (with integrated live BUILD camera zoom transition) */}
-        <FlowAboutStorySection />
+          {/* Flow Art Story Scroll Showcase (with integrated live BUILD camera zoom transition) */}
+          <FlowAboutStorySection />
 
-        {/* Floating Milestone Showcase (25+ Hackathons, 20+ Finalists, Intl Silambam Bronze) */}
-        <AchievementsShowcaseSection />
+          {/* Floating Milestone Showcase (25+ Hackathons, 20+ Finalists, Intl Silambam Bronze) */}
+          <AchievementsShowcaseSection />
 
-        {/* Professional Experience Timeline */}
-        <ExperienceSection />
+          {/* Professional Experience Timeline */}
+          <ExperienceSection />
 
-        {/* Proof of Work & Community Staggered Grid */}
-        <TechTicker />
+          {/* Proof of Work & Community Staggered Grid */}
+          <TechTicker />
 
-        {/* Interactive Cryptographic Decrypt Challenge */}
-        <DecryptChallengeSection />
+          {/* Interactive Cryptographic Decrypt Challenge */}
+          <DecryptChallengeSection />
 
-        {/* Dramatic Contact CTA */}
-        <ContactSection />
+          {/* Dramatic Contact CTA */}
+          <ContactSection />
 
-        {/* Minimal Footer */}
-        <Footer />
+          {/* Minimal Footer */}
+          <Footer />
+        </ClickSpark>
       </div>
     </main>
   );

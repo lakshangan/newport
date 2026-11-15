@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 import { AnimatedCoffeeCup } from '@/components/ui/AnimatedCoffeeCup';
+import { DecryptedText } from '@/components/ui/DecryptedText';
 
 // =========================================================================
 // CONFIGURATION
@@ -406,7 +407,12 @@ With the help of this decoding key and the parameters above, please derive the A
                     <Lock className="w-3.5 h-3.5" />
                   )}
                 </span>
-                <span className="tracking-wide text-neutral-300">[ ENCRYPTED PAYLOAD ]</span>
+                <DecryptedText
+                  text="[ ENCRYPTED PAYLOAD ]"
+                  speed={40}
+                  encryptedClassName="text-amber-400 font-mono"
+                  className="tracking-wide text-neutral-300"
+                />
               </div>
 
               {/* Copy Button - VisionOS Frosted Pill */}

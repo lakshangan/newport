@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { Trophy, Award, Medal, Sparkles } from "lucide-react";
 import { HiddenClueWord } from "@/components/cipher/HiddenClueWord";
+import { DecryptedText } from "@/components/ui/DecryptedText";
 
 interface CounterNumberProps {
   value: string | number;
@@ -104,7 +105,12 @@ export const AchievementsShowcaseSection: React.FC = () => {
             className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#111116] border border-[#111116] text-xs font-mono text-white tracking-[0.2em] uppercase shadow-2xl"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#C75B32] animate-pulse" />
-            <span>// COMPETITIVE MILESTONES &amp; DISCIPLINE</span>
+            <DecryptedText
+              text="// COMPETITIVE MILESTONES & DISCIPLINE"
+              speed={35}
+              encryptedClassName="text-[#FFA266]"
+              className="text-white tracking-[0.2em]"
+            />
           </motion.div>
 
           {/* 3 Centered High-Contrast Stat Columns */}

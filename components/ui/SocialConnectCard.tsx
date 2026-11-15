@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
+import { ShinyText } from '@/components/ui/ShinyText';
 
 interface SocialItem {
   name: string;
@@ -59,7 +60,12 @@ export const SocialConnectCard: React.FC = () => {
       {/* Header Titles */}
       <div className="space-y-2">
         <h3 className="font-sans font-extrabold text-3xl sm:text-5xl text-white tracking-tight leading-snug drop-shadow-md">
-          Let's build together !
+          <ShinyText
+            text="Let's build together !"
+            color="#FFFFFF"
+            shineColor="#FFA266"
+            speed={2.8}
+          />
         </h3>
         <p className="font-mono text-xs sm:text-sm text-white/80 tracking-wider">
           Hover over the icons to connect with me

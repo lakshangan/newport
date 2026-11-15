@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
 import { TechText } from '@/components/ui/TechText';
+import { ShinyText } from '@/components/ui/ShinyText';
 
 export const HeroSection: React.FC = () => {
   return (
@@ -35,9 +36,15 @@ export const HeroSection: React.FC = () => {
         <div className="max-w-3xl space-y-5 text-left">
 
           {/* Subtitle Badge */}
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-[#C75B32]/50 text-xs font-mono text-[#C75B32] tracking-widest uppercase shadow-xl">
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-[#C75B32]/50 text-xs font-mono tracking-widest uppercase shadow-xl">
             <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
-            <span className="text-[#C75B32] font-medium">FULL STACK DEVELOPER • AI &amp; BLOCKCHAIN</span>
+            <ShinyText
+              text="FULL STACK DEVELOPER • AI & BLOCKCHAIN"
+              color="#E88053"
+              shineColor="#FFA266"
+              speed={2.2}
+              className="font-medium"
+            />
           </div>
 
           {/* Main Display Headline with TechText from React Bits */}

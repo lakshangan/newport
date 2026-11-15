@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
+import { ShinyText } from '@/components/ui/ShinyText';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -168,11 +169,16 @@ export const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center space-x-3">
           <a
             href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-            className="inline-flex items-center space-x-1.5 px-3.5 sm:px-4 py-1.5 text-xs font-mono tracking-wider rounded-full bg-white/10 hover:bg-[#C75B32] border border-white/15 text-[#E8E5DF] hover:text-white transition-all duration-300 shadow-sm cursor-pointer"
+            className="inline-flex items-center space-x-1.5 px-3.5 sm:px-4 py-1.5 text-xs font-mono tracking-wider rounded-full bg-white/10 hover:bg-[#C75B32] border border-white/15 text-[#E8E5DF] hover:text-white transition-all duration-300 shadow-sm cursor-pointer group"
             data-cursor="EMAIL"
           >
-            <span>LET&apos;S TALK</span>
-            <span className="text-[10px]">↗</span>
+            <ShinyText
+              text="LET'S TALK"
+              color="#E8E5DF"
+              shineColor="#FFA266"
+              speed={2.5}
+            />
+            <span className="text-[10px] text-[#FFA266] group-hover:text-white transition-colors">↗</span>
           </a>
         </div>
 
