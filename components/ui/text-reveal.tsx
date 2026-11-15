@@ -35,17 +35,14 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
         gsap.set(el, { opacity: 0.15, color: "rgba(255,255,255,0.15)" });
       });
 
-      // Create GSAP ScrollTrigger timeline scrubbing on scroll (100% synced with Lenis)
+      // Scrub sequentially as user scrolls through the container with native sticky locking (avoids broken pin-spacers and section overlaps)
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
-          pin: true,
           start: "top top",
-          end: () => `+=${Math.min(window.innerHeight * 1.4, 1400)}`,
-          pinSpacing: true,
-          scrub: 0.2,
-          anticipatePin: 1,
-          fastScrollEnd: true,
+          end: "bottom bottom",
+          scrub: 0.25,
+          invalidateOnRefresh: true,
         },
       });
 
@@ -60,15 +57,12 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
             duration: 1,
             ease: "none",
           },
-          ">-=0.5"
+          ">-=0.4"
         );
       });
 
-      // Hold all words fully revealed & glowing at the end before unpinning
-      tl.to({}, { duration: 2.5 });
-
-      ScrollTrigger.sort();
-      ScrollTrigger.refresh();
+      // Hold all words fully revealed & glowing at the end before scrolling away
+      tl.to({}, { duration: 1.5 });
 
       return () => {
         tl.kill();
@@ -82,10 +76,11 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
     <div
       ref={containerRef}
       className={cn(
-        "relative z-10 w-full min-h-screen h-screen flex items-center justify-center bg-[#080808] select-none px-4 sm:px-8 lg:px-12 pt-20 sm:pt-24 pb-12 sm:pb-16 overflow-hidden",
+        "relative z-10 w-full min-h-[175vh] bg-[#080808]",
         className
       )}
     >
+      <div className="sticky top-0 w-full h-screen min-h-screen flex items-center justify-center bg-[#080808] select-none px-4 sm:px-8 lg:px-12 pt-20 sm:pt-24 pb-12 sm:pb-16 overflow-hidden">
       <div className="max-w-4xl xl:max-w-5xl mx-auto text-center w-full my-auto">
         <p className="flex flex-wrap items-center justify-center text-center font-mono font-bold text-xl sm:text-3xl md:text-4xl lg:text-5xl leading-snug sm:leading-normal md:leading-relaxed tracking-tight select-none">
           {words.map((word, i) => (
@@ -109,5 +104,6 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
         </p>
       </div>
     </div>
+  </div>
   );
 };

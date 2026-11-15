@@ -5,6 +5,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { PORTFOLIO_DATA } from '@/lib/portfolioData';
 import { AsciiGlitchRipple } from '@/components/ui/AsciiGlitchRipple';
+import { TechText } from '@/components/ui/TechText';
 
 export const HeroSection: React.FC = () => {
   return (
@@ -39,19 +40,34 @@ export const HeroSection: React.FC = () => {
             <span className="text-[#C75B32] font-medium">FULL STACK DEVELOPER • AI &amp; BLOCKCHAIN</span>
           </div>
 
-          {/* Main Display Headline with ASCII Scramble Hover Effect */}
-          <h1 className="font-display font-black text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] leading-[0.95] tracking-tight uppercase">
-            <span className="block text-white/80 font-light text-2xl xs:text-3xl sm:text-4xl md:text-5xl tracking-widest mb-1 sm:mb-2">
+          {/* Main Display Headline with TechText from React Bits */}
+          <div className="w-full space-y-1 sm:space-y-2">
+            <h1 className="sr-only">HELLO, I&apos;M LAKSHAN G</h1>
+            <span className="block text-white/80 font-display font-light text-2xl xs:text-3xl sm:text-4xl md:text-5xl tracking-widest uppercase select-none mb-1 sm:mb-2">
               <AsciiGlitchRipple dur={1000} className="hover:text-[#C75B32] transition-colors">
                 HELLO, I&apos;M
               </AsciiGlitchRipple>
             </span>
-            <span className="block text-white tracking-tight drop-shadow-2xl">
-              <AsciiGlitchRipple dur={1200} className="hover:text-[#C75B32] transition-colors">
-                LAKSHAN G
-              </AsciiGlitchRipple>
-            </span>
-          </h1>
+            <div className="w-full max-w-2xl h-24 xs:h-28 sm:h-32 md:h-36 lg:h-44 xl:h-48 relative -ml-1 sm:-ml-2">
+              <TechText
+                text="LAKSHAN G"
+                align="left"
+                fontWeight={800}
+                fontSize={140}
+                color="#FFFFFF"
+                accentColor="#E88053"
+                reveal="letter"
+                dashLength={4}
+                dashGap={2}
+                specks={15}
+                intro="none"
+                introDuration={2}
+                clickKick
+                draggable
+                guides={false}
+              />
+            </div>
+          </div>
 
           {/* Clean Bio Description */}
           <p className="text-xs sm:text-sm font-mono tracking-wider text-white/90 max-w-xl pt-2 leading-relaxed bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/15 shadow-2xl">

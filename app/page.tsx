@@ -31,6 +31,11 @@ export default function Home() {
 
     gsap.registerPlugin(ScrollTrigger);
 
+    // Disable browser automatic scroll restoration so page loads cleanly from top without section offset corruption
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
     // Record arrival timestamp for the 5-minute hint reveal timer
     try {
       if (!sessionStorage.getItem('portfolio_stay_start')) {
@@ -64,6 +69,10 @@ export default function Home() {
     gsap.ticker.lagSmoothing(0);
 
     const refreshScrollMetrics = () => {
+      // Avoid calculating metrics while preloader has overflow: hidden locked
+      if (typeof document !== 'undefined' && document.body.style.overflow === 'hidden') {
+        return;
+      }
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
       if ((window as any).__lenis) {
