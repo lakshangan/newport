@@ -180,8 +180,30 @@ export const TechText: React.FC<TechTextProps> = ({
       refreshFonts();
     };
 
-    const family = (s: any) => s.fontFamily || getComputedStyle(container).fontFamily || 'sans-serif';
-    const fontFor = (s: any, size: number) => `${s.fontWeight} ${size}px ${family(s)}`;
+    const family = (s: any) => {
+      let fam = s.fontFamily || (container ? getComputedStyle(container).fontFamily : '') || 'sans-serif';
+      if (fam.includes('var(')) {
+        fam = fam.replace(/var\((--[^),]+)(?:,\s*([^)]+))?\)/g, (_: string, varName: string, fallback?: string) => {
+          const val = (container ? getComputedStyle(container).getPropertyValue(varName).trim() : '') ||
+                      (document.documentElement ? getComputedStyle(document.documentElement).getPropertyValue(varName).trim() : '') ||
+                      (document.body ? getComputedStyle(document.body).getPropertyValue(varName).trim() : '');
+          return val || fallback || '';
+        });
+      }
+      if ((container?.classList.contains('font-display') || /bebas/i.test(fam)) && !fam.includes('"Bebas Neue"') && !fam.includes("'Bebas Neue'")) {
+        fam = `"Bebas Neue", ${fam}`;
+      }
+      return fam.trim();
+    };
+
+    const fontFor = (s: any, size: number) => {
+      const fam = family(s);
+      let weight = s.fontWeight;
+      if (/bebas/i.test(fam)) {
+        weight = 400;
+      }
+      return `${weight} ${size}px ${fam}`;
+    };
 
     const palette = (s: any) => {
       const current = getComputedStyle(container).color || '#000000';

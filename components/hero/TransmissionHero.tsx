@@ -284,9 +284,9 @@ export default function TransmissionHero() {
             <div className="tx-techtext-container">
               <TechText
                 text="LAKSHAN G"
-                fontWeight={700}
-                fontSize={78}
-                letterSpacing={0.03}
+                fontWeight={400}
+                fontSize={86}
+                letterSpacing={0.04}
                 align="left"
                 reveal="letter"
                 dashLength={4}
@@ -296,8 +296,11 @@ export default function TransmissionHero() {
                 clickKick={true}
                 draggable={true}
                 guides={false}
+                sweep={false}
+                labels={false}
                 color="#F5F5F7"
                 accentColor="#FFA266"
+                fontFamily="'Bebas Neue', var(--font-display), sans-serif"
                 className="font-display"
               />
             </div>
