@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -204,7 +203,7 @@ const AppleSpotlightCard: React.FC<AppleSpotlightCardProps> = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        'relative bg-[#0C0907]/85 hover:bg-[#140F0A]/95 border border-white/[0.12] hover:border-[#FFA266]/70 backdrop-blur-3xl shadow-[0_24px_50px_rgba(0,0,0,0.55),inset_0_1px_0_0_rgba(255,255,255,0.14)] hover:shadow-[0_25px_60px_rgba(232,128,83,0.22)] transition-all duration-300 group overflow-hidden',
+        'relative bg-[#0A0B0E]/80 hover:bg-[#121318]/95 border border-white/[0.08] hover:border-[#FFA266]/60 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.08)] hover:shadow-[0_25px_60px_rgba(232,128,83,0.22)] transition-all duration-300 group overflow-hidden',
         className
       )}
     >
@@ -234,7 +233,7 @@ const TechExpertiseCard: React.FC<{ tech: TechExpertiseDomain }> = ({ tech }) =>
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="relative p-3 sm:p-3.5 xl:p-4.5 bg-[#0C0907]/85 hover:bg-[#140F0A]/95 border border-white/[0.12] hover:border-[#FFA266]/70 rounded-2xl xl:rounded-3xl backdrop-blur-3xl shadow-[0_24px_50px_rgba(0,0,0,0.55),inset_0_1px_0_0_rgba(255,255,255,0.14)] hover:shadow-[0_25px_50px_rgba(232,128,83,0.2)] transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between overflow-hidden text-left"
+      className="relative p-3 sm:p-3.5 xl:p-4.5 bg-[#0A0B0E]/80 hover:bg-[#121318]/95 border border-white/[0.08] hover:border-[#FFA266]/60 rounded-2xl xl:rounded-3xl backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.08)] hover:shadow-[0_25px_50px_rgba(232,128,83,0.2)] transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between overflow-hidden text-left"
     >
       {/* Subtle Dynamic Cursor Spotlight */}
       <div
@@ -415,27 +414,46 @@ export const FlowAboutStorySection: React.FC = () => {
       <div
         id="about"
         ref={horizontalContainerRef}
-        className="relative w-full h-screen overflow-hidden bg-[#0C0907] select-none scroll-mt-6"
+        className="relative w-full h-screen overflow-hidden bg-[#080808] select-none scroll-mt-6"
       >
-        {/* Continuous Panoramic Studio & Engineering Workspace Background */}
-        {/* Sized with natural 2048:768 aspect ratio (266.67vh) so the full height is visible with ZERO zoom */}
+        {/* Continuous Panoramic Modern Developer Matrix Canvas */}
         <div
           ref={horizontalBgRef}
-          className="absolute inset-y-0 left-0 h-full w-[266.67vh] min-w-full pointer-events-none select-none z-0 overflow-hidden will-change-transform"
+          className="absolute inset-y-0 left-0 h-full w-[266.67vh] min-w-full pointer-events-none select-none z-0 overflow-hidden will-change-transform bg-[#080808]"
           style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
         >
           <div className="relative w-full h-full">
-            <Image
-              src="/images/horizontal-workspace.png"
-              alt="Creative Engineering Workspace Studio Panorama"
-              fill
-              priority
-              className="object-cover object-left md:object-center filter brightness-[1.05] contrast-[1.02] saturate-[1.08]"
-              sizes="267vh"
-            />
-            {/* Luminous warm ambient vignette with deep optical base so cards pop with crisp Apple-grade contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907]/90 via-[#0C0907]/45 to-[#0C0907]/65 pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(12,9,7,0.55)_100%)] pointer-events-none" />
+            {/* Base Dark Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-[#0A0908] to-[#080808]" />
+
+            {/* Architectural Cyber Blueprint Grid */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_85%_75%_at_50%_50%,#000_65%,transparent_100%)] opacity-80" />
+
+            {/* Subtle Dot Matrix Intersections */}
+            <div className="absolute inset-0 bg-[radial-gradient(rgba(255,162,102,0.18)_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-60" />
+
+            {/* Multi-Node Ambient Volumetric Studio Glows spanning the horizontal width */}
+            <div className="absolute top-1/4 left-[10%] w-[600px] h-[450px] bg-[#E88053]/15 rounded-full blur-[160px]" />
+            <div className="absolute bottom-1/4 left-[35%] w-[650px] h-[500px] bg-[#FFA266]/12 rounded-full blur-[180px]" />
+            <div className="absolute top-1/3 left-[65%] w-[600px] h-[450px] bg-[#E88053]/14 rounded-full blur-[160px]" />
+            <div className="absolute bottom-1/3 left-[85%] w-[550px] h-[400px] bg-[#FFA266]/12 rounded-full blur-[170px]" />
+
+            {/* Technical Monospace Blueprint Rulers along Top & Bottom */}
+            <div className="absolute top-0 inset-x-0 h-8 border-b border-white/[0.06] flex items-center justify-between px-10 text-[9px] font-mono text-white/25 tracking-widest uppercase">
+              <span>// MATRIX: ACTIVE_GRID 64PX</span>
+              <span>DEV // LATITUDE [34.05°N, 118.24°W]</span>
+              <span>RUNTIME: NEXT.JS 14 • GLSL READY</span>
+            </div>
+
+            <div className="absolute bottom-0 inset-x-0 h-8 border-t border-white/[0.06] flex items-center justify-between px-10 text-[9px] font-mono text-white/25 tracking-widest uppercase">
+              <span>SECTION // 02-04 ARCHITECTURAL FLOW</span>
+              <span>PANELS // 01 ACCOLADES • 02 SHOWCASE • 03 EXPERTISE</span>
+              <span>SYSTEM: OPTIMAL (60 FPS)</span>
+            </div>
+
+            {/* Top and Bottom Edge Vignettes for Seamless Transitions */}
+            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#080808] to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none" />
           </div>
         </div>
 
@@ -652,7 +670,7 @@ export const FlowAboutStorySection: React.FC = () => {
                 {SHOWCASE_CARDS.map((card) => (
                   <div
                     key={card.id}
-                    className="rounded-2xl border border-white/[0.12] hover:border-[#FFA266]/70 bg-[#0C0907]/85 hover:bg-[#140F0A]/95 backdrop-blur-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.55),inset_0_1px_0_0_rgba(255,255,255,0.14)] hover:shadow-[0_25px_50px_rgba(232,128,83,0.2)] transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1"
+                    className="rounded-2xl border border-white/[0.08] hover:border-[#FFA266]/60 bg-[#0A0B0E]/80 hover:bg-[#121318]/95 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.08)] hover:shadow-[0_25px_50px_rgba(232,128,83,0.2)] transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1"
                   >
                     {/* macOS Sequoia Glass Window Header */}
                     <div className="px-2.5 py-1 sm:py-1.5 bg-black/60 border-b border-white/[0.1] flex items-center justify-between backdrop-blur-md">
@@ -695,7 +713,7 @@ export const FlowAboutStorySection: React.FC = () => {
 
                     {/* Scaled Desktop Viewport */}
                     <div
-                      className="relative w-full h-[75px] sm:h-[82px] md:h-[90px] xl:h-[105px] 2xl:h-[120px] bg-[#0A0806] overflow-hidden group/screen"
+                      className="relative w-full h-[75px] sm:h-[82px] md:h-[90px] xl:h-[105px] 2xl:h-[120px] bg-[#08090C] overflow-hidden group/screen"
                       style={{ contain: 'paint layout', transform: 'translate3d(0,0,0)' }}
                     >
                       <div
@@ -715,7 +733,7 @@ export const FlowAboutStorySection: React.FC = () => {
                           loading="lazy"
                         />
                       </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0C0907]/60 via-transparent to-transparent opacity-30 pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#08090C]/60 via-transparent to-transparent opacity-30 pointer-events-none" />
 
                       <a
                         href={card.url}
@@ -818,7 +836,7 @@ export const FlowAboutStorySection: React.FC = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-auto flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full bg-[#0E0C0A]/90 hover:bg-[#15110E]/95 border border-white/[0.14] backdrop-blur-3xl shadow-[0_12px_32px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.15)] transition-all"
+            className="pointer-events-auto flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full bg-[#0B0C10]/90 hover:bg-[#121318]/95 border border-white/[0.1] backdrop-blur-3xl shadow-[0_12px_32px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.15)] transition-all"
           >
             {[
               { id: 0, label: 'Accolades' },
