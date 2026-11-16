@@ -8,6 +8,7 @@ import { useGSAP } from '@gsap/react';
 import { AnimatedGradient } from '@/components/ui/animated-gradient-with-svg';
 import { Trophy, Award, Globe, Zap, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown, Layers, Cpu, ArrowUpRight } from 'lucide-react';
 import { HiddenClueWord } from '@/components/cipher/HiddenClueWord';
+import { AccoladesBentoGrid } from '@/components/about/AccoladesBentoGrid';
 import { cn } from '@/lib/utils';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -490,125 +491,8 @@ export const FlowAboutStorySection: React.FC = () => {
                 </p>
               </div>
 
-              {/* Apple Keynote Bento Grid: 2 Headline Breakthroughs + 3 Distinct Pillars */}
-              <div className="space-y-2 sm:space-y-2.5 lg:space-y-3">
-                {/* Row 1: Two Major Headline Breakthroughs */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-2.5 lg:gap-3.5">
-                  {/* Card 1: 1st Place Track Winner NIT Calicut */}
-                  <AppleSpotlightCard className="p-3 sm:p-3.5 xl:p-4.5 rounded-2xl xl:rounded-3xl hover:-translate-y-1">
-                    <div className="space-y-1.5 sm:space-y-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#E88053]/15 border border-[#E88053]/35 shadow-sm">
-                          <Trophy className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFA266]" /> 1ST PLACE TRACK WINNER
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[9px] sm:text-[9.5px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/90 font-semibold tracking-wider">
-                            NIT CALICUT
-                          </span>
-                          <span className="text-[9px] font-mono text-white/30 hidden sm:inline">[01]</span>
-                        </div>
-                      </div>
-                      <h3 className="text-xs sm:text-sm xl:text-base font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight drop-shadow-sm">
-                        Build On Chain @ NIT Calicut
-                      </h3>
-                      <p className="text-[10px] sm:text-[11px] xl:text-xs text-white/75 font-sans leading-relaxed line-clamp-2 xl:line-clamp-3">
-                        Architected an audited on-chain tokenization protocol and automated liquidity vault under a grueling 36-hour hackathon marathon, placing 1st against top national university engineering teams.
-                      </p>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5 pt-1.5 border-t border-white/[0.08] font-mono text-[8.5px] sm:text-[9.5px] mt-1.5 xl:mt-2">
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">Solidity</span>
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">EVM Smart Contracts</span>
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">DeFi Vaults</span>
-                    </div>
-                  </AppleSpotlightCard>
-
-                  {/* Card 2: Smart India Hackathon Finalist */}
-                  <AppleSpotlightCard className="p-3 sm:p-3.5 xl:p-4.5 rounded-2xl xl:rounded-3xl hover:-translate-y-1">
-                    <div className="space-y-1.5 sm:space-y-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[9.5px] font-mono font-bold text-white uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/[0.08] border border-white/[0.15] shadow-sm">
-                          <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFA266]" /> NATIONAL STAGE FINALIST
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[9px] sm:text-[9.5px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/90 font-semibold tracking-wider">
-                            GOVT. OF INDIA
-                          </span>
-                          <span className="text-[9px] font-mono text-white/30 hidden sm:inline">[02]</span>
-                        </div>
-                      </div>
-                      <h3 className="text-xs sm:text-sm xl:text-base font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight drop-shadow-sm">
-                        Smart India Hackathon
-                      </h3>
-                      <p className="text-[10px] sm:text-[11px] xl:text-xs text-white/75 font-sans leading-relaxed line-clamp-2 xl:line-clamp-3">
-                        Selected among tens of thousands of nationwide applicants in India’s premier government hackathon, engineering software solutions addressing national public infrastructure challenges.
-                      </p>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5 pt-1.5 border-t border-white/[0.08] font-mono text-[8.5px] sm:text-[9.5px] mt-1.5 xl:mt-2">
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">National Finalist</span>
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">Full-Stack Systems</span>
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">Public Infrastructure</span>
-                    </div>
-                  </AppleSpotlightCard>
-                </div>
-
-                {/* Row 2: Three Distinct Pillars */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5 lg:gap-3">
-                  {/* Card 3: Campus Tech Lead */}
-                  <AppleSpotlightCard className="p-2.5 sm:p-3 xl:p-3.5 rounded-xl xl:rounded-2xl hover:-translate-y-1">
-                    <div className="space-y-1">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
-                          <Award className="w-3 h-3 text-[#FFA266]" /> LEADERSHIP
-                        </div>
-                        <span className="text-[8.5px] font-mono text-white/25">[03]</span>
-                      </div>
-                      <h4 className="text-[11px] sm:text-xs xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
-                        Tech Hub Lead &amp; Campus Ambassador
-                      </h4>
-                      <p className="text-[9.5px] sm:text-[10px] xl:text-[11px] text-white/70 font-sans leading-relaxed line-clamp-2 xl:line-clamp-3">
-                        Leading hands-on Web3, AI, and developer workshops for 200+ students, mentoring junior builders, and driving university technical initiatives.
-                      </p>
-                    </div>
-                  </AppleSpotlightCard>
-
-                  {/* Card 4: Uniswap & OpenLedger */}
-                  <AppleSpotlightCard className="p-2.5 sm:p-3 xl:p-3.5 rounded-xl xl:rounded-2xl hover:-translate-y-1">
-                    <div className="space-y-1">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
-                          <ShieldCheck className="w-3 h-3 text-[#FFA266]" /> RESEARCH
-                        </div>
-                        <span className="text-[8.5px] font-mono text-white/25">[04]</span>
-                      </div>
-                      <h4 className="text-[11px] sm:text-xs xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
-                        Uniswap v4 &amp; OpenLedger
-                      </h4>
-                      <p className="text-[9.5px] sm:text-[10px] xl:text-[11px] text-white/70 font-sans leading-relaxed line-clamp-2 xl:line-clamp-3">
-                        Selected for the Uniswap v4 Hook Incubator cohort and collaborating on decentralized AI data pipelines and automated liquidity research.
-                      </p>
-                    </div>
-                  </AppleSpotlightCard>
-
-                  {/* Card 5: International Silambam */}
-                  <AppleSpotlightCard className="p-2.5 sm:p-3 xl:p-3.5 rounded-xl xl:rounded-2xl hover:-translate-y-1">
-                    <div className="space-y-1">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
-                          <Monitor className="w-3 h-3 text-[#FFA266]" /> <HiddenClueWord word="DISCIPLINE" clueIndex={2} />
-                        </div>
-                        <span className="text-[8.5px] font-mono text-white/25">[05]</span>
-                      </div>
-                      <h4 className="text-[11px] sm:text-xs xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
-                        International Silambam Medalist
-                      </h4>
-                      <p className="text-[9.5px] sm:text-[10px] xl:text-[11px] text-white/70 font-sans leading-relaxed line-clamp-2 xl:line-clamp-3">
-                        Bronze Medalist at the International Silambam Championship. Physical mastery, precise execution, and{' '}
-                        <HiddenClueWord word="discipline" clueIndex={2} /> that directly shape my engineering stamina.
-                      </p>
-                    </div>
-                  </AppleSpotlightCard>
-                </div>
-              </div>
+              {/* Apple Keynote Interactive Bento Grid Showcase */}
+              <AccoladesBentoGrid />
             </div>
           </div>
 
