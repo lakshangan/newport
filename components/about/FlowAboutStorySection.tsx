@@ -185,7 +185,7 @@ interface AppleSpotlightCardProps {
 const AppleSpotlightCard: React.FC<AppleSpotlightCardProps> = ({
   children,
   className,
-  glowColor = 'rgba(232, 128, 83, 0.18)',
+  glowColor = 'rgba(232, 128, 83, 0.22)',
   onClick,
 }) => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -203,10 +203,11 @@ const AppleSpotlightCard: React.FC<AppleSpotlightCardProps> = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        'relative bg-[#0A0B0E]/80 hover:bg-[#121318]/95 border border-white/[0.08] hover:border-[#FFA266]/60 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.08)] hover:shadow-[0_25px_60px_rgba(232,128,83,0.22)] transition-all duration-300 group overflow-hidden',
+        'relative bg-[#090A0D]/85 hover:bg-[#111319]/95 border border-white/[0.09] hover:border-[#FFA266]/65 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.65),inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:shadow-[0_25px_60px_rgba(232,128,83,0.22)] transition-all duration-300 group overflow-hidden',
         className
       )}
     >
+      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.15] to-transparent opacity-60 group-hover:via-[#FFA266]/70 transition-opacity duration-300 pointer-events-none" />
       <div
         className="pointer-events-none absolute -inset-px rounded-[inherit] transition-opacity duration-300 z-0"
         style={{
@@ -497,12 +498,15 @@ export const FlowAboutStorySection: React.FC = () => {
                   <AppleSpotlightCard className="p-3 sm:p-3.5 xl:p-4.5 rounded-2xl xl:rounded-3xl hover:-translate-y-1">
                     <div className="space-y-1.5 sm:space-y-2">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#E88053]/15 border border-[#E88053]/30 shadow-sm">
-                          <Trophy className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#E88053]" /> 1ST PLACE TRACK WINNER
+                        <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#E88053]/15 border border-[#E88053]/35 shadow-sm">
+                          <Trophy className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFA266]" /> 1ST PLACE TRACK WINNER
                         </span>
-                        <span className="text-[9px] sm:text-[9.5px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/90 font-semibold tracking-wider">
-                          NIT CALICUT
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-[9px] sm:text-[9.5px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/90 font-semibold tracking-wider">
+                            NIT CALICUT
+                          </span>
+                          <span className="text-[9px] font-mono text-white/30 hidden sm:inline">[01]</span>
+                        </div>
                       </div>
                       <h3 className="text-xs sm:text-sm xl:text-base font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight drop-shadow-sm">
                         Build On Chain @ NIT Calicut
@@ -512,9 +516,9 @@ export const FlowAboutStorySection: React.FC = () => {
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-1.5 pt-1.5 border-t border-white/[0.08] font-mono text-[8.5px] sm:text-[9.5px] mt-1.5 xl:mt-2">
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">Solidity</span>
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">EVM Smart Contracts</span>
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">DeFi Vaults</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">Solidity</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">EVM Smart Contracts</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">DeFi Vaults</span>
                     </div>
                   </AppleSpotlightCard>
 
@@ -525,9 +529,12 @@ export const FlowAboutStorySection: React.FC = () => {
                         <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[9.5px] font-mono font-bold text-white uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/[0.08] border border-white/[0.15] shadow-sm">
                           <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFA266]" /> NATIONAL STAGE FINALIST
                         </span>
-                        <span className="text-[9px] sm:text-[9.5px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/90 font-semibold tracking-wider">
-                          GOVT. OF INDIA
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-[9px] sm:text-[9.5px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/90 font-semibold tracking-wider">
+                            GOVT. OF INDIA
+                          </span>
+                          <span className="text-[9px] font-mono text-white/30 hidden sm:inline">[02]</span>
+                        </div>
                       </div>
                       <h3 className="text-xs sm:text-sm xl:text-base font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight drop-shadow-sm">
                         Smart India Hackathon
@@ -537,9 +544,9 @@ export const FlowAboutStorySection: React.FC = () => {
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-1.5 pt-1.5 border-t border-white/[0.08] font-mono text-[8.5px] sm:text-[9.5px] mt-1.5 xl:mt-2">
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">National Finalist</span>
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">Full-Stack Systems</span>
-                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-white/20 transition-colors">Public Infrastructure</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">National Finalist</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">Full-Stack Systems</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/80 group-hover:border-[#FFA266]/30 transition-colors">Public Infrastructure</span>
                     </div>
                   </AppleSpotlightCard>
                 </div>
@@ -551,9 +558,9 @@ export const FlowAboutStorySection: React.FC = () => {
                     <div className="space-y-1">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1.5 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
-                          <Award className="w-3 h-3 text-[#E88053]" /> LEADERSHIP
+                          <Award className="w-3 h-3 text-[#FFA266]" /> LEADERSHIP
                         </div>
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#E88053]/50" />
+                        <span className="text-[8.5px] font-mono text-white/25">[03]</span>
                       </div>
                       <h4 className="text-[11px] sm:text-xs xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
                         Tech Hub Lead &amp; Campus Ambassador
@@ -569,9 +576,9 @@ export const FlowAboutStorySection: React.FC = () => {
                     <div className="space-y-1">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1.5 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
-                          <ShieldCheck className="w-3 h-3 text-[#E88053]" /> RESEARCH
+                          <ShieldCheck className="w-3 h-3 text-[#FFA266]" /> RESEARCH
                         </div>
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#E88053]/50" />
+                        <span className="text-[8.5px] font-mono text-white/25">[04]</span>
                       </div>
                       <h4 className="text-[11px] sm:text-xs xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
                         Uniswap v4 &amp; OpenLedger
@@ -587,9 +594,9 @@ export const FlowAboutStorySection: React.FC = () => {
                     <div className="space-y-1">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1.5 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
-                          <Monitor className="w-3 h-3 text-[#E88053]" /> <HiddenClueWord word="DISCIPLINE" clueIndex={2} />
+                          <Monitor className="w-3 h-3 text-[#FFA266]" /> <HiddenClueWord word="DISCIPLINE" clueIndex={2} />
                         </div>
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#E88053]/50" />
+                        <span className="text-[8.5px] font-mono text-white/25">[05]</span>
                       </div>
                       <h4 className="text-[11px] sm:text-xs xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
                         International Silambam Medalist

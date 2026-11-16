@@ -310,12 +310,37 @@ export default function TransmissionHero() {
             </div>
           </div>
 
-          {/* Right Down: Impactful Architectural Bio (No generic green dot / AI box) */}
+          {/* Right Down: Impactful Architectural Bio Card */}
           <div className="tx-bio-panel" role="region" aria-label="About summary">
+            {/* Ambient Background Radial Glow */}
+            <div className="tx-bio-spotlight" aria-hidden="true" />
 
+            {/* Header: Section Eyebrow */}
+            <div className="tx-bio-header">
+              <span className="tx-bio-tag">// ABOUT</span>
+              <span className="tx-bio-dot" aria-hidden="true" />
+            </div>
+
+            {/* Impactful Architectural Bio Copy */}
             <p className="tx-bio-text">
-              Architecting scalable web applications, autonomous AI agents, and decentralized protocols at the edge of code and intelligence.
+              Engineering scalable web applications, intelligent AI systems, and blockchain protocols at the edge of code and craft.
             </p>
+
+            {/* Hairline Technical Divider */}
+            <div className="tx-bio-divider" aria-hidden="true" />
+
+            {/* Telemetry / Live Status Footer */}
+            <div className="tx-bio-footer">
+              <div className="tx-bio-status">
+                <span className="tx-bio-pulse-wrap" aria-hidden="true">
+                  <span className="tx-bio-pulse-ring" />
+                  <span className="tx-bio-pulse-core" />
+                </span>
+                <span className="tx-bio-status-label">AVAILABLE FOR SELECT ROLES</span>
+                <span className="tx-bio-status-sep">•</span>
+                <span className="tx-bio-year">2026</span>
+              </div>
+            </div>
           </div>
 
           {/* Center Scroll Hint */}
