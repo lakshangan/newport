@@ -8,7 +8,6 @@ import { useGSAP } from '@gsap/react';
 import { AnimatedGradient } from '@/components/ui/animated-gradient-with-svg';
 import { Trophy, Award, Globe, Zap, CheckCircle2, ExternalLink, Sparkles, Monitor, ShieldCheck, ArrowDown, Layers, Cpu, ArrowUpRight } from 'lucide-react';
 import { HiddenClueWord } from '@/components/cipher/HiddenClueWord';
-import { AccoladesBentoGrid } from '@/components/about/AccoladesBentoGrid';
 import { cn } from '@/lib/utils';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -189,31 +188,29 @@ const AppleSpotlightCard: React.FC<AppleSpotlightCardProps> = ({
   glowColor = 'rgba(232, 128, 83, 0.22)',
   onClick,
 }) => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
   };
 
   return (
     <div
       onClick={onClick}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        'relative bg-[#090A0D]/85 hover:bg-[#111319]/95 border border-white/[0.09] hover:border-[#FFA266]/65 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.65),inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:shadow-[0_25px_60px_rgba(232,128,83,0.22)] transition-all duration-300 group overflow-hidden',
+        'relative bg-[#0C0D12]/85 hover:bg-[#121520]/95 border border-white/[0.08] hover:border-[#FFA266]/65 rounded-2xl xl:rounded-3xl backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.65),inset_0_1px_0_0_rgba(255,255,255,0.08)] hover:shadow-[0_25px_60px_rgba(232,128,83,0.2)] transition-all duration-300 group overflow-hidden flex flex-col justify-between text-left will-change-transform hover:-translate-y-1',
         className
       )}
     >
-      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.15] to-transparent opacity-60 group-hover:via-[#FFA266]/70 transition-opacity duration-300 pointer-events-none" />
+      {/* Top Specular Hairline Highlight */}
+      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.18] to-transparent opacity-60 group-hover:via-[#FFA266]/80 transition-opacity duration-300 pointer-events-none z-10" />
+
+      {/* Dynamic GPU Accelerated Cursor Spotlight via CSS Variables (Zero React Re-renders!) */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-[inherit] transition-opacity duration-300 z-0"
+        className="pointer-events-none absolute -inset-px rounded-[inherit] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
         style={{
-          opacity: isHovered ? 1 : 0,
-          background: `radial-gradient(380px circle at ${mousePos.x}px ${mousePos.y}px, ${glowColor}, transparent 80%)`,
+          background: `radial-gradient(350px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), ${glowColor}, transparent 80%)`,
         }}
       />
       <div className="relative z-10 h-full flex flex-col justify-between">
@@ -224,24 +221,27 @@ const AppleSpotlightCard: React.FC<AppleSpotlightCardProps> = ({
 };
 
 const TechExpertiseCard: React.FC<{ tech: TechExpertiseDomain }> = ({ tech }) => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const IconComponent = tech.icon;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
   };
 
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="relative p-3 sm:p-3.5 xl:p-4.5 bg-[#0A0B0E]/80 hover:bg-[#121318]/95 border border-white/[0.08] hover:border-[#FFA266]/60 rounded-2xl xl:rounded-3xl backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.08)] hover:shadow-[0_25px_50px_rgba(232,128,83,0.2)] transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between overflow-hidden text-left"
+      className="relative p-3.5 sm:p-4 xl:p-5 bg-[#0C0D12]/85 hover:bg-[#121520]/95 border border-white/[0.08] hover:border-[#FFA266]/60 rounded-2xl xl:rounded-3xl backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.08)] hover:shadow-[0_25px_50px_rgba(232,128,83,0.2)] transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between overflow-hidden text-left will-change-transform"
     >
-      {/* Subtle Dynamic Cursor Spotlight */}
+      {/* Top Specular Hairline Highlight */}
+      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.18] to-transparent opacity-60 group-hover:via-[#FFA266]/80 transition-opacity duration-300 pointer-events-none z-10" />
+
+      {/* Dynamic Cursor Spotlight via CSS Variables */}
       <div
         className="pointer-events-none absolute -inset-px rounded-2xl xl:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
         style={{
-          background: `radial-gradient(280px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 128, 83, 0.16), transparent 80%)`,
+          background: `radial-gradient(280px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(232, 128, 83, 0.18), transparent 80%)`,
         }}
       />
 
@@ -434,11 +434,11 @@ export const FlowAboutStorySection: React.FC = () => {
             {/* Subtle Dot Matrix Intersections */}
             <div className="absolute inset-0 bg-[radial-gradient(rgba(255,162,102,0.18)_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-60" />
 
-            {/* Multi-Node Ambient Volumetric Studio Glows spanning the horizontal width */}
-            <div className="absolute top-1/4 left-[10%] w-[600px] h-[450px] bg-[#E88053]/15 rounded-full blur-[160px]" />
-            <div className="absolute bottom-1/4 left-[35%] w-[650px] h-[500px] bg-[#FFA266]/12 rounded-full blur-[180px]" />
-            <div className="absolute top-1/3 left-[65%] w-[600px] h-[450px] bg-[#E88053]/14 rounded-full blur-[160px]" />
-            <div className="absolute bottom-1/3 left-[85%] w-[550px] h-[400px] bg-[#FFA266]/12 rounded-full blur-[170px]" />
+            {/* Multi-Node Ambient Volumetric Studio Glows (Precomputed Radial Gradients for 60fps Silk Smoothness) */}
+            <div className="absolute top-1/4 left-[10%] w-[650px] h-[500px] bg-[radial-gradient(circle,rgba(232,128,83,0.18)_0%,transparent_70%)] pointer-events-none" />
+            <div className="absolute bottom-1/4 left-[35%] w-[700px] h-[550px] bg-[radial-gradient(circle,rgba(255,162,102,0.14)_0%,transparent_70%)] pointer-events-none" />
+            <div className="absolute top-1/3 left-[65%] w-[650px] h-[500px] bg-[radial-gradient(circle,rgba(232,128,83,0.16)_0%,transparent_70%)] pointer-events-none" />
+            <div className="absolute bottom-1/3 left-[85%] w-[600px] h-[450px] bg-[radial-gradient(circle,rgba(255,162,102,0.14)_0%,transparent_70%)] pointer-events-none" />
 
             {/* Technical Monospace Blueprint Rulers along Top & Bottom */}
             <div className="absolute top-0 inset-x-0 h-8 border-b border-white/[0.06] flex items-center justify-between px-10 text-[9px] font-mono text-white/25 tracking-widest uppercase">
@@ -472,9 +472,9 @@ export const FlowAboutStorySection: React.FC = () => {
             id="recognition"
             className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-18 xl:pt-22 pb-16 sm:pb-18 xl:pb-20 overflow-hidden bg-transparent"
           >
-            {/* Ambient Volumetric Glows - Warm Studio Golden Hour */}
-            <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[150px] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[160px] pointer-events-none z-1" />
+            {/* Ambient Volumetric Glows - Precomputed for Zero GPU Lag */}
+            <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[radial-gradient(circle,rgba(232,128,83,0.18)_0%,transparent_70%)] pointer-events-none z-1" />
+            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[radial-gradient(circle,rgba(255,162,102,0.15)_0%,transparent_70%)] pointer-events-none z-1" />
 
             <div className="max-w-7xl mx-auto w-full space-y-2.5 sm:space-y-3.5 lg:space-y-4 relative z-10 my-auto">
               {/* Apple Keynote Eyebrow & Headline */}
@@ -486,13 +486,213 @@ export const FlowAboutStorySection: React.FC = () => {
                 <h2 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-[34px] xl:text-[38px] font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
                   PROVEN ON NATIONAL &amp; GLOBAL STAGES
                 </h2>
-                <p className="text-[11px] sm:text-xs md:text-[13px] xl:text-sm text-white/80 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2">
+                <p className="text-[11px] sm:text-xs md:text-[13px] xl:text-sm text-white/80 font-sans leading-relaxed max-w-2xl font-normal">
                   Combining competitive hackathon execution, decentralized protocol research, and campus community leadership with unwavering discipline.
                 </p>
               </div>
 
-              {/* Apple Keynote Interactive Bento Grid Showcase */}
-              <AccoladesBentoGrid />
+              {/* Apple Keynote Bento Grid: 2 Headline Breakthroughs + 3 Distinct Pillars */}
+              <div className="space-y-2.5 sm:space-y-3">
+                {/* Row 1: Two Major Headline Breakthroughs (7-Col Hero + 5-Col National Finalist) */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 sm:gap-3">
+                  {/* Card 1: 1st Place Track Winner NIT Calicut (Span 7) */}
+                  <AppleSpotlightCard className="lg:col-span-7 p-3.5 sm:p-4.5 xl:p-5 rounded-2xl xl:rounded-3xl">
+                    <div className="space-y-2.5">
+                      {/* Top Header Row */}
+                      <div className="flex items-center justify-between gap-2 border-b border-white/[0.08] pb-2">
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#E88053]/15 border border-[#FFA266]/40 shadow-[0_0_16px_rgba(232,128,83,0.25)]">
+                          <Trophy className="w-3.5 h-3.5 text-[#FFA266]" />
+                          <span className="text-[9.5px] sm:text-[10.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
+                            1ST PLACE TRACK WINNER
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-[9px] sm:text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.12] text-white/90 font-semibold tracking-wider">
+                            NIT CALICUT
+                          </span>
+                          <span className="text-[9.5px] font-mono text-white/30 hidden sm:inline">[01 // EVM]</span>
+                        </div>
+                      </div>
+
+                      {/* Title & Key Stat Highlight */}
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                        <h3 className="text-sm sm:text-base xl:text-lg font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
+                          Build On Chain @ NIT Calicut
+                        </h3>
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.1] text-[9.5px] font-mono text-[#FFA266] font-medium w-fit">
+                          <Zap className="w-3 h-3 text-[#FFA266]" /> 36-HOUR MARATHON
+                        </span>
+                      </div>
+
+                      {/* Descriptive Narrative (Uncut, no ellipsis) */}
+                      <p className="text-[11px] sm:text-xs xl:text-[12.5px] text-white/80 font-sans leading-relaxed">
+                        Architected an audited on-chain tokenization protocol and automated liquidity vault under a grueling 36-hour sprint, placing 1st against top national university engineering teams.
+                      </p>
+
+                      {/* Architectural Proof Metrics Bar */}
+                      <div className="grid grid-cols-3 gap-1.5 pt-1 border-t border-white/[0.06]">
+                        <div className="p-1.5 sm:p-2 rounded-xl bg-white/[0.03] border border-white/[0.06] text-left">
+                          <div className="text-[8.5px] font-mono text-white/40 uppercase tracking-wider">Standing</div>
+                          <div className="text-[11px] sm:text-xs font-bold text-white font-mono mt-0.5">#1 of 100+ Teams</div>
+                        </div>
+                        <div className="p-1.5 sm:p-2 rounded-xl bg-white/[0.03] border border-white/[0.06] text-left">
+                          <div className="text-[8.5px] font-mono text-white/40 uppercase tracking-wider">Contract Type</div>
+                          <div className="text-[11px] sm:text-xs font-bold text-white font-mono mt-0.5">Yield &amp; Token Vault</div>
+                        </div>
+                        <div className="p-1.5 sm:p-2 rounded-xl bg-white/[0.03] border border-white/[0.06] text-left">
+                          <div className="text-[8.5px] font-mono text-white/40 uppercase tracking-wider">Verification</div>
+                          <div className="text-[11px] sm:text-xs font-bold text-[#FFA266] font-mono mt-0.5">Audited &amp; Deployed</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Tech Pills */}
+                    <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.08] font-mono text-[8.5px] sm:text-[9.5px] mt-1.5">
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/85 group-hover:border-[#FFA266]/35 transition-colors">Solidity</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/85 group-hover:border-[#FFA266]/35 transition-colors">EVM Smart Contracts</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/85 group-hover:border-[#FFA266]/35 transition-colors">Automated Vaults</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/85 group-hover:border-[#FFA266]/35 transition-colors">Foundry</span>
+                    </div>
+                  </AppleSpotlightCard>
+
+                  {/* Card 2: Smart India Hackathon Finalist (Span 5) */}
+                  <AppleSpotlightCard className="lg:col-span-5 p-3.5 sm:p-4.5 xl:p-5 rounded-2xl xl:rounded-3xl">
+                    <div className="space-y-2.5">
+                      {/* Top Header Row */}
+                      <div className="flex items-center justify-between gap-2 border-b border-white/[0.08] pb-2">
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/[0.08] border border-white/[0.18] shadow-sm">
+                          <Globe className="w-3.5 h-3.5 text-[#FFA266]" />
+                          <span className="text-[9.5px] sm:text-[10.5px] font-mono font-bold text-white uppercase tracking-wider">
+                            NATIONAL STAGE FINALIST
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-[9px] sm:text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.12] text-white/90 font-semibold tracking-wider">
+                            GOVT. OF INDIA
+                          </span>
+                          <span className="text-[9.5px] font-mono text-white/30 hidden sm:inline">[02 // SIH]</span>
+                        </div>
+                      </div>
+
+                      {/* Title & Key Stat Highlight */}
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                        <h3 className="text-sm sm:text-base xl:text-lg font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
+                          Smart India Hackathon
+                        </h3>
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.1] text-[9.5px] font-mono text-white/90 font-medium w-fit">
+                          TOP 0.01% NATIONWIDE
+                        </span>
+                      </div>
+
+                      {/* Descriptive Narrative */}
+                      <p className="text-[11px] sm:text-xs xl:text-[12.5px] text-white/80 font-sans leading-relaxed">
+                        Selected among tens of thousands of nationwide applicants in India’s premier national hackathon, engineering software solutions for national public infrastructure challenges.
+                      </p>
+
+                      {/* Architectural Proof Metrics Bar */}
+                      <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-white/[0.06]">
+                        <div className="p-1.5 sm:p-2 rounded-xl bg-white/[0.03] border border-white/[0.06] text-left">
+                          <div className="text-[8.5px] font-mono text-white/40 uppercase tracking-wider">Selection Pool</div>
+                          <div className="text-[11px] sm:text-xs font-bold text-white font-mono mt-0.5">50,000+ Applicants</div>
+                        </div>
+                        <div className="p-1.5 sm:p-2 rounded-xl bg-white/[0.03] border border-white/[0.06] text-left">
+                          <div className="text-[8.5px] font-mono text-white/40 uppercase tracking-wider">Government Sector</div>
+                          <div className="text-[11px] sm:text-xs font-bold text-[#FFA266] font-mono mt-0.5">Ministry of Education</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Tech Pills */}
+                    <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.08] font-mono text-[8.5px] sm:text-[9.5px] mt-1.5">
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/85 group-hover:border-[#FFA266]/35 transition-colors">National Finalist</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/85 group-hover:border-[#FFA266]/35 transition-colors">Full-Stack Systems</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/85 group-hover:border-[#FFA266]/35 transition-colors">Public Infrastructure</span>
+                    </div>
+                  </AppleSpotlightCard>
+                </div>
+
+                {/* Row 2: Three Distinct Engineering & Leadership Pillars */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+                  {/* Card 3: Campus Tech Lead */}
+                  <AppleSpotlightCard className="p-3 sm:p-3.5 xl:p-4 rounded-xl xl:rounded-2xl">
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between border-b border-white/[0.08] pb-1.5">
+                        <div className="inline-flex items-center gap-1 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
+                          <Award className="w-3 h-3 text-[#FFA266]" /> LEADERSHIP
+                        </div>
+                        <span className="text-[9px] font-mono text-white/30">[03]</span>
+                      </div>
+                      <h4 className="text-xs sm:text-[13px] xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
+                        Tech Hub Lead &amp; Ambassador
+                      </h4>
+                      <p className="text-[10px] sm:text-[11px] xl:text-xs text-white/75 font-sans leading-relaxed">
+                        Leading hands-on Web3, AI, and developer workshops for 200+ students, mentoring junior builders, and driving university technical initiatives.
+                      </p>
+                      <div className="px-2 py-0.5 rounded-md bg-white/[0.03] border border-white/[0.06] text-[9px] font-mono text-white/70 flex items-center justify-between mt-1">
+                        <span>Cohort Impact</span>
+                        <span className="text-[#FFA266] font-bold">200+ Mentored</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-1 pt-1.5 border-t border-white/[0.06] font-mono text-[8px] sm:text-[8.5px] mt-1.5">
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.07] text-white/80">Web3 Workshops</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.07] text-white/80">Developer Mentorship</span>
+                    </div>
+                  </AppleSpotlightCard>
+
+                  {/* Card 4: Uniswap & OpenLedger */}
+                  <AppleSpotlightCard className="p-3 sm:p-3.5 xl:p-4 rounded-xl xl:rounded-2xl">
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between border-b border-white/[0.08] pb-1.5">
+                        <div className="inline-flex items-center gap-1 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
+                          <ShieldCheck className="w-3 h-3 text-[#FFA266]" /> PROTOCOL RESEARCH
+                        </div>
+                        <span className="text-[9px] font-mono text-white/30">[04]</span>
+                      </div>
+                      <h4 className="text-xs sm:text-[13px] xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
+                        Uniswap v4 &amp; OpenLedger
+                      </h4>
+                      <p className="text-[10px] sm:text-[11px] xl:text-xs text-white/75 font-sans leading-relaxed">
+                        Selected for the Uniswap v4 Hook Incubator cohort and collaborating on decentralized AI data pipelines and automated liquidity research.
+                      </p>
+                      <div className="px-2 py-0.5 rounded-md bg-white/[0.03] border border-white/[0.06] text-[9px] font-mono text-white/70 flex items-center justify-between mt-1">
+                        <span>Research Cohort</span>
+                        <span className="text-[#FFA266] font-bold">v4 Hook Incubator</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-1 pt-1.5 border-t border-white/[0.06] font-mono text-[8px] sm:text-[8.5px] mt-1.5">
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.07] text-white/80">v4 Liquidity Hooks</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.07] text-white/80">Decentralized AI</span>
+                    </div>
+                  </AppleSpotlightCard>
+
+                  {/* Card 5: International Silambam */}
+                  <AppleSpotlightCard className="p-3 sm:p-3.5 xl:p-4 rounded-xl xl:rounded-2xl">
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between border-b border-white/[0.08] pb-1.5">
+                        <div className="inline-flex items-center gap-1 text-[8.5px] sm:text-[9.5px] font-mono font-bold text-[#FFA266] uppercase tracking-wider">
+                          <Monitor className="w-3 h-3 text-[#FFA266]" /> <HiddenClueWord word="DISCIPLINE" clueIndex={2} />
+                        </div>
+                        <span className="text-[9px] font-mono text-white/30">[05]</span>
+                      </div>
+                      <h4 className="text-xs sm:text-[13px] xl:text-sm font-bold font-sans text-white group-hover:text-[#FFA266] transition-colors tracking-tight">
+                        International Silambam Medalist
+                      </h4>
+                      <p className="text-[10px] sm:text-[11px] xl:text-xs text-white/75 font-sans leading-relaxed">
+                        Bronze Medalist at the International Silambam Championship. Physical mastery, precise execution, and{' '}
+                        <HiddenClueWord word="discipline" clueIndex={2} /> that directly shape my engineering stamina.
+                      </p>
+                      <div className="px-2 py-0.5 rounded-md bg-white/[0.03] border border-white/[0.06] text-[9px] font-mono text-white/70 flex items-center justify-between mt-1">
+                        <span>Championship</span>
+                        <span className="text-[#FFA266] font-bold">Bronze Medalist</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-1 pt-1.5 border-t border-white/[0.06] font-mono text-[8px] sm:text-[8.5px] mt-1.5">
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.07] text-white/80">Physical Mastery</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.07] text-white/80">Engineering Stamina</span>
+                    </div>
+                  </AppleSpotlightCard>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -506,9 +706,9 @@ export const FlowAboutStorySection: React.FC = () => {
             id="showcase"
             className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-18 xl:pt-22 pb-16 sm:pb-18 xl:pb-20 overflow-hidden bg-transparent"
           >
-            {/* Ambient Volumetric Glows */}
-            <div className="absolute top-1/4 left-1/3 w-[550px] h-[450px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[150px] pointer-events-none z-1" />
+            {/* Ambient Volumetric Glows - Hardware Accelerated */}
+            <div className="absolute top-1/4 left-1/3 w-[550px] h-[450px] bg-[radial-gradient(circle,rgba(232,128,83,0.18)_0%,transparent_70%)] pointer-events-none z-1" />
+            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[radial-gradient(circle,rgba(255,162,102,0.15)_0%,transparent_70%)] pointer-events-none z-1" />
 
             <div className="space-y-2 sm:space-y-2.5 lg:space-y-3 my-auto max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center">
               {/* Header - Apple Keynote Eyebrow & Headline */}
@@ -681,9 +881,9 @@ export const FlowAboutStorySection: React.FC = () => {
             id="technical-expertise"
             className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-18 xl:pt-22 pb-16 sm:pb-18 xl:pb-20 overflow-hidden bg-transparent"
           >
-            {/* Ambient Volumetric Glows */}
-            <div className="absolute top-1/3 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[160px] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[150px] pointer-events-none z-1" />
+            {/* Ambient Volumetric Glows - Hardware Accelerated */}
+            <div className="absolute top-1/3 left-1/4 w-[550px] h-[400px] bg-[radial-gradient(circle,rgba(232,128,83,0.18)_0%,transparent_70%)] pointer-events-none z-1" />
+            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[radial-gradient(circle,rgba(255,162,102,0.15)_0%,transparent_70%)] pointer-events-none z-1" />
 
             <div className="max-w-7xl mx-auto w-full space-y-2.5 sm:space-y-3.5 lg:space-y-4 relative z-10 my-auto">
               {/* Header */}

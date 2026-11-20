@@ -20,9 +20,9 @@ function UpcomingSectionBackground() {
       {/* Subtle Dot Matrix Intersections */}
       <div className="absolute inset-0 bg-[radial-gradient(rgba(255,162,102,0.18)_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-60" />
 
-      {/* Warm Golden Hour Volumetric Glows */}
-      <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[#E88053]/20 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[#FFA266]/18 rounded-full blur-[160px] pointer-events-none" />
+      {/* Warm Golden Hour Volumetric Glows (Precomputed Radial Gradients) */}
+      <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[radial-gradient(circle,rgba(232,128,83,0.18)_0%,transparent_70%)] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[radial-gradient(circle,rgba(255,162,102,0.15)_0%,transparent_70%)] pointer-events-none" />
 
       {/* Technical Monospace Blueprint Rulers along Top */}
       <div className="absolute top-0 inset-x-0 h-8 border-b border-white/[0.06] flex items-center justify-between px-10 text-[9px] font-mono text-white/25 tracking-widest uppercase">
