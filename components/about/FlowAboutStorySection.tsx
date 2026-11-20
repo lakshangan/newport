@@ -9,6 +9,8 @@ import { Sparkles, Monitor, ShieldCheck, ArrowDown, Layers, Cpu, ExternalLink, Z
 import { HiddenClueWord } from '@/components/cipher/HiddenClueWord';
 import { cn } from '@/lib/utils';
 import { AerospaceFlightCorridor } from './AerospaceFlightCorridor';
+import { NothingHardwareBackground } from './NothingHardwareBackground';
+import { NothingUpperRail, NothingBottomRail } from './NothingHardwareRails';
 import {
   ChampionshipArcGaugeWidget,
   NationalTimelineWidget,
@@ -164,6 +166,13 @@ const AppleTechExpertiseCard: React.FC<{ tech: TechExpertiseDomain }> = ({ tech 
       {/* Top Specular Hairline Highlight */}
       <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.18] to-transparent opacity-60 group-hover:via-[#FFA266]/80 transition-opacity duration-300 pointer-events-none z-10" />
 
+      {/* Nothing FPC Ribbon Connector Pin Header */}
+      <div className="absolute top-1 right-3 flex items-center gap-1 opacity-40 group-hover:opacity-80 transition-opacity">
+        <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#E63946]" />
+        <span className="text-[7px] font-mono text-white/50">FPC</span>
+      </div>
+
       {/* Dynamic Cursor Spotlight via CSS Variables */}
       <div
         className="pointer-events-none absolute -inset-px rounded-[inherit] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
@@ -199,7 +208,7 @@ const AppleTechExpertiseCard: React.FC<{ tech: TechExpertiseDomain }> = ({ tech 
           </p>
         </div>
 
-        {/* Apple System Performance Pill */}
+        {/* Apple/Nothing System Performance Pill */}
         <div className="p-2 rounded-xl bg-black/40 border border-white/[0.06] flex items-center justify-between">
           <span className="text-[8.5px] font-mono text-white/50">{tech.telemetry.label}</span>
           <span
@@ -277,7 +286,7 @@ export const FlowAboutStorySection: React.FC = () => {
     const totalPanels = panels.length;
     if (totalPanels <= 1) return;
 
-    // Total scroll duration: calibrated for effortless wheel travel
+    // Total scroll duration calibrated for smooth, effortless wheel travel
     const getPanelWidth = () => container.offsetWidth || window.innerWidth;
     const totalDistance = Math.round(
       Math.min(getPanelWidth() * 0.95, 1350) * (totalPanels - 1) + 400
@@ -357,42 +366,28 @@ export const FlowAboutStorySection: React.FC = () => {
         ref={horizontalContainerRef}
         className="relative w-full h-screen overflow-hidden bg-[#080808] select-none scroll-mt-6"
       >
-        {/* Continuous Panoramic Modern Developer Matrix Canvas */}
-        <div
-          ref={horizontalBgRef}
-          className="absolute inset-y-0 left-0 h-full w-[266.67vh] min-w-full pointer-events-none select-none z-0 overflow-hidden will-change-transform bg-[#080808]"
-          style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
-        >
-          <div className="relative w-full h-full">
-            {/* Base Dark Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-[#0A0908] to-[#080808]" />
-
-            {/* Architectural Cyber Blueprint Grid */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_85%_75%_at_50%_50%,#000_65%,transparent_100%)] opacity-80" />
-
-            {/* Subtle Dot Matrix Intersections */}
-            <div className="absolute inset-0 bg-[radial-gradient(rgba(255,162,102,0.18)_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-60" />
-
-            {/* Multi-Node Ambient Volumetric Studio Glows */}
-            <div className="absolute top-1/4 left-[10%] w-[650px] h-[500px] bg-[radial-gradient(circle,rgba(232,128,83,0.18)_0%,transparent_70%)] pointer-events-none" />
-            <div className="absolute bottom-1/4 left-[35%] w-[700px] h-[550px] bg-[radial-gradient(circle,rgba(255,162,102,0.14)_0%,transparent_70%)] pointer-events-none" />
-            <div className="absolute top-1/3 left-[65%] w-[650px] h-[500px] bg-[radial-gradient(circle,rgba(232,128,83,0.16)_0%,transparent_70%)] pointer-events-none" />
-            <div className="absolute bottom-1/3 left-[85%] w-[600px] h-[450px] bg-[radial-gradient(circle,rgba(255,162,102,0.14)_0%,transparent_70%)] pointer-events-none" />
-
-            {/* Top and Bottom Edge Vignettes for Seamless Transitions */}
-            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#080808] to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none" />
-          </div>
+        {/* Continuous Panoramic Nothing OS Transparent Motherboard Canvas */}
+        <div ref={horizontalBgRef} className="absolute inset-y-0 left-0 h-full w-[266.67vh] min-w-full pointer-events-none select-none z-0 overflow-hidden will-change-transform">
+          <NothingHardwareBackground scrollProgress={scrollProgress} />
         </div>
 
         {/* ========================================================================= */}
-        {/* PARALLAX AEROSPACE FLIGHT CORRIDOR (FIXED AT SECTION TOP) */}
+        {/* UPPER SPACE: NOTHING OS HARDWARE CORRIDOR & PARALLAX FLIGHT SYSTEM */}
         {/* ========================================================================= */}
-        <div className="absolute top-10 sm:top-12 inset-x-0 z-20 pointer-events-auto">
+        <div className="absolute top-2 sm:top-3 inset-x-0 z-30 pointer-events-auto flex flex-col gap-1">
+          {/* 1. Nothing OS Top Hardware Status Rail (Clock, REC Dot, Compass, Weather) */}
+          <NothingUpperRail
+            scrollProgress={scrollProgress}
+            activeSlide={activeSlide}
+            onSelectWaypoint={advanceToSlide}
+          />
+
+          {/* 2. Parallax Supersonic Flight Corridor with Mach Telemetry */}
           <AerospaceFlightCorridor
             activeSlide={activeSlide}
             scrollProgress={scrollProgress}
             onSelectWaypoint={advanceToSlide}
+            className="mt-0 pt-0"
           />
         </div>
 
@@ -405,22 +400,19 @@ export const FlowAboutStorySection: React.FC = () => {
           style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
         >
           {/* ========================================================================= */}
-          {/* PANEL 1 (SLIDE 02): APPLE BENTO RECOGNITION & ACCOLADES */}
+          {/* PANEL 1 (SLIDE 02): APPLE & NOTHING BENTO RECOGNITION & ACCOLADES */}
           {/* ========================================================================= */}
           <div
             id="recognition"
-            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-28 sm:pt-32 pb-14 sm:pb-16 overflow-hidden bg-transparent"
+            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-26 sm:pt-30 pb-16 sm:pb-20 overflow-hidden bg-transparent"
           >
-            {/* Ambient Volumetric Glows */}
-            <div className="absolute top-1/4 left-1/4 w-[550px] h-[400px] bg-[radial-gradient(circle,rgba(232,128,83,0.18)_0%,transparent_70%)] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[radial-gradient(circle,rgba(255,162,102,0.15)_0%,transparent_70%)] pointer-events-none z-1" />
-
             <div className="max-w-7xl mx-auto w-full space-y-2 sm:space-y-3 relative z-10 my-auto">
-              {/* Apple Keynote Eyebrow & Headline */}
+              {/* Nothing OS Eyebrow & Headline */}
               <div className="space-y-0.5 sm:space-y-1 border-b border-white/[0.08] pb-1.5 sm:pb-2 text-left">
                 <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.12] text-[9.5px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E63946] animate-pulse" />
                   <span>02 // LEADERSHIP &amp; ACCOLADES</span>
+                  <span className="text-white/30 hidden sm:inline">• FPC-CONN 01</span>
                 </div>
                 <h2 className="font-display text-lg sm:text-2xl md:text-3xl lg:text-[32px] font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
                   PROVEN ON NATIONAL &amp; GLOBAL STAGES
@@ -430,7 +422,7 @@ export const FlowAboutStorySection: React.FC = () => {
                 </p>
               </div>
 
-              {/* Apple Bento Grid matching reference image */}
+              {/* Bento Grid matching reference image */}
               <div className="space-y-2 sm:space-y-2.5">
                 {/* Row 1: Arc Speedometer Gauge (Span 7) + National Stage Timeline (Span 5) */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-2.5">
@@ -438,7 +430,7 @@ export const FlowAboutStorySection: React.FC = () => {
                   <NationalTimelineWidget className="lg:col-span-5" />
                 </div>
 
-                {/* Row 2: 3 Apple-Grade Pillars: Equalizer Bars + Waveform + Stamina Battery */}
+                {/* Row 2: 3 Pillars: Equalizer Bars + Waveform + Stamina Battery */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
                   <BuilderEqualizerWidget />
                   <LiquidityWaveformWidget />
@@ -449,23 +441,20 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
 
           {/* ========================================================================= */}
-          {/* PANEL 2 (SLIDE 03): APPLE BENTO CREATIVE SHOWCASE */}
+          {/* PANEL 2 (SLIDE 03): NOTHING CREATIVE SHOWCASE */}
           {/* ========================================================================= */}
           <div
             id="showcase"
-            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-28 sm:pt-32 pb-14 sm:pb-16 overflow-hidden bg-transparent"
+            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-26 sm:pt-30 pb-16 sm:pb-20 overflow-hidden bg-transparent"
           >
-            {/* Ambient Volumetric Glows */}
-            <div className="absolute top-1/4 left-1/3 w-[550px] h-[450px] bg-[radial-gradient(circle,rgba(232,128,83,0.18)_0%,transparent_70%)] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[radial-gradient(circle,rgba(255,162,102,0.15)_0%,transparent_70%)] pointer-events-none z-1" />
-
             <div className="space-y-2 sm:space-y-2.5 my-auto max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center">
               {/* Header */}
               <div className="flex flex-row items-center justify-between gap-2 sm:gap-3 border-b border-white/[0.08] pb-1.5 sm:pb-2 text-left">
                 <div className="space-y-0.5 sm:space-y-1">
                   <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.12] text-[9.5px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]">
-                    <Sparkles className="w-3.5 h-3.5 text-[#E88053]" />
+                    <Sparkles className="w-3.5 h-3.5 text-[#E63946]" />
                     <span>03 // LATEST DEPLOYMENTS</span>
+                    <span className="text-white/30 hidden sm:inline">• FPC-CONN 02</span>
                   </div>
                   <h2 className="font-display text-lg sm:text-2xl md:text-3xl lg:text-[32px] font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
                     CREATIVE <span className="text-[#FFA266] drop-shadow-[0_0_25px_rgba(232,128,83,0.5)]">SHOWCASE</span>
@@ -496,14 +485,20 @@ export const FlowAboutStorySection: React.FC = () => {
                 </a>
               </div>
 
-              {/* 6 Apple macOS Window Widgets */}
+              {/* 6 Nothing OS Window Widgets */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5">
                 {SHOWCASE_CARDS.map((card) => (
                   <div
                     key={card.id}
-                    className="rounded-[20px] sm:rounded-[24px] border border-white/[0.08] hover:border-[#FFA266]/60 bg-[#0E0F15]/90 hover:bg-[#131520]/95 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.08)] hover:shadow-[0_25px_50px_rgba(232,128,83,0.2)] transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1"
+                    className="rounded-[20px] sm:rounded-[24px] border border-white/[0.08] hover:border-[#FFA266]/60 bg-[#0E0F15]/90 hover:bg-[#131520]/95 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.08)] hover:shadow-[0_25px_50px_rgba(232,128,83,0.2)] transition-all duration-300 group flex flex-col justify-between hover:-translate-y-1 relative"
                   >
-                    {/* Apple macOS Sequoia Glass Window Header */}
+                    {/* Nothing Hardware Ribbon Connector Pin Tag */}
+                    <div className="absolute top-1.5 right-14 flex items-center gap-0.5 opacity-30 group-hover:opacity-75 transition-opacity">
+                      <span className="w-1 h-1 rounded-full bg-[#E63946]" />
+                      <span className="w-1 h-1 rounded-full bg-white/40" />
+                    </div>
+
+                    {/* Window Header */}
                     <div className="px-3 py-1.5 bg-black/60 border-b border-white/[0.1] flex items-center justify-between backdrop-blur-md">
                       <div className="flex items-center gap-1.5">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] shadow-sm" />
@@ -606,23 +601,20 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
 
           {/* ========================================================================= */}
-          {/* PANEL 3 (SLIDE 04): APPLE BENTO TECHNICAL CAPABILITIES */}
+          {/* PANEL 3 (SLIDE 04): NOTHING TECHNICAL ARCHITECTURE */}
           {/* ========================================================================= */}
           <div
             id="technical-expertise"
-            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-28 sm:pt-32 pb-14 sm:pb-16 overflow-hidden bg-transparent"
+            className="horizontal-panel w-1/3 min-w-[33.333333%] max-w-[33.333333%] h-full shrink-0 relative z-10 flex flex-col justify-center px-4 sm:px-8 lg:px-12 xl:px-16 pt-26 sm:pt-30 pb-16 sm:pb-20 overflow-hidden bg-transparent"
           >
-            {/* Ambient Volumetric Glows */}
-            <div className="absolute top-1/3 left-1/4 w-[550px] h-[400px] bg-[radial-gradient(circle,rgba(232,128,83,0.18)_0%,transparent_70%)] pointer-events-none z-1" />
-            <div className="absolute bottom-10 right-1/4 w-[500px] h-[380px] bg-[radial-gradient(circle,rgba(255,162,102,0.15)_0%,transparent_70%)] pointer-events-none z-1" />
-
             <div className="max-w-7xl mx-auto w-full space-y-2 sm:space-y-3 relative z-10 my-auto">
               {/* Header */}
               <div className="flex flex-row items-center justify-between gap-2.5 sm:gap-3 border-b border-white/[0.08] pb-1.5 sm:pb-2 text-left">
                 <div className="space-y-0.5 sm:space-y-1">
                   <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-0.5 rounded-full bg-white/[0.06] border border-white/[0.12] text-[9.5px] sm:text-xs font-mono text-[#FFA266] tracking-widest uppercase backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E88053] animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E63946] animate-pulse" />
                     <span>04 // CORE ARCHITECTURAL CAPABILITIES</span>
+                    <span className="text-white/30 hidden sm:inline">• FPC-CONN 03</span>
                   </div>
                   <h2 className="font-display text-lg sm:text-2xl md:text-3xl lg:text-[32px] font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
                     TECHNICAL <span className="text-[#FFA266] drop-shadow-[0_0_25px_rgba(232,128,83,0.5)]">EXPERTISE</span>
@@ -642,7 +634,7 @@ export const FlowAboutStorySection: React.FC = () => {
                 </button>
               </div>
 
-              {/* 4 Apple System Performance Widgets */}
+              {/* 4 Nothing System Performance Widgets */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5 lg:gap-3 xl:gap-4">
                 {TECHNICAL_EXPERTISE.map((tech) => (
                   <AppleTechExpertiseCard key={tech.id} tech={tech} />
@@ -652,13 +644,20 @@ export const FlowAboutStorySection: React.FC = () => {
           </div>
         </div>
 
-        {/* Apple Dynamic Island Floating Navigation Capsule */}
-        <div className="absolute bottom-2.5 sm:bottom-3 lg:bottom-4 left-1/2 -translate-x-1/2 z-30 pointer-events-none select-none">
+        {/* ========================================================================= */}
+        {/* BOTTOM SPACE: NOTHING OS HARDWARE BASELINE & DYNAMIC NAVIGATION ISLAND */}
+        {/* ========================================================================= */}
+        <div className="absolute bottom-11 sm:bottom-13 inset-x-0 z-30 pointer-events-auto">
+          <NothingBottomRail activeSlide={activeSlide} />
+        </div>
+
+        {/* Apple / Nothing Dynamic Island Floating Navigation Capsule */}
+        <div className="absolute bottom-2 sm:bottom-2.5 left-1/2 -translate-x-1/2 z-30 pointer-events-none select-none">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-auto flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full bg-[#0B0C10]/90 hover:bg-[#121318]/95 border border-white/[0.1] backdrop-blur-3xl shadow-[0_12px_32px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.15)] transition-all"
+            className="pointer-events-auto flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full bg-[#0B0C10]/95 hover:bg-[#121318]/95 border border-white/[0.12] backdrop-blur-3xl shadow-[0_12px_32px_rgba(0,0,0,0.7),inset_0_1px_0_0_rgba(255,255,255,0.15)] transition-all"
           >
             {[
               { id: 0, label: 'Accolades' },
