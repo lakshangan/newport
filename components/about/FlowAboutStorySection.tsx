@@ -686,12 +686,12 @@ export const FlowAboutStorySection: React.FC = () => {
             </div>
 
             <h2 className="font-display uppercase leading-[0.86] tracking-[-0.01em] text-[clamp(64px,15vh,176px)] text-[#F2EFE9]">
-              <MaskedLine text="Proven" />
-              <MaskedLine text="by" />
+              <MaskedLine text="The" />
+              <MaskedLine text="work &" />
               <span className="h-line block">
                 <span className="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]">
                   <span className="h-word inline-block font-serif italic normal-case tracking-[-0.03em] text-[#E06D43] text-[0.92em] pr-[0.06em]">
-                    results.
+                    wins.
                   </span>
                 </span>
               </span>
@@ -699,7 +699,7 @@ export const FlowAboutStorySection: React.FC = () => {
 
             <div className="h-reveal flex items-end justify-between gap-10">
               <p className="max-w-[34ch] text-[15px] leading-relaxed text-white/55">
-                Competitive hackathon wins, national stages, and protocol research. Keep scrolling; the page moves sideways.
+                National hackathon podiums, live interactive web apps, and modern AI workflows. Keep scrolling; the page moves sideways.
               </p>
               <div className="flex shrink-0 items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/45">
                 Scroll
