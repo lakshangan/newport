@@ -210,3 +210,9 @@ body {
   }
 }
 
+
+/* Horizontal about-strip scroll hint */
+@keyframes hscroll-hint {
+  0% { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(200%); }
+}

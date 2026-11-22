@@ -25,6 +25,12 @@ export const Navbar: React.FC = () => {
       }
     };
 
+    const aboutGoTo = (window as any).__aboutGoTo;
+    if ((targetId === 'showcase' || targetId === 'about') && typeof aboutGoTo === 'function') {
+      aboutGoTo(targetId);
+      return;
+    }
+
     if (targetId === 'showcase') {
       const st = ScrollTrigger.getById('about-horizontal');
       if (st) {
@@ -66,6 +72,11 @@ export const Navbar: React.FC = () => {
       // Check pinned horizontal scroll section first
       const st = ScrollTrigger.getById('about-horizontal');
       if (st && scrollY >= st.start - 80 && scrollY <= st.end) {
+        const chapter = (window as any).__aboutChapter;
+        if (chapter) {
+          setActiveSection(chapter === 'work' ? 'showcase' : 'about');
+          return;
+        }
         const progress = Math.max(0, Math.min(1, (scrollY - st.start) / (st.end - st.start)));
         if (progress < 0.28) {
           setActiveSection('about');
