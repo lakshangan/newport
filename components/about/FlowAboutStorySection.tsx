@@ -19,8 +19,8 @@ type ChapterId = 'accolades' | 'work' | 'craft';
 
 const CHAPTERS: { id: ChapterId; num: string; label: string }[] = [
   { id: 'accolades', num: '01', label: 'Accolades' },
-  { id: 'work', num: '02', label: 'Selected work' },
-  { id: 'craft', num: '03', label: 'Craft' },
+  { id: 'work', num: '02', label: 'Projects' },
+  { id: 'craft', num: '03', label: 'Tech Stack' },
 ];
 
 interface Accolade {
@@ -37,54 +37,54 @@ interface Accolade {
 const ACCOLADES: Accolade[] = [
   {
     num: '01',
-    tag: 'Track winner',
+    tag: '1st Place',
     stat: '1st',
     statNote: 'out of 100+ teams',
     title: 'Build On Chain — NIT Calicut',
-    body: 'Shipped an audited on-chain tokenization protocol and an automated liquidity vault inside a 36-hour sprint.',
-    meta: 'Solidity · Foundry · EVM',
+    body: 'Built and deployed an audited tokenization protocol and automated yield vault in a 36-hour sprint.',
+    meta: 'Solidity · Foundry · DeFi',
     lead: true,
   },
   {
     num: '02',
-    tag: 'National finalist',
-    stat: '50K+',
-    statNote: 'applicants, one shortlist',
+    tag: 'Top 0.01%',
+    stat: 'Top 0.01%',
+    statNote: 'out of 50K+ applicants',
     title: 'Smart India Hackathon',
-    body: 'Selected as a finalist in India’s largest national hackathon, building software for public-infrastructure problems.',
-    meta: 'Ministry of Education',
+    body: 'Selected as a national finalist in India’s premier hackathon, engineering software for public infrastructure challenges.',
+    meta: 'Ministry of Education · Govt. of India',
   },
   {
     num: '03',
-    tag: 'Leadership',
+    tag: 'Community',
     stat: '200+',
-    statNote: 'students mentored',
+    statNote: 'builders mentored',
     title: 'Tech Hub Lead & Ambassador',
-    body: 'Running hands-on Web3, AI and developer workshops on campus, and mentoring the next batch of builders.',
+    body: 'Leading hands-on Web3 and AI workshops, mentoring junior developers, and driving tech initiatives on campus.',
     meta: 'Workshops · Mentorship',
   },
   {
     num: '04',
-    tag: 'Protocol research',
+    tag: 'Research',
     stat: 'v4',
-    statNote: 'Uniswap Hook Incubator',
+    statNote: 'Hook Incubator',
     title: 'Uniswap v4 & OpenLedger',
-    body: 'Part of the Uniswap v4 Hook Incubator cohort, researching liquidity hooks and decentralized AI data pipelines.',
-    meta: 'DeFi · Decentralized AI',
+    body: 'Selected for the Uniswap v4 Hook cohort, researching custom liquidity hooks and decentralized AI data pipelines.',
+    meta: 'AMM Hooks · Decentralized AI',
   },
   {
     num: '05',
-    tag: 'Off the keyboard',
+    tag: 'Discipline',
     stat: 'Bronze',
     statNote: 'International Silambam',
     title: 'International Silambam Medalist',
     body: (
       <>
-        Years of martial-arts training taught me precision and{' '}
-        <HiddenClueWord word="discipline" clueIndex={2} /> — the same stamina I bring to long builds.
+        Years of martial-arts training taught me precision, reaction speed, and{' '}
+        <HiddenClueWord word="discipline" clueIndex={2} /> — the stamina I bring to engineering builds.
       </>
     ),
-    meta: 'Physical mastery',
+    meta: 'Physical Mastery · Focus',
   },
 ];
 
@@ -195,26 +195,26 @@ const CRAFT = [
   {
     num: '01',
     title: 'Full-stack',
-    line: 'Products that hold up under real traffic.',
-    skills: ['Next.js', 'TypeScript', 'React', 'Node.js', 'PostgreSQL'],
+    line: 'Fast, scalable web apps from frontend to database.',
+    skills: ['Next.js 15', 'TypeScript', 'React', 'Node.js', 'PostgreSQL', 'Tailwind CSS'],
   },
   {
     num: '02',
-    title: 'Web3',
-    line: 'Contracts that are boring in the best way.',
-    skills: ['Solidity', 'Foundry', 'Hardhat', 'Uniswap v4', 'Ethers.js'],
+    title: 'AI tools',
+    line: 'Intelligent LLM agents, neural search, and modern AI workflows.',
+    skills: ['Cursor & Copilot', 'Gemini & OpenAI API', 'LangChain & Agents', 'Vector DBs & RAG', 'Claude & Python'],
   },
   {
     num: '03',
-    title: 'AI systems',
-    line: 'Agents and retrieval that actually ship.',
-    skills: ['Python', 'LangChain', 'LLM agents', 'Vector DBs', 'C2PA'],
+    title: 'Web3 & EVM',
+    line: 'Audited smart contracts, DeFi vaults, and on-chain protocols.',
+    skills: ['Solidity', 'Foundry', 'Uniswap v4 Hooks', 'Hardhat', 'Ethers.js'],
   },
   {
     num: '04',
-    title: 'Creative 3D',
-    line: 'Interfaces you want to touch twice.',
-    skills: ['Three.js', 'R3F', 'GLSL', 'GSAP', 'WebGL'],
+    title: '3D & Motion',
+    line: 'Immersive 60fps web graphics, GLSL shaders, and tactile motion.',
+    skills: ['Three.js', 'React Three Fiber', 'GLSL Shaders', 'GSAP Motion', 'WebGL'],
   },
 ];
 
@@ -358,9 +358,9 @@ const RAIL_LABELS: Record<string, string> = {
 /** Ids are looked up inside the horizontal track only (the mobile view reuses some ids). */
 const RAIL_ITEMS: RailTocItem[] = [
   { id: 'recognition', label: 'Accolades' },
-  { id: 'showcase', label: 'Selected work' },
+  { id: 'showcase', label: 'Projects' },
   ...PROJECTS.map((p) => ({ id: `work-${p.id}`, label: RAIL_LABELS[p.id] ?? p.plainTitle, depth: 1 })),
-  { id: 'technical-expertise', label: 'Craft' },
+  { id: 'technical-expertise', label: 'Tech Stack' },
   { id: 'about-next', label: 'Up next' },
 ];
 
@@ -640,7 +640,7 @@ export const FlowAboutStorySection: React.FC = () => {
   );
 
   return (
-    <div className="w-full relative block" aria-label="About — accolades, selected work and craft">
+    <div className="w-full relative block" aria-label="About — accolades, projects and tech stack">
       <div
         id="about"
         ref={containerRef}
@@ -654,7 +654,7 @@ export const FlowAboutStorySection: React.FC = () => {
           aria-hidden="true"
           className="absolute inset-y-0 left-0 flex items-center gap-[30vw] pl-[60vw] whitespace-nowrap pointer-events-none select-none will-change-transform"
         >
-          {['Accolades', 'Work', 'Craft'].map((word) => (
+          {['Accolades', 'Projects', 'Tech Stack'].map((word) => (
             <span
               key={word}
               className="font-display uppercase leading-none text-transparent text-[42vh] tracking-tight"
@@ -681,17 +681,17 @@ export const FlowAboutStorySection: React.FC = () => {
           {/* ======================= INTRO ======================= */}
           <section className="relative flex h-full w-[58vw] shrink-0 flex-col justify-between pl-[6vw] pr-[4vw] pt-[16vh] pb-[20vh]">
             <div className="h-reveal flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/45">
-              <span className="text-[#E06D43]">(02)</span>
-              <span>About — in three chapters</span>
+              <span className="text-[#E06D43]">(01)</span>
+              <span>Overview</span>
             </div>
 
             <h2 className="font-display uppercase leading-[0.86] tracking-[-0.01em] text-[clamp(64px,15vh,176px)] text-[#F2EFE9]">
               <MaskedLine text="Proven" />
-              <MaskedLine text="where it" />
+              <MaskedLine text="by" />
               <span className="h-line block">
                 <span className="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]">
                   <span className="h-word inline-block font-serif italic normal-case tracking-[-0.03em] text-[#E06D43] text-[0.92em] pr-[0.06em]">
-                    counts.
+                    results.
                   </span>
                 </span>
               </span>
@@ -699,7 +699,7 @@ export const FlowAboutStorySection: React.FC = () => {
 
             <div className="h-reveal flex items-end justify-between gap-10">
               <p className="max-w-[34ch] text-[15px] leading-relaxed text-white/55">
-                Hackathon podiums, national stages, research cohorts — and a few things built along the way. Keep scrolling; the page moves sideways.
+                Competitive hackathon wins, national stages, and protocol research. Keep scrolling; the page moves sideways.
               </p>
               <div className="flex shrink-0 items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/45">
                 Scroll
@@ -764,7 +764,7 @@ export const FlowAboutStorySection: React.FC = () => {
             })}
           </div>
 
-          {/* ======================= 02 SELECTED WORK ======================= */}
+          {/* ======================= 02 PROJECTS ======================= */}
           <div
             id="showcase"
             ref={(el) => {
@@ -774,9 +774,9 @@ export const FlowAboutStorySection: React.FC = () => {
           >
             <section className="relative flex h-full w-[40vw] shrink-0 flex-col justify-between pl-[5vw] pr-[3vw] pt-[16vh] pb-[20vh]">
               <div className="h-reveal font-mono text-[11px] uppercase tracking-[0.2em] text-white/45">
-                <span className="text-[#E06D43]">Chapter 02</span>
+                <span className="text-[#E06D43]">02</span>
                 <span className="mx-2 text-white/20">/</span>
-                {String(PROJECTS.length).padStart(2, '0')} live deployments
+                Featured projects
               </div>
 
               <h2 className="font-display uppercase leading-[0.86] text-[clamp(64px,15vh,176px)] text-[#F2EFE9]">
@@ -784,7 +784,7 @@ export const FlowAboutStorySection: React.FC = () => {
                 <span className="h-line block">
                   <span className="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]">
                     <span className="h-word inline-block font-serif italic normal-case tracking-[-0.03em] text-[#E06D43] text-[0.92em]">
-                      work
+                      projects
                     </span>
                   </span>
                 </span>
@@ -792,7 +792,7 @@ export const FlowAboutStorySection: React.FC = () => {
 
               <div className="h-reveal flex items-end justify-between gap-8">
                 <p className="max-w-[30ch] text-[15px] leading-relaxed text-white/55">
-                  Every frame is the real site, running live. Click one to open it.
+                  Every card is a live deployment. Click to launch and interact with it.
                 </p>
                 <a
                   href="https://github.com/lakshangan"
@@ -864,7 +864,7 @@ export const FlowAboutStorySection: React.FC = () => {
             ))}
           </div>
 
-          {/* ======================= 03 CRAFT ======================= */}
+          {/* ======================= 03 TECH STACK ======================= */}
           <div
             id="technical-expertise"
             ref={(el) => {
@@ -874,22 +874,23 @@ export const FlowAboutStorySection: React.FC = () => {
           >
             <section className="relative flex h-full w-[36vw] shrink-0 flex-col justify-between pl-[5vw] pr-[3vw] pt-[16vh] pb-[20vh]">
               <div className="h-reveal font-mono text-[11px] uppercase tracking-[0.2em] text-white/45">
-                <span className="text-[#E06D43]">Chapter 03</span>
+                <span className="text-[#E06D43]">03</span>
                 <span className="mx-2 text-white/20">/</span>
-                What I build with
+                Tech stack & tools
               </div>
+
               <h2 className="font-display uppercase leading-[0.86] text-[clamp(64px,15vh,176px)] text-[#F2EFE9]">
-                <MaskedLine text="Four" />
+                <MaskedLine text="Tech" />
                 <span className="h-line block">
                   <span className="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]">
                     <span className="h-word inline-block font-serif italic normal-case tracking-[-0.03em] text-[#E06D43] text-[0.92em]">
-                      crafts
+                      stack
                     </span>
                   </span>
                 </span>
               </h2>
               <p className="h-reveal max-w-[32ch] text-[15px] leading-relaxed text-white/55">
-                Different stacks, one habit: break the hard problem down until it’s simple, then make it feel good.
+                The core technologies, frameworks, and modern AI tools I use to engineer fast, resilient software.
               </p>
             </section>
 
@@ -916,7 +917,7 @@ export const FlowAboutStorySection: React.FC = () => {
                   </span>
 
                   <span className={cn('relative w-fit rounded-full px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.16em]', t.chip)}>
-                    Craft {c.num}
+                    Stack {c.num}
                   </span>
 
                   <div className="relative space-y-3">
