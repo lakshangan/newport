@@ -59,6 +59,15 @@ export const Navbar: React.FC = () => {
     smoothScrollTo(0);
   };
 
+  const getVisibleElementById = (id: string): HTMLElement | null => {
+    const nodes = document.querySelectorAll<HTMLElement>(`[id="${id}"]`);
+    for (let i = 0; i < nodes.length; i++) {
+      const r = nodes[i].getBoundingClientRect();
+      if (r.width > 0 || r.height > 0) return nodes[i];
+    }
+    return null;
+  };
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: NavId) => {
     e.preventDefault();
     setMobileMenuOpen(false);
@@ -78,7 +87,7 @@ export const Navbar: React.FC = () => {
         smoothScrollTo(targetScroll);
         return;
       }
-      const el = document.getElementById('showcase');
+      const el = getVisibleElementById('showcase');
       if (el) smoothScrollTo(el);
       return;
     }
@@ -89,12 +98,12 @@ export const Navbar: React.FC = () => {
         smoothScrollTo(st.start);
         return;
       }
-      const el = document.getElementById('about');
+      const el = getVisibleElementById('about');
       if (el) smoothScrollTo(el);
       return;
     }
 
-    const targetEl = document.getElementById(targetId);
+    const targetEl = getVisibleElementById(targetId);
     if (targetEl) {
       smoothScrollTo(targetEl);
     }
@@ -168,13 +177,15 @@ export const Navbar: React.FC = () => {
             ? 'showcase'
             : 'about';
         setActiveSection((prev) => (prev === nextSection ? prev : nextSection));
+      } else if (scrollY < 300) {
+        setActiveSection((prev) => (prev === 'about' ? prev : 'about'));
       } else {
         const triggerLine = window.innerHeight * 0.45;
         const verticalSections: NavId[] = ['contact', 'experience', 'about'];
         let resolved: NavId = 'about';
 
         for (const id of verticalSections) {
-          const el = document.getElementById(id);
+          const el = getVisibleElementById(id);
           if (el) {
             const rect = el.getBoundingClientRect();
             if (rect.top <= triggerLine) {
