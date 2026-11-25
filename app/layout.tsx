@@ -62,24 +62,15 @@ export const metadata: Metadata = {
       'Portfolio of Lakshan Ganesan. Full Stack Developer engineering scalable web applications, AI systems, and blockchain protocols.',
     url: 'https://lakshan-dev.vercel.app',
     siteName: 'Lakshan Ganesan Portfolio',
-    images: [
-      {
-        url: '/images/hero_portrait.jpg',
-        width: 1200,
-        height: 1600,
-        alt: 'Lakshan Ganesan Portfolio',
-      },
-    ],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Lakshan Ganesan | Full Stack Developer (AI & Blockchain)',
     description:
       'Portfolio of Lakshan Ganesan. Full Stack Developer engineering scalable web applications, AI systems, and blockchain protocols.',
     creator: '@lakshangan',
-    images: ['/images/hero_portrait.jpg'],
   },
 };
 

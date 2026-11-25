@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -8,6 +9,11 @@ import { ArrowDown, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { HiddenClueWord } from '@/components/cipher/HiddenClueWord';
 import { cn } from '@/lib/utils';
 import { RailToc, type RailTocItem } from '@/components/ui/rail-toc';
+
+const ArchitecturalDepthCanvas = dynamic(
+  () => import('@/components/3d/ArchitecturalDepthCanvas').then((m) => m.ArchitecturalDepthCanvas),
+  { ssr: false }
+);
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -311,14 +317,22 @@ const DepthCard: React.FC<{
     const el = innerRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width - 0.5;
-    const py = (e.clientY - r.top) / r.height - 0.5;
-    el.style.setProperty('--ry', `${px * 7}deg`);
-    el.style.setProperty('--rx', `${py * -7}deg`);
+    const nx = (e.clientX - r.left) / r.width;
+    const ny = (e.clientY - r.top) / r.height;
+    const px = nx - 0.5;
+    const py = ny - 0.5;
+    el.style.setProperty('--ry', `${px * 8}deg`);
+    el.style.setProperty('--rx', `${py * -8}deg`);
+    el.style.setProperty('--gx', `${nx * 100}%`);
+    el.style.setProperty('--gy', `${ny * 100}%`);
+    el.style.setProperty('--glare', '1');
   };
   const onLeave = () => {
-    innerRef.current?.style.setProperty('--ry', '0deg');
-    innerRef.current?.style.setProperty('--rx', '0deg');
+    const el = innerRef.current;
+    if (!el) return;
+    el.style.setProperty('--ry', '0deg');
+    el.style.setProperty('--rx', '0deg');
+    el.style.setProperty('--glare', '0');
   };
 
   return (
@@ -336,6 +350,18 @@ const DepthCard: React.FC<{
             className
           )}
         >
+          {/* Tactile 3D specular light reflection following pointer tilt */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-20 rounded-[28px] transition-opacity duration-500"
+            style={{
+              opacity: 'var(--glare, 0)',
+              background:
+                tone === 'light'
+                  ? 'radial-gradient(520px circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.45), transparent 60%)'
+                  : 'radial-gradient(520px circle at var(--gx, 50%) var(--gy, 50%), rgba(224,109,67,0.12), rgba(255,255,255,0.04) 40%, transparent 65%)',
+            }}
+          />
           {children}
         </div>
       </div>
@@ -373,6 +399,8 @@ export const FlowAboutStorySection: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const percentRef = useRef<HTMLSpanElement>(null);
+  const scrollProgressRef = useRef(0);
+  const scrollVelocityRef = useRef(0);
   const chapterRefs = useRef<Record<ChapterId, HTMLDivElement | null>>({
     accolades: null,
     work: null,
@@ -498,6 +526,8 @@ export const FlowAboutStorySection: React.FC = () => {
           invalidateOnRefresh: true,
           anticipatePin: 1,
           onUpdate: (self) => {
+            scrollProgressRef.current = self.progress;
+            scrollVelocityRef.current = self.getVelocity() / 1000;
             if (percentRef.current) {
               percentRef.current.textContent = String(Math.round(self.progress * 100)).padStart(2, '0');
             }
@@ -620,13 +650,14 @@ export const FlowAboutStorySection: React.FC = () => {
           })
           .fromTo(
             card,
-            { rotateY: -24, z: -260, xPercent: 12, opacity: 0.35, transformOrigin: '0% 50%' },
-            { rotateY: 0, z: 0, xPercent: 0, opacity: 1, ease: 'power2.out', duration: 1 }
+            { rotateY: -22, rotateX: 3, z: -220, xPercent: 10, opacity: 0.4, transformOrigin: '0% 50%' },
+            { rotateY: 0, rotateX: 0, z: 0, xPercent: 0, opacity: 1, ease: 'power2.out', duration: 1 }
           )
-          .to(card, { rotateY: 0, duration: 0.6 })
+          .to(card, { rotateY: 0, rotateX: 0, duration: 0.65 })
           .to(card, {
-            rotateY: 16,
-            z: -160,
+            rotateY: 14,
+            rotateX: -2,
+            z: -150,
             opacity: 0.45,
             transformOrigin: '100% 50%',
             ease: 'power2.in',
@@ -647,8 +678,12 @@ export const FlowAboutStorySection: React.FC = () => {
         className="relative w-full h-screen overflow-hidden bg-[#080808] text-[#E8E5DF] scroll-mt-6"
       >
         {/* ------------------------------------------------------------------ */}
-        {/* Background: slow-drifting outlined words                           */}
+        {/* Background: 3D calibrated spatial depth rig + outlined words       */}
         {/* ------------------------------------------------------------------ */}
+        <ArchitecturalDepthCanvas
+          progressRef={scrollProgressRef}
+          velocityRef={scrollVelocityRef}
+        />
         <div
           ref={bgRef}
           aria-hidden="true"

@@ -45,18 +45,18 @@ void main() {
   vec2 uv = (frag - 0.5 * uRes) / uRes.y;
 
   // Interactive 3D perspective parallax & tilt from yaw & pitch
-  float yawAngle = sin(uYaw) * 0.08;
-  float pitchAngle = (uPitch - 0.28) * 0.08;
-  
+  float yawAngle = sin(uYaw) * 0.11;
+  float pitchAngle = (uPitch - 0.28) * 0.11;
+
   // Perspective warp
-  uv.x += uv.x * (uv.y * 0.25) * yawAngle;
-  uv.x += yawAngle * 0.35;
-  uv.y -= pitchAngle * 0.35;
+  uv.x += uv.x * (uv.y * 0.28) * yawAngle;
+  uv.x += yawAngle * 0.32;
+  uv.y -= pitchAngle * 0.32;
 
   // Aspect ratio fitting (landscape widescreen format)
   float imgAspect = uImageRes.x / uImageRes.y;
   float screenAspect = uRes.x / uRes.y;
-  
+
   float scale = 0.96 + 0.16 * uBloom;
   vec2 imgUv;
 
@@ -68,6 +68,19 @@ void main() {
     // Narrower viewport: screen is taller than image (scale based on width)
     imgUv.x = (uv.x / (scale * screenAspect)) + 0.5;
     imgUv.y = (uv.y * imgAspect / (scale * screenAspect)) + 0.5;
+  }
+
+  // 4-step luminance-driven 3D relief parallax offset
+  vec2 parallaxDir = vec2(yawAngle, -pitchAngle) * 0.032;
+  if (imgUv.x >= 0.02 && imgUv.x <= 0.98 && imgUv.y >= 0.02 && imgUv.y <= 0.98) {
+    vec2 curUv = imgUv;
+    for (int i = 0; i < 4; i++) {
+      vec3 sCol = texture2D(uImage, clamp(curUv, 0.001, 0.999)).rgb;
+      float sLum = dot(sCol, vec3(0.299, 0.587, 0.114));
+      float depth = smoothstep(0.08, 0.92, sLum);
+      curUv = imgUv - parallaxDir * (depth - 0.35) * 0.65;
+    }
+    imgUv = curUv;
   }
 
   // Holographic wave displacement on click pulse
@@ -159,19 +172,21 @@ void main() {
   tint = mix(tint, sc * 1.25, 0.18);                       // keep a trace of the real tone
   vec3 col = tint * g * (0.28 + lum * 0.95 + glow * 0.25);
 
-  // decoder lens: the true photorealistic portrait with chromatic aberration
+  // decoder lens: optical glass loupe with subtle radial curvature & chromatic rim
   vec2 lv = frag - uLensC;
   float ld = length(lv);
   if (uLensR > 0.5) {
     float inside = 1.0 - smoothstep(uLensR - 1.5, uLensR + 1.5, ld);
     vec2 dir = lv / max(ld, 1e-3);
-    float edge = smoothstep(uLensR * 0.55, uLensR, ld);
-    vec2 uv = frag / uRes;
-    vec2 off = dir * edge * 6.0 / uRes;
+    float normR = clamp(ld / uLensR, 0.0, 1.0);
+    float edge = smoothstep(0.5, 1.0, normR);
+    float barrel = pow(normR, 2.2) * 0.012;
+    vec2 uv = (frag / uRes) - dir * barrel;
+    vec2 off = dir * edge * 5.5 / uRes;
     vec3 real = vec3(texture2D(uScene, uv - off).r, texture2D(uScene, uv).g, texture2D(uScene, uv + off).b);
     col = mix(col, real, inside);
-    float rim = smoothstep(1.6, 0.0, abs(ld - uLensR));
-    col += uAccent * rim * 0.85; // Warm amber rim glow
+    float rim = smoothstep(1.8, 0.0, abs(ld - uLensR));
+    col += uAccent * rim * 0.9; // Warm amber rim glow
   }
 
   // CRT whisper: faint scanlines + vignette
@@ -410,10 +425,13 @@ export class TransmissionEngine {
     this.pulse *= Math.pow(0.12, dt);
 
     const s = this.sceneMat.uniforms;
+    const pointerNormX = p.sx < -999 ? 0 : (p.sx / Math.max(1, this.w) - 0.5) * 2;
+    const pointerNormY = p.sy < -999 ? 0 : (p.sy / Math.max(1, this.h) - 0.5) * 2;
+    const lensFactor = Math.min(1, p.r / 90);
     s.uTime.value = this.staticMode ? 0 : t;
     s.uBloom.value = this.state.bloom;
-    s.uYaw.value = this.state.yaw + this.autoYaw;
-    s.uPitch.value = this.state.pitch;
+    s.uYaw.value = this.state.yaw + this.autoYaw + pointerNormX * 0.16 * lensFactor;
+    s.uPitch.value = this.state.pitch - pointerNormY * 0.14 * lensFactor;
     s.uPulse.value = this.pulse;
 
     const d = this.dpr;
