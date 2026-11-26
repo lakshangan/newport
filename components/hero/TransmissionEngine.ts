@@ -105,10 +105,10 @@ void main() {
     lum = mix(pow(lum, 1.15) * 0.9, pow(lum, 0.85) * 1.3, uBloom);
     
     // Warm amber rim glow at silhouette edges
-    vec3 amberRim = vec3(0.98, 0.62, 0.35) * pow(lum, 2.2) * 0.35;
-    
-    // Blend luminance with subtle warm tones from original image labels
-    col = mix(vec3(lum), tex, 0.45) + amberRim;
+    vec3 amberRim = vec3(0.98, 0.62, 0.35) * pow(lum, 2.2) * 0.22;
+
+    // Blend luminance with rich tones from original studio image
+    col = mix(vec3(lum), tex, 0.75) + amberRim;
     col *= mask;
   }
 
@@ -144,6 +144,12 @@ float hash21(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.3
 
 void main() {
   vec2 frag = gl_FragCoord.xy;
+  vec2 uv = frag / uRes;
+
+  // Base layer: Crisp, clear 3D-parallaxed portrait image
+  vec3 clearCol = texture2D(uScene, uv).rgb;
+
+  // Compute quantized pixelated / glyph cells (ASCII, Binary 01, or Blocks)
   vec2 cs = vec2(uCell * 0.62, uCell);
   vec2 cell = floor(frag / cs);
   vec2 center = (cell + 0.5) * cs;
@@ -151,48 +157,57 @@ void main() {
 
   vec3 sc = texture2D(uScene, center / uRes).rgb;
   float lum = dot(sc, vec3(0.299, 0.587, 0.114));
-  lum = smoothstep(0.04, 0.96, lum);
+  lum = smoothstep(0.03, 0.96, lum);
 
   float dp = length(center - uPointer);
-  float glow = uGlowR > 0.0 ? smoothstep(uGlowR * 2.2, uGlowR * 0.6, dp) : 0.0;
+  float glow = uGlowR > 0.0 ? smoothstep(uGlowR * 1.4, uGlowR * 0.15, dp) : 0.0;
   float ring = exp(-pow((dp - uRing) / (uCell * 4.0), 2.0)) * uRingAmp;
 
   float tick = floor(uTime * 14.0);
   float h = hash21(cell + tick * 0.37);
   float scramble = step(1.0 - clamp(ring * 0.95 + uFlicker * lum * 0.08, 0.0, 1.0), h);
 
-  float idx = floor(clamp(lum + glow * 0.1, 0.0, 1.0) * (uGlyphs - 1.0) + 0.5);
+  float idx = floor(clamp(lum + glow * 0.12, 0.0, 1.0) * (uGlyphs - 1.0) + 0.5);
   float rnd = 1.0 + floor(hash21(cell * 1.7 + tick) * (uGlyphs - 1.0));
   idx = mix(idx, rnd, scramble);
 
   vec2 auv = vec2((idx + local.x) / uGlyphs, local.y);
   float g = texture2D(uAtlas, auv).r;
-  float heat = clamp(glow * 0.75 + ring * 1.2 + scramble * 0.6, 0.0, 1.0);
+  float heat = clamp(glow * 0.65 + ring * 1.2 + scramble * 0.55, 0.0, 1.0);
   vec3 tint = mix(uInk, uAccent, heat);
-  tint = mix(tint, sc * 1.25, 0.18);                       // keep a trace of the real tone
-  vec3 col = tint * g * (0.28 + lum * 0.95 + glow * 0.25);
+  tint = mix(tint, sc * 1.3, 0.22);
+  vec3 glyphCol = vec3(0.025, 0.024, 0.028) + tint * g * (0.32 + lum * 1.05 + glow * 0.28);
 
-  // decoder lens: optical glass loupe with subtle radial curvature & chromatic rim
+  // Subtle scanlines on glyph layer inside lens
+  glyphCol *= 0.93 + 0.07 * sin(frag.y * 1.6);
+
+  vec3 col = clearCol;
+
+  // Click shockwave ripples brief glyph scramble across clear portrait
+  if (ring > 0.02) {
+    col = mix(col, glyphCol, clamp(ring * 1.2, 0.0, 1.0));
+  }
+
+  // Hover Lens (Inverted): Reveals pixelated ASCII / Binary / Blocks inside the loupe
   vec2 lv = frag - uLensC;
   float ld = length(lv);
   if (uLensR > 0.5) {
     float inside = 1.0 - smoothstep(uLensR - 1.5, uLensR + 1.5, ld);
     vec2 dir = lv / max(ld, 1e-3);
     float normR = clamp(ld / uLensR, 0.0, 1.0);
-    float edge = smoothstep(0.5, 1.0, normR);
-    float barrel = pow(normR, 2.2) * 0.012;
-    vec2 uv = (frag / uRes) - dir * barrel;
-    vec2 off = dir * edge * 5.5 / uRes;
-    vec3 real = vec3(texture2D(uScene, uv - off).r, texture2D(uScene, uv).g, texture2D(uScene, uv + off).b);
-    col = mix(col, real, inside);
-    float rim = smoothstep(1.8, 0.0, abs(ld - uLensR));
-    col += uAccent * rim * 0.9; // Warm amber rim glow
+    float edge = smoothstep(0.55, 1.0, normR);
+
+    // Subtle glass curvature + chromatic dispersion near the lens rim
+    vec3 lensGlyph = mix(glyphCol, glyphCol * vec3(1.06, 0.98, 0.92), edge * 0.5);
+    col = mix(col, lensGlyph, inside);
+
+    float rim = smoothstep(2.0, 0.0, abs(ld - uLensR));
+    col += uAccent * rim * 0.95; // Warm amber optical rim glow
   }
 
-  // CRT whisper: faint scanlines + vignette
-  col *= 0.94 + 0.06 * sin(frag.y * 1.6);
-  vec2 q = frag / uRes - 0.5;
-  col *= 1.0 - dot(q, q) * 0.9;
+  // Soft perimeter vignette
+  vec2 q = uv - 0.5;
+  col *= 1.0 - dot(q, q) * 0.65;
   gl_FragColor = vec4(col, 1.0);
 }`;
 
@@ -216,8 +231,8 @@ export class TransmissionEngine {
   private dpr = 1;
   private w = 1;
   private h = 1;
-  private scale = 0.6;
-  private maxScale = 0.75;
+  private scale = 1.0;
+  private maxScale = 1.5;
   private staticMode = false;
   private dirty = true;
   private font: string;
@@ -340,8 +355,8 @@ export class TransmissionEngine {
     this.w = Math.max(1, w);
     this.h = Math.max(1, h);
     this.dpr = Math.min(window.devicePixelRatio || 1, 2);
-    this.maxScale = w < 700 ? 0.55 : 0.75;
-    this.scale = Math.min(this.scale, this.maxScale);
+    this.maxScale = Math.min(this.dpr, 1.5);
+    this.scale = this.maxScale;
     this.renderer.setPixelRatio(this.dpr);
     this.renderer.setSize(this.w, this.h, false);
     this.asciiMat.uniforms.uRes.value.set(this.w * this.dpr, this.h * this.dpr);
@@ -374,7 +389,7 @@ export class TransmissionEngine {
       this.pointer.sx = x;
       this.pointer.sy = y;
     }
-    this.state.lensR = active ? (this.w < 700 ? 88 : 128) : 0;
+    this.state.lensR = active ? (this.w < 700 ? 96 : 145) : 0;
     this.dirty = true;
   }
 
@@ -403,11 +418,11 @@ export class TransmissionEngine {
       this.frameTimes.length = 0;
       this.stats.fps = Math.round(1 / Math.max(avg, 1e-3));
       if (!this.staticMode) {
-        if (avg > 0.021 && this.scale > 0.34) {
-          this.scale = Math.max(0.34, this.scale - 0.08);
+        if (avg > 0.024 && this.scale > 0.75) {
+          this.scale = Math.max(0.75, this.scale - 0.1);
           this.sizeSceneTarget();
         } else if (avg < 0.0135 && this.scale < this.maxScale) {
-          this.scale = Math.min(this.maxScale, this.scale + 0.04);
+          this.scale = Math.min(this.maxScale, this.scale + 0.05);
           this.sizeSceneTarget();
         }
       }
@@ -441,7 +456,7 @@ export class TransmissionEngine {
     const cy = p.sy < -999 ? this.h / 2 : p.sy;
     const lensX = cx + (this.w / 2 - cx) * decode;
     const lensY = cy + (this.h / 2 - cy) * decode;
-    const lensR = p.r + (diag * 0.6 - p.r) * decode;
+    const lensR = p.r + (diag * 0.62 - p.r) * decode;
 
     const a = this.asciiMat.uniforms;
     a.uTime.value = this.staticMode ? 0 : t;

@@ -209,7 +209,7 @@ export default function TransmissionHero() {
         const mobile = window.innerWidth < 700;
         const res = smooth(0, 0.34, p);
         engineRef.current?.setState({
-          cell: (mobile ? 15 : 20) - res * (mobile ? 7 : 11),
+          cell: (mobile ? 13 : 15) - res * (mobile ? 4 : 5),
           bloom: 0.3 + 0.7 * smooth(0.12, 0.58, p),
           pitch: 0.28 + 0.9 * smooth(0.3, 0.72, p),
           decode: smooth(0.66, 0.93, p),
@@ -258,7 +258,7 @@ export default function TransmissionHero() {
     const p = progressRef.current;
     const mobile = window.innerWidth < 700;
     engineRef.current?.setState({
-      cell: (mobile ? 15 : 20) - smooth(0, 0.34, p) * (mobile ? 7 : 11),
+      cell: (mobile ? 13 : 15) - smooth(0, 0.34, p) * (mobile ? 4 : 5),
       bloom: 0.3 + 0.7 * smooth(0.12, 0.58, p),
       pitch: 0.28 + 0.9 * smooth(0.3, 0.72, p),
       decode: smooth(0.66, 0.93, p),
